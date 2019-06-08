@@ -129,6 +129,20 @@ function cheat:cheat_add_all_perks(line)
   excludes["8d9d23f-e293-4980-abd4-a3046b929771"] = true--Combo srt 04 cut OBSOLETE"
   excludes["3f6c0eb-1b03-46ad-89f5-7eda9e4ab548"] = true--Combo srt 04 cut axe OBSOLETE"
   excludes["80825cd9-7d7b-440f-aa57-75807e83aed9"] = true --Always drunk
+  
+  -- charlitoti
+  -- here is an extension of the excludes perk to exclude aswell the hardcore negative perks:
+  excludes["fbedb426-410c-4614-952a-1086b6f6554f"] = true
+  excludes["37433f7b-9c2e-48e2-bce7-af8d34b403c8"] = true
+  excludes["4d51ba41-2c10-4281-9308-fcfed1fe0276"] = true
+  excludes["5ef31fc4-244e-40ac-b088-03e5730ff5c1"] = true
+  excludes["6402905d-6cfa-4666-80bf-2a70b0b82bd1"] = true
+  excludes["aa725966-98eb-4db2-8cd5-ad3d43b13f14"] = true
+  excludes["b59a2f39-faf4-4a1d-88c2-c059dadc6abb"] = true
+  excludes["b9aa28f1-ccbb-4c0c-9718-c218f01d749b"] = true
+  excludes["ce2fe289-4c26-45c0-803b-32627d288765"] = true
+  excludes["d2105041-120b-4c06-8e61-1948a5fdf65d"] = true
+  excludes["fbedb426-410c-4614-952a-1086b6f6554f"] = true
 
   local perks = cheat:find_perk(nil, true)
   for i,perk in pairs(perks) do
