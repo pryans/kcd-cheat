@@ -1,0 +1,1093 @@
+[b][size=6]Install[/size][/b]
+
+[list=1]
+[*]This is not required but if you want console tab completion run the game with -devmode. See screenshot on how to add -devmode in Steam.
+
+[*]Create a Mods folder and then unzip the mod into it. You MUST ensure you have this folder structure after unzipping the mod:
+
+steamapps\common\KingdomComeDeliverance\Mods
+steamapps\common\KingdomComeDeliverance\Mods\Cheat
+steamapps\common\KingdomComeDeliverance\Mods\Cheat\mod.manifest
+steamapps\common\KingdomComeDeliverance\Mods\Cheat\Data
+steamapps\common\KingdomComeDeliverance\Mods\Cheat\Data\data.pak
+
+[*]If you installed the mod correctly it will print out the mod name and current version in the console when the main menu loads.
+
+[*]Press the tilde ([b]~[/b]) key and use the Page-Up key to scroll the console up.
+
+[*]Enabled: [img]https://staticdelivery.nexusmods.com/mods/2298/images/106/106-1520643541-2009734923.png[/img]
+
+[*]Loaded: [img]https://staticdelivery.nexusmods.com/mods/2298/images/106/106-1520643545-1883082392.png[/img]
+
+[/list]
+
+
+[b][size=6]Usage[/size][/b]
+[list=1]
+[*]Press the tilde ([b]~[/b]) key to open the console.
+[*]Type [b]cheat [/b]and press tab (not enter) to see the list of commands.
+[*]You can see the arguments to a command by running the command with a single [b]?[/b] argument.
+[*]For example run "cheat_set_regen ?" to see usage instructions for that command.
+[/list]
+
+[b][size=6]Autoexec Cheats[/size][/b]
+Since some cheats are temporary (they don't survive game restart) you can add cheats to a file named "autocheat.txt". Create steamapps\common\KingdomComeDeliverance\Data\autocheat.txt and place one console command per line in the file. This file is loaded and executed by Cheat mod when a level loads not when the game loads.
+
+These are the 3 commands are have in my autocheat.txt for testing:
+cheat_eval cheat:logSetLevel(cheat.g_cheat_log_level_debug)
+cheat_set_bow_reticle enable:true
+cheat_set_regen enable:true state:stamina amount:10
+
+[b][size=6]Change Log[/size][/b]
+
+[b]1.29[/b]
+[list]
+[*]Merged latest defaultProfile.xml.
+[*]Fixed documentation error on command cheat_set_horse.
+[*]Released additional version of mod without any key bindings.
+[/list]
+
+[b]1.28[/b]
+[list]
+[*]Merged the most recent defaultProfile.xml from patch ipl_patch_010400.pak so the esc button should be working in tutorial screens now.
+[/list]
+
+[b]1.27[/b]
+[list]
+[*]Works with KCD 1.4.1. For new games you'll need to save and reload after the initial tutorial sequence (talking to your mom) for all features of the mod to be loaded and working.
+[/list]
+
+[b]1.26[/b]
+[list]
+[*]The cheat_spawn command now had radius option and can spawn guards.
+[/list]
+
+[b]1.25[/b]
+[list]
+[*]Removed version section from mod.manifest since it works so poorly.
+[/list]
+
+[b]1.24[/b]
+[list]
+[*]Added cheat_spawn and cheat_spawn_npc.
+[*]Added required health argument to cheat_damage_all_items.
+[*]Improvements to argument validation.
+[/list]
+
+[b]1.23[/b]
+[list]
+[*]Fixed startup logging so missing autocheat.txt isn't logged as an error.
+[*]Added cheat_target_entity command bound to F4.
+[*]Added cheat_kill_target comand to kill an entity targeted with F4 or the cheat_target_entity command.
+[*]Added cheat_damage_all_items.
+[/list]
+
+[b]1.22[/b]
+[list]
+[*]Added support for GOG versions.
+[/list]
+
+[b]1.21[/b]
+[list]
+[*]Fixed packaging issues causing wrong file to get uploaded to nexus.
+[/list]
+
+[b]1.20[/b]
+[list]
+[*]Switched mod to use new 1.3 mod structure
+[*]Mod should now be unzipped into steamapps\common\KingdomComeDeliverance\Mods
+[*]See https://wiki.nexusmods.com/index.php/Modding_guide_for_KCD
+[/list]
+
+[b]1.19[/b]
+[list]
+[*]Fixed a bug with autocheat.txt not loading
+[/list]
+
+[b]1.18[/b]
+[list]
+[*]Added cheat_exec_file and cheat_exec_delay.
+[/list]
+[b]Create Data\exec.txt will following 6 lines:[/b]
+cheat_exec_delay ms:5000
+cheat_eval cheat:logWarn("1")
+cheat_exec_delay ms:5000
+cheat_eval cheat:logWarn("2")
+cheat_exec_delay ms:5000
+cheat_eval cheat:logWarn("3")
+[b]Run command: cheat_exec_file file:Data\exec.txt[/b]
+
+[b]1.17[/b]
+[list]
+[*]Added cheat_set_weather to control the weather.
+[/list]
+
+[b]1.16[/b]
+[list]
+[*]Added cheat_kill_npc to kill matching NPCs within a specified radius of the player.
+[/list]
+
+[b]1.15[/b]
+[list]
+[*]Added cheat_stash to open player's stash.
+[*]Added max parameter to cheat_teleport_npc_to_loc to limit total number of NPCs teleported.
+[*]Added max parameter to cheat_teleport_npc_to_player to limit total number of NPCs teleported.
+[*]Changed cheat_find_npc, cheat_teleport_npc_to_loc, and cheat_teleport_npc_to_player to work with any actor like hare, pig, deer, etc.
+[*]Added cheat_add_buff_invisible and cheat_remove_buff_invisible
+[/list]
+
+[b]1.14[/b]
+[list]
+[*]Added cheat_find_npc to display an NPC's location assuming the NPC has been loaded into the game world.
+[*]Added cheat_teleport_npc_to_loc to teleport one or more NPCs to a specific x,y,z location.
+[*]Added cheat_teleport_npc_to_player to teleport one or more NPCs to the player's location.
+[*]Added cheat_teleport_horse to teleport the player's horse to the player's location.
+[/list]
+
+[b]1.13[/b]
+[list]
+[*]Excluded Always Drunk perk from cheat_add_all_perks
+[*]Added cheat_loc to get player's location on map
+[*]Fixed cheat_teleport so it actually works
+[/list]
+
+[b]1.12[/b]
+[list]
+[*]Added required "exclude" argument to cheat_add_all_perks to control excluding negative, test, and obsolete perks.
+[*]Added cheat_teleport
+[*]Added cheat_phys_hover (F1 key)
+[*]Added cheat_phys_push (F2 key)
+[*]Added cheat_phys_sprint (F3 key)
+[/list]
+
+[b]1.11[/b]
+[list]
+[*]F5 key is now bound to quicksave (cheat_save).
+[/list]
+
+[b]1.10[/b]
+[list]
+[*]Added cheat_remove_all_stolen_items
+[*]Added cheat_own_all_stolen_items
+[*]Added cheat_repair_all_items
+[/list]
+
+[b]1.9[/b]
+[list]
+[*]Fixed cheat_set_bow_reticle
+[*]Added cheat_reveal_map
+[*]Added cheat_get_time
+[*]Added cheat_set_time
+[*]Added cheat_set_time_speed
+[/list]
+
+[b]1.8[/b]
+[list]
+[*]Automatically run cheats when after you load a level. Create file Data\autocheat.txt and put 1 console command per line in the file.
+[*]cheat_remove_all_buffs - Attempts to remove every buff in the buff database from the player's character.
+[*]cheat_add_buff_heal - Now restores health, stamina, hunger, and exhuast in addition to bleeding and injuries.
+[*]cheat_add_buff_immortal - Now calls cheat_add_buff_heal before adding immortal buffs.
+[*]cheat_remove_all_perks - Attempts to remove every perk in the perk database from the player's character.
+[*]cheat_add_all_items - Adds all items in the item database to the player inventory which is about 5300 punds of items. Don't worry somehow you can still walk.
+[*]cheat_add_stat_xp -- Adds XP to the a player's stat like str.
+[/list]
+
+[b][size=6]Commands[/size][/b]
+cheat_add_all_items
+cheat_add_all_perks
+cheat_add_buff
+cheat_add_buff_heal
+cheat_add_buff_immortal
+cheat_add_buff_invisible
+cheat_add_item
+cheat_add_money
+cheat_add_perk
+cheat_add_stat_xp
+cheat_auto_exec
+cheat_damage_all_items
+cheat_eval
+cheat_exec_delay
+cheat_exec_file
+cheat_find_buffs
+cheat_find_horses
+cheat_find_items
+cheat_find_npc
+cheat_find_perks
+cheat_find_skills
+cheat_get_time
+cheat_kill_npc
+cheat_kill_target
+cheat_loc
+cheat_no_door_lockpicking
+cheat_no_lockpicking
+cheat_no_pickpocketing
+cheat_no_stash_lockpicking
+cheat_own_all_stolen_items
+cheat_phys_hover
+cheat_phys_push
+cheat_phys_sprint
+cheat_remove_all_buffs
+cheat_remove_all_items
+cheat_remove_all_perks
+cheat_remove_all_stolen_items
+cheat_remove_buff
+cheat_remove_buff_immortal
+cheat_remove_buff_invisible
+cheat_remove_item
+cheat_remove_perk
+cheat_repair_all_items
+cheat_reveal_map
+cheat_save
+cheat_set_all_merchants_fence
+cheat_set_bow_reticle
+cheat_set_horse
+cheat_set_regen
+cheat_set_skill_level
+cheat_set_stat_level
+cheat_set_state
+cheat_set_time
+cheat_set_time_speed
+cheat_set_wanted_level
+cheat_set_weather
+cheat_spawn
+cheat_spawn_npc
+cheat_stash
+cheat_target_entity
+cheat_teleport
+cheat_teleport_horse
+cheat_teleport_npc_to_loc
+cheat_teleport_npc_to_player
+cheat_unlock_recipes
+cheat_wash_dirt_and_blood
+
+
+
+
+[b][size=6]Command Documentation[/size][/b]
+[b]All of this information is available in game by running "command-name ?".[/b]
+
+
+
+[size=4][b]cheat_eval[/b][/size]
+Executes the given Lua code. This is not a cheat it is used for testing and debugging.
+
+[b]Examples:[/b]
+	Dump all methods on the cheat table:
+	cheat_eval cheat:print_methods(cheat)
+
+	Dump all methods on player metatable:
+	cheat_eval cheat:print_methods(getmetatable(player))
+
+	Log the value of something to the console:
+	cheat_eval cheat:logInfo(tostring(player.soul:GetState("health")))
+
+
+
+[size=4][b]cheat_save[/b][/size]
+This instantly saves your game. No item requirements or save limits.
+
+[b]Examples:[/b]
+	Save your game:
+	cheat_save
+
+
+
+[size=4][b]cheat_find_buffs[/b][/size]
+Finds all of the buffs that match the given token.
+
+[b]Arguments:[/b]
+	token: (optional) All or part of a the buff's name. Leave empty to list all buffs.
+
+[b]Examples:[/b]
+	Show all buffs:
+	cheat_find_buffs token:
+
+	Show all buffs with 'heal' in their name:
+	cheat_find_buffs token:heal
+
+
+
+[size=4][b]cheat_add_buff[/b][/size]
+Adds the given buff to the player.
+
+[b]Arguments:[/b]
+	id: (required) The buff ID or all or part of a the buff's name. Uses last match from cheat_find_buffs.
+
+[b]Examples:[/b]
+	Adds the last buff with 'heal' in its name:
+	cheat_add_buff id:heal
+
+	Adds the buff poor_hearing buff by ID:
+	cheat_add_buff id:29336a21-dd76-447b-a4f0-94dd6b9db466
+
+	Adds the buff healthEatSleep_instant buff by full name:
+	cheat_add_buff id:healthEatSleep_instant
+
+
+
+[size=4][b]cheat_remove_buff[/b][/size]
+Removes the given buff from the player.
+
+[b]Arguments:[/b]
+	id: (required) The buff ID or all or part of a the buff's name. Uses last match from cheat_find_buffs.
+
+[b]Examples:[/b]
+	Removes the last buff with 'heal' in its name:
+	cheat_remove_buff id:heal
+
+	Removes the buff poor_hearing buff by ID:
+	cheat_remove_buff id:29336a21-dd76-447b-a4f0-94dd6b9db466
+
+	Removes the buff healthEatSleep_instant buff by full name:
+	cheat_remove_buff id:healthEatSleep_instant
+
+
+
+[size=4][b]cheat_remove_all_buffs[/b][/size]
+Removes all buffs from the player.
+
+[b]Examples:[/b]
+	Remove all buffs:
+	cheat_remove_all_buffs
+
+
+
+[size=4][b]cheat_add_buff_heal[/b][/size]
+Stop bleeding, removes injuries, and restores all health, stamina, hunger, and exhaust.
+
+[b]Examples:[/b]
+	Heal bleeding and injuries:
+	cheat_add_buff_heal
+
+
+
+[size=4][b]cheat_add_buff_immortal[/b][/size]
+Adds buffs to make the player immortal. Use cheat_remove_buff_immortal to remove this.
+
+[b]Examples:[/b]
+	Add immortality:
+	cheat_add_buff_immortal
+
+
+
+[size=4][b]cheat_remove_buff_immortal[/b][/size]
+Removes the buffs making the player immortal.
+
+[b]Examples:[/b]
+	Remove immortality:
+	cheat_remove_buff_immortal
+
+
+
+[size=4][b]cheat_add_buff_invisible[/b][/size]
+Adds invisible buff to player. For now this just sets conspicuousness to zero.
+Use cheat_remove_buff_invisible to remove this.
+
+[b]Examples:[/b]
+	Add invisible buff to player:
+	cheat_add_buff_invisible
+
+
+
+[size=4][b]cheat_remove_buff_invisible[/b][/size]
+Removes invisible buff from player.
+
+[b]Examples:[/b]
+	Remove invisible buff from player:
+	cheat_remove_buff_invisible
+
+
+
+[size=4][b]cheat_find_horses[/b][/size]
+Find and display stats of horses.
+
+[b]Arguments:[/b]
+	token: (optional) All or part of a horse's name. Leave blank to list all horses.
+
+[b]Examples:[/b]
+	List all horses:
+	cheat_find_horses token:
+
+	Find all horses in MRH stable:
+	cheat_find_horses token:mrh
+
+
+
+[size=4][b]cheat_set_horse[/b][/size]
+Sets the player's horse.
+
+[b]Arguments:[/b]
+	token: (optional) All or part of a horse's name. Leave blank to list all horses.
+
+[b]Examples:[/b]
+	Set horse by name part:
+	cheat_set_horse id:mrh_05
+
+
+
+[size=4][b]cheat_teleport_horse[/b][/size]
+Teleports your horse to you.
+
+[b]Examples:[/b]
+	Teleport your horse to you:
+	cheat_teleport_horse
+
+
+
+[size=4][b]cheat_find_items[/b][/size]
+Finds all of the items that match the given token.
+
+[b]Arguments:[/b]
+	token: (optional) All or part of a the item's name. Leave empty to list all items.
+
+[b]Examples:[/b]
+	Show all items:
+	cheat_find_items token:
+
+	Show all items with 'arrow' in their name:
+	cheat_find_items token:arrow
+
+
+
+[size=4][b]cheat_add_item[/b][/size]
+Adds an item to the player's inventory.
+
+[b]Arguments:[/b]
+	amount: (optional number) The number of items to add. Default 1.
+	health: (optional number) The condition of the item added. Default 100.
+	id: (required) The item ID or all or part of a the item's name. Uses last match from cheat_find_items.
+
+[b]Examples:[/b]
+	Adds the last item with 'bow' in its name:
+	cheat_add_item id:bow
+
+	Adds the item ui_nm_arrow_hunter by ID:
+	cheat_add_item id:802507e9-d620-47b5-ae66-08fcc314e26a
+
+	Adds 10 items ui_nm_arrow_hunter by fullname with 50 condition:
+	cheat_add_item id:ui_nm_arrow_hunter amount:10 health:50
+
+
+
+[size=4][b]cheat_add_all_items[/b][/size]
+Adds all items the player's inventory. This is probably a bad idea...
+
+[b]Examples:[/b]
+	Add all items:
+	cheat_add_all_items
+
+
+
+[size=4][b]cheat_remove_item[/b][/size]
+Removes an item to the player's inventory.
+
+[b]Arguments:[/b]
+	amount: (optional number) The number of items to remove. Default 1.
+	id: (required) The item ID or all or part of a the item's name. Uses last match from cheat_find_items.
+
+[b]Examples:[/b]
+	Removes the last item with 'bow' in its name:
+	cheat_remove_item id:bow
+
+	Removes the item ui_nm_arrow_hunter by ID:
+	cheat_remove_item id:802507e9-d620-47b5-ae66-08fcc314e26a
+
+	Removes 10 items ui_nm_arrow_hunter by fullname:
+	cheat_remove_item id:ui_nm_arrow_hunter amount:10
+
+
+
+[size=4][b]cheat_remove_all_items[/b][/size]
+Removes all items in the player's inventory.
+THIS DELETES YOUR INVENTORY! Move items you want to a stash first.
+
+[b]Examples:[/b]
+	Delete your inventory:
+	cheat_remove_all_items
+
+
+
+[size=4][b]cheat_remove_all_stolen_items[/b][/size]
+Removes all stolen items from your inventory.
+
+[b]Examples:[/b]
+	Remove stolen items:
+	cheat_remove_all_stolen_items
+
+
+
+[size=4][b]cheat_own_all_stolen_items[/b][/size]
+Makes you the owner of all stolen items in your inventory.
+This removes the stolen flag from the item.
+
+[b]Examples:[/b]
+	Take ownership of stolen items:
+	cheat_own_all_stolen_items
+
+
+
+[size=4][b]cheat_repair_all_items[/b][/size]
+Repairs all damaged items in your inventory. This can uneqip items so don't do this in combat.
+
+[b]Examples:[/b]
+	Repair all items:
+	cheat_repair_all_items
+
+
+
+[size=4][b]cheat_damage_all_items[/b][/size]
+Damages all weapons and armor in your inventory. This can uneqip items so don't do this in combat.
+
+[b]Arguments:[/b]
+	health: (required number) The item health/condition to apply between 0 and 1.
+
+[b]Examples:[/b]
+	Damage all weapons and armor to 50%:
+	cheat_damage_all_items health:0.5
+
+
+
+[size=4][b]cheat_set_all_merchants_fence[/b][/size]
+Flags all merchants so they accept stolen goods.
+Restarting the game reverts this effect.
+
+[b]Arguments:[/b]
+	enable: (required boolean) true or false
+
+[b]Examples:[/b]
+	Turn it on:
+	cheat_set_all_merchants_fence enable:true
+
+	Turn it off:
+	cheat_set_all_merchants_fence enable:false
+
+
+
+[size=4][b]cheat_find_perks[/b][/size]
+Finds all of the perks that match the given token.
+
+[b]Arguments:[/b]
+	token: (optional) All or part of a the perk's name. Leave empty to list all perks.
+
+[b]Examples:[/b]
+	Show all perks:
+	cheat_find_perks token:
+
+	Show all perks with 'hunt' in their name:
+	cheat_find_perks token:hunt
+
+
+
+[size=4][b]cheat_add_perk[/b][/size]
+Adds the given perk to the player.
+
+[b]Arguments:[/b]
+	id: (required) The perk ID or all or part of a the perk's name. Uses last match from cheat_find_perks.
+
+[b]Examples:[/b]
+	Adds the last perk with 'hunt' in its name:
+	cheat_add_perk id:hunt
+
+	Adds the perk juggler perk by ID:
+	cheat_add_perk id:09a5f2a0-d59f-42c2-a80c-bec9ad7ca168
+
+	Adds the perk general_speech perk by full name:
+	cheat_add_perk id:general_speech
+
+
+
+[size=4][b]cheat_add_all_perks[/b][/size]
+Adds all perks to the player.
+
+[b]Arguments:[/b]
+	exclude: (required boolean) If true then negative, test, and obsolete of perks are excluded.
+
+[b]Examples:[/b]
+	Add all perks:
+	cheat_add_all_perks exclude:true
+
+	Add all perks including negative, test, and obsolete perks:
+	cheat_add_all_perks exclude:false
+
+
+
+[size=4][b]cheat_remove_perk[/b][/size]
+Removes the given perk from the player.
+
+[b]Arguments:[/b]
+	id: (required) The perk ID or all or part of a the perk's name. Uses last match from cheat_find_perks.
+
+[b]Examples:[/b]
+	Removes the last perk with 'hunt' in its name:
+	cheat_remove_perk id:hunt
+
+	Removes the perk juggler by ID:
+	cheat_remove_perk id:09a5f2a0-d59f-42c2-a80c-bec9ad7ca168
+
+	Removes the perk golden_tongue by full name.:
+	cheat_remove_perk id:golden_tongue
+
+
+
+[size=4][b]cheat_remove_all_perks[/b][/size]
+Removes all perks from the player.
+
+[b]Examples:[/b]
+	Remove all perks:
+	cheat_remove_all_perks
+
+
+
+[size=4][b]cheat_phys_hover[/b][/size]
+Use F1 key to toggle hover on and off.
+This uses physics to push the player slightly up.
+This is intended to be used with F2 push.
+
+
+[size=4][b]cheat_phys_push[/b][/size]
+Use F2 key to toggle push on and off.
+This uses physics to push the player forward.
+This is intended to be used with F1 hover.
+
+
+[size=4][b]cheat_phys_sprint[/b][/size]
+Use F3 key to toggle sprinting on and off.
+This uses physics to push the player forward (and down for friction).
+
+
+[size=4][b]cheat_no_stash_lockpicking[/b][/size]
+This disables the lockpicking minigame on stashes and automatically opens the stash for looting.
+Restarting the game reverts this effect.
+
+[b]Examples:[/b]
+	Turn off lockpicking minigame on stashes:
+	cheat_no_stash_lockpicking
+
+
+
+[size=4][b]cheat_no_door_lockpicking[/b][/size]
+This disables the lockpicking minigame on doors and automatically opens the door.
+Restarting the game reverts this effect.
+
+[b]Examples:[/b]
+	Turn off lockpicking minigame on doors:
+	cheat_no_door_lockpicking
+
+
+
+[size=4][b]cheat_no_lockpicking[/b][/size]
+This calls cheat_no_stash_lockpicking and cheat_no_door_lockpicking.
+
+[b]Examples:[/b]
+	Turn off lockpicking minigames on doors and stashes:
+	cheat_no_lockpicking
+
+
+
+[size=4][b]cheat_no_pickpocketing[/b][/size]
+This disables the pickpocketing minigame and automatically opens the person's inventory for looting.
+They can still catch you.
+Restarting the game reverts this effect.
+
+[b]Examples:[/b]
+	Turn off pickpocketing minigame:
+	cheat_no_pickpocketing
+
+
+
+[size=4][b]cheat_stash[/b][/size]
+Opens the player's stash. This only works if you have unlocked at least 1 stash.
+
+[b]Examples:[/b]
+	Open your stash:
+	cheat_stash
+
+
+
+[size=4][b]cheat_loc[/b][/size]
+Shows player's world location.
+
+[b]Examples:[/b]
+	Example:
+	cheat_loc
+
+
+
+[size=4][b]cheat_teleport[/b][/size]
+Teleports the player to the given coordinates.
+You can end up in the air or under the map.
+I suggest saving your game and turn on immortality first.
+
+[b]Arguments:[/b]
+	y: (required number) Y coordinate
+	x: (required number) X coordinate
+	z: (required number) Z coordinate
+
+[b]Examples:[/b]
+	Example:
+	cheat_teleport x:3000 y:1500 z:300
+
+
+
+[size=4][b]cheat_set_state[/b][/size]
+Sets one of the player's states to the given value.
+
+[b]Arguments:[/b]
+	state: (required) One of: health, exhaust, hunger, or stamina.
+	value: (required number) The number to assign to the given state.
+
+[b]Examples:[/b]
+	Set health to 100 points:
+	cheat_set_state state:health value:100
+
+	Set exhaust to 100 points:
+	cheat_set_state state:exhaust value:100
+
+
+
+[size=4][b]cheat_add_stat_xp[/b][/size]
+Adds XP to one of the player's stats.
+
+[b]Arguments:[/b]
+	stat: (required) One of: str, agi, vit, or spc.
+	xp: (required number) The desired XP to add.
+
+[b]Examples:[/b]
+	Add 100 XP to player's strength stat:
+	cheat_add_stat_xp stat:str xp:100
+
+
+
+[size=4][b]cheat_set_stat_level[/b][/size]
+Sets one of the player's stats to the given level.
+
+[b]Arguments:[/b]
+	stat: (required) One of: str, agi, vit, or spc.
+	level: (required number) The desired level for the given stat (max 20). Level cannot lowered.
+
+[b]Examples:[/b]
+	Set player's strength to level 20:
+	cheat_set_stat_level stat:str level:20
+
+	Set player's agility to level 5:
+	cheat_set_stat_level stat:agi level:5
+
+
+
+[size=4][b]cheat_add_money[/b][/size]
+Adds the given amount of groschen to the player's inventory.
+
+[b]Arguments:[/b]
+	amount: (required number) The amount of groschen to add.
+
+[b]Examples:[/b]
+	Add 200 groschen:
+	cheat_add_money amount:200
+
+
+
+[size=4][b]cheat_set_bow_reticle[/b][/size]
+Enabled or disables the bow reticle. Won't take effect if bow is drawn.
+
+[b]Arguments:[/b]
+	enable: (required boolean) true or false
+
+[b]Examples:[/b]
+	Turn it on:
+	cheat_set_bow_reticle enable:true
+
+	Turn it off:
+	cheat_set_bow_reticle enable:false
+
+
+
+[size=4][b]cheat_set_wanted_level[/b][/size]
+Set or clears the player's wanted level. This doesn't affect faction reputation.
+
+[b]Arguments:[/b]
+	level: (required number) 0=not wanted, 1=wanted for money, 2=wanted for jail, 3=wanted dead
+
+[b]Examples:[/b]
+	Clear wanted status:
+	cheat_set_wanted_level level:0
+
+	Make the guards kill me on sight:
+	cheat_set_wanted_level level:4
+
+
+
+[size=4][b]cheat_wash_dirt_and_blood[/b][/size]
+Washes all blood and dirt from the player and player's horse.
+Do horses need this?
+Can items be washed?
+Let me know.
+
+[b]Examples:[/b]
+	Wash yourself and your horse:
+	cheat_wash_dirt_and_blood
+
+
+
+[size=4][b]cheat_unlock_recipes[/b][/size]
+Saw this code to unlock recipes in a pak file.
+I have no idea what this really does or if it works.
+Let me know.
+
+[b]Examples:[/b]
+	Unlock all recipes:
+	cheat_unlock_recipes
+
+
+
+[size=4][b]cheat_set_regen[/b][/size]
+Regenerates the given player state over time; pulses once per second.
+
+[b]Arguments:[/b]
+	enable: (required boolean) true to enable state regen; false to disable
+	amount: (optional number) The amount to regen every second.
+	state: (required) The state to regen: all, health, stamina, or exhaust.
+
+[b]Examples:[/b]
+	Adds 1 to all states every second.:
+	cheat_set_regen enable:true state:all amount:1
+
+	Adds 100 to player's stamina every second.:
+	cheat_set_regen enable:true state:stamina amount:100
+
+	Disable all state regeneration.:
+	cheat_set_regen enable:false state:all
+
+
+
+[size=4][b]cheat_find_skills[/b][/size]
+Finds all of the skills that match the given token.
+
+[b]Arguments:[/b]
+	token: (optional) All or part of a the skill's name. Leave empty to list all skills.
+
+[b]Examples:[/b]
+	Show all skills:
+	cheat_find_skills token:
+
+	Show all skills with 'pick' in their name:
+	cheat_find_skills token:pick
+
+
+
+[size=4][b]cheat_set_skill_level[/b][/size]
+Sets one of the player's skills to the given level.
+
+[b]Arguments:[/b]
+	level: (required number) The desired level for the given skill (max 20).
+	skill: (required) The skill name, full or partial, or ID. Use cheat_find_skills to list all skills.
+
+[b]Examples:[/b]
+	Set player's lockpicking skill to level 20:
+	cheat_set_skill_level skill:lockpicking level:20
+
+	Set player's bow skill to level 20:
+	cheat_set_skill_level skill:18 level:20
+
+
+
+[size=4][b]cheat_reveal_map[/b][/size]
+Reveals the entire map (removes fog of war).
+
+[b]Examples:[/b]
+	Reveal the entire map:
+	cheat_show_map
+
+
+
+[size=4][b]cheat_get_time[/b][/size]
+Logs information about game time.
+
+[b]Examples:[/b]
+	Get game time:
+	cheat_get_time
+
+
+
+[size=4][b]cheat_set_time[/b][/size]
+Moved time forward the given number of hours.
+
+[b]Arguments:[/b]
+	hours: (required number) The number of hours.
+
+[b]Examples:[/b]
+	Move 5 hours forward:
+	cheat_set_time hours:5
+
+
+
+[size=4][b]cheat_set_time_speed[/b][/size]
+Set the game time speed as a ratio between real time and game time.
+A high ratio, like 1000, is faster. Default is 15. 0 will pause time.
+
+[b]Arguments:[/b]
+	ratio: (required number) The ratio between real time and game time. Default 15.
+
+[b]Examples:[/b]
+	Speed up game time:
+	cheat_set_time_speed ratio:1000
+
+
+
+[size=4][b]cheat_kill_npc[/b][/size]
+Finds and kills all the killable NPCs within the given radius of the player.
+
+[b]Arguments:[/b]
+	token: (required) All or part of a the NPC's name.
+	radius: (optional number) The kill radius around player. Default 5.
+
+[b]Examples:[/b]
+	Kill Father Godwin:
+	cheat_kill_npc token:Father Godwin radius:2
+
+	Kill all bandits near the player:
+	cheat_kill_npc token:bandit radius:10
+
+
+
+[size=4][b]cheat_find_npc[/b][/size]
+Finds and shows information about an NPC.
+This only works if the NPC has been loaded into the world.
+
+[b]Arguments:[/b]
+	token: (required) All or part of a the NPC's name.
+
+[b]Examples:[/b]
+	Find Father Godwin:
+	cheat_find_npc token:godwin
+
+
+
+[size=4][b]cheat_teleport_npc_to_loc[/b][/size]
+Teleports one or more NPCs to the given coordinates. Use cheat_loc to get locations.
+
+[b]Arguments:[/b]
+	max: (optional number) The maximum NPCs to teleport. Default 10.
+	x: (required number) X coordinate.
+	y: (required number) Y coordinate.
+	radius: (optional number) The teleport radius around the x,y,z target. Default 5.
+	token: (required) All or part of a the NPC's name.
+	z: (required number) Z coordinate.
+
+[b]Examples:[/b]
+	Teleport Father Godwin to somewhere...:
+	cheat_teleport_npc_to_loc token:Father_Godwin x:1 y:2 z:3
+
+
+
+[size=4][b]cheat_teleport_npc_to_player[/b][/size]
+Teleports one or more NPCs to the player's location.
+
+[b]Arguments:[/b]
+	max: (optional number) The maximum NPCs to teleport. Default 10.
+	token: (required) All or part of a the NPC's name.
+	radius: (optional number) The teleport radius around the player. Default 5.
+
+[b]Examples:[/b]
+	Teleport Father Godwin to ???:
+	cheat_teleport_npc_to_loc token:Father_Godwin x:1 y:2 z:3
+
+
+
+[size=4][b]cheat_target_entity[/b][/size]
+Tracks the entity being targeted by the player.
+This will allow you to use other commands on the entity.
+This command is bound to the F4 key.
+
+
+[size=4][b]cheat_kill_target[/b][/size]
+Kills the entity targeted using by F4 or the cheat_target_entity command.
+
+
+[size=4][b]cheat_spawn[/b][/size]
+Spawns bandits, cuman, or animals.
+For some reason most of the animals and some bandits/cuman just stand around. No idea why.
+The spawned entities are not managed so you should kill them off or load a clean save.
+
+[b]Arguments:[/b]
+	count: (optional number) Number of things to spawn. Default 1.
+	radius: (optional number) The spawn radius around the player. Default 5.
+	class: (required) bandit|cuman|hare|horse|boar|sheep|pig|cow|buck|doe|reddeer
+
+[b]Examples:[/b]
+	Spawn 10 bandits:
+	cheat_spawn class:bandit count:10
+
+
+
+[size=4][b]cheat_spawn_npc[/b][/size]
+Searches through the database of souls and spawns 1 NPC for each match.
+This is intended to be used to spawn specific NPCs.
+The list of souls is in v_soul_character_data.xml in tables.pak.
+
+[b]Arguments:[/b]
+	token: (required) The sould ID, all/part of the soul name, or all/part of localized soul name.
+
+[b]Examples:[/b]
+	Spawn Olena by name (spawns 2 NPCs, 1 is invisible):
+	cheat_spawn_npc token:olena
+
+	Spawn all NPCs with 'father' in their name:
+	cheat_spawn_npc token:father
+
+	Spawn by soul ID:
+	cheat_spawn_npc token:4d69f4f4-6b78-7b1f-5a61-8fa8045b7aac
+
+	Spawn by ui name:
+	cheat_spawn_npc token:char_452_uiName
+
+
+
+[size=4][b]cheat_set_weather[/b][/size]
+Sets the weather to the given weather ID.
+1 = cloudless_sunny
+2 = semicloudy_clear
+3 = cloudy_no_rain
+4 = cloudy_frequent_showers
+5 = foggy_drizzly
+6 = foggy_storm
+7 = dream
+
+[b]Arguments:[/b]
+	delay: (optional number) The number of hours to delay the transition. Default 0.
+	id: (required number) The weather type ID.
+
+[b]Examples:[/b]
+	Set weather to foggy storm:
+	cheat_set_weather id:6
+
+
+
+[size=4][b]cheat_exec_delay[/b][/size]
+Sets the number of milliseconds to delay execution of the next command.
+
+[b]Arguments:[/b]
+	ms: (required number) The number of milliseconds to delay the next command.
+
+[b]Examples:[/b]
+	1 second delay:
+	cheat_exec_delay ms:1000
+
+
+
+[size=4][b]cheat_exec_file[/b][/size]
+Executes a file of console commands. Use an absolute path or
+path relative to SteamLibrary\steamapps\common\KingdomComeDeliverance.
+
+[b]Arguments:[/b]
+	file: (required) The file to execute.
+
+[b]Examples:[/b]
+	Manually run autocheat.txt:
+	cheat_exec_file file:Data\autocheat.txt
+
+
+
+[size=4][b]cheat_auto_exec[/b][/size]
+This command does nothing and is here for documentation only.
+You can run cheat commands automatically when a level loads by placing them in file Datautocheat.txt.
+This is useful for commands that are not permanent.
