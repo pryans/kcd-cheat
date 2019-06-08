@@ -62,6 +62,7 @@ EOF
   mkdir -p "${REL_DIR}"
   cd "${PKG_DIR}"
   7za a -tzip "${REL_DIR}/${MOD_NAME}${MOD_CLASS}-${VERSION}.zip" ./*
+
 }
 
 # normal release

@@ -40,6 +40,13 @@ cheat_set_regen enable:true state:stamina amount:10
 
 [b][size=6]Change Log[/size][/b]
 
+[b]1.30[/b]
+[list]
+[*]Moved to github.
+[*]Changed install.sh to generic release.sh without any absolute paths.
+[*]See github 1.30 milestone for merged pull requests.
+[/list]
+
 [b]1.29[/b]
 [list]
 [*]Merged latest defaultProfile.xml.
