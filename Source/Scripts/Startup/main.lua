@@ -1,6 +1,6 @@
 cheat={}
 cheat.versionMajor = 1
-cheat.versionMinor = 30
+cheat.versionMinor = 31
 cheat.isCommandLineBuild = false
 cheat.devHome = os.getenv("KCD_CHEAT_HOME")
 cheat.commands = {}
