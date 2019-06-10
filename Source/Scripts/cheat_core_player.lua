@@ -65,6 +65,42 @@ function cheat:teleport(line)
 end
 
 -- ============================================================================
+-- cheat_teleport_to
+-- ============================================================================
+cheat.cheat_teleport_to_args = {
+  place=function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "Place to teleport to") end,
+}
+cheat:createCommand("cheat_teleport_to", "cheat:teleport_to(%line)", cheat.cheat_teleport_to_args,
+  "Teleports the player to the given place. Supported places (case insensitive):\n$8Ledetchko, Merhojed, Monestary,\n$8Neuhof, Pribyslavitz, Rattay,\n$8Rovna, Samopesh, Sasau,\n$8SKalitz, Talmberg, Uzhitz ",
+  "Example", "cheat_teleport_to place:rattay")
+function cheat:teleport_to(line)
+  local args = cheat:argsProcess(line, cheat.cheat_teleport_to_args)
+  local nplace, nplaceErr = cheat:argsGet(args, 'place')
+
+  local places = {}
+  places["LEDETCHKO"] = "x:2052 y:1304 z:30"
+  places["MERHOJED"] = "x:1636 y:2618 z:126"
+  places["MONESTARY"] = "x:929 y:1617 z:36"
+  places["NEUHOF"] = "x:3522 y:1524 z:131"
+  places["PRIBYSLAVITZ"] = "x:1557 y:3719 z:107"
+  places["RATTAY"] = "x:2534 y:572 z:81"
+  places["ROVNA"] = "x:1261 y:3129 z:25"
+  places["SAMOPESH"] = "x:1139 y:2239 z:71"
+  places["SASAU"] = "x:896 y:1186 z:27"
+  places["SKALITZ"] = "x:829 y:3522 z:51"
+  places["TALMBERG"] = "x:2360 y:2846 z:105"
+  places["UZHITZ"] = "x:3041 y:3324 z:156"
+
+  if not nplaceErr then
+    if places[cheat:toUpper(nplace)] ~= nil then
+      cheat:teleport(places[cheat:toUpper(nplace)])
+    else
+      cheat:logError("Invalid Place - See list of supported places type: 'cheat_teleport_to ?'")
+    end
+  end
+end
+
+-- ============================================================================
 -- cheat_set_state
 -- ============================================================================
 cheat.cheat_set_state_args = {
