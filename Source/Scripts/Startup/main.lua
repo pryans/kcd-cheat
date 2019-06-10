@@ -1,14 +1,20 @@
-System.LogAlways("@@@@@@@@@ cheat mod main.lua called @@@@@@@@")
-
 cheat={}
 cheat.versionMajor = 1
 cheat.versionMinor = 30
-cheat.isInsideIde = NPC_NAI_x == nil
-cheat.devHome = "/home/mikeno/FAST/Projects/Cheat"
+cheat.isCommandLineBuild = false
+cheat.devHome = os.getenv("KCD_CHEAT_HOME")
 cheat.commands = {}
 
+if os.getenv("KCD_CHEAT_BUILD") ~= nil then
+  cheat.isCommandLineBuild = true
+end
+
+if not cheat.isCommandLineBuild then
+  System.LogAlways("@@@@@@@@@ cheat mod main.lua called @@@@@@@@")
+end
+
 function cheat:loadFile(file, fromDisk)
-  if not cheat.isInsideIde and not fromDisk then
+  if not cheat.isCommandLineBuild and not fromDisk then
     Script.ReloadScript("Scripts/" .. file)
     System.LogAlways("$5Loaded file [" .. tostring(file) .. "].")
   else
@@ -65,7 +71,7 @@ function cheat:initOnLevelLoad()
   cheat:logInfo("Cheat %s.%s Running", cheat.versionMajor, cheat.versionMinor)
 end
 
-if cheat.isInsideIde then
+if cheat.isCommandLineBuild then
   helpFile = io.open (cheat.devHome .. "/Source/Docs/help.txt", "w")
   helpFile:write("")
   helpFile:flush()
@@ -79,7 +85,7 @@ end
 
 cheat:init()
 
-if cheat.isInsideIde then
+if cheat.isCommandLineBuild then
   table.sort(cheat.commands)
   commandsFile = io.open (cheat.devHome .. "/Source/Docs/commands.txt", "a+")
   for i,n in ipairs(cheat.commands) do

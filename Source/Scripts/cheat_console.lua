@@ -23,7 +23,7 @@ function cheat:createCommand(cmdName, cmdFunc, cmdArgsSet, cmdDocs, ...)
     end
   end
 
-  if cheat.isInsideIde then
+  if cheat.isCommandLineBuild then
     cmdHelp = " \n \n[size=4][b]" .. cmdName .. "[/b][/size]" .. "\n" .. cmdHelp
     cmdHelp = cmdHelp:gsub("$8Arguments:$8", "[b]Arguments:[/b]")
     cmdHelp = cmdHelp:gsub("$8Examples:$8", "[b]Examples:[/b]")

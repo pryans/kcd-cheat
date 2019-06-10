@@ -116,7 +116,7 @@ function cheat:logOn()
 end
 
 function cheat:log(value)
-  if cheat.isInsideIde == false then
+  if cheat.isCommandLineBuild == false then
     System.LogAlways(value)
   else
     print(value)
@@ -172,7 +172,7 @@ cheat.g_cheat_test_pass = 0
 cheat.g_cheat_test_name = nil
 
 function cheat:testEnabled()
-  return cheat:logIsDebugEnabled() or cheat.isInsideIde
+  return cheat:logIsDebugEnabled() or cheat.isCommandLineBuild
 end
 
 function cheat:beginTest(name)

@@ -1,4 +1,4 @@
-if cheat.isInsideIde then  
+if cheat.isCommandLineBuild then  
   System = {}
   System["AddCCommand"] = function(cmdName, cmdFunc, cmdHelp)
     --cheat:logDebug("Fake System.AddCCommand(%s, %s, %s) called . ", cmdName, cmdFunc, cmdHelp)

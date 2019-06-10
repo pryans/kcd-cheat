@@ -146,10 +146,10 @@ Find and display stats of horses.
  
  
 [size=4][b]cheat_set_horse[/b][/size]
-Sets the player's horse.
+Sets the player's horse. Use command cheat_find_horses to display a list of horse UUIDs.
 
 [b]Arguments:[/b]
-	token: (optional) All or part of a horse's name. Leave blank to list all horses.
+	id: (required) The UUID or all or part of a horse's name (last match is used).
 
 [b]Examples:[/b]
 	Set horse by name part:
@@ -185,9 +185,9 @@ Finds all of the items that match the given token.
 Adds an item to the player's inventory.
 
 [b]Arguments:[/b]
-	amount: (optional number) The number of items to add. Default 1.
-	health: (optional number) The condition of the item added. Default 100.
 	id: (required) The item ID or all or part of a the item's name. Uses last match from cheat_find_items.
+	health: (optional number) The condition of the item added. Default 100.
+	amount: (optional number) The number of items to add. Default 1.
 
 [b]Examples:[/b]
 	Adds the last item with 'bow' in its name:
@@ -451,9 +451,9 @@ You can end up in the air or under the map.
 I suggest saving your game and turn on immortality first.
 
 [b]Arguments:[/b]
+	z: (required number) Z coordinate
 	y: (required number) Y coordinate
 	x: (required number) X coordinate
-	z: (required number) Z coordinate
 
 [b]Examples:[/b]
 	Example:
@@ -481,8 +481,8 @@ Sets one of the player's states to the given value.
 Adds XP to one of the player's stats.
 
 [b]Arguments:[/b]
-	stat: (required) One of: str, agi, vit, or spc.
 	xp: (required number) The desired XP to add.
+	stat: (required) One of: str, agi, vit, or spc.
 
 [b]Examples:[/b]
 	Add 100 XP to player's strength stat:
@@ -494,8 +494,8 @@ Adds XP to one of the player's stats.
 Sets one of the player's stats to the given level.
 
 [b]Arguments:[/b]
-	stat: (required) One of: str, agi, vit, or spc.
 	level: (required number) The desired level for the given stat (max 20). Level cannot lowered.
+	stat: (required) One of: str, agi, vit, or spc.
 
 [b]Examples:[/b]
 	Set player's strength to level 20:
@@ -575,9 +575,9 @@ Let me know.
 Regenerates the given player state over time; pulses once per second.
 
 [b]Arguments:[/b]
-	enable: (required boolean) true to enable state regen; false to disable
-	amount: (optional number) The amount to regen every second.
 	state: (required) The state to regen: all, health, stamina, or exhaust.
+	amount: (optional number) The amount to regen every second.
+	enable: (required boolean) true to enable state regen; false to disable
 
 [b]Examples:[/b]
 	Adds 1 to all states every second.:
@@ -698,12 +698,12 @@ This only works if the NPC has been loaded into the world.
 Teleports one or more NPCs to the given coordinates. Use cheat_loc to get locations.
 
 [b]Arguments:[/b]
-	max: (optional number) The maximum NPCs to teleport. Default 10.
-	x: (required number) X coordinate.
-	y: (required number) Y coordinate.
-	radius: (optional number) The teleport radius around the x,y,z target. Default 5.
 	token: (required) All or part of a the NPC's name.
+	max: (optional number) The maximum NPCs to teleport. Default 10.
+	radius: (optional number) The teleport radius around the x,y,z target. Default 5.
 	z: (required number) Z coordinate.
+	y: (required number) Y coordinate.
+	x: (required number) X coordinate.
 
 [b]Examples:[/b]
 	Teleport Father Godwin to somewhere...:
@@ -715,8 +715,8 @@ Teleports one or more NPCs to the given coordinates. Use cheat_loc to get locati
 Teleports one or more NPCs to the player's location.
 
 [b]Arguments:[/b]
-	max: (optional number) The maximum NPCs to teleport. Default 10.
 	token: (required) All or part of a the NPC's name.
+	max: (optional number) The maximum NPCs to teleport. Default 10.
 	radius: (optional number) The teleport radius around the player. Default 5.
 
 [b]Examples:[/b]
@@ -741,9 +741,9 @@ For some reason most of the animals and some bandits/cuman just stand around. No
 The spawned entities are not managed so you should kill them off or load a clean save.
 
 [b]Arguments:[/b]
+	class: (required) bandit|cuman|hare|horse|boar|sheep|pig|cow|buck|doe|reddeer
 	count: (optional number) Number of things to spawn. Default 1.
 	radius: (optional number) The spawn radius around the player. Default 5.
-	class: (required) bandit|cuman|hare|horse|boar|sheep|pig|cow|buck|doe|reddeer
 
 [b]Examples:[/b]
 	Spawn 10 bandits:

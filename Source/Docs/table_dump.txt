@@ -9063,7 +9063,7 @@ versionMajor
 argsGetOptionalNumber
 init
 quest_show_started
-isInsideIde
+isCommandLineBuild
 g_cheat_test_pass
 soulTextLookup
 logSetLevel
