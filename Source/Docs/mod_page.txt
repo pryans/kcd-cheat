@@ -40,6 +40,11 @@ cheat_set_regen enable:true state:stamina amount:10
 
 [b][size=6]Change Log[/size][/b]
 
+[b]1.31[/b]
+[list]
+[*]New command cheat_teleport_to from @pingpongmury
+[/list]
+
 [b]1.30[/b]
 [list]
 [*]Moved to github.
