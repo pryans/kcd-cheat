@@ -59,9 +59,9 @@ cheat_spawn_npc
 cheat_stash
 cheat_target_entity
 cheat_teleport
-cheat_teleport_to
 cheat_teleport_horse
 cheat_teleport_npc_to_loc
 cheat_teleport_npc_to_player
+cheat_teleport_to
 cheat_unlock_recipes
 cheat_wash_dirt_and_blood
