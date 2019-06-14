@@ -460,7 +460,19 @@ I suggest saving your game and turn on immortality first.
 	cheat_teleport x:3000 y:1500 z:300
 
  
- 
+[size=4][b]cheat_teleport_to[/b][/size]
+Teleports the player to the given place.
+I suggest saving your game and turn on immortality first.
+
+[b]Arguments:[/b]
+	place: (required) Place to teleport to.
+
+[b]Examples:[/b]
+	Example:
+	cheat_teleport_to place:rattay
+	
+	
+	
 [size=4][b]cheat_set_state[/b][/size]
 Sets one of the player's states to the given value.
 
