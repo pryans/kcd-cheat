@@ -71,7 +71,7 @@ cheat.cheat_teleport_to_args = {
   place=function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "Place to teleport to") end,
 }
 cheat:createCommand("cheat_teleport_to", "cheat:teleport_to(%line)", cheat.cheat_teleport_to_args,
-  "Teleports the player to the given place. Supported places (case insensitive):\n$8(Inn at the) Glade, Ledetchko, Merhojed,\n$8Monestary, Neuhof, Pribyslavitz,\n$8Rattay, Rovna, Samopesh,\n$8Sasau, Skalitz, Talmberg, \n$8Uzhitz, Vranik ",
+  "Teleports the player to the given place. Supported places (case insensitive):\n$8(Inn at the) Glade, Ledetchko, Merhojed,\n$8Monastery, Neuhof, Pribyslavitz,\n$8Rattay, Rovna, Samopesh,\n$8Sasau, Skalitz, Talmberg, \n$8Uzhitz, Vranik ",
   "Example", "cheat_teleport_to place:rattay")
 function cheat:teleport_to(line)
   local args = cheat:argsProcess(line, cheat.cheat_teleport_to_args)
@@ -81,7 +81,7 @@ function cheat:teleport_to(line)
   places["GLADE"] = "x:2849 y:1913 z:156"
   places["LEDETCHKO"] = "x:2052 y:1304 z:30"
   places["MERHOJED"] = "x:1636 y:2618 z:126"
-  places["MONESTARY"] = "x:929 y:1617 z:36"
+  places["MONASTERY"] = "x:929 y:1617 z:36"
   places["NEUHOF"] = "x:3522 y:1524 z:131"
   places["PRIBYSLAVITZ"] = "x:1557 y:3719 z:107"
   places["RATTAY"] = "x:2534 y:572 z:81"
