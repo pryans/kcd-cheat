@@ -464,7 +464,7 @@ I suggest saving your game and turn on immortality first.
 [size=4][b]cheat_teleport_to[/b][/size]
 Teleports the player to the given place. Supported places (case insensitive):
 (Inn at the) Glade, Ledetchko, Merhojed,
-Monestary, Neuhof, Pribyslavitz,
+Monastery, Neuhof, Pribyslavitz,
 Rattay, Rovna, Samopesh,
 Sasau, Skalitz, Talmberg, 
 Uzhitz, Vranik 
