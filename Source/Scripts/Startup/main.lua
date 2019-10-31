@@ -1,13 +1,9 @@
 cheat={}
 cheat.versionMajor = 1
-cheat.versionMinor = 31
+cheat.versionMinor = 32
+cheat.devHome = ""
 cheat.isCommandLineBuild = false
-cheat.devHome = os.getenv("KCD_CHEAT_HOME")
 cheat.commands = {}
-
-if os.getenv("KCD_CHEAT_BUILD") ~= nil then
-  cheat.isCommandLineBuild = true
-end
 
 if not cheat.isCommandLineBuild then
   System.LogAlways("@@@@@@@@@ cheat mod main.lua called @@@@@@@@")
