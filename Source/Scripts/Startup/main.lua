@@ -1,6 +1,6 @@
 cheat={}
 cheat.versionMajor = 1
-cheat.versionMinor = 32
+cheat.versionMinor = 33
 cheat.devHome = ""
 cheat.isCommandLineBuild = false
 cheat.commands = {}
@@ -51,7 +51,6 @@ function cheat:loadFiles(fromDisk)
   cheat:loadFile("cheat_core_time.lua", fromDisk)
   cheat:loadFile("cheat_core_npc.lua", fromDisk)
   cheat:loadFile("cheat_core_weather.lua", fromDisk)
-  cheat:loadFile("cheat_core_exec.lua", fromDisk)
 end
 
 function cheat:init()
@@ -63,7 +62,8 @@ function cheat:initOnLevelLoad()
   ActionMapManager.EnableActionMap("cheat", 1)
   cheat:cheat_timer(false)
   cheat:cheat_timer(true)
-  cheat:cheat_auto_exec()
+  cheat:logInfo("Loading [Scripts/autocheat.lua] from [Mods/Cheat/Data/data.pak].")
+  Script.ReloadScript("Scripts/autocheat.lua")
   cheat:logInfo("Cheat %s.%s Running", cheat.versionMajor, cheat.versionMinor)
 end
 

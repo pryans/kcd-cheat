@@ -185,9 +185,9 @@ Finds all of the items that match the given token.
 Adds an item to the player's inventory.
 
 [b]Arguments:[/b]
-	amount: (optional number) The number of items to add. Default 1.
 	id: (required) The item ID or all or part of a the item's name. Uses last match from cheat_find_items.
 	health: (optional number) The condition of the item added. Default 100.
+	amount: (optional number) The number of items to add. Default 1.
 
 [b]Examples:[/b]
 	Adds the last item with 'bow' in its name:
@@ -214,8 +214,8 @@ Adds all items the player's inventory. This is probably a bad idea...
 Removes an item to the player's inventory.
 
 [b]Arguments:[/b]
-	id: (required) The item ID or all or part of a the item's name. Uses last match from cheat_find_items.
 	amount: (optional number) The number of items to remove. Default 1.
+	id: (required) The item ID or all or part of a the item's name. Uses last match from cheat_find_items.
 
 [b]Examples:[/b]
 	Removes the last item with 'bow' in its name:
@@ -498,8 +498,8 @@ Sets one of the player's states to the given value.
 Adds XP to one of the player's stats.
 
 [b]Arguments:[/b]
-	xp: (required number) The desired XP to add.
 	stat: (required) One of: str, agi, vit, or spc.
+	xp: (required number) The desired XP to add.
 
 [b]Examples:[/b]
 	Add 100 XP to player's strength stat:
@@ -511,8 +511,8 @@ Adds XP to one of the player's stats.
 Sets one of the player's stats to the given level.
 
 [b]Arguments:[/b]
-	level: (required number) The desired level for the given stat (max 20). Level cannot lowered.
 	stat: (required) One of: str, agi, vit, or spc.
+	level: (required number) The desired level for the given stat (max 20). Level cannot lowered.
 
 [b]Examples:[/b]
 	Set player's strength to level 20:
@@ -715,12 +715,12 @@ This only works if the NPC has been loaded into the world.
 Teleports one or more NPCs to the given coordinates. Use cheat_loc to get locations.
 
 [b]Arguments:[/b]
-	max: (optional number) The maximum NPCs to teleport. Default 10.
-	radius: (optional number) The teleport radius around the x,y,z target. Default 5.
-	y: (required number) Y coordinate.
-	token: (required) All or part of a the NPC's name.
 	z: (required number) Z coordinate.
+	y: (required number) Y coordinate.
 	x: (required number) X coordinate.
+	radius: (optional number) The teleport radius around the x,y,z target. Default 5.
+	max: (optional number) The maximum NPCs to teleport. Default 10.
+	token: (required) All or part of a the NPC's name.
 
 [b]Examples:[/b]
 	Teleport Father Godwin to somewhere...:
@@ -732,8 +732,8 @@ Teleports one or more NPCs to the given coordinates. Use cheat_loc to get locati
 Teleports one or more NPCs to the player's location.
 
 [b]Arguments:[/b]
-	max: (optional number) The maximum NPCs to teleport. Default 10.
 	radius: (optional number) The teleport radius around the player. Default 5.
+	max: (optional number) The maximum NPCs to teleport. Default 10.
 	token: (required) All or part of a the NPC's name.
 
 [b]Examples:[/b]
@@ -758,9 +758,9 @@ For some reason most of the animals and some bandits/cuman just stand around. No
 The spawned entities are not managed so you should kill them off or load a clean save.
 
 [b]Arguments:[/b]
-	class: (required) bandit|cuman|hare|horse|boar|sheep|pig|cow|buck|doe|reddeer
-	count: (optional number) Number of things to spawn. Default 1.
 	radius: (optional number) The spawn radius around the player. Default 5.
+	count: (optional number) Number of things to spawn. Default 1.
+	class: (required) bandit|cuman|hare|horse|boar|sheep|pig|cow|buck|doe|reddeer
 
 [b]Examples:[/b]
 	Spawn 10 bandits:
@@ -802,41 +802,10 @@ Sets the weather to the given weather ID.
 7 = dream
 
 [b]Arguments:[/b]
-	id: (required number) The weather type ID.
 	delay: (optional number) The number of hours to delay the transition. Default 0.
+	id: (required number) The weather type ID.
 
 [b]Examples:[/b]
 	Set weather to foggy storm:
 	cheat_set_weather id:6
 
- 
- 
-[size=4][b]cheat_exec_delay[/b][/size]
-Sets the number of milliseconds to delay execution of the next command.
-
-[b]Arguments:[/b]
-	ms: (required number) The number of milliseconds to delay the next command.
-
-[b]Examples:[/b]
-	1 second delay:
-	cheat_exec_delay ms:1000
-
- 
- 
-[size=4][b]cheat_exec_file[/b][/size]
-Executes a file of console commands. Use an absolute path or
-path relative to SteamLibrary\steamapps\common\KingdomComeDeliverance.
-
-[b]Arguments:[/b]
-	file: (required) The file to execute.
-
-[b]Examples:[/b]
-	Manually run autocheat.txt:
-	cheat_exec_file file:Data\autocheat.txt
-
- 
- 
-[size=4][b]cheat_auto_exec[/b][/size]
-This command does nothing and is here for documentation only.
-You can run cheat commands automatically when a level loads by placing them in file Datautocheat.txt.
-This is useful for commands that are not permanent.

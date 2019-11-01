@@ -8,11 +8,8 @@ cheat_add_item
 cheat_add_money
 cheat_add_perk
 cheat_add_stat_xp
-cheat_auto_exec
 cheat_damage_all_items
 cheat_eval
-cheat_exec_delay
-cheat_exec_file
 cheat_find_buffs
 cheat_find_horses
 cheat_find_items

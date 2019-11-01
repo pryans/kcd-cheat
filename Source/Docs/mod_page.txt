@@ -31,14 +31,28 @@ steamapps\common\KingdomComeDeliverance\Mods\Cheat\Data\data.pak
 [/list]
 
 [b][size=6]Autoexec Cheats[/size][/b]
-Since some cheats are temporary (they don't survive game restart) you can add cheats to a file named "autocheat.txt". Create steamapps\common\KingdomComeDeliverance\Data\autocheat.txt and place one console command per line in the file. This file is loaded and executed by Cheat mod when a level loads not when the game loads.
+Since some cheats are temporary (they don't survive game restart) you can add cheat commands to "Scripts\autocheat.lua" inside Mods\Cheat\Data\data.pak.
+This file is loaded and executed by Cheat mod when a level loads not when the game loads.
 
-These are the 3 commands are have in my autocheat.txt for testing:
-cheat_eval cheat:logSetLevel(cheat.g_cheat_log_level_debug)
-cheat_set_bow_reticle enable:true
-cheat_set_regen enable:true state:stamina amount:10
+The data.pak file is a ZIP file so just edit the file from inside the zip.
+
+These are the 3 commands are have in my autocheat.lua for testing:
+System.ExecuteCommand("cheat_eval cheat:logSetLevel(cheat.g_cheat_log_level_debug)")
+System.ExecuteCommand("cheat_set_bow_reticle enable:true")
+System.ExecuteCommand("cheat_set_regen enable:true state:stamina amount:10")
 
 [b][size=6]Change Log[/size][/b]
+
+[b]1.32[/b]
+[list]
+[*]Removed system for loading autocheat.txt since io.open no longer works
+[*]Merged new defaultProfile.xml
+[/list]
+
+[b]1.32[/b]
+[list]
+[*]Removed use of io.getEnv so mod loads on 1.93
+[/list]
 
 [b]1.31[/b]
 [list]
@@ -215,11 +229,8 @@ cheat_add_item
 cheat_add_money
 cheat_add_perk
 cheat_add_stat_xp
-cheat_auto_exec
 cheat_damage_all_items
 cheat_eval
-cheat_exec_delay
-cheat_exec_file
 cheat_find_buffs
 cheat_find_horses
 cheat_find_items
@@ -275,10 +286,8 @@ cheat_wash_dirt_and_blood
 
 
 
-
 [b][size=6]Command Documentation[/size][/b]
 [b]All of this information is available in game by running "command-name ?".[/b]
-
 
 
 
@@ -468,8 +477,8 @@ Adds an item to the player's inventory.
 
 [b]Arguments:[/b]
  id: (required) The item ID or all or part of a the item's name. Uses last match from cheat_find_items.
- health: (optional number) The condition of the item added. Default 100.
  amount: (optional number) The number of items to add. Default 1.
+ health: (optional number) The condition of the item added. Default 100.
 
 [b]Examples:[/b]
  Adds the last item with 'bow' in its name:
@@ -733,9 +742,9 @@ You can end up in the air or under the map.
 I suggest saving your game and turn on immortality first.
 
 [b]Arguments:[/b]
+ x: (required number) X coordinate
  z: (required number) Z coordinate
  y: (required number) Y coordinate
- x: (required number) X coordinate
 
 [b]Examples:[/b]
  Example:
@@ -780,8 +789,8 @@ Sets one of the player's states to the given value.
 Adds XP to one of the player's stats.
 
 [b]Arguments:[/b]
- xp: (required number) The desired XP to add.
  stat: (required) One of: str, agi, vit, or spc.
+ xp: (required number) The desired XP to add.
 
 [b]Examples:[/b]
  Add 100 XP to player's strength stat:
@@ -793,8 +802,8 @@ Adds XP to one of the player's stats.
 Sets one of the player's stats to the given level.
 
 [b]Arguments:[/b]
- level: (required number) The desired level for the given stat (max 20). Level cannot lowered.
  stat: (required) One of: str, agi, vit, or spc.
+ level: (required number) The desired level for the given stat (max 20). Level cannot lowered.
 
 [b]Examples:[/b]
  Set player's strength to level 20:
@@ -874,9 +883,9 @@ Let me know.
 Regenerates the given player state over time; pulses once per second.
 
 [b]Arguments:[/b]
+ state: (required) The state to regen: all, health, stamina, or exhaust.
  amount: (optional number) The amount to regen every second.
  enable: (required boolean) true to enable state regen; false to disable
- state: (required) The state to regen: all, health, stamina, or exhaust.
 
 [b]Examples:[/b]
  Adds 1 to all states every second.:
@@ -998,11 +1007,11 @@ Teleports one or more NPCs to the given coordinates. Use cheat_loc to get locati
 
 [b]Arguments:[/b]
  max: (optional number) The maximum NPCs to teleport. Default 10.
- radius: (optional number) The teleport radius around the x,y,z target. Default 5.
  z: (required number) Z coordinate.
- y: (required number) Y coordinate.
- x: (required number) X coordinate.
  token: (required) All or part of a the NPC's name.
+ x: (required number) X coordinate.
+ radius: (optional number) The teleport radius around the x,y,z target. Default 5.
+ y: (required number) Y coordinate.
 
 [b]Examples:[/b]
  Teleport Father Godwin to somewhere...:
@@ -1040,8 +1049,8 @@ For some reason most of the animals and some bandits/cuman just stand around. No
 The spawned entities are not managed so you should kill them off or load a clean save.
 
 [b]Arguments:[/b]
- radius: (optional number) The spawn radius around the player. Default 5.
  class: (required) bandit|cuman|hare|horse|boar|sheep|pig|cow|buck|doe|reddeer
+ radius: (optional number) The spawn radius around the player. Default 5.
  count: (optional number) Number of things to spawn. Default 1.
 
 [b]Examples:[/b]
@@ -1090,35 +1099,3 @@ Sets the weather to the given weather ID.
 [b]Examples:[/b]
  Set weather to foggy storm:
  cheat_set_weather id:6
-
-
-
-[size=4][b]cheat_exec_delay[/b][/size]
-Sets the number of milliseconds to delay execution of the next command.
-
-[b]Arguments:[/b]
- ms: (required number) The number of milliseconds to delay the next command.
-
-[b]Examples:[/b]
- 1 second delay:
- cheat_exec_delay ms:1000
-
-
-
-[size=4][b]cheat_exec_file[/b][/size]
-Executes a file of console commands. Use an absolute path or
-path relative to SteamLibrary\steamapps\common\KingdomComeDeliverance.
-
-[b]Arguments:[/b]
- file: (required) The file to execute.
-
-[b]Examples:[/b]
- Manually run autocheat.txt:
- cheat_exec_file file:Data\autocheat.txt
-
-
-
-[size=4][b]cheat_auto_exec[/b][/size]
-This command does nothing and is here for documentation only.
-You can run cheat commands automatically when a level loads by placing them in file Datautocheat.txt.
-This is useful for commands that are not permanent.

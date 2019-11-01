@@ -1,3 +1,5 @@
+-- file IO no longer seems to work on KCD 1.93
+-- this file is no longer loaded from main.lua
 
 function cheat:execReset()
   cheat.execList = {}
