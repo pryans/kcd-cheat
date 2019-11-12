@@ -89,11 +89,17 @@ cheat.cheat_set_horse_args = {
 
 cheat:createCommand("cheat_set_horse", "cheat:cheat_set_horse(%line)", cheat.cheat_set_horse_args,
   "Sets the player's horse. Use command cheat_find_horses to display a list of horse UUIDs.",
-  "Set horse by name part", "cheat_set_horse id:mrh_05")
+  "Set horse by name part", "cheat_set_horse id:mrh_05",
+  "Remove horse", "cheat_set_horse id:nil")
 function cheat:cheat_set_horse(line)
   local args = cheat:argsProcess(line, cheat.cheat_set_horse_args)
   local id, idErr = cheat:argsGet(args, "id")
   if not idErr then
+    if id == 'nil' then
+	  player.player:SetPlayerHorse(__null)
+	  cheat:logInfo("Removed player horse.")
+	  return true
+	end
     local horseName = cheat:find_horse(id)
     local horse = System.GetEntityByName(horseName)
     player.player:SetPlayerHorse(horse.id)
