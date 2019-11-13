@@ -6,13 +6,14 @@
 		<PS4 keyboard="1" xboxpad="0" ps4pad="1"/>
 	</platforms>
 
-	<actionmap name="cheat" version="11">
+	<actionmap name="cheat" version="22">
 		<action consoleCmd="1" keyboard="f1" name="cheat_phys_hover" onPress="1" />
 		<action consoleCmd="1" keyboard="f2" name="cheat_phys_push" onPress="1" />
 		<action consoleCmd="1" keyboard="f3" name="cheat_phys_sprint" onPress="1" />
 		<action consoleCmd="1" keyboard="f4" name="cheat_target_entity" onPress="1" />
 		<action consoleCmd="1" keyboard="f5" name="cheat_save" onPress="1" />
 	</actionmap>
+
 
 	<actionmap name="loading" version="22">
 		<action name="ui_skipIntro" onPress="1" onRelease="1" keyboard="_keybinds_ref_" xboxpad="xi_b" ps4pad="pad_circle"/>
@@ -471,8 +472,8 @@
 		<action name="use_stop" onPress="1" onRelease="1" keyboard="_keybinds_ref_" xboxpad="xi_b" ps4pad="pad_circle" />
 		<action name="use_other" onPress="1" onRelease="1" onHold="1" holdTriggerDelay="0.3" holdRepeatDelay="-1"  keyboard="_keybinds_ref_" xboxpad="xi_a" ps4pad="pad_cross" />
 		<action name="mount_horse" onPress="1" onRelease="1" onHold="1" holdTriggerDelay="0.3" holdRepeatDelay="-1"  keyboard="_keybinds_ref_" xboxpad="xi_y" ps4pad="pad_triangle" />
-		<action name="call_horse" onPress="1" keyboard="_keybinds_ref_" xboxpad="xi_y" ps4pad="pad_triangle" />
-
+		<action name="call_horse" onPress="1" onRelease="1" keyboard="_keybinds_ref_" xboxpad="xi_y" ps4pad="pad_triangle" />
+		
 		<action name="toggle_run" onRelease="1" keyboard="_keybinds_ref_" />
 		<action name="toggle_crouch" onPress="1" keyboard="_keybinds_ref_" xboxpad="xi_thumbl" ps4pad="pad_l3" />
 
@@ -529,6 +530,13 @@
 		<action name="surrender_xi_activate" onPress="1" xboxpad="xi_a" ps4pad="pad_cross" />
 
 	</actionmap>
+
+	<actionmap name="dog" version="22">
+		<action name="request_dog" onPress="1" onRelease="1" onHold="1" holdTriggerDelay="0.3" holdRepeatDelay="-1"  keyboard="_keybinds_ref_" xboxpad="xi_y" ps4pad="pad_triangle" />
+		<action name="combat_request_dog" onPress="1" onRelease="1" onHold="1" holdTriggerDelay="0.3" holdRepeatDelay="-1"  keyboard="_keybinds_ref_" xboxpad="xi_y" ps4pad="pad_triangle" />
+		<action name="cancel_dog" onPress="1" onRelease="1" onHold="1" holdTriggerDelay="0.3" holdRepeatDelay="-1"  keyboard="_keybinds_ref_" xboxpad="xi_y" ps4pad="pad_triangle" />
+	</actionmap>
+
 
 	<actionmap name="helpscreen" version="22">
 		<action name="close_help_screen" keyboard="_keybinds_ref_" onPress="1" onRelease="1" onHold="1" holdTriggerDelay="0.5" xboxpad="xi_b" ps4pad="pad_circle" />
@@ -664,6 +672,7 @@
 		<action name="lock_cursor_click" onPress="1" onRelease="1" keyboard="mouse1" />
 		<action name="xi_lock_dir_x" onPress="1" onRelease="1" xboxpad="xi_thumblx" ps4pad="pad_sticklx"/>
 		<action name="xi_lock_dir_y" onPress="1" onRelease="1" xboxpad="xi_thumbly" ps4pad="pad_stickly" />
+		<action name="xi_lock_fwd" onPress="1" onHold="1" onRelease="1" holdTriggerDelay="0" xboxpad="xi_shoulderl" ps4pad="pad_l1" />
 		<action name="lock_dir_bck" onPress="1" onHold="1" onRelease="1" holdTriggerDelay="0" keyboard="_keybinds_ref_" />
 		<action name="lock_dir_fwd" onPress="1" onHold="1" onRelease="1" holdTriggerDelay="0" keyboard="_keybinds_ref_" />
 
@@ -697,7 +706,7 @@
 		<action name="horse_xi_rotateyaw" xboxpad="xi_thumbrx" ps4pad="pad_stickrx"/>
 		<action name="horse_xi_rotatepitch" xboxpad="xi_thumbry" ps4pad="pad_stickry"/>
 
-		<action name="horse_dismount" onPress="1" keyboard="_keybinds_ref_" xboxpad="xi_y" ps4pad="pad_triangle"/>
+		<action name="horse_dismount" onPress="1" onRelease="1" keyboard="_keybinds_ref_" xboxpad="xi_y" ps4pad="pad_triangle"/>
 		<action name="horse_strafe" onPress="1" onRelease="1" />
 		<action name="jump" onPress="1" onRelease="1" keyboard="_keybinds_ref_" xboxpad="xi_x" ps4pad="pad_square"/>
 		<action name="horse_sprint" onPress="1" onRelease="1" retriggerable="1" keyboard="_keybinds_ref_" xboxpad="xi_b" ps4pad="pad_circle" />
