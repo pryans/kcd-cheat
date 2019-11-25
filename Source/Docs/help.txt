@@ -155,6 +155,9 @@ Sets the player's horse. Use command cheat_find_horses to display a list of hors
 	Set horse by name part:
 	cheat_set_horse id:mrh_05
 
+	Remove horse:
+	cheat_set_horse id:nil
+
  
  
 [size=4][b]cheat_teleport_horse[/b][/size]
@@ -593,8 +596,8 @@ Regenerates the given player state over time; pulses once per second.
 
 [b]Arguments:[/b]
 	enable: (required boolean) true to enable state regen; false to disable
-	amount: (optional number) The amount to regen every second.
 	state: (required) The state to regen: all, health, stamina, or exhaust.
+	amount: (optional number) The amount to regen every second.
 
 [b]Examples:[/b]
 	Adds 1 to all states every second.:
@@ -715,11 +718,11 @@ This only works if the NPC has been loaded into the world.
 Teleports one or more NPCs to the given coordinates. Use cheat_loc to get locations.
 
 [b]Arguments:[/b]
-	max: (optional number) The maximum NPCs to teleport. Default 10.
+	token: (required) All or part of a the NPC's name.
 	z: (required number) Z coordinate.
 	y: (required number) Y coordinate.
 	x: (required number) X coordinate.
-	token: (required) All or part of a the NPC's name.
+	max: (optional number) The maximum NPCs to teleport. Default 10.
 	radius: (optional number) The teleport radius around the x,y,z target. Default 5.
 
 [b]Examples:[/b]
@@ -732,8 +735,8 @@ Teleports one or more NPCs to the given coordinates. Use cheat_loc to get locati
 Teleports one or more NPCs to the player's location.
 
 [b]Arguments:[/b]
-	max: (optional number) The maximum NPCs to teleport. Default 10.
 	token: (required) All or part of a the NPC's name.
+	max: (optional number) The maximum NPCs to teleport. Default 10.
 	radius: (optional number) The teleport radius around the player. Default 5.
 
 [b]Examples:[/b]
@@ -758,9 +761,9 @@ For some reason most of the animals and some bandits/cuman just stand around. No
 The spawned entities are not managed so you should kill them off or load a clean save.
 
 [b]Arguments:[/b]
-	class: (required) bandit|cuman|hare|horse|boar|sheep|pig|cow|buck|doe|reddeer
 	count: (optional number) Number of things to spawn. Default 1.
 	radius: (optional number) The spawn radius around the player. Default 5.
+	class: (required) bandit|cuman|hare|horse|boar|sheep|pig|cow|buck|doe|reddeer
 
 [b]Examples:[/b]
 	Spawn 10 bandits:

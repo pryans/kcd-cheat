@@ -43,6 +43,12 @@ System.ExecuteCommand("cheat_set_regen enable:true state:stamina amount:10")
 
 [b][size=6]Change Log[/size][/b]
 
+[b]1.35[/b]
+[list]
+[*]PR11: Fixed 'x' hotkey for horse dismount and calling dog.
+[*]PR10: Add ability to remove horse.
+[/list]
+
 [b]1.33/1.34[/b]
 [list]
 [*]Removed system for loading autocheat.txt since io.open no longer works
