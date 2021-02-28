@@ -317,14 +317,34 @@ end
 
 -- ============================================================================
 -- cheat_own_all_stolen_items
+--
+-- Fixed by JoewAlabel at 28-02-21
+-- GitHub: https://www.nexusmods.com/users/52260751?tab=user+files
+-- NexusMod: https://www.nexusmods.com/users/52260751?tab=user+files
 -- ============================================================================
 cheat:createCommand("cheat_own_all_stolen_items", "cheat:cheat_own_all_stolen_items()", nil,
   "Makes you the owner of all stolen items in your inventory.\n$8This removes the stolen flag from the item.",
   "Take ownership of stolen items", "cheat_own_all_stolen_items")
 function cheat:cheat_own_all_stolen_items()
-  cheat:recreateitems("ownstolen")
+  local allitems = {}
+  for i,userdata in pairs(player.inventory:GetInventoryTable()) do
+    local item = ItemManager.GetItem(userdata)
+    local itemHealth = item.health
+    local itemAmount = item.amount
+    local itemUIName = ItemManager.GetItemUIName(item.class)
+    local itemName = ItemManager.GetItemName(item.class)
+	allitems[i] = { name = itemName, itemUIName = itemUIName, class = item.class, health = itemHealth, amount = itemAmount }
+  end
+  
+  -- cmd to remove all inv
+  player.inventory:RemoveAllItems()
+  
+  -- add items back
+  for i=1,#allitems do
+	local newitem = ItemManager.CreateItem(allitems[i].class, allitems[i].health, allitems[i].amount)
+    player.inventory:AddItem(newitem)	
+  end
   cheat:logInfo("All stolen items are now owned by the player.")
-  return true
 end
 
 -- ============================================================================
