@@ -1,27 +1,6 @@
-# kcd-cheat
-KCD Cheat Mod: https://www.nexusmods.com/kingdomcomedeliverance/mods/106
+# JoewAlabel kcd-cheat
+My version of @pryans KCD Cheat Mod: https://www.nexusmods.com/kingdomcomedeliverance/mods/106 that i am fixing to work with lateste KDC v1.9.6
 
 
-## Create new release
-
-1. Edit ./Source/Scripts/Startup/main.lua and set major + minor version number
-
-    cheat.versionMajor = 1
-    cheat.versionMinor = 31
-
-2. Run build
-
-   ./build.sh
-
-3. Update mod_page.txt with new content from help.txt, commands.txt
-
-4. Commit all changes
-
-5. Run release:
-
-   ./release.sh
-
-6. Upload new release zip files
-
-   ./Release/Cheat-X.XX.zip
-   ./Release/Cheat-NOKEYS-X.XX.zip
+## Credits
+All credits goes to pryans and his mod. I am here just making some fixes i can deal with.
