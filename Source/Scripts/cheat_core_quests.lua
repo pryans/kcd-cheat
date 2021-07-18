@@ -216,26 +216,27 @@ end
 -- cheat_quest_complete
 -- ============================================================================
 function cheat:quest_complete(questName)
-  if not QuestSystem.IsQuestCompleted(questName) then
-    QuestSystem.StartQuest(questName);
-    if not QuestSystem.IsQuestStarted(questName) then
-      QuestSystem.StartQuest(questName);
+  for _, quest in pairs(cheat:find_quest(questName,true)) do
+	local questName = quest.quest_name
+    if not QuestSystem.IsQuestCompleted(questName) then
+      if not QuestSystem.IsQuestStarted(questName) then
+        QuestSystem.StartQuest(questName);
+      end
+      QuestSystem.CompleteQuest(questName);
     end
-    QuestSystem.CompleteQuest(questName);
+    cheat:logInfo("Quest [%s] completed", questName)
   end
-  cheat:logInfo("Quest [%s] completed")
 end
 
 -- cheat_eval cheat:quest_complete("q_skalitz")
 -- cheat_eval cheat:quest_reset("q_skalitz")
 function cheat:quest_reset(questName)
-  if QuestSystem.IsQuestStarted(questName) then
-	   QuestSystem.ResetQuest(questName);
-	   QuestSystem.ActivateQuest(questName);
-	else
-		QuestSystem.ActivateQuest(questName);
-	end
-  cheat:logInfo("Quest [%s] reset")
+  for _, quest in pairs(cheat:find_quest(questName,true)) do
+	local questName = quest.quest_name
+	QuestSystem.ResetQuest(questName);
+	QuestSystem.ActivateQuest(questName);
+    cheat:logInfo("Quest [%s] reset", questName)
+  end
 end
 
 -- ============================================================================
