@@ -71,7 +71,13 @@ cheat.cheat_teleport_to_args = {
   place=function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "Place to teleport to") end,
 }
 cheat:createCommand("cheat_teleport_to", "cheat:teleport_to(%line)", cheat.cheat_teleport_to_args,
-  "Teleports the player to the given place. Supported places (case insensitive):\n$8(Inn at the) Glade, Ledetchko, Merhojed,\n$8Monastery, Neuhof, Pribyslavitz,\n$8Rattay, Rovna, Samopesh,\n$8Sasau, Skalitz, Talmberg, \n$8Uzhitz, Vranik ",
+  [["Teleports the player to the given place. Supported places (case insensitive):
+  (Inn at the) Glade, Ledetchko, Merhojed,
+  Monastery, Neuhof, Pribyslavitz,
+  Rattay, Rovna, Samopesh,
+  Sasau, Skalitz, Talmberg, Uzhitz, Vranik,
+  Treasure_1, ..., Treasure_25,
+  Ancient_Treasure_1, ... , Ancient_Treasure_5]],
   "Example", "cheat_teleport_to place:rattay")
 function cheat:teleport_to(line)
   local args = cheat:argsProcess(line, cheat.cheat_teleport_to_args)
@@ -92,7 +98,37 @@ function cheat:teleport_to(line)
   places["TALMBERG"] = "x:2360 y:2846 z:105"
   places["UZHITZ"] = "x:3041 y:3324 z:156"
   places["VRANIK"] = "x:930 y:913 z:130"
-
+  places["TREASURE_1"] = "x:650 y:1920 z:106"
+  places["TREASURE_2"] = "x:382 y:1813 z:22" 
+  places["TREASURE_3"] = "x:223 y:1695 z:71"
+  places["TREASURE_4"] = "x:2772 y:1449 z:106"
+  places["TREASURE_5"] = "x:2086 y:2054 z:126"
+  places["TREASURE_6"] = "x:2268 y:1589 z:114"
+  places["TREASURE_7"] = "x:1860 y:1521 z:80"
+  places["TREASURE_8"] = "x:2332 y:1120 z:54"
+  places["TREASURE_9"] = "x:869 y:3279 z:19"
+  places["TREASURE_10"] = "x:1683 y:938 z:41"
+  places["TREASURE_11"] = "x:1445 y:1140 z:37"
+  places["TREASURE_12"] = "x:3175 y:335 z:136"
+  places["TREASURE_13"] = "x:3610 y:721 z:100"
+  places["TREASURE_14"] = "x:3692 y:1258 z:87"
+  places["TREASURE_15"] = "x:2942 y:1329 z:90"
+  places["TREASURE_16"] = "x:482 y:2578 z:20"
+  places["TREASURE_17"] = "x:769 y:2572 z:20"
+  places["TREASURE_18"] = "x:2494 y:2817 z:99"
+  places["TREASURE_19"] = "x:856 y:1335 z:18"
+  places["TREASURE_20"] = "x:740 y:3699 z:30"
+  places["TREASURE_21"] = "x:657 y:3141 z:41"
+  places["TREASURE_22"] = "x:600 y:608 z:158"
+  places["TREASURE_23"] = "x:1011 y:3972 z:51"
+  places["TREASURE_24"] = "x:903 y:3841 z:66"
+  places["TREASURE_25"] = "x:221 y:3474 z:77"
+  places["ANCIENT_TREASURE_1"] = "x:3872 y:886 z:157"
+  places["ANCIENT_TREASURE_2"] = "x:874 y:270 z:181"
+  places["ANCIENT_TREASURE_3"] = "x:3159 y:3840 z:167"
+  places["ANCIENT_TREASURE_4"] = "x:1723 y:778 z:74"
+  places["ANCIENT_TREASURE_5"] = "x:474 y:3869 z:40"
+  
   if not nplaceErr then
     if places[cheat:toUpper(nplace)] ~= nil then
       cheat:teleport(places[cheat:toUpper(nplace)])
