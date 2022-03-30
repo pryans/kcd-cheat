@@ -1,58 +1,56 @@
 -- ============================================================================
 -- debug functions
 -- ============================================================================
-
-
---function printTable(ent, entName, indent, ismeta)
---  local prefix = string.rep("  ", indent) .. entName
---  if ismeta then
---    prefix = prefix .. ":"
---  else
---    prefix = prefix .. "."
---  end
-
---  cheat:logDebug(type(ent)
-
---  for k,v in pairs(ent) do
---    if k ~= "__index" and k ~= "__this" then
---      if type(v) == "function" then
---        local funcval = tostring(v())
---        cheat:logDebug(prefix.. k .. "=" .. funcval)
---      elseif type(v) == "table" then
---        printTable(v,prefix .. k, indent, false)
---      else
---        cheat:logDebug(prefix.. k.."="..tostring(v))
---      end
---    end
---  end
-
---  local mt = getmetatable(ent)
---  if mt then
---    printTable(mt,entName, indent, true)
---  end
---end
-
-
+--[[
+function printTable(ent, entName, indent, ismeta)
+  local prefix = string.rep("  ", indent) .. entName
+  if ismeta then
+    prefix = prefix .. ":"
+  else
+    prefix = prefix .. "."
+  end
+  
+  cheat:logDebug(type(ent)
+  
+  for k,v in pairs(ent) do
+    if k ~= "__index" and k ~= "__this" then
+      if type(v) == "function" then
+        local funcval = tostring(v())
+        cheat:logDebug(prefix.. k .. "=" .. funcval)
+      elseif type(v) == "table" then
+        printTable(v,prefix .. k, indent, false)
+      else
+        cheat:logDebug(prefix.. k.."="..tostring(v))
+      end
+    end
+  end
+  
+  local mt = getmetatable(ent)
+  if mt then
+    printTable(mt,entName, indent, true)
+  end
+end
+]]
 
 function cheat:print_db_table(tableName, filter, debug)
   if not Database.LoadTable(tableName) then
     cheat:logError("Unable to load table [%s].", tostring(tableName))
     return
   end
-
+  
   local tableInfo = Database.GetTableInfo(tableName)
   if not tableInfo then
     cheat:logError("Table [%s] not found.", tostring(tableName))
     return
   end
-
+  
   if tableInfo.LineCount == 0 then
     cheat:logInfo("Table [%s] is empty.", tostring(tableName))
     return
   end
-
+  
   local rows = tableInfo.LineCount - 1
-
+  
   for i=0,rows do
     local tableline = Database.GetTableLine(tableName, i)
     if tableline then
@@ -61,7 +59,7 @@ function cheat:print_db_table(tableName, filter, debug)
         if debug then
           cheat:logDebug("Pair key=[%s] value=[%s]." ,tostring(key), tostring(value))
         end
-
+        
         if not cheat:isBlank(filter) then
           if string.find(string.upper(key), string.upper(filter)) or string.find(string.upper(tostring(value)), string.upper(filter)) then
             displayLine = displayLine .. " " .. key .. "=" .. tostring(value)
@@ -70,7 +68,7 @@ function cheat:print_db_table(tableName, filter, debug)
           displayLine = displayLine .. " " .. key .. "=" .. tostring(value)
         end
       end
-
+      
       if not cheat:isBlank(displayLine) then
         cheat:logInfo(displayLine)
       end
@@ -96,17 +94,17 @@ function cheat:print_all_tables(object, tableName, showMethods)
   if not object then
     object = _G
   end
-
+  
   if not cheat:isBlank(tableName) then
     tableName = toUpper(tableName)
   else
     tableName = nil
   end
-
+  
   if showMethods ~= true and showMethods ~= false then
     showMethods = false
   end
-
+  
   for key,value in pairs(object) do
     if not tableName or (tableName and tableName ~= toUpper(key)) then
       local getKeyType = loadstring("return type(" .. key .. ")")
@@ -125,7 +123,7 @@ function cheat:print_all_functions(object)
   if not object then
     object = _G
   end
-
+  
   for key,value in pairs(object) do
     local getKeyType = loadstring("return type(" .. key .. ")")
     if getKeyType() == "function" then
@@ -174,7 +172,7 @@ end
 -- print_method_args( function()
 function cheat:print_method_args(f)
   cheat:logDebug("begin - print_method_args")
-
+  
   local calltracer = function(event, line)
     cheat:logWarn("event="..event.." line="..tostring(line))
     cheat:tprint(debug.getinfo(2, "flLnSu"))
@@ -192,12 +190,12 @@ function cheat:print_method_args(f)
     end
   end
   cheat:logDebug("tracter function created")
-
-  debug.sethook(calltracer, "crl")
+  
+    debug.sethook(calltracer, "crl")
   cheat:logDebug("debug hook set")
-
-	f()
-
+	
+  f()
+  
   debug.sethook()
   cheat:logDebug("end - print_method_args")
 end

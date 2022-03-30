@@ -2,7 +2,7 @@
 -- cheat_set_all_merchants_fence
 -- ============================================================================
 cheat.cheat_set_all_merchants_fence_args = {
-  enable=function(args,name,showHelp) return cheat:argsGetRequiredBoolean(args, name, showHelp, "true or false") end,
+  enable = function(args,name,showHelp) return cheat:argsGetRequiredBoolean(args, name, showHelp, "true or false") end,
 }
 
 cheat:createCommand("cheat_set_all_merchants_fence", "cheat:cheat_set_all_merchants_fence(%line)", cheat.cheat_set_all_merchants_fence_args,
@@ -15,12 +15,12 @@ function cheat:cheat_set_all_merchants_fence(line)
   if not enableErr then
     SocialClass.defaultValues.dealsWithStolenItems = enable
     cheat:logInfo("default dealsWithStolenItems[%s]", tostring(enable))
-
+    
     for socialClassName,socialClassTable in pairs(SocialClass.data) do
       socialClassTable["dealsWithStolenItems"] = enable
       cheat:logInfo("%s dealsWithStolenItems[%s]", tostring(socialClassName), tostring(enable))
     end
-
+    
     cheat:logInfo("Done.")
     return true
   end

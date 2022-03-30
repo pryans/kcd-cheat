@@ -33,7 +33,7 @@ function cheat:recreateitems(mode, miscValue)
     local shouldDelete = false
     local shouldRecreate = false
     local newItemHealth = 1
-
+    
     if mode == "repairall" and itemHealth ~= 1 then
       shouldDelete = true
       shouldRecreate = true
@@ -42,30 +42,6 @@ function cheat:recreateitems(mode, miscValue)
     if mode == "damageall" then
       -- trying to create non-repairable items with less than 100% health will crash the game
       local item_category_id = cheat:get_item_category_id(tostring(item.class))
-      --[[
-            <row item_category_id="0" item_category_name="misc" />
-      <row item_category_id="1" item_category_name="melee_weapon" />
-      <row item_category_id="2" item_category_name="missile_weapon" />
-      <row item_category_id="3" item_category_name="ammo" />
-      <row item_category_id="4" item_category_name="armor" />
-      <row item_category_id="5" item_category_name="food" />
-      <row item_category_id="6" item_category_name="money" />
-      <row item_category_id="8" item_category_name="document" />
-      <row item_category_id="9" item_category_name="alchemy_material" />
-      <row item_category_id="10" item_category_name="herb" />
-      <row item_category_id="11" item_category_name="alchemy_base" />
-      <row item_category_id="12" item_category_name="npc_tool" />
-      <row item_category_id="13" item_category_name="ointment_item" />
-      <row item_category_id="14" item_category_name="potion" />
-      <row item_category_id="15" item_category_name="die" />
-      <row item_category_id="16" item_category_name="helmet" />
-      <row item_category_id="17" item_category_name="key" />
-      <row item_category_id="18" item_category_name="keyring" />
-      <row item_category_id="25" item_category_name="player_item" />
-      <row item_category_id="26" item_category_name="equippable_item" />
-      <row item_category_id="27" item_category_name="weapon" />
-      <row item_category_id="28" item_category_name="consumable_item" />
-      --]]
       if item_category_id == 4 or item_category_id == 1 or item_category_id == 2 or item_category_id == 16 or item_category_id == 27 then
         cheat:logDebug("dmgall [%s] [%s] [%s]", itemUIName, tostring(item.class), tostring(itemHealth))
         shouldDelete = true
@@ -73,17 +49,17 @@ function cheat:recreateitems(mode, miscValue)
         newItemHealth = miscValue
       end
     end
-
+    
     if mode == "removestolen" and itemOwner ~= 0 then
       shouldDelete = true
       shouldRecreate = false
     end
-
+    
     if mode == "ownstolen" and itemOwner ~= 0 then
       shouldDelete = true
       shouldRecreate = true
     end
-
+    
     if shouldDelete then
       cheat:logDebug("recreateitem delete [%s] [%s]", itemUIName, tostring(item.class))
       for i=1,itemAmount do
@@ -101,7 +77,6 @@ function cheat:recreateitems(mode, miscValue)
   end
 end
 
-
 -- ============================================================================
 -- find_item
 -- ============================================================================
@@ -114,23 +89,23 @@ function cheat:find_item(searchKey, returnAll)
   local item_id = nil
   local item_name = nil
   local items = {}
-
+  
   for i=0,rows do
     local rowInfo = Database.GetTableLine(tableName, i)
     local found = false
-
+    
     if not cheat:isBlank(searchKeyUpper) then
       if cheat:toUpper(rowInfo.item_id) == searchKeyUpper then
         found = true
       end
-
+      
       if string.find(cheat:toUpper(rowInfo.ui_name), searchKeyUpper, 1, true) then
         found = true
       end
     else
       found = true
     end
-
+    
     if found then
       item_id = rowInfo.item_id
       item_name = rowInfo.ui_name
@@ -143,7 +118,7 @@ function cheat:find_item(searchKey, returnAll)
       cheat:logInfo("Found item [%s] with id [%s].", tostring(item_name), tostring(item_id))
     end
   end
-
+  
   if returnAll then
     cheat:logDebug("Returning [%s] items.", tostring(#items))
     return items
@@ -163,7 +138,7 @@ function cheat:get_item_category_id(searchKey)
   local tableInfo = Database.GetTableInfo(tableName)
   local rows = tableInfo.LineCount - 1
   local searchKeyUpper = cheat:toUpper(searchKey)
-
+  
   for i=0,rows do
     local rowInfo = Database.GetTableLine(tableName, i)
     if cheat:toUpper(rowInfo.item_id) == searchKeyUpper then
@@ -172,12 +147,11 @@ function cheat:get_item_category_id(searchKey)
   end
 end
 
-
 -- ============================================================================
 -- cheat_find_items
 -- ============================================================================
 cheat.cheat_find_items_args = {
-  token=function(args,name,showHelp) return cheat:argsGetOptional(args, name, nil, showHelp, "All or part of a the item's name. Leave empty to list all items.") end
+  token = function(args,name,showHelp) return cheat:argsGetOptional(args, name, nil, showHelp, "All or part of a the item's name. Leave empty to list all items.") end
 }
 
 cheat:createCommand("cheat_find_items", "cheat:cheat_find_items(%line)", cheat.cheat_find_items_args,
@@ -198,9 +172,9 @@ end
 -- cheat_add_item
 -- ============================================================================
 cheat.cheat_add_item_args = {
-  id=function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "The item ID or all or part of a the item's name. Uses last match from cheat_find_items.") end,
-  amount=function(args,name,showHelp) return cheat:argsGetOptionalNumber(args, name, 1, showHelp, "The number of items to add. Default 1.") end,
-  health=function(args,name,showHelp) return cheat:argsGetOptionalNumber(args, name, 100, showHelp, "The condition of the item added. Default 100.") end
+  id = function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "The item ID or all or part of a the item's name. Uses last match from cheat_find_items.") end,
+  amount = function(args,name,showHelp) return cheat:argsGetOptionalNumber(args, name, 1, showHelp, "The number of items to add. Default 1.") end,
+  health = function(args,name,showHelp) return cheat:argsGetOptionalNumber(args, name, 100, showHelp, "The condition of the item added. Default 100.") end
 }
 
 cheat:createCommand("cheat_add_item", "cheat:cheat_add_item(%line)", cheat.cheat_add_item_args,
@@ -213,21 +187,21 @@ function cheat:cheat_add_item(line)
   local id, idErr = cheat:argsGet(args, 'id')
   local amount, amountErr = cheat:argsGet(args, 'amount', 1)
   local health, healthErr = cheat:argsGet(args, 'health', 100)
-
+  
   if idErr or amountErr or healthErr then
     return
   end
-
+  
   if amount < 0 then
     amount = 1
     cheat:logWarn("Setting amount to 1.")
   end
-
+  
   if health < 0 then
     health = 1
     cheat:logWarn("Setting health to 1.")
   end
-
+  
   local item_id, item_name = cheat:find_item(id)
   if not cheat:isBlank(item_id) then
     for i=1,amount do
@@ -264,9 +238,10 @@ end
 -- cheat_remove_item
 -- ============================================================================
 cheat.cheat_remove_item_args = {
-  id=function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "The item ID or all or part of a the item's name. Uses last match from cheat_find_items.") end,
-  amount=function(args,name,showHelp) return cheat:argsGetOptionalNumber(args, name, 1, showHelp, "The number of items to remove. Default 1.") end,
+  id = function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "The item ID or all or part of a the item's name. Uses last match from cheat_find_items.") end,
+  amount = function(args,name,showHelp) return cheat:argsGetOptionalNumber(args, name, 1, showHelp, "The number of items to remove. Default 1.") end,
 }
+
 cheat:createCommand("cheat_remove_item", "cheat:cheat_remove_item(%line)", cheat.cheat_remove_item_args,
   "Removes an item to the player's inventory.",
   "Removes the last item with 'bow' in its name", "cheat_remove_item id:bow",
@@ -343,8 +318,9 @@ end
 -- cheat_damage_all_items
 -- ============================================================================
 cheat.cheat_damage_all_items_args = {
-  health=function(args,name,showHelp) return cheat:argsGetRequiredNumber(args, name, showHelp, "The item health/condition to apply between 0 and 1.") end
+  health = function(args,name,showHelp) return cheat:argsGetRequiredNumber(args, name, showHelp, "The item health/condition to apply between 0 and 1.") end
 }
+
 cheat:createCommand("cheat_damage_all_items", "cheat:cheat_damage_all_items(%line)", cheat.cheat_damage_all_items_args,
   "Damages all weapons and armor in your inventory. This can uneqip items so don't do this in combat.",
   "Damage all weapons and armor to 50%", "cheat_damage_all_items health:0.5")

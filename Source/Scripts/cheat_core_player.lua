@@ -1,18 +1,3 @@
-
---[[
-
-player.soul:GetDerivedStat('hac', {}, self.secondChancesPerks)  --haggle?
-player.soul:GetDerivedStat("ble")
-player.soul:GetDerivedStat("mst") --max stamina
-player.soul:GetDerivedStat("bad") --badassness
-
-entity.soul:GetDerivedStat("cap") --capacity
-entity.soul:GetDerivedStat("mor") --morale?
-g_localActor.soul:GetDerivedStat("cha") --charisma
-
---]]
-
-
 -- ============================================================================
 -- cheat_stash
 -- ============================================================================
@@ -46,10 +31,11 @@ end
 -- cheat_teleport
 -- ============================================================================
 cheat.cheat_teleport_args = {
-  x=function(args,name,showHelp) return cheat:argsGetRequiredNumber(args, name, showHelp, "X coordinate") end,
-  y=function(args,name,showHelp) return cheat:argsGetRequiredNumber(args, name, showHelp, "Y coordinate") end,
-  z=function(args,name,showHelp) return cheat:argsGetRequiredNumber(args, name, showHelp, "Z coordinate") end
+  x = function(args,name,showHelp) return cheat:argsGetRequiredNumber(args, name, showHelp, "X coordinate") end,
+  y = function(args,name,showHelp) return cheat:argsGetRequiredNumber(args, name, showHelp, "Y coordinate") end,
+  z = function(args,name,showHelp) return cheat:argsGetRequiredNumber(args, name, showHelp, "Z coordinate") end
 }
+
 cheat:createCommand("cheat_teleport", "cheat:teleport(%line)", cheat.cheat_teleport_args,
   "Teleports the player to the given coordinates.\n$8You can end up in the air or under the map.\n$8I suggest saving your game and turn on immortality first.",
   "Example", "cheat_teleport x:3000 y:1500 z:300")
@@ -68,15 +54,16 @@ end
 -- cheat_teleport_to
 -- ============================================================================
 cheat.cheat_teleport_to_args = {
-  place=function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "Place to teleport to") end,
+  place = function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "Place to teleport to") end,
 }
+
 cheat:createCommand("cheat_teleport_to", "cheat:teleport_to(%line)", cheat.cheat_teleport_to_args,
   "Teleports the player to the given place. Supported places (case insensitive):\n$8(Inn at the) Glade, Ledetchko, Merhojed,\n$8Monastery, Neuhof, Pribyslavitz,\n$8Rattay, Rovna, Samopesh,\n$8Sasau, Skalitz, Talmberg, \n$8Uzhitz, Vranik ",
   "Example", "cheat_teleport_to place:rattay")
 function cheat:teleport_to(line)
   local args = cheat:argsProcess(line, cheat.cheat_teleport_to_args)
   local nplace, nplaceErr = cheat:argsGet(args, 'place')
-
+  
   local places = {}
   places["GLADE"] = "x:2849 y:1913 z:156"
   places["LEDETCHKO"] = "x:2052 y:1304 z:30"
@@ -92,7 +79,7 @@ function cheat:teleport_to(line)
   places["TALMBERG"] = "x:2360 y:2846 z:105"
   places["UZHITZ"] = "x:3041 y:3324 z:156"
   places["VRANIK"] = "x:930 y:913 z:130"
-
+  
   if not nplaceErr then
     if places[cheat:toUpper(nplace)] ~= nil then
       cheat:teleport(places[cheat:toUpper(nplace)])
@@ -106,8 +93,8 @@ end
 -- cheat_set_state
 -- ============================================================================
 cheat.cheat_set_state_args = {
-  state=function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "One of: health, exhaust, hunger, or stamina.") end,
-  value=function(args,name,showHelp) return cheat:argsGetRequiredNumber(args, name, showHelp, "The number to assign to the given state.") end
+  state = function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "One of: health, exhaust, hunger, or stamina.") end,
+  value = function(args,name,showHelp) return cheat:argsGetRequiredNumber(args, name, showHelp, "The number to assign to the given state.") end
 }
 
 cheat:createCommand("cheat_set_state", "cheat:cheat_set_state(%line)", cheat.cheat_set_state_args,
@@ -130,8 +117,8 @@ end
 -- cheat_add_stat_xp
 -- ============================================================================
 cheat.cheat_add_stat_xp_args = {
-  stat=function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "One of: str, agi, vit, or spc.") end,
-  xp=function(args,name,showHelp) return cheat:argsGetRequiredNumber(args, name, showHelp, "The desired XP to add.") end
+  stat = function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "One of: str, agi, vit, or spc.") end,
+  xp = function(args,name,showHelp) return cheat:argsGetRequiredNumber(args, name, showHelp, "The desired XP to add.") end
 }
 
 cheat:createCommand("cheat_add_stat_xp", "cheat:cheat_add_stat_xp(%line)", cheat.cheat_add_stat_xp_args,
@@ -153,15 +140,14 @@ end
 -- cheat_set_stat_level
 -- ============================================================================
 cheat.cheat_set_stat_level_args = {
-  stat=function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "One of: str, agi, vit, or spc.") end,
-  level=function(args,name,showHelp) return cheat:argsGetRequiredNumber(args, name, showHelp, "The desired level for the given stat (max 20). Level cannot lowered.") end
+  stat = function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "One of: str, agi, vit, or spc.") end,
+  level = function(args,name,showHelp) return cheat:argsGetRequiredNumber(args, name, showHelp, "The desired level for the given stat (max 20). Level cannot lowered.") end
 }
 
 cheat:createCommand("cheat_set_stat_level", "cheat:cheat_set_stat_level(%line)", cheat.cheat_set_stat_level_args,
   "Sets one of the player's stats to the given level.",
   "Set player's strength to level 20", "cheat_set_stat_level stat:str level:20",
   "Set player's agility to level 5", "cheat_set_stat_level stat:agi level:5")
-
 function cheat:cheat_set_stat_level(line)
   local args = cheat:argsProcess(line, cheat.cheat_set_stat_level_args)
   local stat, statErr = cheat:argsGet(args, 'stat')
@@ -178,7 +164,7 @@ end
 -- cheat_add_money
 -- ============================================================================
 cheat.cheat_add_money_args = {
-  amount=function(args,name,showHelp) return cheat:argsGetRequiredNumber(args, name, showHelp, "The amount of groschen to add.") end
+  amount = function(args,name,showHelp) return cheat:argsGetRequiredNumber(args, name, showHelp, "The amount of groschen to add.") end
 }
 
 cheat:createCommand("cheat_add_money", "cheat:cheat_add_money(%line)", cheat.cheat_add_money_args,
@@ -199,7 +185,7 @@ end
 -- cheat_set_bow_reticle
 -- ============================================================================
 cheat.cheat_set_bow_reticle_args = {
-  enable=function(args,name,showHelp) return cheat:argsGetRequiredBoolean(args, name, showHelp, "true or false") end,
+  enable = function(args,name,showHelp) return cheat:argsGetRequiredBoolean(args, name, showHelp, "true or false") end,
 }
 
 cheat:createCommand("cheat_set_bow_reticle", "cheat:cheat_set_bow_reticle(%line)", cheat.cheat_set_bow_reticle_args,
@@ -226,7 +212,7 @@ end
 -- cheat_set_wanted_level
 -- ============================================================================
 cheat.cheat_set_wanted_level_args = {
-  level=function(args,name,showHelp) return cheat:argsGetRequiredNumber(args, name, showHelp, "0=not wanted, 1=wanted for money, 2=wanted for jail, 3=wanted dead") end,
+  level = function(args,name,showHelp) return cheat:argsGetRequiredNumber(args, name, showHelp, "0=not wanted, 1=wanted for money, 2=wanted for jail, 3=wanted dead") end,
 }
 
 cheat:createCommand("cheat_set_wanted_level", "cheat:cheat_set_wanted_level(%line)", cheat.cheat_set_wanted_level_args,
@@ -236,16 +222,16 @@ cheat:createCommand("cheat_set_wanted_level", "cheat:cheat_set_wanted_level(%lin
 function cheat:cheat_set_wanted_level(line)
   local args = cheat:argsProcess(line, cheat.cheat_set_wanted_level_args)
   local level, levelErr = cheat:argsGet(args, 'level')
-
+  
   if not levelErr then
     if level < 0 then
       level = 0
     end
-
+    
     if level > 3 then
       level = 3
     end
-
+    
     Game.SetWantedLevel(level)
     cheat:logInfo("Player's wanted level set to [%s].", tostring(level))
     return true
@@ -261,12 +247,12 @@ cheat:createCommand("cheat_wash_dirt_and_blood", "cheat:cheat_wash_dirt_and_bloo
   "Wash yourself and your horse", "cheat_wash_dirt_and_blood")
 function cheat:cheat_wash_dirt_and_blood()
   player.actor:WashDirtAndBlood(1)
-
+  
   local entity = XGenAIModule.GetEntityByWUID(player.player:GetPlayerHorse());
   if entity then
     entity.actor:WashDirtAndBlood(1)
   end
-
+  
   cheat:logInfo("All Clean!")
 end
 
@@ -292,12 +278,12 @@ cheat.g_passive_stamina_regen_highwater = 100
 cheat:cheat_timer_register("g_passive_stamina_regen", function()
   if cheat.g_passive_stamina_regen then
     local stamina = player.soul:GetState("stamina")
-
+    
     if stamina > cheat.g_passive_stamina_regen_highwater then
       cheat.g_passive_stamina_regen_highwater = stamina
       cheat:logDebug("current stamina highwater [%s]", tostring(cheat.g_passive_stamina_regen_highwater))
     end
-
+    
     if stamina < cheat.g_passive_stamina_regen_highwater then
       local realAmount = cheat:min(stamina + cheat.g_passive_stamina_regen_amount, cheat.g_passive_stamina_regen_highwater)
       player.soul:SetState("stamina", realAmount)
@@ -315,12 +301,12 @@ cheat.g_passive_exhaust_regen_highwater = 100
 cheat:cheat_timer_register("g_passive_exhaust_regen", function()
   if cheat.g_passive_exhaust_regen then
     local exhaust = player.soul:GetState("exhaust")
-
+    
     if exhaust > cheat.g_passive_exhaust_regen_highwater then
       cheat.g_passive_exhaust_regen_highwater = exhaust
       cheat:logDebug("current exhaust highwater [%s]", tostring(cheat.g_passive_exhaust_regen_highwater))
     end
-
+    
     if exhaust < cheat.g_passive_exhaust_regen_highwater then
       local realAmount = cheat:min(exhaust + cheat.g_passive_exhaust_regen_amount, cheat.g_passive_exhaust_regen_highwater)
       player.soul:SetState("exhaust", realAmount)
@@ -338,12 +324,12 @@ cheat.g_passive_hunger_regen_highwater = 100
 cheat:cheat_timer_register("g_passive_hunger_regen", function()
   if cheat.g_passive_hunger_regen then
     local hunger = player.soul:GetState("hunger")
-
+    
     if hunger > cheat.g_passive_hunger_regen_highwater then
       cheat.g_passive_hunger_regen_highwater = hunger
       cheat:logDebug("current hunger highwater [%s]", tostring(cheat.g_passive_hunger_regen_highwater))
     end
-
+    
     if hunger < cheat.g_passive_hunger_regen_highwater then
       local realAmount = cheat:min(hunger + cheat.g_passive_hunger_regen_amount, cheat.g_passive_hunger_regen_highwater)
       player.soul:SetState("hunger", realAmount)
@@ -362,12 +348,12 @@ cheat:cheat_timer_register("g_passive_health_regen", function()
   if cheat.g_passive_health_regen then
     local health = player.soul:GetState("health")
     local maxHealth = player.actor:GetMaxHealth();
-
+    
     if health > cheat.g_passive_health_regen_highwater then
       cheat.g_passive_health_regen_highwater = health
       cheat:logDebug("current health highwater [%s]", tostring(cheat.g_passive_health_regen_highwater))
     end
-
+    
     if health < cheat.g_passive_health_regen_highwater then
       local realAmount = cheat:min(health + cheat.g_passive_health_regen_amount, cheat.g_passive_health_regen_highwater)
       player.soul:SetState("health", realAmount)
@@ -391,15 +377,15 @@ cheat:createCommand("cheat_set_regen", "cheat:cheat_set_regen(%line)", cheat.che
   "Adds 100 to player's stamina every second.", "cheat_set_regen enable:true state:stamina amount:100",
   "Disable all state regeneration.", "cheat_set_regen enable:false state:all")
 function cheat:cheat_set_regen(line)
-   local args = cheat:argsProcess(line, cheat.cheat_set_regen_args)
+  local args = cheat:argsProcess(line, cheat.cheat_set_regen_args)
   local enable, enableErr = cheat:argsGet(args, 'enable')
   local state, stateErr = cheat:argsGet(args, 'state')
   local amount, amountErr = cheat:argsGet(args, 'amount', 1)
-
+  
   if enableErr or stateErr or amountErr then
     return
   end
-
+  
   if state == "health" or state == "all" then
     cheat.g_passive_health_regen = enable
     if enable then
@@ -407,7 +393,7 @@ function cheat:cheat_set_regen(line)
     end
     cheat:logInfo("Heath regen state [%s] and amount [%s].", tostring(cheat.g_passive_health_regen), tostring(cheat.g_passive_health_regen_amount))
   end
-
+  
   if state == "stamina" or state == "all" then
     cheat.g_passive_stamina_regen = enable
     if enable then
@@ -415,7 +401,7 @@ function cheat:cheat_set_regen(line)
     end
     cheat:logInfo("Stamina regen state [%s] and amount [%s].", tostring(cheat.g_passive_stamina_regen), tostring(cheat.g_passive_stamina_regen_amount))
   end
-
+  
   if state == "hunger" or state == "all" then
     cheat.g_passive_hunger_regen = enable
     if enable then
@@ -423,7 +409,7 @@ function cheat:cheat_set_regen(line)
     end
     cheat:logInfo("Hunger regen state [%s] and amount [%s].", tostring(cheat.g_passive_hunger_regen), tostring(cheat.g_passive_hunger_regen_amount))
   end
-
+  
   if state == "exhaust" or state == "all" then
     cheat.g_passive_exhaust_regen = enable
     if enable then
@@ -431,7 +417,7 @@ function cheat:cheat_set_regen(line)
     end
     cheat:logInfo("Exhaust regen state [%s] and amount [%s].", tostring(cheat.g_passive_exhaust_regen), tostring(cheat.g_passive_exhaust_regen_amount))
   end
-
+  
   return true
 end
 

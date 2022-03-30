@@ -34,8 +34,9 @@ end
 -- cheat_exec_delay
 -- ============================================================================
 cheat.cheat_exec_delay_args = {
-  ms=function(args,name,showHelp) return cheat:argsGetRequiredNumber(args, name, showHelp, "The number of milliseconds to delay the next command.") end,
+  ms = function(args,name,showHelp) return cheat:argsGetRequiredNumber(args, name, showHelp, "The number of milliseconds to delay the next command.") end,
 }
+
 cheat:createCommand("cheat_exec_delay", "cheat:cheat_exec_delay(%line)", cheat.cheat_exec_delay_args,
   "Sets the number of milliseconds to delay execution of the next command.",
   "1 second delay", "cheat_exec_delay ms:1000")
@@ -51,8 +52,9 @@ end
 -- cheat_exec_file
 -- ============================================================================
 cheat.cheat_exec_file_args = {
-  file=function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "The file to execute.") end
+  file = function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "The file to execute.") end
 }
+
 cheat:createCommand("cheat_exec_file", "cheat:cheat_exec_file(%line)", cheat.cheat_exec_file_args,
   "Executes a file of console commands. Use an absolute path or\n$8path relative to SteamLibrary\\steamapps\\common\\KingdomComeDeliverance.",
   "Manually run autocheat.txt", "cheat_exec_file file:Data\\autocheat.txt")

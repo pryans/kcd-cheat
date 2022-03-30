@@ -10,23 +10,23 @@ function cheat:find_buff(searchKey, returnAll)
   local buff_id = nil
   local buff_name = nil
   local buffs = {}
-
+  
   for i=0,rows do
     local buffInfo = Database.GetTableLine(tableName, i)
     local found = false
-
+    
     if not cheat:isBlank(searchKeyUpper) then
       if cheat:toUpper(buffInfo.buff_id) == searchKeyUpper then
         found = true
       end
-
+      
       if string.find(cheat:toUpper(buffInfo.buff_name), searchKeyUpper, 1, true) then
         found = true
       end
     else
       found = true
     end
-
+    
     if found then
       buff_id = buffInfo.buff_id
       buff_name = buffInfo.buff_name
@@ -39,7 +39,7 @@ function cheat:find_buff(searchKey, returnAll)
       cheat:logInfo("Found buff [%s] with id [%s].", tostring(buff_name), tostring(buff_id))
     end
   end
-
+  
   if returnAll then
     cheat:logDebug("Returning [%s] buffs.", tostring(#buffs))
     return buffs
@@ -53,7 +53,7 @@ end
 -- cheat_find_buffs
 -- ============================================================================
 cheat.cheat_find_buffs_args = {
-  token=function(args,name,showHelp) return cheat:argsGetOptional(args, name, nil, showHelp, "All or part of a the buff's name. Leave empty to list all buffs.") end
+  token = function(args,name,showHelp) return cheat:argsGetOptional(args, name, nil, showHelp, "All or part of a the buff's name. Leave empty to list all buffs.") end
 }
 
 cheat:createCommand("cheat_find_buffs", "cheat:cheat_find_buffs(%line)", cheat.cheat_find_buffs_args,
@@ -74,7 +74,7 @@ end
 -- cheat_add_buff
 -- ============================================================================
 cheat.cheat_add_buff_args = {
-  id=function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "The buff ID or all or part of a the buff's name. Uses last match from cheat_find_buffs.") end
+  id = function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "The buff ID or all or part of a the buff's name. Uses last match from cheat_find_buffs.") end
 }
 
 cheat:createCommand("cheat_add_buff", "cheat:cheat_add_buff(%line)", cheat.cheat_add_buff_args,
@@ -102,7 +102,7 @@ end
 -- cheat_remove_buff
 -- ============================================================================
 cheat.cheat_remove_buff_args = {
-  id=function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "The buff ID or all or part of a the buff's name. Uses last match from cheat_find_buffs.") end
+  id = function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "The buff ID or all or part of a the buff's name. Uses last match from cheat_find_buffs.") end
 }
 
 cheat:createCommand("cheat_remove_buff", "cheat:cheat_remove_buff(%line)", cheat.cheat_remove_buff_args,

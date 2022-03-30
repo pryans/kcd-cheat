@@ -10,38 +10,38 @@ function cheat:find_perk(searchKey, returnAll)
   local perk_id = nil
   local perk_name = nil
   local perks = {}
-
+  
   for i=0,rows do
     local rowInfo = Database.GetTableLine(tableName, i)
     local found = false
-
+    
     if not cheat:isBlank(searchKeyUpper) then
       if cheat:toUpper(rowInfo.perk_id) == searchKeyUpper then
         found = true
       end
-
+      
       if string.find(cheat:toUpper(rowInfo.perk_name), searchKeyUpper, 1, true) then
         found = true
       end
     else
       found = true
     end
-
+    
     if found then
       perk_id = rowInfo.perk_id
       perk_name = rowInfo.perk_name
-
+      
       if returnAll then
         local perk = {}
         perk.perk_id = perk_id
         perk.perk_name = perk_name
         table.insert(perks, perk)
       end
-
+      
       cheat:logInfo("Found perk [%s] with id [%s].", tostring(perk_name), tostring(perk_id))
     end
   end
-
+  
   if returnAll then
     cheat:logDebug("Returning [%s] perks.", tostring(#perks))
     return perks
@@ -55,7 +55,7 @@ end
 -- cheat_find_perks
 -- ============================================================================
 cheat.cheat_find_perks_args = {
-  token=function(args,name,showHelp) return cheat:argsGetOptional(args, name, nil, showHelp, "All or part of a the perk's name. Leave empty to list all perks.") end
+  token = function(args,name,showHelp) return cheat:argsGetOptional(args, name, nil, showHelp, "All or part of a the perk's name. Leave empty to list all perks.") end
 }
 
 cheat:createCommand("cheat_find_perks", "cheat:cheat_find_perks(%line)", cheat.cheat_find_perks_args,
@@ -76,7 +76,7 @@ end
 -- cheat_add_perk
 -- ============================================================================
 cheat.cheat_add_perk_args = {
-  id=function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "The perk ID or all or part of a the perk's name. Uses last match from cheat_find_perks.") end
+  id = function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "The perk ID or all or part of a the perk's name. Uses last match from cheat_find_perks.") end
 }
 
 cheat:createCommand("cheat_add_perk", "cheat:cheat_add_perk(%line)", cheat.cheat_add_perk_args,
@@ -104,8 +104,9 @@ end
 -- cheat_add_all_perks
 -- ============================================================================
 cheat.cheat_add_all_perks_args = {
-  exclude=function(args,name,showHelp) return cheat:argsGetRequiredBoolean(args, name, showHelp, "If true then negative, test, and obsolete of perks are excluded.") end
+  exclude = function(args,name,showHelp) return cheat:argsGetRequiredBoolean(args, name, showHelp, "If true then negative, test, and obsolete of perks are excluded.") end
 }
+
 cheat:createCommand("cheat_add_all_perks", "cheat:cheat_add_all_perks(%line)", cheat.cheat_add_all_perks_args,
   "Adds all perks to the player.",
   "Add all perks", "cheat_add_all_perks exclude:true",
@@ -113,7 +114,7 @@ cheat:createCommand("cheat_add_all_perks", "cheat:cheat_add_all_perks(%line)", c
 function cheat:cheat_add_all_perks(line)
   local args = cheat:argsProcess(line, cheat.cheat_add_all_perks_args)
   local exclude, excludeErr = cheat:argsGet(args, 'exclude')
-
+  
   local excludes = {}
   excludes["fa299718-b1eb-4664-8769-25f82fb95de9"] = true --LimitSprint
   excludes["12c75fff-d00d-4cb0-8c27-4a8e4838dc14"] = true --test_dummy_perk
@@ -143,7 +144,7 @@ function cheat:cheat_add_all_perks(line)
   excludes["ce2fe289-4c26-45c0-803b-32627d288765"] = true
   excludes["d2105041-120b-4c06-8e61-1948a5fdf65d"] = true
   excludes["fbedb426-410c-4614-952a-1086b6f6554f"] = true
-
+  
   local perks = cheat:find_perk(nil, true)
   for i,perk in pairs(perks) do
     if not exclude or not excludes[perk.perk_id] then
@@ -161,7 +162,7 @@ end
 -- cheat_remove_perk
 -- ============================================================================
 cheat.cheat_remove_perk_args = {
-  id=function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "The perk ID or all or part of a the perk's name. Uses last match from cheat_find_perks.") end
+  id = function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "The perk ID or all or part of a the perk's name. Uses last match from cheat_find_perks.") end
 }
 
 cheat:createCommand("cheat_remove_perk", "cheat:cheat_remove_perk(%line)", cheat.cheat_remove_perk_args,

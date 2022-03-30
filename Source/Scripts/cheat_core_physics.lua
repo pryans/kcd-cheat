@@ -105,84 +105,7 @@ function cheat:sprint()
 end
 
 
-
-
---[[
-ch_props =
-	{
-		commrange = 30,
-		SpawnedEntityName = "Bob0",
-    name = "Bob1",
-		bSpeciesHostility = 1,
-		soclasses_SmartObjectClass = "Actor",
-		attackrange = 70,
-		special = 0,
-		aicharacter_character = "Cover",
-		Perception =
-		{
-			stanceScale = 1.8,
-			sightrange = 50,
-			FOVSecondary = 160,
-			FOVPrimary = 80,
-			audioScale = 1,
-		},
-		species = 1,
-		bInvulnerable = 0,
-		accuracy = 1.0,
-		fileModel = "",
-	}
-
-chpropinst=
-	{
-		aibehavior_behaviour = "Job_StandIdle",
-		soclasses_SmartObjectClass = "",
-		groupid = 173,
-	}
-
-function cheat:spawn(pclass)
-  local params = {
-    class = "Grunt";
-    position = player:GetPos(),
-    orientation = player:GetDirectionVector(1),
-    scale = player:GetScale(),
-    --archetype = nil,
-    properties = ch_props,
-    propertiesInstance = chpropinst,
-  }
-
-  local ent = System.SpawnEntity(params)
-
-  if ent then
---    self.spawnedEntity = ent.id
---    self.lastSpawnedEntity = ent.id;
---    if not ent.Events then ent.Events = {} end
---    local evts = ent.Events
---    for name, data in pairs(self.FlowEvents.Outputs) do
---      if not evts[name] then evts[name] = {} end
---      table.insert(evts[name], {self.id, name})
---    end
---    ent.whoSpawnedMe = self;
-
-    ent:SetupTerritoryAndWave();
-    ent:ActivateOutput("Spawned", ent.id);
-    --return self.id;
-    cheat:logInfo("spawned")
-  end
-end
-
---]]
-
-
-
-
-
-
-
-
-
-
-
--- player.gameParams type=table methods=yes metamethods=no
+-- player.gameParams type = table methods = yes metamethods = no
 --    jumpHeight=1
 --    sprintMultiplier=1.5
 --    strafeMultiplier=.75
@@ -200,59 +123,56 @@ end
 -- ActivatePlayerPhysics
 
 
-
-
 -- all cheats, don't work
 function cheat:set_timewarp()
   -- Time of fade in during PB time warp defined relative to hit point.
   System.SetCVar("wh_cs_TimeWarpFadeIn", 0)
-
+  
   --Time of fade out during PB time warp defined relative to hit point.
   System.SetCVar("wh_cs_TimeWarpFadeOut", 0)
-
+  
   --Time of fade out during PB time warp defined relative to hit point.
   System.SetCVar("wh_cs_TimeWarpDuration", 0)
-
+  
   --Time warp maximum bias of duration to start or end of hit point (0 / 1).
   System.SetCVar("wh_cs_TimeWarpBias", 0)
-
+  
   --Speed of PB time warp for player. 1 - disabled
   System.SetCVar("wh_cs_TimeWarpPBFadeSpeedForPlayer", 1)
-
+  
   --Speed of PB time warp for player's opponent. 1 - disabled
   System.SetCVar("wh_cs_TimeWarpPBFadeSpeedForOpp", 1)
-
+  
   --Speed of Dodge time warp for player. 1 - disabled
   System.SetCVar("wh_cs_TimeWarpDodgeFadeSpeedForPlayer", 1)
-
+  
   --Speed of Dodge time warp for player's opponent. 1 - disabled
   System.SetCVar("wh_cs_TimeWarpDodgeFadeSpeedForOpp", 1)
-
+  
   cheat:logInfo("done")
 end
 
-
 -- cheat_eval cheat:cheat_set_player_physics(5,0,0)
 function cheat:cheat_set_player_physics(p_gravity, p_zerog, p_air_control)
-
+  
   -- does not work
   --System.SetCVar( "p_gravity_z", tonumber(p_gravity))
   --cheat:logInfo("gravity=" .. tostring(System.GetCVar("p_gravity_z")))
   --return
-
+  
   local originalFunc = _G["EntityUpdateGravity"]
   _G["EntityUpdateGravity"] = function(ent)
-
+    
     cheat:logInfo("new method")
-
+    
     if ent.type ~= "Player" then
       cheat:logInfo("calling orig")
       originalFunc(ent)
       return
     end
-
+    
     cheat:logInfo("gravity=" .. tostring(ent:GetPhysicalStats().gravity))
-
+    
     if not ent.TempPhysicsParams then
       ent:AwakePhysics(1);
     end
@@ -267,7 +187,7 @@ function cheat:cheat_set_player_physics(p_gravity, p_zerog, p_air_control)
     ent:SetPhysicParams(PHYSICPARAM_PLAYERDYN, ent.TempPhysicsParams);
     cheat:logInfo("gravity=" .. tostring(ent:GetPhysicalStats().gravity))
   end
-
+  
   EntityUpdateGravity(player)
 end
 

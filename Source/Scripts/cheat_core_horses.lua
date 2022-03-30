@@ -18,7 +18,7 @@ function cheat:find_horse(searchKey)
       local str = tostring(entity.soul:GetStatLevel('str'))
       local vit = tostring(entity.soul:GetStatLevel('vit'))
       local total = tostring(tonumber(agi) + tonumber(cou) + tonumber(str) + tonumber(vit))
-
+      
       local found = false
       if not cheat:isBlank(searchKeyUpper) then
         if string.find(cheat:toUpper(horseData.name), searchKeyUpper, 1, true) then
@@ -27,7 +27,7 @@ function cheat:find_horse(searchKey)
       else
         found = true
       end
-
+      
       if found then
         horse_name = horseData.name
         cheat:logInfo("Found horse [%s] agi[%s] cou[%s] str[%s] vit[%s] total[%s].", tostring(horse_name), agi, cou, str, vit, total)
@@ -65,7 +65,7 @@ end
 -- cheat_find_horses
 -- ============================================================================
 cheat.cheat_find_horses_args = {
-  token=function(args,name,showHelp) return cheat:argsGetOptional(args, name, nil, showHelp, "All or part of a horse's name. Leave blank to list all horses.") end
+  token = function(args,name,showHelp) return cheat:argsGetOptional(args, name, nil, showHelp, "All or part of a horse's name. Leave blank to list all horses.") end
 }
 
 cheat:createCommand("cheat_find_horses", "cheat:cheat_find_horses(%line)", cheat.cheat_find_horses_args,
@@ -84,7 +84,7 @@ end
 -- cheat_set_horse
 -- ============================================================================
 cheat.cheat_set_horse_args = {
-  id=function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "The UUID or all or part of a horse's name (last match is used).") end
+  id = function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "The UUID or all or part of a horse's name (last match is used).") end
 }
 
 cheat:createCommand("cheat_set_horse", "cheat:cheat_set_horse(%line)", cheat.cheat_set_horse_args,
@@ -96,10 +96,10 @@ function cheat:cheat_set_horse(line)
   local id, idErr = cheat:argsGet(args, "id")
   if not idErr then
     if id == 'nil' then
-	  player.player:SetPlayerHorse(__null)
-	  cheat:logInfo("Removed player horse.")
-	  return true
-	end
+      player.player:SetPlayerHorse(__null)
+      cheat:logInfo("Removed player horse.")
+      return true
+    end
     local horseName = cheat:find_horse(id)
     local horse = System.GetEntityByName(horseName)
     player.player:SetPlayerHorse(horse.id)
