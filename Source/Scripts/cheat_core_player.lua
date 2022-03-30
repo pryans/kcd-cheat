@@ -53,19 +53,20 @@ end
 -- ============================================================================
 -- cheat_teleport_to
 -- ============================================================================
-cheat.cheat_teleport_to_args = {
-  place = function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "Place to teleport to") end,
-}
+System.AddCCommand('cheat_teleport_to', 'cheat:teleport_to(%line)', "Teleports the player to the given place. Supported places (case insensitive):\n$8Budin, (Inn at the) Glade, (Rattay Mill) Home,\n$8(Wagoner's) Inn, Katzek, Kohelnitz,\n$8Ledetchko, Merhojed, Monastery,\n$8Neuhof, Pribyslavitz, Rattay,\n$8Rovna, Samopesh, Sasau,\n$8Skalitz, Talmberg, (Talmberg) Tavern,\n$8Uzhitz, Vranik, (Broken) Wheel")
 
-cheat:createCommand("cheat_teleport_to", "cheat:teleport_to(%line)", cheat.cheat_teleport_to_args,
-  "Teleports the player to the given place. Supported places (case insensitive):\n$8(Inn at the) Glade, Ledetchko, Merhojed,\n$8Monastery, Neuhof, Pribyslavitz,\n$8Rattay, Rovna, Samopesh,\n$8Sasau, Skalitz, Talmberg, \n$8Uzhitz, Vranik ",
-  "Example", "cheat_teleport_to place:rattay")
 function cheat:teleport_to(line)
-  local args = cheat:argsProcess(line, cheat.cheat_teleport_to_args)
-  local nplace, nplaceErr = cheat:argsGet(args, 'place')
+  local args = string.gsub(tostring(line), "place:", "")
+  --local argsArr = cheat:split(args, " ") -- ok
+  local checkteste = "error"
   
   local places = {}
+  places["BUDIN"] = "x:1405 y:1463 z:19"
   places["GLADE"] = "x:2849 y:1913 z:156"
+  places["HOME"] = "x:2451 y:693 z:28"
+  places["INN"] = "x:938 y:1424 z:24"
+  places["KATZEK"] = "x:1602 y:1838 z:20"
+  places["KOHELNITZ"] = "x:2823 y:1232 z:25"
   places["LEDETCHKO"] = "x:2052 y:1304 z:30"
   places["MERHOJED"] = "x:1636 y:2618 z:126"
   places["MONASTERY"] = "x:929 y:1617 z:36"
@@ -77,14 +78,61 @@ function cheat:teleport_to(line)
   places["SASAU"] = "x:896 y:1186 z:27"
   places["SKALITZ"] = "x:829 y:3522 z:51"
   places["TALMBERG"] = "x:2360 y:2846 z:105"
+  --places["TAVERN"] = "x: y: z:"
   places["UZHITZ"] = "x:3041 y:3324 z:156"
   places["VRANIK"] = "x:930 y:913 z:130"
+  --places["WHEEL"] = "x: y: z: "
   
-  if not nplaceErr then
-    if places[cheat:toUpper(nplace)] ~= nil then
-      cheat:teleport(places[cheat:toUpper(nplace)])
+  if places[cheat:toUpper(args)] ~= nil then
+    cheat:teleport(places[cheat:toUpper(args)])
+  else
+    for k,v in pairs(places) do
+      if string.find(k, cheat:toUpper(args)) then
+        checkteste = v
+      end
+    end
+    if checkteste ~= "error" then
+      cheat:teleport(checkteste)
     else
       cheat:logError("Invalid Place - See list of supported places type: 'cheat_teleport_to ?'")
+    end
+  end
+end
+
+-- ============================================================================
+-- cheat_tp_to_npc
+-- ============================================================================
+cheat.cheat_tp_to_npc_args = {
+  id = function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "All or part of the NPC's name.") end,
+  num = function(args,name,showHelp) return cheat:argsGetOptionalNumber(args, name, 0, showHelp, "Optional: The NPC's number in the list if there's more than one.\n$8Keep it greater than 0.") end
+}
+
+cheat:createCommand("cheat_tp_to_npc", "cheat:cheat_tp_to_npc(%line)", cheat.cheat_tp_to_npc_args,
+  "Finds an NPC or list of NPCs and teleports to any of them.\n$8This only works if the NPC has been loaded into the world.\n$8Defaults to last NPC in the list if no num argument received.",
+  "Teleport to Father Godwin", "cheat_tp_to_npc id:godwin")
+function cheat:cheat_tp_to_npc(line)
+  local args = cheat:argsProcess(line, cheat.cheat_tp_to_npc_args)
+  local id, idErr = cheat:argsGet(args, 'id', nil)
+  local num, numErr = cheat:argsGet(args, 'num', 0)
+  if not idErr and not numErr then
+    cheat:cheat_find_npc("token:" .. id)
+    local npcs = cheat:find_npc(id)
+    
+    if num == nil or num <= 0 then
+      num = #npcs
+    end
+    
+    if num > #npcs then
+      cheat:logError("Sorry, this number is greater than the amount of found NPCS.")
+      return
+    end
+    if npcs and #npcs > 0 then
+      local nx = npcs[num]:GetWorldPos().x
+      local ny = npcs[num]:GetWorldPos().y
+      local nz = npcs[num]:GetWorldPos().z
+      cheat:teleport("x:" .. nx .. " y:" .. ny .. " z:" .. nz)
+    else
+      cheat:logError("NPC [%s] not found.", id)
     end
   end
 end
@@ -148,6 +196,7 @@ cheat:createCommand("cheat_set_stat_level", "cheat:cheat_set_stat_level(%line)",
   "Sets one of the player's stats to the given level.",
   "Set player's strength to level 20", "cheat_set_stat_level stat:str level:20",
   "Set player's agility to level 5", "cheat_set_stat_level stat:agi level:5")
+
 function cheat:cheat_set_stat_level(line)
   local args = cheat:argsProcess(line, cheat.cheat_set_stat_level_args)
   local stat, statErr = cheat:argsGet(args, 'stat')
@@ -246,16 +295,33 @@ cheat:createCommand("cheat_wash_dirt_and_blood", "cheat:cheat_wash_dirt_and_bloo
   "Washes all blood and dirt from the player and player's horse.\n$8Do horses need this?\n$8Can items be washed?\n$8Let me know.",
   "Wash yourself and your horse", "cheat_wash_dirt_and_blood")
 function cheat:cheat_wash_dirt_and_blood()
-  player.actor:WashDirtAndBlood(1)
-  
   local entity = XGenAIModule.GetEntityByWUID(player.player:GetPlayerHorse());
+  
+  player.actor:WashDirtAndBlood(1)
+  player.actor:WashItems(1)
+  
   if entity then
     entity.actor:WashDirtAndBlood(1)
+    entity.actor:WashItems(1)
   end
   
   cheat:logInfo("All Clean!")
 end
 
+-- ============================================================================
+-- cheat_charm
+-- ============================================================================
+cheat:createCommand("cheat_charm", "cheat:cheat_charm()", nil,
+  "Automates your morning routine of bath-haircut-sex for maximum Charisma bonus.\n$8Washes all dirt and blood and applies Fresh Cut and Smitten buffs.",
+  "Wash yourself and add Charisma buffs", "cheat_charm")
+function cheat:cheat_charm()
+  cheat:cheat_wash_dirt_and_blood()
+  cheat:cheat_add_buff("id:fresh_cut")
+  cheat:cheat_add_buff("id:alpha_male_in_love")
+  cheat:logInfo("All Clean and dandy!")
+end
+
+-- ============================================================================
 -- cheat_unlock_recipes
 -- ============================================================================
 cheat:createCommand("cheat_unlock_recipes", "cheat:cheat_unlock_recipes()", nil,
@@ -275,6 +341,7 @@ end
 cheat.g_passive_stamina_regen = false
 cheat.g_passive_stamina_regen_amount = 1
 cheat.g_passive_stamina_regen_highwater = 100
+
 cheat:cheat_timer_register("g_passive_stamina_regen", function()
   if cheat.g_passive_stamina_regen then
     local stamina = player.soul:GetState("stamina")
@@ -298,6 +365,7 @@ end)
 cheat.g_passive_exhaust_regen = false
 cheat.g_passive_exhaust_regen_amount = 1
 cheat.g_passive_exhaust_regen_highwater = 100
+
 cheat:cheat_timer_register("g_passive_exhaust_regen", function()
   if cheat.g_passive_exhaust_regen then
     local exhaust = player.soul:GetState("exhaust")
@@ -321,6 +389,7 @@ end)
 cheat.g_passive_hunger_regen = false
 cheat.g_passive_hunger_regen_amount = 1
 cheat.g_passive_hunger_regen_highwater = 100
+
 cheat:cheat_timer_register("g_passive_hunger_regen", function()
   if cheat.g_passive_hunger_regen then
     local hunger = player.soul:GetState("hunger")
@@ -344,6 +413,7 @@ end)
 cheat.g_passive_health_regen = false
 cheat.g_passive_health_regen_amount = 1
 cheat.g_passive_health_regen_highwater = 100
+
 cheat:cheat_timer_register("g_passive_health_regen", function()
   if cheat.g_passive_health_regen then
     local health = player.soul:GetState("health")
@@ -366,9 +436,9 @@ end)
 -- cheat_set_regen
 -- ============================================================================
 cheat.cheat_set_regen_args = {
-  enable=function(args,name,showHelp) return cheat:argsGetRequiredBoolean(args, name, showHelp, "true to enable state regen; false to disable") end,
-  state=function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "The state to regen: all, health, stamina, or exhaust.") end,
-  amount=function(args,name,showHelp) return cheat:argsGetOptionalNumber(args, name, 1, showHelp, "The amount to regen every second.") end
+  enable = function(args,name,showHelp) return cheat:argsGetRequiredBoolean(args, name, showHelp, "true to enable state regen; false to disable") end,
+  state = function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "The state to regen: all, health, stamina, or exhaust.") end,
+  amount = function(args,name,showHelp) return cheat:argsGetOptionalNumber(args, name, 1, showHelp, "The amount to regen every second.") end
 }
 
 cheat:createCommand("cheat_set_regen", "cheat:cheat_set_regen(%line)", cheat.cheat_set_regen_args,

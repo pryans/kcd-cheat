@@ -99,6 +99,43 @@ function cheat:cheat_add_buff(line)
 end
 
 -- ============================================================================
+-- cheat_add_potion_buff
+-- ============================================================================
+System.AddCCommand('cheat_add_potion_buff', 'cheat:add_potion_buff(%line)', "Usage: cheat_add_potion_buff id:number\n$8Adds a potion buff to the player. Supported buffs:\n$8 1. Aqua Vitalis\n$8 2. Embrocation\n$8 3. Bowman's Brew\n$8 4. Padfoot\n$8 5. Nighthawk\n$8 6. Bard\n$8 7. Aesop\n$8 8. Chamomile Brew\n$8 9. Marigold Deoction\n$8 10. Lazarus")
+
+function cheat:add_potion_buff(line)
+  local args = string.gsub(tostring(line), "id:", "")
+  local checkteste = "error"
+  
+  local ids = {}
+  ids["1"] = "id:27c2fd6a-9b87-4d1f-b434-44f5ec3fa426"
+  ids["2"] = "id:ceb70cbf-9c4e-491a-8d75-7e8ab874db54"
+  ids["3"] = "id:736fcb09-5554-4e6b-b3e0-f9bc6cc4fd0a"
+  ids["4"] = "id:eacbd986-ad07-4698-bf81-59df608b56a1"
+  ids["5"] = "id:fa2ad41e-5701-4fe7-8630-5cee49eb304f"
+  ids["6"] = "id:1f398bd2-05ea-4a56-b883-9ac3ba3ad01a"
+  ids["7"] = "id:f23dda25-6450-49c8-86f3-fc7bc1236199"
+  ids["8"] = "id:679a7453-c1b4-4164-b7e5-8410d682e6da"
+  ids["9"] = "id:8503216a-a34c-49f0-aefa-54d4502046f9"
+  ids["10"] = "id:7690a860-a843-4609-8a67-9868b87b32b5"
+  
+  if ids[args] ~= nil then
+    cheat:cheat_add_buff(ids[args])
+  else
+	for k,v in pairs(ids) do
+    if string.find(k, args) then
+      checkteste = v
+    end
+	end
+	if checkteste ~= "error" then
+    cheat:cheat_add_buff(checkteste)
+	else
+    cheat:logError("Invalid Buff - See list of supported potion buffs: 'cheat_add_potion_buff ?'")
+	end
+  end
+end
+
+-- ============================================================================
 -- cheat_remove_buff
 -- ============================================================================
 cheat.cheat_remove_buff_args = {
@@ -197,11 +234,10 @@ end
 -- cheat_add_buff_invisible
 -- ============================================================================
 cheat:createCommand("cheat_add_buff_invisible", "cheat:cheat_add_buff_invisible()", nil,
-  "Adds invisible buff to player. For now this just sets conspicuousness to zero.\n$8Use cheat_remove_buff_invisible to remove this.",
+  "Adds invisible buff to player. Should set visibility, conspicuousness and noise to zero.\n$8Use cheat_remove_buff_invisible to remove this.",
   "Add invisible buff to player", "cheat_add_buff_invisible")
 function cheat:cheat_add_buff_invisible()
-  cheat:cheat_add_buff("id:cf787871-d151-43b7-a7c9-39acac116f0f") -- vib=-10,con=-10
-  cheat:cheat_add_buff("id:07db9dfd-0e0c-4cbe-bf8a-10aaa1add262") -- ors=-1
+  cheat:cheat_add_buff("id:cf787871-d151-43b7-a7c9-39acac116f0f") -- tweaked using patched table files
   cheat:logInfo("Invisibility buff added.")
   return true
 end
@@ -214,7 +250,6 @@ cheat:createCommand("cheat_remove_buff_invisible", "cheat:cheat_remove_buff_invi
   "Remove invisible buff from player", "cheat_remove_buff_invisible")
 function cheat:cheat_remove_buff_invisible()
   cheat:cheat_remove_buff("id:cf787871-d151-43b7-a7c9-39acac116f0f")
-  cheat:cheat_remove_buff("id:07db9dfd-0e0c-4cbe-bf8a-10aaa1add262")
   cheat:logInfo("Invisibility buff removed.")
   return true
 end

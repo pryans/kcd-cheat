@@ -1,6 +1,6 @@
 -- cheat_eval return type(XGenAIModule.GetEntityByWUID( player.inventory:GetInventoryTable()[5] ))
 -- ItemManager.GetItemUIName
---  ItemManager.GetItem(player.inventory:GetInventoryTable()[5])
+-- ItemManager.GetItem(player.inventory:GetInventoryTable()[5])
 -- cheat_eval return tostring(player.inventory:GetInventoryTable()[5])
 
 -- cheat_eval cheat:print_methods( ItemManager.GetItem(player.inventory:GetInventoryTable()[5]) )
@@ -25,39 +25,60 @@
 function cheat:recreateitems(mode, miscValue)
   for i,userdata in pairs(player.inventory:GetInventoryTable()) do
     local item = ItemManager.GetItem(userdata)
-    local itemHealth = item.health
     local itemAmount = item.amount
+    local itemHealth = item.health
+    local itemCategoryId = cheat:get_item_category_id(tostring(item.class))
     local itemUIName = ItemManager.GetItemUIName(item.class)
     local itemName = ItemManager.GetItemName(item.class)
-    local itemOwner = tonumber(string.gsub(tostring(ItemManager.GetItemOwner(item.id)), "userdata: ", ""), 10)
+    local itemOwner =  tostring(ItemManager.GetItemOwner(item.id))
+    local playerData = "userdata: 0500000000000A53"
     local shouldDelete = false
     local shouldRecreate = false
     local newItemHealth = 1
     
-    if mode == "repairall" and itemHealth ~= 1 then
-      shouldDelete = true
-      shouldRecreate = true
-    end
-    
-    if mode == "damageall" then
-      -- trying to create non-repairable items with less than 100% health will crash the game
-      local item_category_id = cheat:get_item_category_id(tostring(item.class))
-      if item_category_id == 4 or item_category_id == 1 or item_category_id == 2 or item_category_id == 16 or item_category_id == 27 then
-        cheat:logDebug("dmgall [%s] [%s] [%s]", itemUIName, tostring(item.class), tostring(itemHealth))
-        shouldDelete = true
-        shouldRecreate = true
-        newItemHealth = miscValue
+    if mode == "repairall" then
+      local itemHealth = item.health
+      local categoryidArray = {0, 1, 2, 3, 4, 5, 9, 13, 14, 16, 27}
+      for i=1,table.getn(categoryidArray) do
+        if categoryidArray[i] == itemCategoryId and itemHealth ~= 1 then
+          shouldDelete = true
+          shouldRecreate = true
+        end
       end
     end
     
-    if mode == "removestolen" and itemOwner ~= 0 then
-      shouldDelete = true
-      shouldRecreate = false
+    if mode == "damageall" then
+      local categoryidArray = {0, 1, 2, 3, 4, 5, 13, 14, 16, 27}
+      for i=1,table.getn(categoryidArray) do
+        if categoryidArray[i] == itemCategoryId then
+          cheat:logDebug("dmgall [%s] [%s] [%s]", itemUIName, tostring(item.class), tostring(itemHealth))
+          shouldDelete = true
+          shouldRecreate = true
+          newItemHealth = miscValue
+        end
+      end
     end
     
-    if mode == "ownstolen" and itemOwner ~= 0 then
-      shouldDelete = true
-      shouldRecreate = true
+    if mode == "removestolen" then
+      local categoryidArray = {0, 1, 2, 3, 4, 5, 8, 9, 13, 14, 16, 27}
+      for i=1,table.getn(categoryidArray) do
+        if categoryidArray[i] == itemCategoryId and itemOwner ~= playerData then
+          --cheat:logDebug("owner [%s]", itemOwner)
+          shouldDelete = true
+          shouldRecreate = false
+        end
+      end
+    end
+    
+    if mode == "ownstolen" then
+      local categoryidArray = {0, 1, 2, 3, 4, 5, 8, 13, 14, 16, 27}
+      for i=1,table.getn(categoryidArray) do
+        if categoryidArray[i] == itemCategoryId and itemOwner ~= playerData then
+          --cheat:logDebug("owner [%s]", itemOwner)
+          shouldDelete = true
+          shouldRecreate = true
+        end
+      end
     end
     
     if shouldDelete then
@@ -127,7 +148,6 @@ function cheat:find_item(searchKey, returnAll)
     return item_id, item_name
   end
 end
-
 
 -- ============================================================================
 -- find_item
