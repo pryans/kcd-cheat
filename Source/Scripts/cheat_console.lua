@@ -144,6 +144,10 @@ UIAction.RegisterElementListener(cheat, "", "", "", "uiElementListener")
 -- ============================================================================
 function cheat:uiEventSystemListener(actionName, eventName, argTable)
   cheat:logDebug("ui-esl: actionName[%s] eventName[%s]", tostring(actionName), tostring(eventName))
+  if actionName == "HUDElements" and eventName == "ChangeOverlay" then
+    System.ExecuteCommand("sys_MaxFPS=-1")
+  end
+  
   if argTable then
     cheat:tprint(argTable)
   end
