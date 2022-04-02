@@ -28,19 +28,19 @@ function cheat:loc()
 end
 
 -- ============================================================================
--- cheat_teleport
+-- cheat_tp
 -- ============================================================================
-cheat.cheat_teleport_args = {
+cheat.cheat_tp_args = {
   x = function(args,name,showHelp) return cheat:argsGetRequiredNumber(args, name, showHelp, "X coordinate") end,
   y = function(args,name,showHelp) return cheat:argsGetRequiredNumber(args, name, showHelp, "Y coordinate") end,
   z = function(args,name,showHelp) return cheat:argsGetRequiredNumber(args, name, showHelp, "Z coordinate") end
 }
 
-cheat:createCommand("cheat_teleport", "cheat:teleport(%line)", cheat.cheat_teleport_args,
+cheat:createCommand("cheat_tp", "cheat:tp(%line)", cheat.cheat_tp_args,
   "Teleports the player to the given coordinates.\n$8You can end up in the air or under the map.\n$8I suggest saving your game and turn on immortality first.",
-  "Example", "cheat_teleport x:3000 y:1500 z:300")
-function cheat:teleport(line)
-  local args = cheat:argsProcess(line, cheat.cheat_teleport_args)
+  "Example", "cheat_tp x:3000 y:1500 z:300")
+function cheat:tp(line)
+  local args = cheat:argsProcess(line, cheat.cheat_tp_args)
   local nx, nxErr = cheat:argsGet(args, 'x')
   local ny, nyErr = cheat:argsGet(args, 'y')
   local nz, nzErr = cheat:argsGet(args, 'z')
@@ -51,11 +51,11 @@ function cheat:teleport(line)
 end
 
 -- ============================================================================
--- cheat_teleport_to
+-- cheat_tp_to
 -- ============================================================================
-System.AddCCommand('cheat_teleport_to', 'cheat:teleport_to(%line)', "Teleports the player to the given place. Supported places (case insensitive):\n$8Budin, (Inn at the) Glade, (Rattay Mill) Home,\n$8(Wagoner's) Inn, Katzek, Kohelnitz,\n$8Ledetchko, Merhojed, Monastery,\n$8Neuhof, Pribyslavitz, Rattay,\n$8Rovna, Samopesh, Sasau,\n$8Skalitz, Talmberg, (Talmberg) Tavern,\n$8Uzhitz, Vranik, (Broken) Wheel")
+System.AddCCommand('cheat_tp_to', 'cheat:tp_to(%line)', "Teleports the player to the given place. Supported places (case insensitive):\n$8Budin, (Inn at the) Glade, (Rattay Mill) Home,\n$8(Wagoner's) Inn, Katzek, Kohelnitz,\n$8Ledetchko, Merhojed, Monastery,\n$8Neuhof, Pribyslavitz, Rattay,\n$8Rovna, Samopesh, Sasau,\n$8Skalitz, Talmberg, (Talmberg) Tavern,\n$8Uzhitz, Vranik, (Broken) Wheel")
 
-function cheat:teleport_to(line)
+function cheat:tp_to(line)
   local args = string.gsub(tostring(line), "place:", "")
   --local argsArr = cheat:split(args, " ") -- ok
   local checkteste = "error"
@@ -64,7 +64,6 @@ function cheat:teleport_to(line)
   places["BUDIN"] = "x:1405 y:1463 z:19"
   places["GLADE"] = "x:2849 y:1913 z:156"
   places["HOME"] = "x:2451 y:693 z:28"
-  places["INN"] = "x:938 y:1424 z:24"
   places["KATZEK"] = "x:1602 y:1838 z:20"
   places["KOHELNITZ"] = "x:2823 y:1232 z:25"
   places["LEDETCHKO"] = "x:2052 y:1304 z:30"
@@ -78,10 +77,10 @@ function cheat:teleport_to(line)
   places["SASAU"] = "x:896 y:1186 z:27"
   places["SKALITZ"] = "x:829 y:3522 z:51"
   places["TALMBERG"] = "x:2360 y:2846 z:105"
-  --places["TAVERN"] = "x: y: z:"
   places["UZHITZ"] = "x:3041 y:3324 z:156"
   places["VRANIK"] = "x:930 y:913 z:130"
-  --places["WHEEL"] = "x: y: z: "
+  places["WAGONERS"] = "x:938 y:1424 z:24"
+  places["WHEEL"] = "x:2915 y:733 z:108 "
   
   if places[cheat:toUpper(args)] ~= nil then
     cheat:teleport(places[cheat:toUpper(args)])
@@ -94,10 +93,66 @@ function cheat:teleport_to(line)
     if checkteste ~= "error" then
       cheat:teleport(checkteste)
     else
-      cheat:logError("Invalid Place - See list of supported places type: 'cheat_teleport_to ?'")
+      cheat:logError("Invalid Place - See list of supported places type: 'cheat_tp_to ?'")
     end
   end
 end
+
+-- ============================================================================
+-- cheat_tp_tr
+-- ============================================================================
+cheat.cheat_tp_tr_args = {
+  place = function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "Teleport to treasure") end,
+}
+
+cheat:createCommand("cheat_tp_tr", "cheat:tp_tr(%line)", cheat.cheat_tp_tr_args,
+"Teleports the player to the given place. Supported places (case insensitive):\n$8I, II, III, IV, V, VI, VII, VIII, IX, X, XI, XII, XIII, XIV, XV, XVI, XVII, XVIII, XIX, XX,\n$8XXI, XXII, XIII, XXIV, XXV, AI, AII, AII, AIII, AIV, AV",
+"Example", "cheat_tp_tr place:XXV")
+function cheat:tp_tr(line)
+  local args = cheat:argsProcess(line, cheat.cheat_tp_tr_args)
+  local nplace, nplaceErr = cheat:argsGet(args, 'place')
+  
+  local places = {}
+  places["I"] = "x:650 y:1920 z:106"
+  places["II"] = "x:382 y:1813 z:22" 
+  places["III"] = "x:223 y:1695 z:71"
+  places["IV"] = "x:2772 y:1449 z:106"
+  places["V"] = "x:2086 y:2054 z:126"
+  places["VI"] = "x:2268 y:1589 z:114"
+  places["VII"] = "x:1860 y:1521 z:80"
+  places["VIII"] = "x:2332 y:1120 z:54"
+  places["IX"] = "x:869 y:3279 z:19"
+  places["X"] = "x:1683 y:938 z:41"
+  places["XI"] = "x:1445 y:1140 z:37"
+  places["XII"] = "x:3175 y:335 z:136"
+  places["XIII"] = "x:3610 y:721 z:100"
+  places["XIV"] = "x:3692 y:1258 z:87"
+  places["XV"] = "x:2942 y:1329 z:90"
+  places["XVI"] = "x:482 y:2578 z:20"
+  places["XVII"] = "x:769 y:2572 z:20"
+  places["XVIII"] = "x:2494 y:2817 z:99"
+  places["XIX"] = "x:856 y:1335 z:18"
+  places["XX"] = "x:740 y:3699 z:30"
+  places["XXI"] = "x:657 y:3141 z:41"
+  places["XXII"] = "x:600 y:608 z:158"
+  places["XXIII"] = "x:1011 y:3972 z:51"
+  places["XXIV"] = "x:903 y:3841 z:66"
+  places["XXV"] = "x:221 y:3474 z:77"
+  places["AI"] = "x:3872 y:886 z:157"
+  places["AII"] = "x:874 y:270 z:181"
+  places["AIII"] = "x:3159 y:3840 z:167"
+  places["AIV"] = "x:1723 y:778 z:74"
+  places["AV"] = "x:474 y:3869 z:40"
+  
+  if not nplaceErr then
+    if places[cheat:toUpper(nplace)] ~= nil then
+      cheat:teleport(places[cheat:toUpper(nplace)])
+    else
+      cheat:logError("Invalid Place - See list of supported places type: 'cheat_tp_tr ?'")
+    end
+  end
+end
+
 
 -- ============================================================================
 -- cheat_tp_to_npc
