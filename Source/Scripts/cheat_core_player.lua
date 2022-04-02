@@ -53,7 +53,7 @@ end
 -- ============================================================================
 -- cheat_tp_to
 -- ============================================================================
-System.AddCCommand('cheat_tp_to', 'cheat:tp_to(%line)', "Teleports the player to the given place. Supported places (case insensitive):\n$8Budin, (Inn at the) Glade, (Rattay Mill) Home,\n$8(Wagoner's) Inn, Katzek, Kohelnitz,\n$8Ledetchko, Merhojed, Monastery,\n$8Neuhof, Pribyslavitz, Rattay,\n$8Rovna, Samopesh, Sasau,\n$8Skalitz, Talmberg, (Talmberg) Tavern,\n$8Uzhitz, Vranik, (Broken) Wheel")
+System.AddCCommand('cheat_tp_to', 'cheat:tp_to(%line)', "Teleports the player to the given place. Supported places (case insensitive):\n$8Budin, (Inn at the) Glade, (Rattay Mill) Home,\n$8(Wagoner's) Inn, Katzek, Kohelnitz,\n$8Ledetchko, Merhojed, Monastery,\n$8Neuhof, Pribyslavitz, Rattay,\n$8Rovna, Samopesh, Sasau,\n$8Skalitz, Talmberg, Uzhitz,\n$8Vranik, Wagoners (Inn), (Broken) Wheel")
 
 function cheat:tp_to(line)
   local args = string.gsub(tostring(line), "place:", "")
