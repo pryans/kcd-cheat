@@ -1,7 +1,7 @@
 -- ============================================================================
 -- find_perk
 -- ============================================================================
-function cheat:find_perk(searchKey, returnAll)
+function cheat:find_perk(searchKey, returnAll, findAny)
   local tableName = "perk"
   Database.LoadTable(tableName)
   local tableInfo = Database.GetTableInfo(tableName)
@@ -27,7 +27,7 @@ function cheat:find_perk(searchKey, returnAll)
       found = true
     end
     
-    if found then
+    if found and ( findAny or rowInfo.visibility == 2 )then
       perk_id = rowInfo.perk_id
       perk_name = rowInfo.perk_name
       
@@ -55,7 +55,8 @@ end
 -- cheat_find_perks
 -- ============================================================================
 cheat.cheat_find_perks_args = {
-  token = function(args,name,showHelp) return cheat:argsGetOptional(args, name, nil, showHelp, "All or part of a the perk's name. Leave empty to list all perks.") end
+  token = function(args,name,showHelp) return cheat:argsGetOptional(args, name, nil, showHelp, "All or part of a the perk's name. Leave empty to list all perks.") end,
+  any = function(args,name,showHelp) return cheat:argsGetOptionalBoolean(args, name, false, showHelp, "Whether to not filter out perks you can't select yourself") end
 }
 
 cheat:createCommand("cheat_find_perks", "cheat:cheat_find_perks(%line)", cheat.cheat_find_perks_args,
@@ -65,8 +66,9 @@ cheat:createCommand("cheat_find_perks", "cheat:cheat_find_perks(%line)", cheat.c
 function cheat:cheat_find_perks(line)
   local args = cheat:argsProcess(line, cheat.cheat_find_perks_args)
   local token, tokenErr = cheat:argsGet(args, 'token', nil)
+  local any = cheat:argsGet(args,'any')
   if not tokenErr then
-    cheat:find_perk(token)
+    cheat:find_perk(token,nil,any)
     return true
   end
   return false
@@ -76,7 +78,8 @@ end
 -- cheat_add_perk
 -- ============================================================================
 cheat.cheat_add_perk_args = {
-  id = function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "The perk ID or all or part of a the perk's name. Uses last match from cheat_find_perks.") end
+  id = function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "The perk ID or all or part of a the perk's name. Uses last match from cheat_find_perks.") end,
+  any = function(args,name,showHelp) return cheat:argsGetOptionalBoolean(args, name, false, showHelp, "Whether to not filter out perks you can't select yourself") end
 }
 
 cheat:createCommand("cheat_add_perk", "cheat:cheat_add_perk(%line)", cheat.cheat_add_perk_args,
@@ -87,8 +90,9 @@ cheat:createCommand("cheat_add_perk", "cheat:cheat_add_perk(%line)", cheat.cheat
 function cheat:cheat_add_perk(line)
   local args = cheat:argsProcess(line, cheat.cheat_add_perk_args)
   local id, idErr = cheat:argsGet(args, 'id')
+  local any = cheat:argsGet(args,'any')
   if not idErr then
-    local perk_id, perk_name = cheat:find_perk(id)
+    local perk_id, perk_name = cheat:find_perk(id,nil,any)
     if not cheat:isBlank(perk_id) then
       player.soul:AddPerk(perk_id)
       cheat:logInfo("Added perk [%s] to player.", tostring(perk_name))
@@ -104,7 +108,8 @@ end
 -- cheat_add_all_perks
 -- ============================================================================
 cheat.cheat_add_all_perks_args = {
-  exclude = function(args,name,showHelp) return cheat:argsGetRequiredBoolean(args, name, showHelp, "If true then negative, test, and obsolete of perks are excluded.") end
+  exclude = function(args,name,showHelp) return cheat:argsGetOptionalBoolean(args, name, false, showHelp, "If true then negative, test, and obsolete of perks are excluded.") end,
+  any = function(args,name,showHelp) return cheat:argsGetOptionalBoolean(args, name, false, showHelp, "Whether to not filter out perks you can't select yourself") end
 }
 
 cheat:createCommand("cheat_add_all_perks", "cheat:cheat_add_all_perks(%line)", cheat.cheat_add_all_perks_args,
@@ -114,6 +119,7 @@ cheat:createCommand("cheat_add_all_perks", "cheat:cheat_add_all_perks(%line)", c
 function cheat:cheat_add_all_perks(line)
   local args = cheat:argsProcess(line, cheat.cheat_add_all_perks_args)
   local exclude, excludeErr = cheat:argsGet(args, 'exclude')
+  local any = cheat:argsGet(args,'any')
   
   local excludes = {}
   excludes["80825cd9-7d7b-440f-aa57-75807e83aed9"] = true -- Always drunk
@@ -144,7 +150,7 @@ function cheat:cheat_add_all_perks(line)
   excludes["fbedb426-410c-4614-952a-1086b6f6554f"] = true -- Brittle Bones
   excludes["4d51ba41-2c10-4281-9308-fcfed1fe0276"] = true -- Woman in a Man's World
   
-  local perks = cheat:find_perk(nil, true)
+  local perks = cheat:find_perk(nil, true, any)
   for i,perk in pairs(perks) do
     if not exclude or not excludes[perk.perk_id] then
       player.soul:AddPerk(perk.perk_id)
@@ -161,7 +167,8 @@ end
 -- cheat_remove_perk
 -- ============================================================================
 cheat.cheat_remove_perk_args = {
-  id = function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "The perk ID or all or part of a the perk's name. Uses last match from cheat_find_perks.") end
+  id = function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "The perk ID or all or part of a the perk's name. Uses last match from cheat_find_perks.") end,
+  any = function(args,name,showHelp) return cheat:argsGetOptionalBoolean(args, name, false, showHelp, "Whether to not filter out perks you can't select yourself") end
 }
 
 cheat:createCommand("cheat_remove_perk", "cheat:cheat_remove_perk(%line)", cheat.cheat_remove_perk_args,
@@ -172,8 +179,9 @@ cheat:createCommand("cheat_remove_perk", "cheat:cheat_remove_perk(%line)", cheat
 function cheat:cheat_remove_perk(line)
   local args = cheat:argsProcess(line, cheat.cheat_remove_perk_args)
   local id, idErr = cheat:argsGet(args, 'id')
+  local any = cheat:argsGet(args,'any')
   if not idErr then
-    local perk_id, perk_name = cheat:find_perk(id)
+    local perk_id, perk_name = cheat:find_perk(id,nil,any)
     if not cheat:isBlank(perk_id) then
       player.soul:RemovePerk(perk_id)
       cheat:logInfo("Removed perk [%s] from player.", tostring(perk_name))
@@ -192,7 +200,9 @@ cheat:createCommand("cheat_remove_all_perks", "cheat:cheat_remove_all_perks()", 
   "Removes all perks from the player.",
   "Remove all perks", "cheat_remove_all_perks")
 function cheat:cheat_remove_all_perks(line)
-  local perks = cheat:find_perk(nil, true)
+  local args = cheat:argsProcess(line, cheat.cheat_remove_perk_args)
+  local any = cheat:argsGet(args,'any')
+  local perks = cheat:find_perk(nil, true, any)
   for i,perk in pairs(perks) do
     player.soul:RemovePerk(perk.perk_id)
     cheat:logInfo("Removed perk [%s] from player.", tostring(perk.perk_name))
