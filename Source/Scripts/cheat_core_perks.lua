@@ -150,6 +150,23 @@ function cheat:cheat_add_all_perks(line)
   excludes["fbedb426-410c-4614-952a-1086b6f6554f"] = true -- Brittle Bones
   excludes["4d51ba41-2c10-4281-9308-fcfed1fe0276"] = true -- Woman in a Man's World
   
+  -- WileCoyote68
+  -- some more Hardcore related Perks
+  excludes["1e53b07d-8012-44b1-ace6-3504558f04aa"] = true -- Hardcore Mode
+  excludes["1e7c2255-b068-47a0-9447-4e0fe5205e8c"] = true -- Hardcore Mode Buff
+  excludes["01c3b32a-5751-4c98-b6ab-258d02370382"] = true -- Hardcore Mode Constants
+  excludes["305dd4f2-6923-42cb-a14d-2af07dff2863"] = true -- Revenant
+  excludes["9a5842cb-6dc1-4602-a585-aa99bfc9eb16"] = true -- Insomniac
+  excludes["d6916a36-f36e-4f7a-947b-d54ba84726f7"] = true -- Ascetic
+  excludes["0f635b58-63e4-4db4-aa1a-5496d62e1a66"] = true -- Ascetic digestion
+  excludes["871a05d0-8d1b-4abf-97ce-d8c496a220b5"] = true -- Ascetic overeat
+  excludes["f1f439cd-7636-4060-8a8b-233153f7f685"] = true -- Thickblooded
+  excludes["034494c7-db3d-47e0-a36f-ddd2aa9dee87"] = true -- Tutorial Injury
+  excludes["16c67f0a-7770-416b-8bee-f9cbd8dd417a"] = true -- Tutorial Combat basic
+  excludes["78d66139-9958-41cc-8148-8153f1a38efd"] = true -- Tutorial Horse
+  excludes["9738139e-0957-4148-8585-8b71ef78ef30"] = true -- Tutorial Hardcore Mode
+  excludes["f29a5eba-5c98-4779-9362-03dc5bfef316"] = true -- Tutorial Combat advanced
+  
   local perks = cheat:find_perk(nil, true, any)
   for i,perk in pairs(perks) do
     if not exclude or not excludes[perk.perk_id] then
@@ -208,6 +225,18 @@ function cheat:cheat_remove_all_perks(line)
     cheat:logInfo("Removed perk [%s] from player.", tostring(perk.perk_name))
   end
   cheat:logInfo("All perks removed.")
+  return true
+end
+
+-- ============================================================================
+-- cheat_reset_perks
+-- ============================================================================
+cheat:createCommand("cheat_reset_perks", "cheat:cheat_reset_perks()", nil,
+  "Resets all visible Perks.",
+  "Reset all Perks", "cheat_reset_perks")
+function cheat:cheat_reset_perks()
+  cheat:cheat_add_buff("id:c8b0d038-a503-44cc-85a5-7f753a09eb6e")
+  cheat:logInfo("All perks have been reset.")
   return true
 end
 
