@@ -28,19 +28,19 @@ function cheat:loc()
 end
 
 -- ============================================================================
--- cheat_tp
+-- cheat_teleport
 -- ============================================================================
-cheat.cheat_tp_args = {
+cheat.cheat_teleport_args = {
   x = function(args,name,showHelp) return cheat:argsGetRequiredNumber(args, name, showHelp, "X coordinate") end,
   y = function(args,name,showHelp) return cheat:argsGetRequiredNumber(args, name, showHelp, "Y coordinate") end,
   z = function(args,name,showHelp) return cheat:argsGetRequiredNumber(args, name, showHelp, "Z coordinate") end
 }
 
-cheat:createCommand("cheat_tp", "cheat:tp(%line)", cheat.cheat_tp_args,
+cheat:createCommand("cheat_teleport", "cheat:teleport(%line)", cheat.cheat_teleport_args,
   "Teleports the player to the given coordinates.\n$8You can end up in the air or under the map.\n$8I suggest saving your game and turn on immortality first.",
-  "Example", "cheat_tp x:3000 y:1500 z:300")
-function cheat:tp(line)
-  local args = cheat:argsProcess(line, cheat.cheat_tp_args)
+  "Example", "cheat_teleport x:3000 y:1500 z:300")
+function cheat:teleport(line)
+  local args = cheat:argsProcess(line, cheat.cheat_teleport_args)
   local nx, nxErr = cheat:argsGet(args, 'x')
   local ny, nyErr = cheat:argsGet(args, 'y')
   local nz, nzErr = cheat:argsGet(args, 'z')
@@ -51,13 +51,12 @@ function cheat:tp(line)
 end
 
 -- ============================================================================
--- cheat_tp_to
+-- cheat_teleport_to
 -- ============================================================================
-System.AddCCommand('cheat_tp_to', 'cheat:tp_to(%line)', "Teleports the player to the given place. Supported places (case insensitive):\n$8Budin, (Inn at the) Glade, (Rattay Mill) Home,\n$8(Wagoner's) Inn, Katzek, Kohelnitz,\n$8Ledetchko, Merhojed, Monastery,\n$8Neuhof, Pribyslavitz, Rattay,\n$8Rovna, Samopesh, Sasau,\n$8Skalitz, Talmberg, Uzhitz,\n$8Vranik, Wagoners (Inn), (Broken) Wheel")
+System.AddCCommand('cheat_teleport_to', 'cheat:teleport_to(%line)', "Teleports the player to the given place. Supported places (case insensitive):\n$8Budin, (Inn at the) Glade, (Rattay Mill) Home,\n$8Wagoners (Inn), Katzek, Kohelnitz,\n$8Ledetchko, Merhojed, Monastery,\n$8Neuhof, Pribyslavitz, Rattay,\n$8Rovna, Samopesh, Sasau,\n$8Skalitz, Talmberg, Uzhitz,\n$8Vranik, Wagoners (Inn), (Broken) Wheel")
 
-function cheat:tp_to(line)
+function cheat:teleport_to(line)
   local args = string.gsub(tostring(line), "place:", "")
-  --local argsArr = cheat:split(args, " ") -- ok
   local checkteste = "error"
   
   local places = {}
@@ -93,7 +92,7 @@ function cheat:tp_to(line)
     if checkteste ~= "error" then
       cheat:teleport(checkteste)
     else
-      cheat:logError("Invalid Place - See list of supported places type: 'cheat_tp_to ?'")
+      cheat:logError("Invalid place - For a list of supported places type: 'cheat_teleport_to ?'")
     end
   end
 end
@@ -153,7 +152,6 @@ function cheat:tp_tr(line)
   end
 end
 
-
 -- ============================================================================
 -- cheat_tp_to_npc
 -- ============================================================================
@@ -161,11 +159,10 @@ cheat.cheat_tp_to_npc_args = {
   id = function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "All or part of the NPC's name.") end,
   num = function(args,name,showHelp) return cheat:argsGetOptionalNumber(args, name, 0, showHelp, "Optional: The NPC's number in the list if there's more than one.\n$8Keep it greater than 0.") end
 }
-
-cheat:createCommand("cheat_tp_to_npc", "cheat:cheat_tp_to_npc(%line)", cheat.cheat_tp_to_npc_args,
+cheat:createCommand("cheat_tp_to_npc", "cheat:tp_to_npc(%line)", cheat.cheat_tp_to_npc_args,
   "Finds an NPC or list of NPCs and teleports to any of them.\n$8This only works if the NPC has been loaded into the world.\n$8Defaults to last NPC in the list if no num argument received.",
   "Teleport to Father Godwin", "cheat_tp_to_npc id:godwin")
-function cheat:cheat_tp_to_npc(line)
+function cheat:tp_to_npc(line)
   local args = cheat:argsProcess(line, cheat.cheat_tp_to_npc_args)
   local id, idErr = cheat:argsGet(args, 'id', nil)
   local num, numErr = cheat:argsGet(args, 'num', 0)
@@ -196,8 +193,8 @@ end
 -- cheat_set_state
 -- ============================================================================
 cheat.cheat_set_state_args = {
-  state = function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "One of: health, exhaust, hunger, or stamina.") end,
-  value = function(args,name,showHelp) return cheat:argsGetRequiredNumber(args, name, showHelp, "The number to assign to the given state.") end
+  state=function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "One of: health, exhaust, hunger, or stamina.") end,
+  value=function(args,name,showHelp) return cheat:argsGetRequiredNumber(args, name, showHelp, "The number to assign to the given state.") end
 }
 
 cheat:createCommand("cheat_set_state", "cheat:cheat_set_state(%line)", cheat.cheat_set_state_args,
@@ -251,7 +248,6 @@ cheat:createCommand("cheat_set_stat_level", "cheat:cheat_set_stat_level(%line)",
   "Sets one of the player's stats to the given level.",
   "Set player's strength to level 20", "cheat_set_stat_level stat:str level:20",
   "Set player's agility to level 5", "cheat_set_stat_level stat:agi level:5")
-
 function cheat:cheat_set_stat_level(line)
   local args = cheat:argsProcess(line, cheat.cheat_set_stat_level_args)
   local stat, statErr = cheat:argsGet(args, 'stat')
@@ -349,19 +345,19 @@ end
 cheat:createCommand("cheat_wash_dirt_and_blood", "cheat:cheat_wash_dirt_and_blood()", nil,
   "Washes all blood and dirt from the player and player's horse.\n$8Do horses need this?\n$8Can items be washed?\n$8Let me know.",
   "Wash yourself and your horse", "cheat_wash_dirt_and_blood")
-function cheat:cheat_wash_dirt_and_blood()
-  local entity = XGenAIModule.GetEntityByWUID(player.player:GetPlayerHorse());
-  
-  player.actor:WashDirtAndBlood(1)
-  player.actor:WashItems(1)
-  
-  if entity then
-    entity.actor:WashDirtAndBlood(1)
-    entity.actor:WashItems(1)
+  function cheat:cheat_wash_dirt_and_blood()
+    local entity = XGenAIModule.GetEntityByWUID(player.player:GetPlayerHorse());
+    
+    player.actor:WashDirtAndBlood(1)
+    player.actor:WashItems(1)
+    
+    if entity then
+      entity.actor:WashDirtAndBlood(1)
+      entity.actor:WashItems(1)
+    end
+    
+    cheat:logInfo("All Clean!")
   end
-  
-  cheat:logInfo("All Clean!")
-end
 
 -- ============================================================================
 -- cheat_charm
@@ -376,7 +372,6 @@ function cheat:cheat_charm()
   cheat:logInfo("All Clean and dandy!")
 end
 
--- ============================================================================
 -- cheat_unlock_recipes
 -- ============================================================================
 cheat:createCommand("cheat_unlock_recipes", "cheat:cheat_unlock_recipes()", nil,
