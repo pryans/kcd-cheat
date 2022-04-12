@@ -101,23 +101,28 @@ end
 -- ============================================================================
 -- cheat_add_potion_buff
 -- ============================================================================
-System.AddCCommand('cheat_add_potion_buff', 'cheat:add_potion_buff(%line)', "Usage: cheat_add_potion_buff id:number\n$8Adds a potion buff to the player. Supported buffs:\n$8 1. Aqua Vitalis\n$8 2. Embrocation\n$8 3. Bowman's Brew\n$8 4. Padfoot\n$8 5. Nighthawk\n$8 6. Bard\n$8 7. Aesop\n$8 8. Chamomile Brew\n$8 9. Marigold Deoction\n$8 10. Lazarus")
+System.AddCCommand('cheat_add_potion_buff', 'cheat:add_potion_buff(%line)', "Usage: cheat_add_potion_buff id:number\n$8Adds a potion buff to the player. Supported buffs:\n$8 01. Aqua Vitalis\n$8 02. Embrocation\n$8 03. Bowman's Brew\n$8 04. Padfoot\n$8 05. Nighthawk\n$8 06. Bard\n$8 07. Aesop\n$8 08. Chamomile Brew\n$8 09. Marigold Deoction\n$8 10. Lazarus\n$8 11. Amor\n$8 12. Artemesia\n$8 13. Bivoj's Rage\n$8 14. Buck's Blood\n$8 15. Hair o' the Dog")
 
 function cheat:add_potion_buff(line)
   local args = string.gsub(tostring(line), "id:", "")
   local checkteste = "error"
   
   local ids = {}
-  ids["1"] = "id:27c2fd6a-9b87-4d1f-b434-44f5ec3fa426"
-  ids["2"] = "id:ceb70cbf-9c4e-491a-8d75-7e8ab874db54"
-  ids["3"] = "id:736fcb09-5554-4e6b-b3e0-f9bc6cc4fd0a"
-  ids["4"] = "id:eacbd986-ad07-4698-bf81-59df608b56a1"
-  ids["5"] = "id:fa2ad41e-5701-4fe7-8630-5cee49eb304f"
-  ids["6"] = "id:1f398bd2-05ea-4a56-b883-9ac3ba3ad01a"
-  ids["7"] = "id:f23dda25-6450-49c8-86f3-fc7bc1236199"
-  ids["8"] = "id:679a7453-c1b4-4164-b7e5-8410d682e6da"
-  ids["9"] = "id:8503216a-a34c-49f0-aefa-54d4502046f9"
+  ids["01"] = "id:27c2fd6a-9b87-4d1f-b434-44f5ec3fa426"
+  ids["02"] = "id:ceb70cbf-9c4e-491a-8d75-7e8ab874db54"
+  ids["03"] = "id:736fcb09-5554-4e6b-b3e0-f9bc6cc4fd0a"
+  ids["04"] = "id:eacbd986-ad07-4698-bf81-59df608b56a1"
+  ids["05"] = "id:fa2ad41e-5701-4fe7-8630-5cee49eb304f"
+  ids["06"] = "id:1f398bd2-05ea-4a56-b883-9ac3ba3ad01a"
+  ids["07"] = "id:f23dda25-6450-49c8-86f3-fc7bc1236199"
+  ids["08"] = "id:679a7453-c1b4-4164-b7e5-8410d682e6da"
+  ids["09"] = "id:8503216a-a34c-49f0-aefa-54d4502046f9"
   ids["10"] = "id:7690a860-a843-4609-8a67-9868b87b32b5"
+  ids["11"] = "id:2edf8a8e-7eba-49e9-aa29-d3149d78c7fd"
+  ids["12"] = "id:cdeed798-e09e-45c5-8523-8df75e8791a6"
+  ids["13"] = "id:d0c97def-b9b3-48e7-beab-f46d6bf44d81"
+  ids["14"] = "id:122c0e62-747e-4bb3-9650-1a14d0420b08"
+  ids["15"] = "id:3f915710-1ccf-41a0-bc7f-67c8cc1a8e7b"
   
   if ids[args] ~= nil then
     cheat:cheat_add_buff(ids[args])
