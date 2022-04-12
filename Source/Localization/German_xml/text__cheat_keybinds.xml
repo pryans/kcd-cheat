@@ -1,0 +1,12 @@
+<Table>
+<Row><Cell>ui_text_cheat_hover</Cell><Cell>Fly</Cell><Cell>Fliegen</Cell></Row>
+<Row><Cell>ui_text_cheat_push</Cell><Cell>Push forward</Cell><Cell>Schnell vorwärts</Cell></Row>
+<Row><Cell>ui_text_cheat_sprint</Cell><Cell>Sprint</Cell><Cell>Spurt</Cell></Row>
+<Row><Cell>ui_text_cheat_target_entity</Cell><Cell>Target Entity</Cell><Cell>Ziel anvisieren</Cell></Row>
+<Row><Cell>ui_text_cheat_quicksave</Cell><Cell>Quicksave</Cell><Cell>Schnellspeichern</Cell></Row>
+<Row><Cell>ui_text_cheat_bow_reticle</Cell><Cell>Hide/Show Bow Reticle</Cell><Cell>Fadenkreuz aus-/einblenden</Cell></Row>
+<Row><Cell>ui_text_cheat_hud</Cell><Cell>Hide/Show HUD</Cell><Cell>HUD aus-/einblenden</Cell></Row>
+<Row><Cell>ui_text_cheat_compass</Cell><Cell>Hide/Show compass</Cell><Cell>Kompass aus-/einblenden</Cell></Row>
+<Row><Cell>ui_text_cheat_statusbar</Cell><Cell>Hide/Show statusbar</Cell><Cell>Statusanzeige aus-/einblenden</Cell></Row>
+<Row><Cell>ui_text_cheat_third_person</Cell><Cell>Third Person view</Cell><Cell>Third-Person Ansicht</Cell></Row>
+</Table>

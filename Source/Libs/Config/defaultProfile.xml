@@ -5,24 +5,16 @@
     <XboxOne keyboard="1" xboxpad="1" ps4pad="0"/>
     <PS4 keyboard="1" xboxpad="0" ps4pad="1"/>
   </platforms>
-  
-  <actionmap name="cheat" version="22">
-    <action consoleCmd="1" keyboard="f1" name="cheat_phys_hover" onPress="1" />
-    <action consoleCmd="1" keyboard="f2" name="cheat_phys_push" onPress="1" />
-    <action consoleCmd="1" keyboard="f3" name="cheat_phys_sprint" onPress="1" />
-    <action consoleCmd="1" keyboard="f4" name="cheat_target_entity" onPress="1" />
-    <action consoleCmd="1" keyboard="f5" name="cheat_save" onPress="1" />
-  </actionmap>
-  
+
   <actionmap name="loading" version="22">
     <action name="ui_skipIntro" onPress="1" onRelease="1" keyboard="_keybinds_ref_" xboxpad="xi_b" ps4pad="pad_circle"/>
     <action name="ui_confirmAfterLoad" onPress="1" onRelease="1" keyboard="_keybinds_ref_" xboxpad="xi_a" ps4pad="pad_cross"/>
   </actionmap>
-  
+
   <actionmap name="game_over" version="22">
     <action name="accept_game_over" onPress="1" onRelease="1" keyboard="_keybinds_ref_" xboxpad="xi_a" ps4pad="pad_cross"/>
   </actionmap>
-  
+
   <actionmap name="debug" version="22">
     <!-- debug keys - move to debug when we can switch devmode-->
     <action name="flymode" onPress="1" noModifiers="1" keyboard="f3" />
@@ -49,7 +41,7 @@
     <action name="xi_moveup" xboxpad="xi_triggerr" ps4pad="pad_rtrigger"/>
     <action name="xi_movedown" xboxpad="xi_triggerl" ps4pad="pad_ltrigger"/>
   </actionmap>
-  
+
   <actionmap name="cheat_engine" version="22">
     <!-- cheat keys - move to debug when we can switch devmode-->
     <action name="cheat_bow" onPress="1" onRelease="1" keyboard="o" />
@@ -64,7 +56,7 @@
     <action name="cheat_animal" onPress="1" onRelease="1" keyboard="np_9" />
     <!-- debug keys - end -->
   </actionmap>
-  
+
   <actionmap name="cheat_engine_stat" version="22">
     <!-- cheat keys - move to debug when we can switch devmode-->
     <action name="cheat_stat_close" onPress="1" onRelease="0" keyboard="f8" />
@@ -74,7 +66,7 @@
     <action name="cheat_stat_vit" onPress="1" onRelease="1" keyboard="np_4" />
     <!-- debug keys - end -->
   </actionmap>
-  
+
   <actionmap name="cheat_engine_animal" version="22">
     <!-- cheat keys - move to debug when we can switch devmode-->
     <action name="cheat_animal_close" onPress="1" onRelease="0" keyboard="f8" />
@@ -103,7 +95,7 @@
     <action name="cheat_animal_print" onPress="1" onRelease="1" keyboard="f5" />
     <!-- debug keys - end -->
   </actionmap>
-  
+
   <actionmap name="cheat_engine_skill" version="22">
     <!-- cheat keys - move to debug when we can switch devmode-->
     <action name="cheat_skill_close" onPress="1" onRelease="0" keyboard="f8" />
@@ -116,7 +108,7 @@
     <action name="cheat_skill_horse" onPress="1" onRelease="1" keyboard="np_7" />
     <!-- debug keys - end -->
   </actionmap>
-  
+
   <actionmap name="cheat_engine_gear" version="22">
     <!-- cheat keys - move to debug when we can switch devmode-->
     <action name="cheat_gear_close" onPress="1" onRelease="0" keyboard="f8" />
@@ -130,7 +122,7 @@
     <action name="cheat_gear_armor_heavy" onPress="1" onRelease="1" keyboard="np_9" />
     <!-- debug keys - end -->
   </actionmap>
-  
+
   <actionmap name="cheat_engine_jump" version="22">
     <!-- cheat keys - move to debug when we can switch devmode-->
     <action name="cheat_jump_close" onPress="0" onRelease="1" keyboard="f8" />
@@ -143,7 +135,7 @@
     <action name="cheat_jump_afterBattleFarmOK" onPress="1" onRelease="1" keyboard="7" />
     <!-- debug keys - end -->
   </actionmap>
-  
+
   <actionmap name="PR_cheat_teleport" version="22">
     <action name="teleport1" onPress="1" noModifiers="1" keyboard="np_1" />
     <action name="teleport2" onPress="1" noModifiers="1" keyboard="np_2" />
@@ -154,7 +146,7 @@
     <action name="teleport_switch" onPress="1" noModifiers="1" keyboard="np_8" />
     <action name="teleport_time" onPress="1" noModifiers="1" keyboard="np_9" />
   </actionmap>
-  
+
   <actionmap name="PR_cheat_teleport_more" version="22">
     <action name="teleport_f1" onPress="1" noModifiers="1" keyboard="np_1" />
     <action name="teleport_f2" onPress="1" noModifiers="1" keyboard="np_2" />
@@ -162,7 +154,7 @@
     <action name="teleport_f4" onPress="1" noModifiers="1" keyboard="np_4" />
     <action name="teleport_f5" onPress="1" noModifiers="1" keyboard="np_5" />
   </actionmap>
-  
+
   <actionmap name="haste" version="22">
     <action name="haste_key0" onPress="1" noModifiers="1" onRelease="1" keyboard="np_0" />
     <action name="haste_key1" onPress="1" noModifiers="1" onRelease="1" keyboard="np_1" />
@@ -184,20 +176,20 @@
     <action name="haste_keyf" onPress="1" noModifiers="1" onRelease="1" keyboard="f" />
     <action name="haste_delete" onPress="1" noModifiers="1" onRelease="1" keyboard="delete" />
   </actionmap>
-  
+
   <actionmap name="custom_quest_call_horse" version="22">
     <action name="custom_quest_call_horse_action" onPress="1" keyboard="_keybinds_ref_" xboxpad="xi_y" ps4pad="pad_triangle"/>
   </actionmap>
-  
+
   <actionmap name="haste_start" version="22">
     <action name="haste_toggle" onPress="0" onRelease="1" keyboard="h"/>
     <action name="hasteC_controller_toggle" onPress="1" onRelease="1" onHold="0" xboxpad="xi_triggerl_btn" ps4pad="pad_l2" />
   </actionmap>
-  
+
   <actionmap name="haste_control_start" version="22">
     <action name="hasteC_toggle" onPress="0" noModifiers="1" onRelease="1" xboxpad="xi_y" ps4pad="pad_triangle" />
   </actionmap>
-  
+
   <actionmap name="haste_controller" version="22">
     <action name="haste_xb_up" onPress="1" noModifiers="1" onRelease="1" xboxpad="xi_dpad_up" ps4pad="pad_up" />
     <action name="haste_xb_down" onPress="1" noModifiers="1" onRelease="1" xboxpad="xi_dpad_down" ps4pad="pad_down" />
@@ -206,12 +198,35 @@
     <action name="haste_xb_back" onPress="1" noModifiers="1" onRelease="1" xboxpad="xi_b" ps4pad="pad_circle" />
     <action name="haste_xb_confirm" onPress="1" noModifiers="1" onRelease="1" xboxpad="xi_a" ps4pad="pad_cross" />
   </actionmap>
-  
+
   <actionmap name="default" version="22">
+    <!-- CHEAT MOD BEGIN -->
+    <!-- Phys Hover on/off-->
+    <action consoleCMD="1" name="cheat_phys_hover" onPress="1" keyboard="_keybinds_ref_"/>
+    <!-- Phys Push -->
+    <action consoleCMD="1" name="cheat_phys_push" onPress="1" keyboard="_keybinds_ref_"/>
+    <!-- Phys Sprint -->
+    <action consoleCMD="1" name="cheat_phys_sprint" onPress="1" keyboard="_keybinds_ref_"/>
+    <!-- Target Entity -->
+    <action consoleCMD="1" name="cheat_target_entity" onPress="1" keyboard="_keybinds_ref_"/>
+    <!-- Quicksave -->
+    <action consoleCMD="1" name="cheat_save" onPress="1" keyboard="_keybinds_ref_"/>
+    <!-- Hide/Show Bow Rectile -->
+    <action consoleCMD="1" name="cheat_set_bow_reticle" onPress="1" keyboard="_keybinds_ref_"/>
+    <!-- Hide/Show Compass -->
+    <action consoleCMD="1" name="cheat_set_compass" onPress="1" keyboard="_keybinds_ref_"/>
+    <!-- Hide/Show HUD -->
+    <action consoleCMD="1" name="cheat_set_hud" onPress="1" keyboard="_keybinds_ref_"/>
+    <!-- Hide/Show statusbar -->
+    <action consoleCMD="1" name="cheat_set_statusbar" onPress="1" keyboard="_keybinds_ref_"/>
+    <!-- Third Person View -->
+    <action consoleCMD="1" name="cheat_set_third_person" onPress="1" keyboard="_keybinds_ref_"/>
+    <!-- CHEAT MOD END -->
+
     <!-- default keys -->
     <action name="screenshot" onPress="1" keyboard="_keybinds_ref_" />
     <action name="tobii_enable" onPress="1" keyboard="_keybinds_ref_" />
-    
+
     <!-- PR special -->
     <action name="telep" onRelease="1" noModifiers="1" keyboard="np_7" />
     <action name="telock1" onRelease="1" noModifiers="1" keyboard="np_1" />
@@ -221,7 +236,7 @@
     <action name="telock5" onRelease="1" noModifiers="1" keyboard="np_5" />
     <action name="telock6" onRelease="1" noModifiers="1" keyboard="np_6" />
     <action name="E3_move" onRelease="1" noModifiers="1" keyboard="np_8" />
-    
+
     <!-- UI keys -->
     <!-- Toggles -->
     <action name="ui_toggle_pause" onPress="1" xboxpad="xi_start" ps4pad="pad_start"/>
@@ -240,7 +255,7 @@
     <action name="ui_open_skiptime" onPress="1" keyboard="_keybinds_ref_" xboxpad="xi_back" ps4pad="pad_touch" noModifiers="1" />
     <action name="ui_open_skiptime_inventoryoff" onPress="1" keyboard="_keybinds_ref_" noModifiers="1" />
     <action name="ui_cycle_tabs" onRelease="1" keyboard="_keybinds_ref_" noModifiers="1" />
-    
+
     <!-- General -->
     <!-- For eventual scrolling of infobox right stick digital -->
     <action name="ui_scroll_up" onPress="1" onHold="1" holdTriggerDelay="0.5" holdRepeatDelay="0.15" keyboard="_keybinds_ref_">
@@ -251,7 +266,7 @@
         <inputdata input="pad_stickry" useAnalogCompare="1" analogCompareVal="0.5" analogCompareOp="GREATERTHAN" />
       </ps4pad>
     </action>
-    
+
     <action name="ui_scroll_down" onPress="1" onHold="1" holdTriggerDelay="0.5" holdRepeatDelay="0.15" keyboard="_keybinds_ref_">
       <xboxpad>
         <inputdata input="xi_thumbr_down" />
@@ -260,7 +275,7 @@
         <inputdata input="pad_stickry" useAnalogCompare="1" analogCompareVal="-0.5" analogCompareOp="LESSTHAN" />
       </ps4pad>
     </action>
-    
+
     <action name="ui_dp_up" onPress="1" onHold="1" onRelease="1" holdTriggerDelay="0.5" holdRepeatDelay="0.15">
       <xboxpad>
         <inputdata input="xi_dpad_up" />
@@ -269,7 +284,7 @@
         <inputdata input="pad_up" />
       </ps4pad>
     </action>
-    
+
     <action name="ui_dp_down" onPress="1" onHold="1" onRelease="1" holdTriggerDelay="0.5" holdRepeatDelay="0.15">
       <xboxpad>
         <inputdata input="xi_dpad_down" />
@@ -278,7 +293,7 @@
         <inputdata input="pad_down" />
       </ps4pad>
     </action>
-    
+
     <action name="ui_dp_left" onPress="1" onHold="1" onRelease="1" holdTriggerDelay="0.5" holdRepeatDelay="0.15">
       <xboxpad>
         <inputdata input="xi_dpad_left" />
@@ -287,7 +302,7 @@
         <inputdata input="pad_left"/>
       </ps4pad>
     </action>
-    
+
     <action name="ui_dp_right" onPress="1" onHold="1" onRelease="1" holdTriggerDelay="0.5" holdRepeatDelay="0.15">
       <xboxpad>
         <inputdata input="xi_dpad_right" />
@@ -296,7 +311,8 @@
         <inputdata input="pad_right"/>
       </ps4pad>
     </action>
-    
+
+
     <action name="ui_lstick_up" onPress="1" onHold="1" onRelease="1" holdTriggerDelay="0.5" holdRepeatDelay="0.15">
       <xboxpad>
         <inputdata input="xi_thumbly" useAnalogCompare="1" analogCompareVal="0.5" analogCompareOp="GREATERTHAN" />
@@ -305,7 +321,7 @@
         <inputdata input="pad_stickly" useAnalogCompare="1" analogCompareVal="0.5" analogCompareOp="GREATERTHAN" />
       </ps4pad>
     </action>
-    
+
     <action name="ui_lstick_down" onPress="1" onHold="1" onRelease="1" holdTriggerDelay="0.5" holdRepeatDelay="0.15">
       <xboxpad>
         <inputdata input="xi_thumbly" useAnalogCompare="1" analogCompareVal="-0.5" analogCompareOp="LESSTHAN" />
@@ -314,7 +330,7 @@
         <inputdata input="pad_stickly" useAnalogCompare="1" analogCompareVal="-0.5" analogCompareOp="LESSTHAN" />
       </ps4pad>
     </action>
-    
+
     <action name="ui_lstick_right" onPress="1" onHold="1" onRelease="1" holdTriggerDelay="0.5" holdRepeatDelay="0.15">
       <xboxpad>
         <inputdata input="xi_thumblx" useAnalogCompare="1" analogCompareVal="0.5" analogCompareOp="GREATERTHAN" />
@@ -323,7 +339,7 @@
         <inputdata input="pad_sticklx" useAnalogCompare="1" analogCompareVal="0.5" analogCompareOp="GREATERTHAN" />
       </ps4pad>
     </action>
-    
+
     <action name="ui_lstick_left" onPress="1" onHold="1" onRelease="1" holdTriggerDelay="0.5" holdRepeatDelay="0.15">
       <xboxpad>
         <inputdata input="xi_thumblx" useAnalogCompare="1" analogCompareVal="-0.5" analogCompareOp="LESSTHAN" />
@@ -332,7 +348,8 @@
         <inputdata input="pad_sticklx" useAnalogCompare="1" analogCompareVal="-0.5" analogCompareOp="LESSTHAN" />
       </ps4pad>
     </action>
-    
+
+
     <action name="ui_rstick_up" onPress="1" onHold="1" onRelease="1" holdTriggerDelay="0.5" holdRepeatDelay="0.15">
       <xboxpad>
         <inputdata input="xi_thumbry" useAnalogCompare="1" analogCompareVal="0.5" analogCompareOp="GREATERTHAN" />
@@ -341,7 +358,7 @@
         <inputdata input="pad_stickry" useAnalogCompare="1" analogCompareVal="0.5" analogCompareOp="GREATERTHAN" />
       </ps4pad>
     </action>
-    
+
     <action name="ui_rstick_down" onPress="1" onHold="1" onRelease="1" holdTriggerDelay="0.5" holdRepeatDelay="0.15">
       <xboxpad>
         <inputdata input="xi_thumbry" useAnalogCompare="1" analogCompareVal="-0.5" analogCompareOp="LESSTHAN" />
@@ -350,7 +367,7 @@
         <inputdata input="pad_stickry" useAnalogCompare="1" analogCompareVal="-0.5" analogCompareOp="LESSTHAN" />
       </ps4pad>
     </action>
-    
+
     <action name="ui_rstick_right" onPress="1" onHold="1" onRelease="1" holdTriggerDelay="0.5" holdRepeatDelay="0.15">
       <xboxpad>
         <inputdata input="xi_thumbrx" useAnalogCompare="1" analogCompareVal="0.5" analogCompareOp="GREATERTHAN" />
@@ -359,7 +376,7 @@
         <inputdata input="pad_stickrx" useAnalogCompare="1" analogCompareVal="0.5" analogCompareOp="GREATERTHAN" />
       </ps4pad>
     </action>
-    
+
     <action name="ui_rstick_left" onPress="1" onHold="1" onRelease="1" holdTriggerDelay="0.5" holdRepeatDelay="0.15">
       <xboxpad>
         <inputdata input="xi_thumbrx" useAnalogCompare="1" analogCompareVal="-0.5" analogCompareOp="LESSTHAN" />
@@ -368,24 +385,24 @@
         <inputdata input="pad_stickrx" useAnalogCompare="1" analogCompareVal="-0.5" analogCompareOp="LESSTHAN" />
       </ps4pad>
     </action>
-    
+
     <!-- sticks for map -->
     <action name="ui_controller_left_x" onPress="1" onRelease="1" xboxpad="xi_thumblx" ps4pad="pad_sticklx" />
     <action name="ui_controller_left_y" onPress="1" onRelease="1" xboxpad="xi_thumbly" ps4pad="pad_stickly" />
     <action name="ui_controller_right_x" onPress="1" onRelease="1" xboxpad="xi_thumbrx" ps4pad="pad_stickrx" />
     <action name="ui_controller_right_y" onPress="1" onRelease="1" xboxpad="xi_thumbry" ps4pad="pad_stickry" />
-    
+
     <!-- arrows -->
     <action name="ui_arrow_down" onPress="1" onHold="1" onRelease="1" holdTriggerDelay="0.5" holdRepeatDelay="0.15" keyboard="_keybinds_ref_" />
     <action name="ui_arrow_up" onPress="1" onHold="1" onRelease="1" holdTriggerDelay="0.5" holdRepeatDelay="0.15" keyboard="_keybinds_ref_" />
     <action name="ui_arrow_left" onPress="1" onHold="1" onRelease="1" holdTriggerDelay="0.5" holdRepeatDelay="0.15" keyboard="_keybinds_ref_" />
     <action name="ui_arrow_right" onPress="1" onHold="1" onRelease="1" holdTriggerDelay="0.5" holdRepeatDelay="0.15" keyboard="_keybinds_ref_" />
-    
+
     <action name="ui_up" onPress="1" onHold="1" onRelease="1" holdTriggerDelay="0.5" holdRepeatDelay="0.15" keyboard="_keybinds_ref_" />
     <action name="ui_down" onPress="1" onHold="1" onRelease="1" holdTriggerDelay="0.5" holdRepeatDelay="0.15" keyboard="_keybinds_ref_" />
     <action name="ui_left" onPress="1" onHold="1" onRelease="1" holdTriggerDelay="0.5" holdRepeatDelay="0.15" keyboard="_keybinds_ref_" />
     <action name="ui_right" onPress="1" onHold="1" onRelease="1" holdTriggerDelay="0.5" holdRepeatDelay="0.15" keyboard="_keybinds_ref_" />
-    
+
     <action name="ui_controller_shoulder_r1" onPress="1" onRelease="1" onHold="1" holdTriggerDelay="1" holdRepeatDelay="0.5">
       <xboxpad>
         <inputdata input="xi_triggerr_btn"/>
@@ -402,7 +419,7 @@
         <inputdata input="pad_l2"/>
       </ps4pad>
     </action>
-    
+
     <action name="ui_controller_shoulder_r2" onPress="1" onRelease="1" onHold="1" holdTriggerDelay="1" holdRepeatDelay="0.5">>
       <xboxpad>
         <inputdata input="xi_shoulderr"/>
@@ -419,38 +436,38 @@
         <inputdata input="pad_l1"/>
       </ps4pad>
     </action>
-    
+
     <action name="ui_mouse_wheel_down" onPress="1" onRelease="1" keyboard="_keybinds_ref_" />
     <action name="ui_mouse_wheel_up" onPress="1" onRelease="1" keyboard="_keybinds_ref_" />
-    
+
     <!-- fake action for inventory helpbar -->
     <action name="ui_zoom_down_help" keyboard="_keybinds_ref_" xboxpad="xi_shoulderl" ps4pad="pad_l1"/>
     <action name="ui_zoom_up_help" keyboard="_keybinds_ref_" xboxpad="xi_shoulderr" ps4pad="pad_r1"/>
-    
+
     <!-- Inventory for character add left and right arrow-->
     <action name="ui_inv_rotate" onHold="1" xboxpad="xi_thumbrx" ps4pad="pad_stickrx"/>
     <action name="ui_inv_rotate_left" onPress="1" onRelease="1" keyboard="_keybinds_ref_" />
     <action name="ui_inv_rotate_right" onPress="1" onRelease="1" keyboard="_keybinds_ref_" />
-    
+
     <!-- Map -->
     <action name="ui_map_center" onPress="1" xboxpad="xi_thumbr" ps4pad="pad_r3" keyboard="_keybinds_ref_" />
-    
+
     <action name="ui_accept" onPress="1" onRelease="1" onHold="1" holdTriggerDelay="0.5" holdRepeatDelay="0.5" keyboard="_keybinds_ref_" xboxpad="xi_a" ps4pad="pad_cross" />
-    
+
     <action name="ui_back" keyboard="_keybinds_ref_" onPress="1" onRelease="1" xboxpad="xi_b" ps4pad="pad_circle"/>
     <action name="ui_confirm" onPress="1" onRelease="1" onHold="1" holdTriggerDelay="1" holdRepeatDelay="-1" keyboard="_keybinds_ref_" xboxpad="xi_y" ps4pad="pad_triangle"/>
     <action name="ui_reset" onPress="1" onRelease="1" onHold="1" holdTriggerDelay="0.5" holdRepeatDelay="0.5" keyboard="_keybinds_ref_" xboxpad="xi_x" ps4pad="pad_square"/>
     <action name="ui_clear" keyboard="_keybinds_ref_" onPress="1"/>
-    
+
     <!-- video -->
     <action name="ui_skipCutscene" keyboard="_keybinds_ref_" onPress="1" xboxpad="xi_a" ps4pad="pad_cross"/>
     <action name="ui_abortCutscene" keyboard="_keybinds_ref_" onPress="1" onRelease="1" onHold="1" holdTriggerDelay="0.15" xboxpad="xi_b" ps4pad="pad_circle"/>
     <action name="ui_skipDialog" keyboard="_keybinds_ref_" onRelease="1" onPress="1" onHold="1" holdTriggerDelay="0.15" xboxpad="xi_b" ps4pad="pad_circle" />
-    
+
     <action name="ui_mouse_left" keyboard="_keybinds_ref_" onPress="1" onRelease="1" />
     <action name="ui_mouse_right" onPress="1" onRelease="1" onHold="1" holdTriggerDelay="0.15" />
   </actionmap>
-  
+
   <actionmap name="player" version="22">
     <!-- player keys -->
     <action name="moveleft" onPress="1" onRelease="1" retriggerable="1" keyboard="_keybinds_ref_" />
@@ -459,27 +476,27 @@
     <action name="moveback" onPress="1" onRelease="1" retriggerable="1" keyboard="_keybinds_ref_" />
     <action name="jump" onPress="1" onRelease="1" keyboard="_keybinds_ref_" xboxpad="xi_x" ps4pad="pad_square"/>
     <action name="sprint" onPress="1" onRelease="1" retriggerable="1" keyboard="_keybinds_ref_" xboxpad="xi_b" ps4pad="pad_circle" />
-    
+
     <action name="rotateleft" onPress="1" onRelease="1" onHold="1" keyboard="_keybinds_ref_" />
     <action name="rotateright" onPress="1" onRelease="1" onHold="1" keyboard="_keybinds_ref_" />
-    
+
     <action name="rotateyaw" keyboard="maxis_x" />
     <action name="rotatepitch" keyboard="maxis_y" />
-    
+
     <action name="use" onPress="1" onRelease="1" onHold="1" holdTriggerDelay="0.3" holdRepeatDelay="-1" keyboard="_keybinds_ref_" xboxpad="xi_a" ps4pad="pad_cross" />
     <action name="use_bed" onPress="1" onRelease="1" onHold="1" holdTriggerDelay="0.3" holdRepeatDelay="-1" keyboard="_keybinds_ref_" xboxpad="xi_a" ps4pad="pad_cross" />
     <action name="use_stop" onPress="1" onRelease="1" keyboard="_keybinds_ref_" xboxpad="xi_b" ps4pad="pad_circle" />
     <action name="use_other" onPress="1" onRelease="1" onHold="1" holdTriggerDelay="0.3" holdRepeatDelay="-1" keyboard="_keybinds_ref_" xboxpad="xi_a" ps4pad="pad_cross" />
     <action name="mount_horse" onPress="1" onRelease="1" onHold="1" holdTriggerDelay="0.3" holdRepeatDelay="-1" keyboard="_keybinds_ref_" xboxpad="xi_y" ps4pad="pad_triangle" />
     <action name="call_horse" onPress="1" keyboard="_keybinds_ref_" xboxpad="xi_y" ps4pad="pad_triangle" />
-    
+
     <action name="toggle_run" onRelease="1" keyboard="_keybinds_ref_" />
     <action name="toggle_crouch" onPress="1" keyboard="_keybinds_ref_" xboxpad="xi_thumbl" ps4pad="pad_l3" />
-    
+
     <action name="weapon_set1" onPress="1" onRelease="1" xboxpad="xi_dpad_left" ps4pad="pad_left" keyboard="_keybinds_ref_" noModifiers="1" />
     <action name="toggle_torch" onRelease="1" onHold="1" holdTriggerDelay="0.5" xboxpad="xi_dpad_left" ps4pad="pad_left" keyboard="_keybinds_ref_" noModifiers="1" />
     <action name="weapon_set2" onPress="1" onRelease="1" onHold="1" xboxpad="xi_dpad_right" ps4pad="pad_right" keyboard="_keybinds_ref_" noModifiers="1"/>
-    
+
     <!-- combat controls -->
     <action name="attack2" onPress="1" onRelease="1" onHold="0" keyboard="_keybinds_ref_" xboxpad="xi_shoulderr" ps4pad="pad_r1"/>
     <action name="block" onPress="1" onRelease="1" onHold="1" keyboard="_keybinds_ref_" xboxpad="xi_shoulderl" ps4pad="pad_l1"/>
@@ -488,7 +505,7 @@
     <!-- only for bow, combat does not use this -->
     <action name="opponent_lock" onPress="1" onRelease="0" onHold="0" keyboard="_keybinds_ref_" xboxpad="xi_thumbr" ps4pad="pad_r3"/>
     <!--<action name="draw" onPress="1" onRelease="1" onHold="1" keyboard="f" xboxpad="xi_thumbr" />	-->
-    
+
     <!-- PC SPECIFIC CONTROLS START -->
     <action name="attack1_mouse" onPress="1" onRelease="1" onHold="0" keyboard="_keybinds_ref_" />
     <action name="combat_unlock_mouse" onPress="1" onRelease="1" onHold="0" keyboard="_keybinds_ref_" />
@@ -497,7 +514,7 @@
     <action name="combat_switch_opp_next" keyboard="_keybinds_ref_" />
     <action name="combat_switch_opp_prev" keyboard="_keybinds_ref_" />
     <!-- PC SPECIFIC CONTROLS END -->
-    
+
     <!-- CONSOLE SPECIFIC CONTROLS START -->
     <action name="xi_movey" xboxpad="xi_thumbly" ps4pad="pad_stickly"/>
     <action name="xi_movex" xboxpad="xi_thumblx" ps4pad="pad_sticklx"/>
@@ -521,14 +538,16 @@
     </action>
     <action name="attack3" onPress="1" onRelease="1" onHold="1" keyboard="_keybinds_ref_" xboxpad="xi_triggerl_btn" ps4pad="pad_l2" holdTriggerDelay="0.3" holdRepeatDelay="-1" />
     <!-- CONSOLE SPECIFIC CONTROLS END -->
-    
+
+
     <!-- surrender -->
     <action name="surrender" onPress="1" keyboard="_keybinds_ref_" />
-    
+
     <action name="surrender_xi_modifier" onPress="1" onRelease="1" xboxpad="xi_shoulderl" ps4pad="pad_l1" />
     <action name="surrender_xi_activate" onPress="1" xboxpad="xi_a" ps4pad="pad_cross" />
+
   </actionmap>
-  
+
   <actionmap name="helpscreen" version="22">
     <action name="close_help_screen" keyboard="_keybinds_ref_" onPress="1" onRelease="1" onHold="1" holdTriggerDelay="0.5" xboxpad="xi_b" ps4pad="pad_circle" />
     <action name="helpscreen_left" onPress="1" onRelease="0" keyboard="_keybinds_ref_" holdTriggerDelay="0.5" holdRepeatDelay="0.15">
@@ -564,14 +583,14 @@
       </ps4pad>
     </action>
   </actionmap>
-  
+
   <actionmap name="sharpening" version="22">
     <action name="xi_pedaling" onPress="1" keyboard="_keybinds_ref_" xboxpad="xi_triggerl_btn" ps4pad="pad_l2" />
     <action name="xi_sword_pressure" onPress="1" onRelease="1" xboxpad="xi_triggerr" ps4pad="pad_r2" />
     <action name="xi_sword_position_r" onPress="1" onRelease="1" xboxpad="xi_thumbrx" ps4pad="pad_stickrx" />
     <action name="xi_sword_position_l" onPress="1" onRelease="1" xboxpad="xi_thumblx" ps4pad="pad_sticklx" />
     <action name="xi_sword_rotation" onPress="1" onRelease="1" xboxpad="xi_thumbry" ps4pad="pad_stickry" />
-    
+
     <!-- <action name="sword_toggle_pressure" onPress="1" onRelease="1" keyboard="enter" /> -->
     <action name="sword_position_left" onPress="1" onRelease="1" onHold="1" keyboard="_keybinds_ref_" />
     <action name="sword_position_right" onPress="1" onRelease="1" onHold="1" keyboard="_keybinds_ref_" />
@@ -581,11 +600,11 @@
     <action name="sword_rotation" keyboard="maxis_y" />
     <action name="sword_pressure_up" keyboard="_keybinds_ref_" />
     <action name="sword_pressure_down" keyboard="_keybinds_ref_" />
-    
+
     <action name="toggle_preview" onPress="1" onRelease="1" xboxpad="xi_a" ps4pad="pad_cross" />
     <action name="back" onPress="1" onRelease="0" keyboard="_keybinds_ref_" xboxpad="xi_b" ps4pad="pad_circle" />
   </actionmap>
-  
+
   <actionmap name="reading" version="22">
     <action name="read_prev" onRelease="1" onHold="1" holdTriggerDelay="1" holdRepeatDelay="0.15" keyboard="_keybinds_ref_" xboxpad="xi_shoulderl" ps4pad="pad_l1" />
     <action name="read_next" onRelease="1" onHold="1" holdTriggerDelay="1" holdRepeatDelay="0.15" keyboard="_keybinds_ref_" xboxpad="xi_shoulderr" ps4pad="pad_r1"/>
@@ -595,7 +614,7 @@
     <action name="read_toggle" onRelease="1" keyboard="_keybinds_ref_" xboxpad="xi_y" ps4pad="pad_triangle" />
     <action name="read_use" onRelease="1" keyboard="_keybinds_ref_" xboxpad="xi_a" ps4pad="pad_cross" />
   </actionmap>
-  
+
   <actionmap name="building" version="22">
     <action name="build_structure" onPress="1" onRelease="1" keyboard="_keybinds_ref_" xboxpad="xi_a" ps4pad="pad_cross" />
     <action name="build_upgrade" onPress="1" onRelease="1" keyboard="_keybinds_ref_" xboxpad="xi_a" ps4pad="pad_cross" />
@@ -603,7 +622,7 @@
     <action name="build_overview" onPress="1" keyboard="_keybinds_ref_" xboxpad="xi_dpad_down" ps4pad="pad_down"/>
     <action name="build_outerb" onPress="1" keyboard="_keybinds_ref_" xboxpad="xi_dpad_right" ps4pad="pad_right"/>
   </actionmap>
-  
+
   <actionmap name="backgammon" version="22">
     <action name="back" onPress="1" keyboard="" />
     <action name="accept" onPress="1" onRelease="1" keyboard="" />
@@ -612,47 +631,48 @@
     <action name="bg_left" onPress="1" noModifiers="1" keyboard="" />
     <action name="bg_right" onPress="1" noModifiers="1" keyboard="" />
   </actionmap>
-  
+
   <actionmap name="sitting" version="22">
     <action name="sitting_end" onPress="1" onRelease="1" keyboard="_keybinds_ref_" xboxpad="xi_b" ps4pad="pad_circle" />
     <action name="sitting_sleep" onPress="1" onRelease="1" keyboard="_keybinds_ref_" xboxpad="xi_a" ps4pad="pad_cross" />
   </actionmap>
-  
+
   <actionmap name="dice" version="22">
     <action name="dice_analog_x" onPress="1" onRelease="1" xboxpad="xi_thumblx" ps4pad="pad_sticklx"/>
     <action name="dice_analog_y" onPress="1" onRelease="1" xboxpad="xi_thumbly" ps4pad="pad_stickly" />
-    
+
     <action name="dice_up" onPress="1" keyboard="_keybinds_ref_" xboxpad="xi_dpad_up" ps4pad="pad_up" />
     <action name="dice_down" onPress="1" keyboard="_keybinds_ref_" xboxpad="xi_dpad_down" ps4pad="pad_down" />
     <action name="dice_left" onPress="1" keyboard="_keybinds_ref_" xboxpad="xi_dpad_left" ps4pad="pad_left" />
     <action name="dice_right" onPress="1" keyboard="_keybinds_ref_" xboxpad="xi_dpad_right" ps4pad="pad_right" />
-    
+
     <action name="dice_hold" onPress="1" keyboard="_keybinds_ref_" xboxpad="xi_a" ps4pad="pad_cross" />
     <action name="dice_score" onPress="1" keyboard="_keybinds_ref_" xboxpad="xi_x" ps4pad="pad_square" />
     <action name="dice_pass" onPress="1" keyboard="_keybinds_ref_" xboxpad="xi_y" ps4pad="pad_triangle" />
     <action name="dice_end" onPress="1" onRelease="1" keyboard="_keybinds_ref_" xboxpad="xi_b" ps4pad="pad_circle" />
-    
+
     <action name="rotateyaw" keyboard="maxis_x" />
     <action name="rotatepitch" keyboard="maxis_y" />
     <action name="xi_rotateyaw" xboxpad="xi_thumbrx" ps4pad="pad_stickrx"/>
     <action name="xi_rotatepitch" xboxpad="xi_thumbry" ps4pad="pad_stickry"/>
   </actionmap>
-  
+
   <actionmap name="alchemy" version="22">
     <action name="alch_back" onPress="1" keyboard="_keybinds_ref_" xboxpad="xi_y" ps4pad="pad_triangle"/>
     <action name="alch_use" onPress="1" onRelease="1" keyboard="_keybinds_ref_" xboxpad="xi_a" ps4pad="pad_cross" />
     <action name="alch_exit" onPress="1" onRelease="1" keyboard="_keybinds_ref_" xboxpad="xi_b" ps4pad="pad_circle" />
     <action name="alch_reset" onPress="1" onRelease="1" keyboard="_keybinds_ref_" xboxpad="xi_x" ps4pad="pad_square" />
-    
+
     <action name="xi_rotateyaw" xboxpad="xi_thumbrx" ps4pad="pad_stickrx"/>
     <action name="xi_rotatepitch" xboxpad="xi_thumbry" ps4pad="pad_stickry"/>
-    
+
     <action name="alch_use_bag" xboxpad="xi_triggerl_btn" keyboard="_keybinds_ref_" ps4pad="pad_l2"/>
     <action name="alch_use_sandglass" xboxpad="xi_triggerr_btn" keyboard="_keybinds_ref_" ps4pad="pad_r2"/>
-    
+
     <action name="alch_open_inventory" onPress="1" keyboard="_keybinds_ref_" xboxpad="xi_dpad_down" ps4pad="pad_down" noModifiers="1" />
+
   </actionmap>
-  
+
   <actionmap name="lockpicking" version="22">
     <action name="back" onPress="1" keyboard="_keybinds_ref_" xboxpad="xi_b" ps4pad="pad_circle" />
     <action name="xi_lock_cursor_x" onPress="1" onRelease="1" xboxpad="xi_thumbrx" ps4pad="pad_stickrx"/>
@@ -664,45 +684,46 @@
     <action name="xi_lock_dir_y" onPress="1" onRelease="1" xboxpad="xi_thumbly" ps4pad="pad_stickly" />
     <action name="lock_dir_bck" onPress="1" onHold="1" onRelease="1" holdTriggerDelay="0" keyboard="_keybinds_ref_" />
     <action name="lock_dir_fwd" onPress="1" onHold="1" onRelease="1" holdTriggerDelay="0" keyboard="_keybinds_ref_" />
-    
+
     <!-- fake action only for HUD help-->
     <action name="xi_lock_cursor_help" xboxpad="xi_thumbr_move" ps4pad="pad_thumbr_move"/>
     <action name="xi_lock_dir_help" xboxpad="xi_thumbl_move" ps4pad="pad_thumbl_move"/>
     <action name="xi_move_help" xboxpad="xi_thumbl_move" ps4pad="pad_thumbl_move"/>
     <action name="xi_zone_help" xboxpad="xi_thumbr_move" ps4pad="pad_thumbr_move"/>
+
   </actionmap>
-  
+
   <actionmap name="book_transcription" version="22">
     <action name="transcription_skip" onPress="1" keyboard="_keybinds_ref_" xboxpad="xi_a" ps4pad="pad_cross" />
   </actionmap>
-  
+
   <actionmap name="minigame" version="22">
     <action name="back" onPress="1" keyboard="_keybinds_ref_" xboxpad="xi_b" ps4pad="pad_circle"/>
   </actionmap>
-  
+
   <actionmap name="horse" version="22">
     <action name="horse_turnleft" onPress="1" onRelease="1" retriggerable="1" keyboard="_keybinds_ref_" />
     <action name="horse_turnright" onPress="1" onRelease="1" retriggerable="1" keyboard="_keybinds_ref_" />
     <action name="horse_accelerate" onPress="1" onRelease="1" retriggerable="1" keyboard="_keybinds_ref_" />
     <action name="horse_deccelerate" onPress="1" onRelease="1" retriggerable="1" keyboard="_keybinds_ref_" />
-    
+
     <action name="horse_rotateyaw" keyboard="maxis_x" />
     <action name="horse_rotatepitch" keyboard="maxis_y" />
-    
+
     <action name="horse_xi_movey" xboxpad="xi_thumbly" ps4pad="pad_stickly"/>
     <action name="horse_xi_movex" xboxpad="xi_thumblx" ps4pad="pad_sticklx"/>
     <action name="horse_xi_rotateyaw" xboxpad="xi_thumbrx" ps4pad="pad_stickrx"/>
     <action name="horse_xi_rotatepitch" xboxpad="xi_thumbry" ps4pad="pad_stickry"/>
-    
+
     <action name="horse_dismount" onPress="1" keyboard="_keybinds_ref_" xboxpad="xi_y" ps4pad="pad_triangle"/>
     <action name="horse_strafe" onPress="1" onRelease="1" />
     <action name="jump" onPress="1" onRelease="1" keyboard="_keybinds_ref_" xboxpad="xi_x" ps4pad="pad_square"/>
     <action name="horse_sprint" onPress="1" onRelease="1" retriggerable="1" keyboard="_keybinds_ref_" xboxpad="xi_b" ps4pad="pad_circle" />
     <action name="horse_toggle_run" onRelease="1" keyboard="_keybinds_ref_" />
-    
+
     <!-- surrender -->
     <action name="surrender" onPress="1" keyboard="_keybinds_ref_" />
-    
+
     <action name="surrender_xi_modifier" onPress="1" onRelease="1" xboxpad="xi_shoulderl" ps4pad="pad_l1" />
     <action name="surrender_xi_activate" onPress="1" xboxpad="xi_a" ps4pad="pad_cross" />
     <!-- /surrender -->
@@ -710,10 +731,10 @@
     <action name="weapon_set1" onPress="1" onRelease="1" xboxpad="xi_dpad_left" ps4pad="pad_left" keyboard="_keybinds_ref_" noModifiers="1" />
     <action name="toggle_torch" onRelease="1" onHold="1" holdTriggerDelay="0.5" xboxpad="xi_dpad_left" ps4pad="pad_left" keyboard="_keybinds_ref_" noModifiers="1" />
     <action name="weapon_set2" onPress="1" onRelease="1" onHold="1" xboxpad="xi_dpad_right" ps4pad="pad_right" keyboard="_keybinds_ref_" noModifiers="1" />
-    
+
     <action name="block" onPress="1" onRelease="1" onHold="1" keyboard="_keybinds_ref_" xboxpad="xi_shoulderl" ps4pad="pad_l1"/>
     <action name="attack_abort" onPress="1" onRelease="1" onHold="0" keyboard="_keybinds_ref_" xboxpad="xi_a" ps4pad="pad_cross"/>
-    
+
     <!-- PC SPECIFIC CONTROLS START -->
     <action name="attack1_mouse" onPress="1" onRelease="1" onHold="0" keyboard="_keybinds_ref_" />
     <action name="attack_abort_mouse" onPress="1" onRelease="1" onHold="0" keyboard="_keybinds_ref_" />
@@ -739,15 +760,15 @@
     <action name="attack3" onPress="1" onRelease="1" keyboard="_keybinds_ref_" xboxpad="xi_triggerl_btn" ps4pad="pad_l2" />
     <!-- /combat -->
   </actionmap>
-  
+
   <actionmap name="carryCorpse" version="22">
     <action name="put_corpse" onPress="1" onRelease="1" onHold="1" holdTriggerDelay="0.2" keyboard="_keybinds_ref_" xboxpad="xi_a" ps4pad="pad_cross" />
   </actionmap>
-  
+
   <actionmap name="pickpocketing" version="22">
     <action name="charge" onRelease="1" keyboard="_keybinds_ref_" xboxpad="xi_a" ps4pad="pad_cross" />
   </actionmap>
-  
+
   <actionmap name="pickpocketing_ui" version="22">
     <action name="pickpocketing_uncover" onPress="1" onRelease="1" keyboard="_keybinds_ref_" xboxpad="xi_a" ps4pad="pad_cross" />
     <action name="pickpocketing_close" onPress="1" onRelease="1" keyboard="_keybinds_ref_" xboxpad="xi_a" ps4pad="pad_cross" />
@@ -777,11 +798,11 @@
       </ps4pad>
     </action>
   </actionmap>
-  
+
   <actionmap name="help_dialog" version="22">
     <action name="open_help_screen" onPress="1" onRelease="1" keyboard="_keybinds_ref_" xboxpad="xi_back" ps4pad="pad_touch" noModifiers="1" />
   </actionmap>
-  
+
   <actiongroup name="movement">
     <action name="moveleft" />
     <action name="moveright" />
@@ -791,14 +812,14 @@
     <action name="xi_movey" />
     <action name="xi_movex" />
   </actiongroup>
-  
+
   <actiongroup name="camera control">
     <action name="rotateyaw" />
     <action name="rotatepitch" />
     <action name="xi_rotateyaw" />
     <action name="xi_rotatepitch" />
   </actiongroup>
-  
+
   <controllerlayouts>
     <layout name="buttonlayout_default" file="buttonlayout_default.xml"/>
     <layout name="buttonlayout_alt" file="buttonlayout_alt.xml"/>
