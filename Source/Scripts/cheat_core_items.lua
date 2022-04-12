@@ -31,7 +31,8 @@ function cheat:recreateitems(mode, miscValue)
     local itemUIName = ItemManager.GetItemUIName(item.class)
     local itemName = ItemManager.GetItemName(item.class)
     local itemOwner =  tostring(ItemManager.GetItemOwner(item.id))
-    local playerData = "userdata: 0500000000000A53"
+    local playerDataM = "userdata: 0500000000000A53"
+    local playerDataF = "userdata: 05000000000000F5"
     local shouldDelete = false
     local shouldRecreate = false
     local newItemHealth = 1
@@ -62,7 +63,7 @@ function cheat:recreateitems(mode, miscValue)
     if mode == "removestolen" then
       local categoryidArray = {0, 1, 2, 3, 4, 5, 8, 9, 13, 14, 15, 16, 27}
       for i=1,table.getn(categoryidArray) do
-        if categoryidArray[i] == itemCategoryId and itemOwner ~= playerData then
+        if categoryidArray[i] == itemCategoryId and itemOwner ~= playerDataM and itemOwner ~= playerDataF then
           --cheat:logDebug("owner [%s]", itemOwner)
           shouldDelete = true
           shouldRecreate = false
@@ -71,9 +72,9 @@ function cheat:recreateitems(mode, miscValue)
     end
     
     if mode == "ownstolen" then
-      local categoryidArray = {0, 1, 2, 3, 4, 5, 8, 13, 14, 15, 16, 27}
+      local categoryidArray = {0, 1, 2, 3, 4, 5, 8, 9, 13, 14, 15, 16, 27}
       for i=1,table.getn(categoryidArray) do
-        if categoryidArray[i] == itemCategoryId and itemOwner ~= playerData then
+        if categoryidArray[i] == itemCategoryId and itemOwner ~= playerData and itemOwner ~= playerDataF then
           --cheat:logDebug("owner [%s]", itemOwner)
           shouldDelete = true
           shouldRecreate = true

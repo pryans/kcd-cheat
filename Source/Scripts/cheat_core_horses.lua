@@ -94,7 +94,8 @@ cheat:createCommand("cheat_set_horse", "cheat:cheat_set_horse(%line)", cheat.che
 function cheat:cheat_set_horse(line)
   local args = cheat:argsProcess(line, cheat.cheat_set_horse_args)
   local id, idErr = cheat:argsGet(args, "id")
-  if not idErr then
+  local gender = player.soul:GetGender()
+  if not idErr and gender ~= 2 then
     if id == 'nil' then
       player.player:SetPlayerHorse(__null)
       cheat:logInfo("Removed player horse.")
@@ -106,6 +107,8 @@ function cheat:cheat_set_horse(line)
     cheat:logInfo("Set player horse to [%s].", tostring(horseName))
     cheat:show_horse_stats()
     return true
+  else
+    cheat:logError("Thereza can't own a horse!")
   end
   return false
 end
@@ -119,9 +122,12 @@ cheat:createCommand("cheat_teleport_horse", "cheat:cheat_teleport_horse()", nil,
 function cheat:cheat_teleport_horse()
   local horse = XGenAIModule.GetEntityByWUID(player.player:GetPlayerHorse());
   local playerPosition = player:GetWorldPos();
-  if horse then
+  local gender = player.soul:GetGender()
+  if horse and gender  ~= 2 then
     horse:SetWorldPos({x=playerPosition.x-1, y=playerPosition.y-1, z=playerPosition.z});
     cheat:logInfo("Teleported your horse to you.")
+  elseif gender == 2 then
+    cheat:logError("Theresa doesn't own a horse!")
   else
     cheat:logError("You don't have a horse.")
   end

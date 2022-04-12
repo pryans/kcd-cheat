@@ -5,15 +5,20 @@ cheat:createCommand("cheat_stash", "cheat:cheat_stash()", nil,
   "Opens the player's stash. This only works if you have unlocked at least 1 stash.",
   "Open your stash", "cheat_stash")
 function cheat:cheat_stash()
-  for i,stash in pairs(System.GetEntitiesByClass("Stash")) do 
-    local ownerWuid = EntityModule.GetInventoryOwner(stash.inventoryId)
-    if ownerWuid == player.this.id then
-      cheat:logInfo("Opening stash [%s].", tostring(stash.inventoryId))
-      stash:Open(player)
-      return
+  local gender = player.soul:GetGender()
+  if gender ~= 2 then
+    for i,stash in pairs(System.GetEntitiesByClass("Stash")) do 
+      local ownerWuid = EntityModule.GetInventoryOwner(stash.inventoryId)
+      if ownerWuid == player.this.id then
+        cheat:logInfo("Opening stash [%s].", tostring(stash.inventoryId))
+        stash:Open(player)
+        return
+      end
     end
+    cheat:logError("You don't have a stash yet.")
+  else
+    cheat:logError("Thereza don't have a stash")
   end
-  cheat:logError("You don't have a stash yet.")
 end
 
 -- ============================================================================
@@ -56,6 +61,7 @@ end
 System.AddCCommand('cheat_teleport_to', 'cheat:teleport_to(%line)', "Teleports the player to the given place. Supported places (case insensitive):\n$8Budin, (Inn at the) Glade, (Rattay Mill) Home,\n$8Wagoners (Inn), Katzek, Kohelnitz,\n$8Ledetchko, Merhojed, Monastery,\n$8Neuhof, Pribyslavitz, Rattay,\n$8Rovna, Samopesh, Sasau,\n$8Skalitz, Talmberg, Uzhitz,\n$8Vranik, Wagoners (Inn), (Broken) Wheel")
 
 function cheat:teleport_to(line)
+  local gender = player.soul:GetGender()
   local args = string.gsub(tostring(line), "place:", "")
   local checkteste = "error"
   
@@ -81,19 +87,23 @@ function cheat:teleport_to(line)
   places["WAGONERS"] = "x:938 y:1424 z:24"
   places["WHEEL"] = "x:2915 y:733 z:108 "
   
-  if places[cheat:toUpper(args)] ~= nil then
-    cheat:teleport(places[cheat:toUpper(args)])
-  else
-    for k,v in pairs(places) do
-      if string.find(k, cheat:toUpper(args)) then
-        checkteste = v
+  if gender ~= 2 then
+    if places[cheat:toUpper(args)] ~= nil then
+      cheat:teleport(places[cheat:toUpper(args)])
+    else
+      for k,v in pairs(places) do
+        if string.find(k, cheat:toUpper(args)) then
+          checkteste = v
+        end
+      end
+      if checkteste ~= "error" then
+        cheat:teleport(checkteste)
+      else
+        cheat:logError("Invalid place - For a list of supported places type: 'cheat_teleport_to ?'")
       end
     end
-    if checkteste ~= "error" then
-      cheat:teleport(checkteste)
-    else
-      cheat:logError("Invalid place - For a list of supported places type: 'cheat_teleport_to ?'")
-    end
+  else
+    cheat:logError("You can't use this command while playing Thereza!")
   end
 end
 
@@ -108,6 +118,7 @@ cheat:createCommand("cheat_tp_tr", "cheat:tp_tr(%line)", cheat.cheat_tp_tr_args,
 "Teleports the player to the given place. Supported places (case insensitive):\n$8I, II, III, IV, V, VI, VII, VIII, IX, X, XI, XII, XIII, XIV, XV, XVI, XVII, XVIII, XIX, XX,\n$8XXI, XXII, XIII, XXIV, XXV, AI, AII, AII, AIII, AIV, AV",
 "Example", "cheat_tp_tr place:XXV")
 function cheat:tp_tr(line)
+  local gender = player.soul:GetGender()
   local args = cheat:argsProcess(line, cheat.cheat_tp_tr_args)
   local nplace, nplaceErr = cheat:argsGet(args, 'place')
   
@@ -143,12 +154,16 @@ function cheat:tp_tr(line)
   places["AIV"] = "x:1723 y:778 z:74"
   places["AV"] = "x:474 y:3869 z:40"
   
-  if not nplaceErr then
-    if places[cheat:toUpper(nplace)] ~= nil then
-      cheat:teleport(places[cheat:toUpper(nplace)])
-    else
-      cheat:logError("Invalid Place - See list of supported places type: 'cheat_tp_tr ?'")
+  if gender ~= 2 then
+    if not nplaceErr then
+      if places[cheat:toUpper(nplace)] ~= nil then
+        cheat:teleport(places[cheat:toUpper(nplace)])
+      else
+        cheat:logError("Invalid Place - See list of supported places type: 'cheat_tp_tr ?'")
+      end
     end
+  else
+    cheat:logError("You can't use this command while playing Thereza!")
   end
 end
 
@@ -507,19 +522,13 @@ end
 cheat:createCommand("cheat_wash_dirt_and_blood", "cheat:cheat_wash_dirt_and_blood()", nil,
   "Washes all blood and dirt from the player and player's horse.\n$8Do horses need this?\n$8Can items be washed?\n$8Let me know.",
   "Wash yourself and your horse", "cheat_wash_dirt_and_blood")
-  function cheat:cheat_wash_dirt_and_blood()
-    local entity = XGenAIModule.GetEntityByWUID(player.player:GetPlayerHorse());
-    
-    player.actor:WashDirtAndBlood(1)
-    player.actor:WashItems(1)
-    
-    if entity then
-      entity.actor:WashDirtAndBlood(1)
-      entity.actor:WashItems(1)
-    end
-    
-    cheat:logInfo("All Clean!")
-  end
+function cheat:cheat_wash_dirt_and_blood()
+  
+  player.actor:WashDirtAndBlood(1)
+  player.actor:WashItems(1)
+  
+  cheat:logInfo("All Clean!")
+end
 
 -- ============================================================================
 -- cheat_charm
@@ -528,10 +537,15 @@ cheat:createCommand("cheat_charm", "cheat:cheat_charm()", nil,
   "Automates your morning routine of bath-haircut-sex for maximum Charisma bonus.\n$8Washes all dirt and blood and applies Fresh Cut and Smitten buffs.",
   "Wash yourself and add Charisma buffs", "cheat_charm")
 function cheat:cheat_charm()
-  cheat:cheat_wash_dirt_and_blood()
-  cheat:cheat_add_buff("id:fresh_cut")
-  cheat:cheat_add_buff("id:alpha_male_in_love")
-  cheat:logInfo("All Clean and dandy!")
+  local gender = player.soul:GetGender()
+  if gender ~= 2 then
+    cheat:cheat_wash_dirt_and_blood()
+    cheat:cheat_add_buff("id:fresh_cut")
+    cheat:cheat_add_buff("id:alpha_male_in_love")
+    cheat:logInfo("All Clean and dandy!")
+  else
+    cheat:logError("You can't use this command while playing Thereza!")
+  end
 end
 
 -- cheat_unlock_recipes
@@ -540,11 +554,16 @@ cheat:createCommand("cheat_unlock_recipes", "cheat:cheat_unlock_recipes()", nil,
   "Saw this code to unlock recipes in a pak file.\n$8I have no idea what this really does or if it works.\n$8Let me know.",
   "Unlock all recipes", "cheat_unlock_recipes")
 function cheat:cheat_unlock_recipes()
-  for i=2,26 do
-		for y=1,5 do RPG.UnlockRecipe(player, i, y); end
-	end
-  cheat:logInfo("Recipies unlocked.")
-  return true
+  local gender = player.soul:GetGender()
+  if gender ~= 2 then
+    for i=2,26 do
+      for y=1,5 do RPG.UnlockRecipe(player, i, y); end
+    end
+    cheat:logInfo("Recipies unlocked.")
+    return true
+  else
+    cheat:logError("You can't use this command while playing Thereza!")
+  end
 end
 
 -- ============================================================================

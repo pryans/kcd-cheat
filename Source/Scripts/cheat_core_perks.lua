@@ -120,6 +120,7 @@ function cheat:cheat_add_all_perks(line)
   local args = cheat:argsProcess(line, cheat.cheat_add_all_perks_args)
   local exclude, excludeErr = cheat:argsGet(args, 'exclude')
   local any = cheat:argsGet(args,'any')
+  local gender = player.soul:GetGender()
   
   local excludes = {}
   excludes["80825cd9-7d7b-440f-aa57-75807e83aed9"] = true -- Always drunk
@@ -166,18 +167,22 @@ function cheat:cheat_add_all_perks(line)
   excludes["78d66139-9958-41cc-8148-8153f1a38efd"] = true -- Tutorial Horse
   excludes["9738139e-0957-4148-8585-8b71ef78ef30"] = true -- Tutorial Hardcore Mode
   excludes["f29a5eba-5c98-4779-9362-03dc5bfef316"] = true -- Tutorial Combat advanced
-  
-  local perks = cheat:find_perk(nil, true, any)
-  for i,perk in pairs(perks) do
-    if not exclude or not excludes[perk.perk_id] then
-      player.soul:AddPerk(perk.perk_id)
-      cheat:logInfo("Added perk [%s] to player.", tostring(perk.perk_name))
-    else
-      cheat:logInfo("Excluded perk [%s].", tostring(perk.perk_name))
+    
+  if gender ~= 2 then
+    local perks = cheat:find_perk(nil, true, any)
+    for i,perk in pairs(perks) do
+      if not exclude or not excludes[perk.perk_id] then
+        player.soul:AddPerk(perk.perk_id)
+        cheat:logInfo("Added perk [%s] to player.", tostring(perk.perk_name))
+      else
+        cheat:logInfo("Excluded perk [%s].", tostring(perk.perk_name))
+      end
     end
+    cheat:logInfo("All perks added.")
+    return true
+  else
+    cheat:logError("You can't use this command while playing Thereza!")
   end
-  cheat:logInfo("All perks added.")
-  return true
 end
 
 -- ============================================================================
