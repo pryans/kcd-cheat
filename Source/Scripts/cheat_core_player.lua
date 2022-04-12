@@ -289,7 +289,7 @@ cheat.cheat_set_bow_reticle_args = {
 }
 
 cheat:createCommand("cheat_set_bow_reticle", "cheat:cheat_set_bow_reticle(%line)", cheat.cheat_set_bow_reticle_args,
-  "Enabled or disables the bow reticle. Won't take effect if bow is drawn.",
+  "Enables or disables the bow reticle. Won't take effect if bow is drawn.",
   "Turn it on", "cheat_set_bow_reticle enable:true",
   "Turn it off", "cheat_set_bow_reticle enable:false")
 function cheat:cheat_set_bow_reticle(line)
@@ -297,11 +297,173 @@ function cheat:cheat_set_bow_reticle(line)
   local enable, enableErr = cheat:argsGet(args, 'enable')
   if not enableErr then
     if enable then
-      System.ExecuteCommand("wh_pl_showfirecursor=1")
+      System.ExecuteCommand("wh_pl_showfirecursor = 1")
       cheat:logInfo("Bow reticle on.")
     else
-      System.ExecuteCommand("wh_pl_showfirecursor=0")
+      System.ExecuteCommand("wh_pl_showfirecursor = 0")
       cheat:logInfo("Bow reticle off.")
+    end
+    return true
+  end
+  return false
+end
+
+-- ============================================================================
+-- cheat_set_chat_bubbles
+-- ============================================================================
+cheat.cheat_set_chat_bubbles_args = {
+  enable = function(args,name,showHelp) return cheat:argsGetRequiredBoolean(args, name, showHelp, "true or false") end,
+}
+
+cheat:createCommand("cheat_set_chat_bubbles", "cheat:cheat_set_chat_bubbles(%line)", cheat.cheat_set_chat_bubbles_args,
+  "Enables or disables chat cheat_set_chat_bubbles.",
+  "Turn it on", "cheat_set_chat_bubbles enable:true",
+  "Turn it off", "cheat_set_chat_bubbles enable:false")
+function cheat:cheat_set_chat_bubbles(line)
+  local args = cheat:argsProcess(line, cheat.cheat_set_chat_bubbles_args)
+  local enable, enableErr = cheat:argsGet(args, 'enable')
+  if not enableErr then
+    if enable then
+      System.ExecuteCommand("wh_dlg_chatbubbles = 1")
+      cheat:logInfo("Chat bubbles on.")
+    else
+      System.ExecuteCommand("wh_dlg_chatbubbles = 0")
+      cheat:logInfo("Chat bubbles off.")
+    end
+    return true
+  end
+  return false
+end
+
+-- ============================================================================
+-- cheat_set_compass
+-- ============================================================================
+cheat.cheat_set_compass_args = {
+  enable = function(args,name,showHelp) return cheat:argsGetRequiredBoolean(args, name, showHelp, "true or false") end,
+}
+
+cheat:createCommand("cheat_set_compass", "cheat:cheat_set_compass(%line)", cheat.cheat_set_compass_args,
+  "Enables or disables the compass.",
+  "Turn it on", "cheat_set_compass enable:true",
+  "Turn it off", "cheat_set_compass enable:false")
+function cheat:cheat_set_compass(line)
+  local args = cheat:argsProcess(line, cheat.cheat_set_compass_args)
+  local enable, enableErr = cheat:argsGet(args, 'enable')
+  if not enableErr then
+    if enable then
+      System.ExecuteCommand("wh_ui_showCompass = 1")
+      cheat:logInfo("Compass on.")
+    else
+      System.ExecuteCommand("wh_ui_showCompass = 0")
+      cheat:logInfo("Compass off.")
+    end
+    return true
+  end
+  return false
+end
+
+-- ============================================================================
+-- cheat_set_gevent_log_level
+-- ============================================================================
+cheat.cheat_set_gevent_log_level_args = {
+  enable = function(args,name,showHelp) return cheat:argsGetRequiredBoolean(args, name, showHelp, "true or false") end,
+}
+
+cheat:createCommand("cheat_set_gevent_log_level", "cheat:cheat_set_gevent_log_level(%line)", cheat.cheat_set_gevent_log_level_args,
+  "Enables or disables game event log level 3. Shows how much experience is gained for a skill/stat.",
+  "Turn it on", "cheat_set_gevent_log_level enable:true",
+  "Turn it off", "cheat_set_gevent_log_level enable:false")
+function cheat:cheat_set_gevent_log_level(line)
+  local args = cheat:argsProcess(line, cheat.cheat_set_gevent_log_level_args)
+  local enable, enableErr = cheat:argsGet(args, 'enable')
+  if not enableErr then
+    if enable then
+      System.ExecuteCommand("wh_ui_GameEventLogLevel = 3")
+      cheat:logInfo("Game event log level 3 on.")
+    else
+      System.ExecuteCommand("wh_ui_GameEventLogLevel = 2")
+      cheat:logInfo("Game event log level 3 off.")
+    end
+    return true
+  end
+  return false
+end
+
+-- ============================================================================
+-- cheat_set_hud
+-- ============================================================================
+cheat.cheat_set_hud_args = {
+  enable = function(args,name,showHelp) return cheat:argsGetRequiredBoolean(args, name, showHelp, "true or false") end,
+}
+
+cheat:createCommand("cheat_set_hud", "cheat:cheat_set_hud(%line)", cheat.cheat_set_hud_args,
+  "Enables or disables the hud.",
+  "Turn it on", "cheat_set_hud enable:true",
+  "Turn it off", "cheat_set_hud enable:false")
+function cheat:cheat_set_hud(line)
+  local args = cheat:argsProcess(line, cheat.cheat_set_hud_args)
+  local enable, enableErr = cheat:argsGet(args, 'enable')
+  if not enableErr then
+    if enable then
+      System.ExecuteCommand("g_showHUD = 1")
+      cheat:logInfo("HUD on.")
+    else
+      System.ExecuteCommand("g_showHUD = 0")
+      cheat:logInfo("HUD off.")
+    end
+    return true
+  end
+  return false
+end
+
+-- ============================================================================
+-- cheat_set_statusbar
+-- ============================================================================
+cheat.cheat_set_statusbar_args = {
+  enable = function(args,name,showHelp) return cheat:argsGetRequiredBoolean(args, name, showHelp, "true or false") end,
+}
+
+cheat:createCommand("cheat_set_statusbar", "cheat:cheat_set_statusbar(%line)", cheat.cheat_set_statusbar_args,
+  "Enables or disables the statusbar.",
+  "Turn it on", "cheat_set_statusbar enable:true",
+  "Turn it off", "cheat_set_statusbar enable:false")
+function cheat:cheat_set_statusbar(line)
+  local args = cheat:argsProcess(line, cheat.cheat_set_statusbar_args)
+  local enable, enableErr = cheat:argsGet(args, 'enable')
+  if not enableErr then
+    if enable then
+      System.ExecuteCommand("wh_ui_ShowStats = 1")
+      cheat:logInfo("Statusbar on.")
+    else
+      System.ExecuteCommand("wh_ui_ShowStats = 0")
+      cheat:logInfo("Statusbar off.")
+    end
+    return true
+  end
+  return false
+end
+
+-- ============================================================================
+-- cheat_set_third_person
+-- ============================================================================
+cheat.cheat_set_third_person_args = {
+  enable = function(args,name,showHelp) return cheat:argsGetRequiredBoolean(args, name, showHelp, "true or false") end,
+}
+
+cheat:createCommand("cheat_set_third_person", "cheat:cheat_set_third_person(%line)", cheat.cheat_set_third_person_args,
+  "Enables or disables the third person view.",
+  "Turn it on", "cheat_set_third_person enable:true",
+  "Turn it off", "cheat_set_third_person enable:false")
+function cheat:cheat_set_third_person(line)
+  local args = cheat:argsProcess(line, cheat.cheat_set_third_person_args)
+  local enable, enableErr = cheat:argsGet(args, 'enable')
+  if not enableErr then
+    if enable then
+      System.ExecuteCommand("wh_pl_FollowEntity = dude")
+      cheat:logInfo("Third person view on.")
+    else
+      System.ExecuteCommand("wh_pl_FollowEntity = 0")
+      cheat:logInfo("Third person view off.")
     end
     return true
   end
