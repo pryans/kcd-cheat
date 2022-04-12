@@ -56,7 +56,7 @@ cheat:createCommand("cheat_eval", "cheat:cheat_eval(%line)", nil,
 function cheat:cheat_eval(line)
   cheat:logDebug("Begin eval [%s].", tostring(line))
   --Defining a function from the string and run it
-  local func = load(line)
+  local func = loadstring(line)
   System.LogAlways(tostring(func()))
   cheat:logDebug("End eval [%s].", tostring(line))
   return true
