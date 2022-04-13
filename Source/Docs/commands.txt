@@ -7,7 +7,9 @@ cheat_add_buff_invisible
 cheat_add_item
 cheat_add_money
 cheat_add_perk
+cheat_add_potion_buff
 cheat_add_stat_xp
+cheat_charm
 cheat_damage_all_items
 cheat_eval
 cheat_find_buffs
@@ -42,11 +44,17 @@ cheat_reveal_map
 cheat_save
 cheat_set_all_merchants_fence
 cheat_set_bow_reticle
+cheat_set_chat_bubbles
+cheat_set_compass
+cheat_set_gevent_log_level
 cheat_set_horse
+cheat_set_hud
 cheat_set_regen
 cheat_set_skill_level
 cheat_set_stat_level
 cheat_set_state
+cheat_set_statusbar
+cheat_set_third_person
 cheat_set_time
 cheat_set_time_speed
 cheat_set_wanted_level
@@ -60,5 +68,7 @@ cheat_teleport_horse
 cheat_teleport_npc_to_loc
 cheat_teleport_npc_to_player
 cheat_teleport_to
+cheat_tp_to_npc
+cheat_tp_tr
 cheat_unlock_recipes
 cheat_wash_dirt_and_blood
