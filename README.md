@@ -11,4 +11,4 @@ So I looked pyrans repository and forked it. I noticed that there are 12 differe
 What could be more obvious than merging the changes from the various repositories. Especially the changes of [JoewAlabel](https://github.com/JoewAlabel/kcd-cheat), [Lernos](https://github.com/Lernos/kcd-cheat) and [MagicGonads](https://github.com/MagicGonads/kcd-cheat) offer some useful extensions and fixes.
 
 
-Join me on my [KCD Modding Discord](https://discord.gg/h89SS5VkvU)
+[![KCD Modding](https://user-images.githubusercontent.com/1034673/163086463-881decd4-b372-4a72-8463-7afc2f4cb94e.png)](https://discord.gg/h89SS5VkvU "Join KCD Modding")
