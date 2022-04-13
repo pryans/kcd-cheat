@@ -312,10 +312,10 @@ function cheat:cheat_set_bow_reticle(line)
   local enable, enableErr = cheat:argsGet(args, 'enable')
   if not enableErr then
     if enable then
-      System.ExecuteCommand("wh_pl_showfirecursor = 1")
+      System.ExecuteCommand("wh_pl_showfirecursor 1")
       cheat:logInfo("Bow reticle on.")
     else
-      System.ExecuteCommand("wh_pl_showfirecursor = 0")
+      System.ExecuteCommand("wh_pl_showfirecursor 0")
       cheat:logInfo("Bow reticle off.")
     end
     return true
@@ -339,10 +339,10 @@ function cheat:cheat_set_chat_bubbles(line)
   local enable, enableErr = cheat:argsGet(args, 'enable')
   if not enableErr then
     if enable then
-      System.ExecuteCommand("wh_dlg_chatbubbles = 1")
+      System.ExecuteCommand("wh_dlg_chatbubbles 1")
       cheat:logInfo("Chat bubbles on.")
     else
-      System.ExecuteCommand("wh_dlg_chatbubbles = 0")
+      System.ExecuteCommand("wh_dlg_chatbubbles 0")
       cheat:logInfo("Chat bubbles off.")
     end
     return true
@@ -366,10 +366,10 @@ function cheat:cheat_set_compass(line)
   local enable, enableErr = cheat:argsGet(args, 'enable')
   if not enableErr then
     if enable then
-      System.ExecuteCommand("wh_ui_showCompass = 1")
+      System.ExecuteCommand("wh_ui_showCompass 1")
       cheat:logInfo("Compass on.")
     else
-      System.ExecuteCommand("wh_ui_showCompass = 0")
+      System.ExecuteCommand("wh_ui_showCompass 0")
       cheat:logInfo("Compass off.")
     end
     return true
@@ -393,10 +393,10 @@ function cheat:cheat_set_gevent_log_level(line)
   local enable, enableErr = cheat:argsGet(args, 'enable')
   if not enableErr then
     if enable then
-      System.ExecuteCommand("wh_ui_GameEventLogLevel = 3")
+      System.ExecuteCommand("wh_ui_GameEventLogLevel 3")
       cheat:logInfo("Game event log level 3 on.")
     else
-      System.ExecuteCommand("wh_ui_GameEventLogLevel = 2")
+      System.ExecuteCommand("wh_ui_GameEventLogLevel 2")
       cheat:logInfo("Game event log level 3 off.")
     end
     return true
@@ -420,10 +420,10 @@ function cheat:cheat_set_hud(line)
   local enable, enableErr = cheat:argsGet(args, 'enable')
   if not enableErr then
     if enable then
-      System.ExecuteCommand("g_showHUD = 1")
+      System.ExecuteCommand("g_showHUD 1")
       cheat:logInfo("HUD on.")
     else
-      System.ExecuteCommand("g_showHUD = 0")
+      System.ExecuteCommand("g_showHUD 0")
       cheat:logInfo("HUD off.")
     end
     return true
@@ -447,10 +447,10 @@ function cheat:cheat_set_statusbar(line)
   local enable, enableErr = cheat:argsGet(args, 'enable')
   if not enableErr then
     if enable then
-      System.ExecuteCommand("wh_ui_ShowStats = 1")
+      System.ExecuteCommand("wh_ui_ShowStats 1")
       cheat:logInfo("Statusbar on.")
     else
-      System.ExecuteCommand("wh_ui_ShowStats = 0")
+      System.ExecuteCommand("wh_ui_ShowStats 0")
       cheat:logInfo("Statusbar off.")
     end
     return true
@@ -474,10 +474,10 @@ function cheat:cheat_set_third_person(line)
   local enable, enableErr = cheat:argsGet(args, 'enable')
   if not enableErr then
     if enable then
-      System.ExecuteCommand("wh_pl_FollowEntity = dude")
+      System.ExecuteCommand("wh_pl_FollowEntity dude")
       cheat:logInfo("Third person view on.")
     else
-      System.ExecuteCommand("wh_pl_FollowEntity = 0")
+      System.ExecuteCommand("wh_pl_FollowEntity 0")
       cheat:logInfo("Third person view off.")
     end
     return true
