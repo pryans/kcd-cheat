@@ -142,7 +142,7 @@
 
 	<superaction name="horse_interaction" ui_group="movement" ui_name="@ui_keybinds_horse" ui_tooltip="" keyboard="writeable">
 		<action name="mount_horse" map="player" />
-		<action name="horse_dismount" map="horse" />
+		<action name="horse_dismount" map="player" />
 		<action name="call_horse" map="player" />
 		<action name="custom_quest_call_horse_action" map="custom_quest_call_horse" />
 		<control input="x" controller="keyboard" />
