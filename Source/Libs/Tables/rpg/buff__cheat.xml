@@ -1,5 +1,27 @@
+<?xml version="1.0" encoding="us-ascii"?>
 <database name="hammerheart">
   <table name="buff" version="1">
+    <header>
+      <column name="buff_ai_tag_id" type="integer" />
+      <column name="buff_class_id" type="integer" />
+      <column name="buff_desc" type="character varying" />
+      <column name="buff_exclusivity_id" type="integer" />
+      <column name="buff_id" type="uuid" />
+      <column name="buff_lifetime_id" type="integer" />
+      <column name="buff_name" type="character varying" />
+      <column name="buff_ui_name" type="character varying" />
+      <column name="buff_ui_order" type="integer" />
+      <column name="buff_ui_type_id" type="integer" />
+      <column name="buff_ui_visibility_id" type="integer" />
+      <column name="duration" type="real" />
+      <column name="icon_id" type="integer" />
+      <column name="implementation" type="character varying" />
+      <column name="is_persistent" type="boolean" />
+      <column name="params" type="character varying" />
+      <column name="slot_buff_ui_name" type="character varying" />
+      <column name="slot_icon_id" type="integer" />
+      <column name="visual_effect" type="character varying" />
+    </header>
     <rows>
       <!-- Invisibility -->
       <!-- Vanilla params="vib=-10, con=-10" -->
