@@ -48,7 +48,8 @@ EOF
 
   # delete default profile?
   if [[ "${NOKEYS}" == "TRUE" ]]; then
-    rm -rf "${TMP_DIR}"/Source/Libs/Config/*.xml
+    # assume for now that this Config folder only contains keybinds and can be removed for the NOKEYS package
+    rm -rf "${TMP_DIR}/Source/Libs/Config"
     MOD_CLASS="-NOKEYS"
   fi
 
@@ -57,6 +58,11 @@ EOF
     rm -rf "${PKG_DIR}/${MOD_NAME}/Localization"
   fi
   mv -v "${TMP_DIR}/Source/Localization" "${PKG_DIR}/${MOD_NAME}"
+
+  # Localization is currently for the custom keybinds so we don't need it for NOKEYS
+  if [[ "${NOKEYS}" == "TRUE" ]]; then
+    rm -rf "${PKG_DIR}/${MOD_NAME}/Localization"
+  fi
 
   # Create new data pak file
   cd "${TMP_DIR}/Source"
