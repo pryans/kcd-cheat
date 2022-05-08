@@ -7,7 +7,6 @@ cheat_add_buff_invisible
 cheat_add_item
 cheat_add_money
 cheat_add_perk
-cheat_add_potion_buff
 cheat_add_stat_xp
 cheat_charm
 cheat_damage_all_items
@@ -40,6 +39,7 @@ cheat_remove_buff_invisible
 cheat_remove_item
 cheat_remove_perk
 cheat_repair_all_items
+cheat_reset_perks
 cheat_reveal_map
 cheat_save
 cheat_set_all_merchants_fence
@@ -67,7 +67,6 @@ cheat_teleport
 cheat_teleport_horse
 cheat_teleport_npc_to_loc
 cheat_teleport_npc_to_player
-cheat_teleport_to
 cheat_tp_to_npc
 cheat_tp_tr
 cheat_unlock_recipes

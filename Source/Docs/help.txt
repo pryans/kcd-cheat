@@ -112,7 +112,7 @@ Removes the buffs making the player immortal.
  
  
 [size=4][b]cheat_add_buff_invisible[/b][/size]
-Adds invisible buff to player. For now this just sets conspicuousness to zero.
+Adds invisible buff to player. Should set visibility, conspicuousness and noise to zero.
 Use cheat_remove_buff_invisible to remove this.
 
 [b]Examples:[/b]
@@ -188,9 +188,9 @@ Finds all of the items that match the given token.
 Adds an item to the player's inventory.
 
 [b]Arguments:[/b]
-	amount: (optional number) The number of items to add. Default 1.
-	id: (required) The item ID or all or part of a the item's name. Uses last match from cheat_find_items.
 	health: (optional number) The condition of the item added. Default 100.
+	id: (required) The item ID or all or part of a the item's name. Uses last match from cheat_find_items.
+	amount: (optional number) The number of items to add. Default 1.
 
 [b]Examples:[/b]
 	Adds the last item with 'bow' in its name:
@@ -217,8 +217,8 @@ Adds all items the player's inventory. This is probably a bad idea...
 Removes an item to the player's inventory.
 
 [b]Arguments:[/b]
-	id: (required) The item ID or all or part of a the item's name. Uses last match from cheat_find_items.
 	amount: (optional number) The number of items to remove. Default 1.
+	id: (required) The item ID or all or part of a the item's name. Uses last match from cheat_find_items.
 
 [b]Examples:[/b]
 	Removes the last item with 'bow' in its name:
@@ -303,6 +303,7 @@ Finds all of the perks that match the given token.
 
 [b]Arguments:[/b]
 	token: (optional) All or part of a the perk's name. Leave empty to list all perks.
+	any: (optional boolean) Whether to not filter out perks you can't select yourself
 
 [b]Examples:[/b]
 	Show all perks:
@@ -317,6 +318,7 @@ Finds all of the perks that match the given token.
 Adds the given perk to the player.
 
 [b]Arguments:[/b]
+	any: (optional boolean) Whether to not filter out perks you can't select yourself
 	id: (required) The perk ID or all or part of a the perk's name. Uses last match from cheat_find_perks.
 
 [b]Examples:[/b]
@@ -335,7 +337,8 @@ Adds the given perk to the player.
 Adds all perks to the player.
 
 [b]Arguments:[/b]
-	exclude: (required boolean) If true then negative, test, and obsolete of perks are excluded.
+	any: (optional boolean) Whether to not filter out perks you can't select yourself
+	exclude: (optional boolean) If true then negative, test, and obsolete of perks are excluded.
 
 [b]Examples:[/b]
 	Add all perks:
@@ -350,6 +353,7 @@ Adds all perks to the player.
 Removes the given perk from the player.
 
 [b]Arguments:[/b]
+	any: (optional boolean) Whether to not filter out perks you can't select yourself
 	id: (required) The perk ID or all or part of a the perk's name. Uses last match from cheat_find_perks.
 
 [b]Examples:[/b]
@@ -370,6 +374,15 @@ Removes all perks from the player.
 [b]Examples:[/b]
 	Remove all perks:
 	cheat_remove_all_perks
+
+ 
+ 
+[size=4][b]cheat_reset_perks[/b][/size]
+Resets all visible Perks.
+
+[b]Examples:[/b]
+	Reset all Perks:
+	cheat_reset_perks
 
  
  
@@ -454,9 +467,9 @@ You can end up in the air or under the map.
 I suggest saving your game and turn on immortality first.
 
 [b]Arguments:[/b]
+	y: (required number) Y coordinate
 	x: (required number) X coordinate
 	z: (required number) Z coordinate
-	y: (required number) Y coordinate
 
 [b]Examples:[/b]
 	Example:
@@ -464,20 +477,33 @@ I suggest saving your game and turn on immortality first.
 
  
  
-[size=4][b]cheat_teleport_to[/b][/size]
+[size=4][b]cheat_tp_tr[/b][/size]
 Teleports the player to the given place. Supported places (case insensitive):
-(Inn at the) Glade, Ledetchko, Merhojed,
-Monastery, Neuhof, Pribyslavitz,
-Rattay, Rovna, Samopesh,
-Sasau, Skalitz, Talmberg, 
-Uzhitz, Vranik 
+I, II, III, IV, V, VI, VII, VIII, IX, X, XI, XII, XIII, XIV, XV, XVI, XVII, XVIII, XIX, XX,
+XXI, XXII, XIII, XXIV, XXV, AI, AII, AII, AIII, AIV, AV
 
 [b]Arguments:[/b]
-	place: (required) Place to teleport to
+	place: (required) Teleport to treasure
 
 [b]Examples:[/b]
 	Example:
-	cheat_teleport_to place:rattay
+	cheat_tp_tr place:XXV
+
+ 
+ 
+[size=4][b]cheat_tp_to_npc[/b][/size]
+Finds an NPC or list of NPCs and teleports to any of them.
+This only works if the NPC has been loaded into the world.
+Defaults to last NPC in the list if no num argument received.
+
+[b]Arguments:[/b]
+	num: (optional number) Optional: The NPC's number in the list if there's more than one.
+Keep it greater than 0.
+	id: (required) All or part of the NPC's name.
+
+[b]Examples:[/b]
+	Teleport to Father Godwin:
+	cheat_tp_to_npc id:godwin
 
  
  
@@ -485,8 +511,8 @@ Uzhitz, Vranik
 Sets one of the player's states to the given value.
 
 [b]Arguments:[/b]
-	state: (required) One of: health, exhaust, hunger, or stamina.
 	value: (required number) The number to assign to the given state.
+	state: (required) One of: health, exhaust, hunger, or stamina.
 
 [b]Examples:[/b]
 	Set health to 100 points:
@@ -501,8 +527,8 @@ Sets one of the player's states to the given value.
 Adds XP to one of the player's stats.
 
 [b]Arguments:[/b]
-	stat: (required) One of: str, agi, vit, or spc.
 	xp: (required number) The desired XP to add.
+	stat: (required) One of: str, agi, vit, or spc.
 
 [b]Examples:[/b]
 	Add 100 XP to player's strength stat:
@@ -514,8 +540,8 @@ Adds XP to one of the player's stats.
 Sets one of the player's stats to the given level.
 
 [b]Arguments:[/b]
-	stat: (required) One of: str, agi, vit, or spc.
 	level: (required number) The desired level for the given stat (max 20). Level cannot lowered.
+	stat: (required) One of: str, agi, vit, or spc.
 
 [b]Examples:[/b]
 	Set player's strength to level 20:
@@ -539,7 +565,7 @@ Adds the given amount of groschen to the player's inventory.
  
  
 [size=4][b]cheat_set_bow_reticle[/b][/size]
-Enabled or disables the bow reticle. Won't take effect if bow is drawn.
+Enables or disables the bow reticle. Won't take effect if bow is drawn.
 
 [b]Arguments:[/b]
 	enable: (required boolean) true or false
@@ -550,6 +576,96 @@ Enabled or disables the bow reticle. Won't take effect if bow is drawn.
 
 	Turn it off:
 	cheat_set_bow_reticle enable:false
+
+ 
+ 
+[size=4][b]cheat_set_chat_bubbles[/b][/size]
+Enables or disables chat cheat_set_chat_bubbles.
+
+[b]Arguments:[/b]
+	enable: (required boolean) true or false
+
+[b]Examples:[/b]
+	Turn it on:
+	cheat_set_chat_bubbles enable:true
+
+	Turn it off:
+	cheat_set_chat_bubbles enable:false
+
+ 
+ 
+[size=4][b]cheat_set_compass[/b][/size]
+Enables or disables the compass.
+
+[b]Arguments:[/b]
+	enable: (required boolean) true or false
+
+[b]Examples:[/b]
+	Turn it on:
+	cheat_set_compass enable:true
+
+	Turn it off:
+	cheat_set_compass enable:false
+
+ 
+ 
+[size=4][b]cheat_set_gevent_log_level[/b][/size]
+Enables or disables game event log level 3. Shows how much experience is gained for a skill/stat.
+
+[b]Arguments:[/b]
+	enable: (required boolean) true or false
+
+[b]Examples:[/b]
+	Turn it on:
+	cheat_set_gevent_log_level enable:true
+
+	Turn it off:
+	cheat_set_gevent_log_level enable:false
+
+ 
+ 
+[size=4][b]cheat_set_hud[/b][/size]
+Enables or disables the hud.
+
+[b]Arguments:[/b]
+	enable: (required boolean) true or false
+
+[b]Examples:[/b]
+	Turn it on:
+	cheat_set_hud enable:true
+
+	Turn it off:
+	cheat_set_hud enable:false
+
+ 
+ 
+[size=4][b]cheat_set_statusbar[/b][/size]
+Enables or disables the statusbar.
+
+[b]Arguments:[/b]
+	enable: (required boolean) true or false
+
+[b]Examples:[/b]
+	Turn it on:
+	cheat_set_statusbar enable:true
+
+	Turn it off:
+	cheat_set_statusbar enable:false
+
+ 
+ 
+[size=4][b]cheat_set_third_person[/b][/size]
+Enables or disables the third person view.
+
+[b]Arguments:[/b]
+	enable: (required boolean) true or false
+
+[b]Examples:[/b]
+	Turn it on:
+	cheat_set_third_person enable:true
+
+	Turn it off:
+	cheat_set_third_person enable:false
 
  
  
@@ -577,6 +693,16 @@ Let me know.
 [b]Examples:[/b]
 	Wash yourself and your horse:
 	cheat_wash_dirt_and_blood
+
+ 
+ 
+[size=4][b]cheat_charm[/b][/size]
+Automates your morning routine of bath-haircut-sex for maximum Charisma bonus.
+Washes all dirt and blood and applies Fresh Cut and Smitten buffs.
+
+[b]Examples:[/b]
+	Wash yourself and add Charisma buffs:
+	cheat_charm
 
  
  
@@ -718,11 +844,11 @@ This only works if the NPC has been loaded into the world.
 Teleports one or more NPCs to the given coordinates. Use cheat_loc to get locations.
 
 [b]Arguments:[/b]
-	token: (required) All or part of a the NPC's name.
+	max: (optional number) The maximum NPCs to teleport. Default 10.
 	z: (required number) Z coordinate.
 	y: (required number) Y coordinate.
 	x: (required number) X coordinate.
-	max: (optional number) The maximum NPCs to teleport. Default 10.
+	token: (required) All or part of a the NPC's name.
 	radius: (optional number) The teleport radius around the x,y,z target. Default 5.
 
 [b]Examples:[/b]
@@ -735,8 +861,8 @@ Teleports one or more NPCs to the given coordinates. Use cheat_loc to get locati
 Teleports one or more NPCs to the player's location.
 
 [b]Arguments:[/b]
-	token: (required) All or part of a the NPC's name.
 	max: (optional number) The maximum NPCs to teleport. Default 10.
+	token: (required) All or part of a the NPC's name.
 	radius: (optional number) The teleport radius around the player. Default 5.
 
 [b]Examples:[/b]
@@ -762,8 +888,8 @@ The spawned entities are not managed so you should kill them off or load a clean
 
 [b]Arguments:[/b]
 	count: (optional number) Number of things to spawn. Default 1.
-	radius: (optional number) The spawn radius around the player. Default 5.
 	class: (required) bandit|cuman|hare|horse|boar|sheep|pig|cow|buck|doe|reddeer
+	radius: (optional number) The spawn radius around the player. Default 5.
 
 [b]Examples:[/b]
 	Spawn 10 bandits:
@@ -805,8 +931,8 @@ Sets the weather to the given weather ID.
 7 = dream
 
 [b]Arguments:[/b]
-	id: (required number) The weather type ID.
 	delay: (optional number) The number of hours to delay the transition. Default 0.
+	id: (required number) The weather type ID.
 
 [b]Examples:[/b]
 	Set weather to foggy storm:
