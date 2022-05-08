@@ -12,7 +12,6 @@ fi
 sed -i 's/cheat.isCommandLineBuild =.*/cheat.isCommandLineBuild = true/g' ./Source/Scripts/Startup/main.lua
 
 # folder that contains the Source folder, used for help.txt and commands.txt out
-
 sed -i "s/cheat.devHome =.*/cheat.devHome = \"$(echo ${DEV_HOME} | sed 's/\//\\\//g')\"/g" ./Source/Scripts/Startup/main.lua
 
 # Running main.lua will do three things:

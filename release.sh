@@ -40,12 +40,15 @@ function packageRelease() {
 EOF
 
   # clone source dir
+  if [[ -d "${TMP_DIR}" ]]; then
+    rm -rf "${TMP_DIR}"
+  fi
   mkdir -p "${TMP_DIR}"
   cp -r "${SRC_DIR}" "${TMP_DIR}"
 
   # delete default profile?
   if [[ "${NOKEYS}" == "TRUE" ]]; then
-    rm -rf "${TMP_DIR}/Source/Libs/Config/defaultProfile.xml"
+    rm -rf "${TMP_DIR}/Source/Libs/Config/*.xml"
     MOD_CLASS="-NOKEYS"
   fi
 
