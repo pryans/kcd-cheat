@@ -54,15 +54,16 @@ EOF
   fi
 
   # Localization must be a sibling of the pak file
+  # Localization is currently for the custom keybinds so we don't need it for NOKEYS
   if [[ -d "${PKG_DIR}/${MOD_NAME}/Localization" ]]; then
     rm -rf "${PKG_DIR}/${MOD_NAME}/Localization"
   fi
-  mv -v "${TMP_DIR}/Source/Localization" "${PKG_DIR}/${MOD_NAME}"
-
-  # Localization is currently for the custom keybinds so we don't need it for NOKEYS
-  if [[ "${NOKEYS}" == "TRUE" ]]; then
-    rm -rf "${PKG_DIR}/${MOD_NAME}/Localization"
+  if [[ "${NOKEYS}" != "TRUE" ]]; then
+    for LOCALIZATION_FOLDER in $(ls ${TMP_DIR}/Source/Localization); do
+      7za a -mx=0 -tzip "${PKG_DIR}/${MOD_NAME}/Localization/${LOCALIZATION_FOLDER}.pak" "${TMP_DIR}/Source/Localization/${LOCALIZATION_FOLDER}"/*
+    done
   fi
+  rm -rf "${TMP_DIR}/Source/Localization"
 
   # Create new data pak file
   cd "${TMP_DIR}/Source"
