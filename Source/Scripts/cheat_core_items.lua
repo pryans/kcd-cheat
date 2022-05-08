@@ -64,7 +64,6 @@ function cheat:recreateitems(mode, miscValue)
       local categoryidArray = {0, 1, 2, 3, 4, 5, 8, 9, 13, 14, 15, 16, 27}
       for i=1,table.getn(categoryidArray) do
         if categoryidArray[i] == itemCategoryId and itemOwner ~= playerDataM and itemOwner ~= playerDataF then
-          --cheat:logDebug("owner [%s]", itemOwner)
           shouldDelete = true
           shouldRecreate = false
         end
@@ -72,10 +71,9 @@ function cheat:recreateitems(mode, miscValue)
     end
     
     if mode == "ownstolen" then
-      local categoryidArray = {0, 1, 2, 3, 4, 5, 8, 9, 13, 14, 15, 16, 27}
+      local categoryidArray = {0, 1, 2, 3, 4, 5, 8, 13, 14, 15, 16, 27}
       for i=1,table.getn(categoryidArray) do
-        if categoryidArray[i] == itemCategoryId and itemOwner ~= playerData and itemOwner ~= playerDataF then
-          --cheat:logDebug("owner [%s]", itemOwner)
+        if categoryidArray[i] == itemCategoryId and itemOwner ~= playerDataM and itemOwner ~= playerDataF then
           shouldDelete = true
           shouldRecreate = true
         end
