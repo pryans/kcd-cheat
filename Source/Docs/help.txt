@@ -188,9 +188,9 @@ Finds all of the items that match the given token.
 Adds an item to the player's inventory.
 
 [b]Arguments:[/b]
-	id: (required) The item ID or all or part of a the item's name. Uses last match from cheat_find_items.
-	health: (optional number) The condition of the item added. Default 100.
 	amount: (optional number) The number of items to add. Default 1.
+	health: (optional number) The condition of the item added. Default 100.
+	id: (required) The item ID or all or part of a the item's name. Uses last match from cheat_find_items.
 
 [b]Examples:[/b]
 	Adds the last item with 'bow' in its name:
@@ -302,8 +302,8 @@ Restarting the game reverts this effect.
 Finds all of the perks that match the given token.
 
 [b]Arguments:[/b]
-	token: (optional) All or part of a the perk's name. Leave empty to list all perks.
 	any: (optional boolean) Whether to not filter out perks you can't select yourself
+	token: (optional) All or part of a the perk's name. Leave empty to list all perks.
 
 [b]Examples:[/b]
 	Show all perks:
@@ -467,9 +467,9 @@ You can end up in the air or under the map.
 I suggest saving your game and turn on immortality first.
 
 [b]Arguments:[/b]
-	x: (required number) X coordinate
 	z: (required number) Z coordinate
 	y: (required number) Y coordinate
+	x: (required number) X coordinate
 
 [b]Examples:[/b]
 	Example:
@@ -527,8 +527,8 @@ Sets one of the player's states to the given value.
 Adds XP to one of the player's stats.
 
 [b]Arguments:[/b]
-	stat: (required) One of: str, agi, vit, or spc.
 	xp: (required number) The desired XP to add.
+	stat: (required) One of: str, agi, vit, or spc.
 
 [b]Examples:[/b]
 	Add 100 XP to player's strength stat:
@@ -540,8 +540,8 @@ Adds XP to one of the player's stats.
 Sets one of the player's stats to the given level.
 
 [b]Arguments:[/b]
-	stat: (required) One of: str, agi, vit, or spc.
 	level: (required number) The desired level for the given stat (max 20). Level cannot lowered.
+	stat: (required) One of: str, agi, vit, or spc.
 
 [b]Examples:[/b]
 	Set player's strength to level 20:
@@ -815,8 +815,8 @@ A high ratio, like 1000, is faster. Default is 15. 0 will pause time.
 Finds and kills all the killable NPCs within the given radius of the player.
 
 [b]Arguments:[/b]
-	token: (required) All or part of a the NPC's name.
 	radius: (optional number) The kill radius around player. Default 5.
+	token: (required) All or part of a the NPC's name.
 
 [b]Examples:[/b]
 	Kill Father Godwin:
@@ -844,12 +844,12 @@ This only works if the NPC has been loaded into the world.
 Teleports one or more NPCs to the given coordinates. Use cheat_loc to get locations.
 
 [b]Arguments:[/b]
-	token: (required) All or part of a the NPC's name.
-	radius: (optional number) The teleport radius around the x,y,z target. Default 5.
-	x: (required number) X coordinate.
-	max: (optional number) The maximum NPCs to teleport. Default 10.
 	z: (required number) Z coordinate.
 	y: (required number) Y coordinate.
+	max: (optional number) The maximum NPCs to teleport. Default 10.
+	radius: (optional number) The teleport radius around the x,y,z target. Default 5.
+	x: (required number) X coordinate.
+	token: (required) All or part of a the NPC's name.
 
 [b]Examples:[/b]
 	Teleport Father Godwin to somewhere...:
@@ -861,9 +861,9 @@ Teleports one or more NPCs to the given coordinates. Use cheat_loc to get locati
 Teleports one or more NPCs to the player's location.
 
 [b]Arguments:[/b]
-	token: (required) All or part of a the NPC's name.
-	radius: (optional number) The teleport radius around the player. Default 5.
 	max: (optional number) The maximum NPCs to teleport. Default 10.
+	radius: (optional number) The teleport radius around the player. Default 5.
+	token: (required) All or part of a the NPC's name.
 
 [b]Examples:[/b]
 	Teleport Father Godwin to ???:

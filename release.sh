@@ -52,6 +52,12 @@ EOF
     MOD_CLASS="-NOKEYS"
   fi
 
+  # Localization must be a sibling of the pak file
+  if [[ -d "${PKG_DIR}/${MOD_NAME}/Localization" ]]; then
+    rm -rf "${PKG_DIR}/${MOD_NAME}/Localization"
+  fi
+  mv -v "${TMP_DIR}/Source/Localization" "${PKG_DIR}/${MOD_NAME}"
+
   # Create new data pak file
   cd "${TMP_DIR}/Source"
   7za a -mx=0 -tzip "${PKG_DIR}/${MOD_NAME}/Data/data.pak" ./*
