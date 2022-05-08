@@ -1,4 +1,5 @@
 <Table>
+<Row><Cell>ui_keybinds_group_cheatmod</Cell><Cell>Cheat Mod</Cell><Cell>Cheat Mod</Cell></Row>
 <Row><Cell>ui_text_cheat_hover</Cell><Cell>Fly</Cell><Cell>Fliegen</Cell></Row>
 <Row><Cell>ui_text_cheat_push</Cell><Cell>Push forward</Cell><Cell>Schnell vorwärts</Cell></Row>
 <Row><Cell>ui_text_cheat_sprint</Cell><Cell>Sprint</Cell><Cell>Spurt</Cell></Row>
