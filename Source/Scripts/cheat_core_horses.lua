@@ -75,6 +75,7 @@ cheat:createCommand("cheat_find_horses", "cheat:cheat_find_horses(%line)", cheat
 function cheat:cheat_find_horses(line)
   local args = cheat:argsProcess(line, cheat.cheat_find_horses_args)
   local token, tokenErr = cheat:argsGet(args, "token")
+  
   if not tokenErr then
     cheat:find_horse(token)
   end
