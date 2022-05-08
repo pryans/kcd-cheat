@@ -5,7 +5,6 @@ function cheat:packTable(...)
   return { n = select("#", ...), ... }
 end
 
-
 -- ============================================================================
 -- string functions
 -- ============================================================================
@@ -32,7 +31,7 @@ function cheat:toLower(value)
 end
 
 function cheat:endsWith(String,End)
-   return End=='' or string.sub(String,-string.len(End))==End
+  return End=='' or string.sub(String,-string.len(End))==End
 end
 
 -- ============================================================================
@@ -85,7 +84,6 @@ function cheat:isNumber(value)
     return false
   end
 end
-
 
 -- ============================================================================
 -- logging functions
@@ -163,7 +161,6 @@ function cheat:logError(message, ...)
   end
 end
 
-
 -- ============================================================================
 -- testing functions
 -- ============================================================================
@@ -201,7 +198,6 @@ function cheat:testAssert(name, value)
     cheat.g_cheat_test_pass = cheat.g_cheat_test_pass + 1
   end
 end
-
 
 -- ============================================================================
 -- end
