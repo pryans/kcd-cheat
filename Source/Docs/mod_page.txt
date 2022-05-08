@@ -43,6 +43,12 @@ System.ExecuteCommand("cheat_set_regen enable:true state:stamina amount:10")
 
 [b][size=6]Change Log[/size][/b]
 
+[b]1.43[/b]
+[list]
+[*]Community changes/fixes. 
+[*]See https://github.com/pryans/kcd-cheat/pull/21 for list of changes.
+[/list]
+
 [b]1.35[/b]
 [list]
 [*]PR11: Fixed 'x' hotkey for horse dismount and calling dog.
