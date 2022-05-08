@@ -48,7 +48,7 @@ EOF
 
   # delete default profile?
   if [[ "${NOKEYS}" == "TRUE" ]]; then
-    rm -rf "${TMP_DIR}/Source/Libs/Config/*.xml"
+    rm -rf "${TMP_DIR}"/Source/Libs/Config/*.xml
     MOD_CLASS="-NOKEYS"
   fi
 
