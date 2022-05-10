@@ -188,9 +188,9 @@ Finds all of the items that match the given token.
 Adds an item to the player's inventory.
 
 [b]Arguments:[/b]
-	health: (optional number) The condition of the item added. Default 100.
-	amount: (optional number) The number of items to add. Default 1.
 	id: (required) The item ID or all or part of a the item's name. Uses last match from cheat_find_items.
+	amount: (optional number) The number of items to add. Default 1.
+	health: (optional number) The condition of the item added. Default 100.
 
 [b]Examples:[/b]
 	Adds the last item with 'bow' in its name:
@@ -337,8 +337,8 @@ Adds the given perk to the player.
 Adds all perks to the player.
 
 [b]Arguments:[/b]
-	exclude: (optional boolean) If true then negative, test, and obsolete of perks are excluded.
 	any: (optional boolean) Whether to not filter out perks you can't select yourself
+	exclude: (optional boolean) If true then negative, test, and obsolete of perks are excluded.
 
 [b]Examples:[/b]
 	Add all perks:
@@ -467,9 +467,9 @@ You can end up in the air or under the map.
 I suggest saving your game and turn on immortality first.
 
 [b]Arguments:[/b]
+	x: (required number) X coordinate
 	y: (required number) Y coordinate
 	z: (required number) Z coordinate
-	x: (required number) X coordinate
 
 [b]Examples:[/b]
 	Example:
@@ -527,8 +527,8 @@ Sets one of the player's states to the given value.
 Adds XP to one of the player's stats.
 
 [b]Arguments:[/b]
-	xp: (required number) The desired XP to add.
 	stat: (required) One of: str, agi, vit, or spc.
+	xp: (required number) The desired XP to add.
 
 [b]Examples:[/b]
 	Add 100 XP to player's strength stat:
@@ -540,8 +540,8 @@ Adds XP to one of the player's stats.
 Sets one of the player's stats to the given level.
 
 [b]Arguments:[/b]
-	level: (required number) The desired level for the given stat (max 20). Level cannot lowered.
 	stat: (required) One of: str, agi, vit, or spc.
+	level: (required number) The desired level for the given stat (max 20). Level cannot lowered.
 
 [b]Examples:[/b]
 	Set player's strength to level 20:
@@ -722,8 +722,8 @@ Regenerates the given player state over time; pulses once per second.
 
 [b]Arguments:[/b]
 	state: (required) The state to regen: all, health, stamina, or exhaust.
-	enable: (required boolean) true to enable state regen; false to disable
 	amount: (optional number) The amount to regen every second.
+	enable: (required boolean) true to enable state regen; false to disable
 
 [b]Examples:[/b]
 	Adds 1 to all states every second.:
@@ -756,8 +756,8 @@ Finds all of the skills that match the given token.
 Sets one of the player's skills to the given level.
 
 [b]Arguments:[/b]
-	skill: (required) The skill name, full or partial, or ID. Use cheat_find_skills to list all skills.
 	level: (required number) The desired level for the given skill (max 20).
+	skill: (required) The skill name, full or partial, or ID. Use cheat_find_skills to list all skills.
 
 [b]Examples:[/b]
 	Set player's lockpicking skill to level 20:
@@ -845,9 +845,9 @@ Teleports one or more NPCs to the given coordinates. Use cheat_loc to get locati
 
 [b]Arguments:[/b]
 	token: (required) All or part of a the NPC's name.
-	z: (required number) Z coordinate.
 	max: (optional number) The maximum NPCs to teleport. Default 10.
 	y: (required number) Y coordinate.
+	z: (required number) Z coordinate.
 	radius: (optional number) The teleport radius around the x,y,z target. Default 5.
 	x: (required number) X coordinate.
 
@@ -862,8 +862,8 @@ Teleports one or more NPCs to the player's location.
 
 [b]Arguments:[/b]
 	token: (required) All or part of a the NPC's name.
-	radius: (optional number) The teleport radius around the player. Default 5.
 	max: (optional number) The maximum NPCs to teleport. Default 10.
+	radius: (optional number) The teleport radius around the player. Default 5.
 
 [b]Examples:[/b]
 	Teleport Father Godwin to ???:
