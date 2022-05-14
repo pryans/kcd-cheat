@@ -49,7 +49,7 @@ function cheat:recreateitems(mode, miscValue)
     end
     
     if mode == "damageall" then
-      local categoryidArray = {0, 1, 2, 3, 4, 5, 13, 14, 16, 27}
+      local categoryidArray = {3, 4, 27}
       for i=1,table.getn(categoryidArray) do
         if categoryidArray[i] == itemCategoryId then
           cheat:logDebug("dmgall [%s] [%s] [%s]", itemUIName, tostring(item.class), tostring(itemHealth))
@@ -342,7 +342,7 @@ cheat.cheat_damage_all_items_args = {
 
 cheat:createCommand("cheat_damage_all_items", "cheat:cheat_damage_all_items(%line)", cheat.cheat_damage_all_items_args,
   "Damages all weapons and armor in your inventory. This can uneqip items so don't do this in combat.",
-  "Damage all weapons and armor to 50%", "cheat_damage_all_items health:0.5")
+  "Damage all ammo, weapons and armor to 50%", "cheat_damage_all_items health:0.5")
 function cheat:cheat_damage_all_items(line)
   local args = cheat:argsProcess(line, cheat.cheat_damage_all_items_args)
   local health, healthErr = cheat:argsGet(args, 'health')
