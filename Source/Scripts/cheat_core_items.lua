@@ -49,7 +49,7 @@ function cheat:recreateitems(mode, miscValue)
     end
     
     if mode == "damageall" then
-      local categoryidArray = {0, 1, 2, 3, 4, 5, 13, 14, 16, 27}
+      local categoryidArray = {3, 4, 27}
       for i=1,table.getn(categoryidArray) do
         if categoryidArray[i] == itemCategoryId then
           cheat:logDebug("dmgall [%s] [%s] [%s]", itemUIName, tostring(item.class), tostring(itemHealth))
@@ -193,14 +193,14 @@ end
 cheat.cheat_add_item_args = {
   id = function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "The item ID or all or part of a the item's name. Uses last match from cheat_find_items.") end,
   amount = function(args,name,showHelp) return cheat:argsGetOptionalNumber(args, name, 1, showHelp, "The number of items to add. Default 1.") end,
-  health = function(args,name,showHelp) return cheat:argsGetOptionalNumber(args, name, 100, showHelp, "The condition of the item added. Default 100.") end
+  health = function(args,name,showHelp) return cheat:argsGetOptionalNumber(args, name, 100, showHelp, "The condition of the item added. Default 1.") end
 }
 
 cheat:createCommand("cheat_add_item", "cheat:cheat_add_item(%line)", cheat.cheat_add_item_args,
   "Adds an item to the player's inventory.",
   "Adds the last item with 'bow' in its name", "cheat_add_item id:bow",
   "Adds the item ui_nm_arrow_hunter by ID", "cheat_add_item id:802507e9-d620-47b5-ae66-08fcc314e26a",
-  "Adds 10 items ui_nm_arrow_hunter by fullname with 50 condition", "cheat_add_item id:ui_nm_arrow_hunter amount:10 health:50")
+  "Adds 10 items ui_nm_arrow_hunter by fullname with 50 condition", "cheat_add_item id:ui_nm_arrow_hunter amount:10 health:0.5")
 function cheat:cheat_add_item(line)
   local args = cheat:argsProcess(line, cheat.cheat_add_item_args)
   local id, idErr = cheat:argsGet(args, 'id')
@@ -240,7 +240,7 @@ end
 -- cheat_add_all_items
 -- ============================================================================
 cheat:createCommand("cheat_add_all_items", "cheat:cheat_add_all_items()", nil,
-  "Adds all items the player's inventory. This is probably a bad idea...",
+  "Adds all items the player's inventory. This is probably a bad idea because of your limmited carry weight...",
   "Add all items", "cheat_add_all_items")
 function cheat:cheat_add_all_items()
   local items = cheat:find_item(id, true)
@@ -342,7 +342,7 @@ cheat.cheat_damage_all_items_args = {
 
 cheat:createCommand("cheat_damage_all_items", "cheat:cheat_damage_all_items(%line)", cheat.cheat_damage_all_items_args,
   "Damages all weapons and armor in your inventory. This can uneqip items so don't do this in combat.",
-  "Damage all weapons and armor to 50%", "cheat_damage_all_items health:0.5")
+  "Damage all ammo, weapons and armor to 50%", "cheat_damage_all_items health:0.5")
 function cheat:cheat_damage_all_items(line)
   local args = cheat:argsProcess(line, cheat.cheat_damage_all_items_args)
   local health, healthErr = cheat:argsGet(args, 'health')
