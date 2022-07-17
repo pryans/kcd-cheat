@@ -22,6 +22,31 @@
 --player.actor:EquipInventoryItem(weapon)
 --player.human:GetItemInHand(0)
 
+-- Item codes to help interpret code below:
+--[[
+<row item_category_id="0" item_category_name="misc" />
+<row item_category_id="1" item_category_name="melee_weapon" />
+<row item_category_id="2" item_category_name="missile_weapon" />
+<row item_category_id="3" item_category_name="ammo" />
+<row item_category_id="4" item_category_name="armor" />
+<row item_category_id="5" item_category_name="food" />
+<row item_category_id="6" item_category_name="money" />
+<row item_category_id="8" item_category_name="document" />
+<row item_category_id="9" item_category_name="alchemy_material" />
+<row item_category_id="10" item_category_name="herb" />
+<row item_category_id="11" item_category_name="alchemy_base" />
+<row item_category_id="12" item_category_name="npc_tool" />
+<row item_category_id="13" item_category_name="ointment_item" />
+<row item_category_id="14" item_category_name="potion" />
+<row item_category_id="15" item_category_name="die" />
+<row item_category_id="16" item_category_name="helmet" />
+<row item_category_id="17" item_category_name="key" />
+<row item_category_id="18" item_category_name="keyring" />
+<row item_category_id="25" item_category_name="player_item" />
+<row item_category_id="26" item_category_name="equippable_item" />
+<row item_category_id="27" item_category_name="weapon" />
+<row item_category_id="28" item_category_name="consumable_item" />
+--]]
 function cheat:recreateitems(mode, miscValue)
   for i,userdata in pairs(player.inventory:GetInventoryTable()) do
     local item = ItemManager.GetItem(userdata)
@@ -36,7 +61,7 @@ function cheat:recreateitems(mode, miscValue)
     local shouldDelete = false
     local shouldRecreate = false
     local newItemHealth = 1
-    
+
     if mode == "repairall" then
       local itemHealth = item.health
       local categoryidArray = {0, 1, 2, 3, 4, 5, 9, 13, 14, 16, 27}
@@ -47,7 +72,7 @@ function cheat:recreateitems(mode, miscValue)
         end
       end
     end
-    
+
     if mode == "damageall" then
       local categoryidArray = {3, 4, 27}
       for i=1,table.getn(categoryidArray) do
@@ -59,7 +84,7 @@ function cheat:recreateitems(mode, miscValue)
         end
       end
     end
-    
+
     if mode == "removestolen" then
       local categoryidArray = {0, 1, 2, 3, 4, 5, 8, 9, 13, 14, 15, 16, 27}
       for i=1,table.getn(categoryidArray) do
@@ -69,7 +94,7 @@ function cheat:recreateitems(mode, miscValue)
         end
       end
     end
-    
+
     if mode == "ownstolen" then
       local categoryidArray = {0, 1, 2, 3, 4, 5, 8, 13, 14, 15, 16, 27}
       for i=1,table.getn(categoryidArray) do
@@ -79,14 +104,14 @@ function cheat:recreateitems(mode, miscValue)
         end
       end
     end
-    
+
     if shouldDelete then
       cheat:logDebug("recreateitem delete [%s] [%s]", itemUIName, tostring(item.class))
       for i=1,itemAmount do
         player.inventory:RemoveItem(item.id, 1)
       end
     end
-    
+
     if shouldRecreate then
       cheat:logDebug("recreateitem create [%s] [%s] [%s]", itemUIName, tostring(item.class), tostring(newItemHealth))
       for i=1,itemAmount do
@@ -109,23 +134,23 @@ function cheat:find_item(searchKey, returnAll)
   local item_id = nil
   local item_name = nil
   local items = {}
-  
+
   for i=0,rows do
     local rowInfo = Database.GetTableLine(tableName, i)
     local found = false
-    
+
     if not cheat:isBlank(searchKeyUpper) then
       if cheat:toUpper(rowInfo.item_id) == searchKeyUpper then
         found = true
       end
-      
+
       if string.find(cheat:toUpper(rowInfo.ui_name), searchKeyUpper, 1, true) then
         found = true
       end
     else
       found = true
     end
-    
+
     if found then
       item_id = rowInfo.item_id
       item_name = rowInfo.ui_name
@@ -138,7 +163,7 @@ function cheat:find_item(searchKey, returnAll)
       cheat:logInfo("Found item [%s] with id [%s].", tostring(item_name), tostring(item_id))
     end
   end
-  
+
   if returnAll then
     cheat:logDebug("Returning [%s] items.", tostring(#items))
     return items
@@ -157,7 +182,7 @@ function cheat:get_item_category_id(searchKey)
   local tableInfo = Database.GetTableInfo(tableName)
   local rows = tableInfo.LineCount - 1
   local searchKeyUpper = cheat:toUpper(searchKey)
-  
+
   for i=0,rows do
     local rowInfo = Database.GetTableLine(tableName, i)
     if cheat:toUpper(rowInfo.item_id) == searchKeyUpper then
@@ -206,21 +231,21 @@ function cheat:cheat_add_item(line)
   local id, idErr = cheat:argsGet(args, 'id')
   local amount, amountErr = cheat:argsGet(args, 'amount', 1)
   local health, healthErr = cheat:argsGet(args, 'health', 100)
-  
+
   if idErr or amountErr or healthErr then
     return
   end
-  
+
   if amount < 0 then
     amount = 1
     cheat:logWarn("Setting amount to 1.")
   end
-  
+
   if health < 0 then
     health = 1
     cheat:logWarn("Setting health to 1.")
   end
-  
+
   local item_id, item_name = cheat:find_item(id)
   if not cheat:isBlank(item_id) then
     for i=1,amount do

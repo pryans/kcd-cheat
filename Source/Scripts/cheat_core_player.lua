@@ -7,7 +7,7 @@ cheat:createCommand("cheat_stash", "cheat:cheat_stash()", nil,
 function cheat:cheat_stash()
   local gender = player.soul:GetGender()
   if gender ~= 2 then
-    for i,stash in pairs(System.GetEntitiesByClass("Stash")) do 
+    for i,stash in pairs(System.GetEntitiesByClass("Stash")) do
       local ownerWuid = EntityModule.GetInventoryOwner(stash.inventoryId)
       if ownerWuid == player.this.id then
         cheat:logInfo("Opening stash [%s].", tostring(stash.inventoryId))
@@ -58,13 +58,32 @@ end
 -- ============================================================================
 -- cheat_teleport_to
 -- ============================================================================
-System.AddCCommand('cheat_teleport_to', 'cheat:teleport_to(%line)', "Teleports the player to the given place. Supported places (case insensitive):\n$8Budin, (Inn at the) Glade, (Rattay Mill) Home,\n$8Wagoners (Inn), Katzek, Kohelnitz,\n$8Ledetchko, Merhojed, Monastery,\n$8Neuhof, Pribyslavitz, Rattay,\n$8Rovna, Samopesh, Sasau,\n$8Skalitz, Talmberg, Uzhitz,\n$8Vranik, Wagoners (Inn), (Broken) Wheel")
-
+System.AddCCommand('cheat_teleport_to', 'cheat:teleport_to(%line)',
+  [["Teleports the player to the given place. Supported places (case insensitive):
+  (Inn at the) Glade, Ratai_inn,
+  Ledetchko, Merhojed,
+  Monastery, Neuhof, Pribyslavitz,
+  Rattay, Rovna, Samopesh,
+  Sasau, Skalitz, Talmberg, Uzhitz, Vranik,
+  Wagoners (Inn), (Broken) Wheel,
+  Treasure_1, ..., Treasure_25,
+  Ancient_Treasure_1, ... , Ancient_Treasure_5,
+  Ruin_1,..., Ruin_4,
+  Raiders_1,..., Raiders_5, (dog at 2 and 5)
+  Interlopers_1,..., Interlopers_3,
+  Bandits_1,...,Bandits_4,
+  /*  MOLDAVITE_BANDIT_CAMP, SKALITZ_SMELTERY_BANDIT_CAMP,
+  SASSAU_BANDIT_CAMP, MONASTERY_BANDIT_CAMP */
+  Garden_1,...,Garden_2,
+  GARDEN_WEST_RATTAY,GARDEN_WHEEL"]])
 function cheat:teleport_to(line)
-  local gender = player.soul:GetGender()
+  if player.soul:GetGender() == 2 then
+    cheat:logError("You can't use this command while playing Thereza!")
+    return
+  end
+
   local args = string.gsub(tostring(line), "place:", "")
-  local checkteste = "error"
-  
+
   local places = {}
   places["BUDIN"] = "x:1405 y:1463 z:19"
   places["GLADE"] = "x:2849 y:1913 z:156"
@@ -85,25 +104,96 @@ function cheat:teleport_to(line)
   places["UZHITZ"] = "x:3041 y:3324 z:156"
   places["VRANIK"] = "x:930 y:913 z:130"
   places["WAGONERS"] = "x:938 y:1424 z:24"
-  places["WHEEL"] = "x:2915 y:733 z:108 "
-  
-  if gender ~= 2 then
-    if places[cheat:toUpper(args)] ~= nil then
-      cheat:teleport(places[cheat:toUpper(args)])
-    else
-      for k,v in pairs(places) do
-        if string.find(k, cheat:toUpper(args)) then
-          checkteste = v
-        end
-      end
-      if checkteste ~= "error" then
-        cheat:teleport(checkteste)
-      else
-        cheat:logError("Invalid place - For a list of supported places type: 'cheat_teleport_to ?'")
+  places["WHEEL"] = "x:2915 y:733 z:108"
+
+  -- All treasure locations. I preferred arabic numerals to roman
+  -- numerals because it is much easier to visit all of them in order.
+  -- (You normally only need to change one digit and re-run the command)
+  places["TREASURE_1"] = "x:650 y:1920 z:106"
+  places["TREASURE_2"] = "x:382 y:1813 z:22"
+  places["TREASURE_3"] = "x:223 y:1695 z:71"
+  places["TREASURE_4"] = "x:2772 y:1449 z:106"
+  places["TREASURE_5"] = "x:2086 y:2054 z:126"
+  places["TREASURE_6"] = "x:2268 y:1589 z:114"
+  places["TREASURE_7"] = "x:1860 y:1521 z:80"
+  places["TREASURE_8"] = "x:2332 y:1120 z:54"
+  places["TREASURE_9"] = "x:869 y:3279 z:19"
+  places["TREASURE_10"] = "x:1683 y:938 z:41"
+  places["TREASURE_11"] = "x:1445 y:1140 z:37"
+  places["TREASURE_12"] = "x:3175 y:335 z:136"
+  places["TREASURE_13"] = "x:3610 y:721 z:100"
+  places["TREASURE_14"] = "x:3692 y:1258 z:87"
+  places["TREASURE_15"] = "x:2942 y:1329 z:90"
+  places["TREASURE_16"] = "x:482 y:2578 z:20"
+  places["TREASURE_17"] = "x:769 y:2572 z:20"
+  places["TREASURE_18"] = "x:2494 y:2817 z:99"
+  places["TREASURE_19"] = "x:856 y:1335 z:18"
+  places["TREASURE_20"] = "x:740 y:3699 z:30"
+  places["TREASURE_21"] = "x:657 y:3141 z:41"
+  places["TREASURE_22"] = "x:600 y:608 z:158"
+  places["TREASURE_23"] = "x:1011 y:3972 z:51"
+  places["TREASURE_24"] = "x:903 y:3841 z:66"
+  places["TREASURE_25"] = "x:221 y:3474 z:77"
+  places["ANCIENT_TREASURE_1"] = "x:3872 y:886 z:157"
+  places["ANCIENT_TREASURE_2"] = "x:874 y:270 z:181"
+  places["ANCIENT_TREASURE_3"] = "x:3159 y:3840 z:167"
+  places["ANCIENT_TREASURE_4"] = "x:1723 y:778 z:74"
+  places["ANCIENT_TREASURE_5"] = "x:474 y:3869 z:40"
+
+  -- All bandit camp locations for RUIN Quest.
+  places["RUIN_1"] = "x:3385 y:633 z:60"
+  places["RUIN_2"] = "x:1724 y:708 z:69"
+  places["RUIN_3"] = "x:3212 y:1380 z:101"
+  places["RUIN_4"] = "x:1726 y:951 z:47"
+
+  -- -- All bandit camp locations for RAIDERS Quest.
+  places["RAIDERS_1"] = "x:2464 y:2195 z:150"
+  places["RAIDERS_2"] = "x:2668 y:3163 z:136"
+  places["RAIDERS_3"] = "x:1669 y:3257 z:53"
+  places["RAIDERS_4"] = "x:3615 y:3193 z:172"
+  places["RAIDERS_5"] = "x:2454 y:2362 z:100"
+
+  -- All bandit camp locations for INTERLOPERS Quest.
+  places["INTERLOPERS_1"] = "x:188 y:3266 z:106"
+  places["INTERLOPERS_2"] = "x:536 y:2840 z:87"
+  places["INTERLOPERS_3"] = "x:536 y:2395 z:32"
+
+  -- MOLDAVITE_BANDIT_CAMP
+  places["BANDITS_1"] = "x:365 y:1749 z:19"
+
+  -- SKALITZ_SMELTERY_BANDIT_CAMP
+  places["BANDITS_2"] = "x:873 y:3279 z:23"
+
+  -- SASSAU_BANDIT_CAMP
+  places["BANDITS_3"] = "x:1295 y:1707 z:40"
+
+  -- MONASTERY_BANDIT_CAMP
+  places["BANDITS_4"] = "x:696 y:2115 z:52"
+
+  -- Gardens are a work in progress...
+  places["GARDEN_WEST_RATTAY"] = "x:2305 y:623 z:39"
+  places["GARDEN_WHEEL"] = "x:2836 y:769 z:92"
+
+  -- For conveniently visiting all gardens.
+  -- Work in progress.
+  places["GARDEN_1"] = places["GARDEN_WEST_RATTAY"]
+  places["GARDEN_2"] = places["GARDEN_WHEEL"]
+
+
+  if places[cheat:toUpper(args)] ~= nil then
+    cheat:teleport(places[cheat:toUpper(args)])
+  else
+    local checkteste = "error"
+    for k,v in pairs(places) do
+      if string.find(k, cheat:toUpper(args)) then
+        checkteste = v
       end
     end
-  else
-    cheat:logError("You can't use this command while playing Thereza!")
+    if checkteste ~= "error" then
+      cheat:teleport(checkteste)
+    else
+      cheat:logError("Invalid place - For a list of supported places type: 'cheat_teleport_to ?'")
+    end
   end
 end
 
@@ -121,10 +211,10 @@ function cheat:tp_tr(line)
   local gender = player.soul:GetGender()
   local args = cheat:argsProcess(line, cheat.cheat_tp_tr_args)
   local nplace, nplaceErr = cheat:argsGet(args, 'place')
-  
+
   local places = {}
   places["I"] = "x:645 y:1916 z:111"
-  places["II"] = "x:384 y:1820 z:22" 
+  places["II"] = "x:384 y:1820 z:22"
   places["III"] = "x:220 y:1687 z:73"
   places["IV"] = "x:2777 y:1451 z:107"
   places["V"] = "x:2084 y:2056 z:126"
@@ -153,7 +243,7 @@ function cheat:tp_tr(line)
   places["AIII"] = "x:3158 y:3835 z:167"
   places["AIV"] = "x:1727 y:778 z:76"
   places["AV"] = "x:475 y:3864 z:39"
-  
+
   if gender ~= 2 then
     if not nplaceErr then
       if places[cheat:toUpper(nplace)] ~= nil then
@@ -184,11 +274,11 @@ function cheat:tp_to_npc(line)
   if not idErr and not numErr then
     cheat:cheat_find_npc("token:" .. id)
     local npcs = cheat:find_npc(id)
-    
+
     if num == nil or num <= 0 then
       num = #npcs
     end
-    
+
     if num > #npcs then
       cheat:logError("Sorry, this number is greater than the amount of found NPCS.")
       return
@@ -499,16 +589,16 @@ cheat:createCommand("cheat_set_wanted_level", "cheat:cheat_set_wanted_level(%lin
 function cheat:cheat_set_wanted_level(line)
   local args = cheat:argsProcess(line, cheat.cheat_set_wanted_level_args)
   local level, levelErr = cheat:argsGet(args, 'level')
-  
+
   if not levelErr then
     if level < 0 then
       level = 0
     end
-    
+
     if level > 3 then
       level = 3
     end
-    
+
     Game.SetWantedLevel(level)
     cheat:logInfo("Player's wanted level set to [%s].", tostring(level))
     return true
@@ -523,10 +613,10 @@ cheat:createCommand("cheat_wash_dirt_and_blood", "cheat:cheat_wash_dirt_and_bloo
   "Washes all blood and dirt from the player and player's horse.\n$8Do horses need this?\n$8Can items be washed?\n$8Let me know.",
   "Wash yourself and your horse", "cheat_wash_dirt_and_blood")
 function cheat:cheat_wash_dirt_and_blood()
-  
+
   player.actor:WashDirtAndBlood(1)
   player.actor:WashItems(1)
-  
+
   cheat:logInfo("All Clean!")
 end
 
@@ -580,12 +670,12 @@ cheat.g_passive_stamina_regen_highwater = 100
 cheat:cheat_timer_register("g_passive_stamina_regen", function()
   if cheat.g_passive_stamina_regen then
     local stamina = player.soul:GetState("stamina")
-    
+
     if stamina > cheat.g_passive_stamina_regen_highwater then
       cheat.g_passive_stamina_regen_highwater = stamina
       cheat:logDebug("current stamina highwater [%s]", tostring(cheat.g_passive_stamina_regen_highwater))
     end
-    
+
     if stamina < cheat.g_passive_stamina_regen_highwater then
       local realAmount = cheat:min(stamina + cheat.g_passive_stamina_regen_amount, cheat.g_passive_stamina_regen_highwater)
       player.soul:SetState("stamina", realAmount)
@@ -604,12 +694,12 @@ cheat.g_passive_exhaust_regen_highwater = 100
 cheat:cheat_timer_register("g_passive_exhaust_regen", function()
   if cheat.g_passive_exhaust_regen then
     local exhaust = player.soul:GetState("exhaust")
-    
+
     if exhaust > cheat.g_passive_exhaust_regen_highwater then
       cheat.g_passive_exhaust_regen_highwater = exhaust
       cheat:logDebug("current exhaust highwater [%s]", tostring(cheat.g_passive_exhaust_regen_highwater))
     end
-    
+
     if exhaust < cheat.g_passive_exhaust_regen_highwater then
       local realAmount = cheat:min(exhaust + cheat.g_passive_exhaust_regen_amount, cheat.g_passive_exhaust_regen_highwater)
       player.soul:SetState("exhaust", realAmount)
@@ -628,12 +718,12 @@ cheat.g_passive_hunger_regen_highwater = 100
 cheat:cheat_timer_register("g_passive_hunger_regen", function()
   if cheat.g_passive_hunger_regen then
     local hunger = player.soul:GetState("hunger")
-    
+
     if hunger > cheat.g_passive_hunger_regen_highwater then
       cheat.g_passive_hunger_regen_highwater = hunger
       cheat:logDebug("current hunger highwater [%s]", tostring(cheat.g_passive_hunger_regen_highwater))
     end
-    
+
     if hunger < cheat.g_passive_hunger_regen_highwater then
       local realAmount = cheat:min(hunger + cheat.g_passive_hunger_regen_amount, cheat.g_passive_hunger_regen_highwater)
       player.soul:SetState("hunger", realAmount)
@@ -653,12 +743,12 @@ cheat:cheat_timer_register("g_passive_health_regen", function()
   if cheat.g_passive_health_regen then
     local health = player.soul:GetState("health")
     local maxHealth = player.actor:GetMaxHealth();
-    
+
     if health > cheat.g_passive_health_regen_highwater then
       cheat.g_passive_health_regen_highwater = health
       cheat:logDebug("current health highwater [%s]", tostring(cheat.g_passive_health_regen_highwater))
     end
-    
+
     if health < cheat.g_passive_health_regen_highwater then
       local realAmount = cheat:min(health + cheat.g_passive_health_regen_amount, cheat.g_passive_health_regen_highwater)
       player.soul:SetState("health", realAmount)
@@ -686,11 +776,11 @@ function cheat:cheat_set_regen(line)
   local enable, enableErr = cheat:argsGet(args, 'enable')
   local state, stateErr = cheat:argsGet(args, 'state')
   local amount, amountErr = cheat:argsGet(args, 'amount', 1)
-  
+
   if enableErr or stateErr or amountErr then
     return
   end
-  
+
   if state == "health" or state == "all" then
     cheat.g_passive_health_regen = enable
     if enable then
@@ -698,7 +788,7 @@ function cheat:cheat_set_regen(line)
     end
     cheat:logInfo("Heath regen state [%s] and amount [%s].", tostring(cheat.g_passive_health_regen), tostring(cheat.g_passive_health_regen_amount))
   end
-  
+
   if state == "stamina" or state == "all" then
     cheat.g_passive_stamina_regen = enable
     if enable then
@@ -706,7 +796,7 @@ function cheat:cheat_set_regen(line)
     end
     cheat:logInfo("Stamina regen state [%s] and amount [%s].", tostring(cheat.g_passive_stamina_regen), tostring(cheat.g_passive_stamina_regen_amount))
   end
-  
+
   if state == "hunger" or state == "all" then
     cheat.g_passive_hunger_regen = enable
     if enable then
@@ -714,7 +804,7 @@ function cheat:cheat_set_regen(line)
     end
     cheat:logInfo("Hunger regen state [%s] and amount [%s].", tostring(cheat.g_passive_hunger_regen), tostring(cheat.g_passive_hunger_regen_amount))
   end
-  
+
   if state == "exhaust" or state == "all" then
     cheat.g_passive_exhaust_regen = enable
     if enable then
@@ -722,7 +812,7 @@ function cheat:cheat_set_regen(line)
     end
     cheat:logInfo("Exhaust regen state [%s] and amount [%s].", tostring(cheat.g_passive_exhaust_regen), tostring(cheat.g_passive_exhaust_regen_amount))
   end
-  
+
   return true
 end
 
