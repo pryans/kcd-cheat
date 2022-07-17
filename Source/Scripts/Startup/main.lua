@@ -1,6 +1,6 @@
 cheat={}
 cheat.versionMajor = 1
-cheat.versionMinor = 34
+cheat.versionMinor = 50
 cheat.devHome = ""
 cheat.isCommandLineBuild = false
 cheat.commands = {}
@@ -30,6 +30,7 @@ function cheat:loadFiles(fromDisk)
   else
     fromDisk = false
   end
+  -- Don't change the load order. It will break commands if you do
   cheat:loadFile("cheat_util.lua", fromDisk)
   cheat:loadFile("cheat_localization.lua", fromDisk)
   cheat:loadFile("cheat_args.lua", fromDisk)

@@ -5,26 +5,26 @@ function cheat:find_faction(searchKey)
   local searchKeyUpper = nil
   local faction_id = nil
   local faction_name = nil
-
+  
   if not cheat:isBlank(searchKey) then
     searchKeyUpper = cheat:toUpper(tostring(searchKey))
   end
-
+  
   for i,faction in ipairs(RPG.GetFactions()) do
     local found = false
-
+    
     if not cheat:isBlank(searchKeyUpper) then
       if cheat:toUpper(tostring(faction:GetId())) == searchKeyUpper then
         found = true
       end
-
+      
       if string.find(cheat:toUpper(faction:GetName()), searchKeyUpper, 1, true) then
         found = true
       end
     else
       found = true
     end
-
+    
     if found then
       faction_id = faction:GetId()
       faction_name = faction:GetName()

@@ -21,9 +21,10 @@ end
 -- ============================================================================
 -- EnvironmentModule.BlendTimeOfDay("foggy_storm", 30, true)
 cheat.cheat_set_weather_args = {
-  id=function(args,name,showHelp) return cheat:argsGetRequiredNumber(args, name, showHelp, "The weather type ID.") end,
-  delay=function(args,name,showHelp) return cheat:argsGetOptionalNumber(args, name, 0, showHelp, "The number of hours to delay the transition. Default 0.") end,
+  id = function(args,name,showHelp) return cheat:argsGetRequiredNumber(args, name, showHelp, "The weather type ID.") end,
+  delay = function(args,name,showHelp) return cheat:argsGetOptionalNumber(args, name, 0, showHelp, "The number of hours to delay the transition. Default 0.") end,
 }
+
 cheat:createCommand("cheat_set_weather", "cheat:cheat_set_weather(%line)", cheat.cheat_set_weather_args,
   "Sets the weather to the given weather ID." .. cheat:getWeatherList(),
   "Set weather to foggy storm", "cheat_set_weather id:6")

@@ -44,7 +44,7 @@ function cheat:find_npc(name, range)
   else
     npcs = System.GetEntities()
   end
-
+  
   for i,npc in pairs(npcs) do
     local isActor = npc and npc["actorStats"] ~= nil
     if isActor then
@@ -70,7 +70,7 @@ function cheat:get_npc_spawn_point(isPlayerPosition,xPos,yPos,zPos,radius)
   if not radius or radius == 0 then
     radius = 5
   end
-
+  
   while true do
     local spawnX = math.random(xPos-radius,xPos+radius)
     local spawnY = math.random(yPos-radius,yPos+radius)
@@ -89,9 +89,10 @@ end
 -- cheat_kill_npc
 -- ============================================================================
 cheat.cheat_kill_npc_args = {
-  token=function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "All or part of a the NPC's name.") end,
-  radius=function(args,name,showHelp) return cheat:argsGetOptionalNumber(args, name, 5, showHelp, "The kill radius around player. Default 5.") end,
+  token = function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "All or part of a the NPC's name.") end,
+  radius = function(args,name,showHelp) return cheat:argsGetOptionalNumber(args, name, 5, showHelp, "The kill radius around player. Default 5.") end,
 }
+
 cheat:createCommand("cheat_kill_npc", "cheat:cheat_kill_npc(%line)", cheat.cheat_kill_npc_args,
   "Finds and kills all the killable NPCs within the given radius of the player.",
   "Kill Father Godwin", "cheat_kill_npc token:Father Godwin radius:2",
@@ -107,10 +108,10 @@ function cheat:cheat_kill_npc(line)
         local npcName = cheat:get_npc_name(npc)
         npc.soul:DealDamage(9999,9999)
         cheat:logInfo("Killed NPC [%s] at position x=%d y=%d z=%d",
-            npcName,
-            npc:GetWorldPos().x,
-            npc:GetWorldPos().y,
-            npc:GetWorldPos().z)
+        npcName,
+        npc:GetWorldPos().x,
+        npc:GetWorldPos().y,
+        npc:GetWorldPos().z)
       end
     else
       cheat:logError("NPC [%s] not found.", token)
@@ -122,8 +123,9 @@ end
 -- cheat_find_npc
 -- ============================================================================
 cheat.cheat_find_npc_args = {
-  token=function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "All or part of a the NPC's name.") end
+  token = function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "All or part of a the NPC's name.") end
 }
+
 cheat:createCommand("cheat_find_npc", "cheat:cheat_find_npc(%line)", cheat.cheat_find_npc_args,
   "Finds and shows information about an NPC.\n$8This only works if the NPC has been loaded into the world.",
   "Find Father Godwin", "cheat_find_npc token:godwin")
@@ -136,10 +138,10 @@ function cheat:cheat_find_npc(line)
       for i,npc in ipairs(npcs) do
         local npcName = cheat:get_npc_name(npc)
         cheat:logInfo("Found NPC [%s] at position x=%d y=%d z=%d",
-            npcName,
-            npc:GetWorldPos().x,
-            npc:GetWorldPos().y,
-            npc:GetWorldPos().z)
+        npcName,
+        npc:GetWorldPos().x,
+        npc:GetWorldPos().y,
+        npc:GetWorldPos().z)
       end
     else
       cheat:logError("NPC [%s] not found.", token)
@@ -151,13 +153,14 @@ end
 -- cheat_teleport_npc_to_loc
 -- ============================================================================
 cheat.cheat_teleport_npc_to_loc_args = {
-  token=function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "All or part of a the NPC's name.") end,
-  x=function(args,name,showHelp) return cheat:argsGetRequiredNumber(args, name, showHelp, "X coordinate.") end,
-  y=function(args,name,showHelp) return cheat:argsGetRequiredNumber(args, name, showHelp, "Y coordinate.") end,
-  z=function(args,name,showHelp) return cheat:argsGetRequiredNumber(args, name, showHelp, "Z coordinate.") end,
-  radius=function(args,name,showHelp) return cheat:argsGetOptionalNumber(args, name, 5, showHelp, "The teleport radius around the x,y,z target. Default 5.") end,
-  max=function(args,name,showHelp) return cheat:argsGetOptionalNumber(args, name, 10, showHelp, "The maximum NPCs to teleport. Default 10.") end
+  token = function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "All or part of a the NPC's name.") end,
+  x = function(args,name,showHelp) return cheat:argsGetRequiredNumber(args, name, showHelp, "X coordinate.") end,
+  y = function(args,name,showHelp) return cheat:argsGetRequiredNumber(args, name, showHelp, "Y coordinate.") end,
+  z = function(args,name,showHelp) return cheat:argsGetRequiredNumber(args, name, showHelp, "Z coordinate.") end,
+  radius = function(args,name,showHelp) return cheat:argsGetOptionalNumber(args, name, 5, showHelp, "The teleport radius around the x,y,z target. Default 5.") end,
+  max = function(args,name,showHelp) return cheat:argsGetOptionalNumber(args, name, 10, showHelp, "The maximum NPCs to teleport. Default 10.") end
 }
+
 cheat:createCommand("cheat_teleport_npc_to_loc", "cheat:cheat_teleport_npc_to_loc(%line)", cheat.cheat_teleport_npc_to_loc_args,
   "Teleports one or more NPCs to the given coordinates. Use cheat_loc to get locations.",
   "Teleport Father Godwin to somewhere...", "cheat_teleport_npc_to_loc token:Father_Godwin x:1 y:2 z:3")
@@ -179,10 +182,10 @@ function cheat:cheat_teleport_npc_to_loc(line)
           npc:SetWorldPos(cheat:get_npc_spawn_point(false, x, y, z, radius));
           spawnCount = spawnCount + 1
           cheat:logInfo("Teleported NPC [%s] to position x=%d y=%d z=%d",
-              npcName,
-              npc:GetWorldPos().x,
-              npc:GetWorldPos().y,
-              npc:GetWorldPos().z)
+          npcName,
+          npc:GetWorldPos().x,
+          npc:GetWorldPos().y,
+          npc:GetWorldPos().z)
         else
           break
         end
@@ -197,10 +200,11 @@ end
 -- cheat_teleport_npc_to_player
 -- ============================================================================
 cheat.cheat_teleport_npc_to_player_args = {
-  token=function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "All or part of a the NPC's name.") end,
-  radius=function(args,name,showHelp) return cheat:argsGetOptionalNumber(args, name, 5, showHelp, "The teleport radius around the player. Default 5.") end,
-  max=function(args,name,showHelp) return cheat:argsGetOptionalNumber(args, name, 10, showHelp, "The maximum NPCs to teleport. Default 10.") end
+  token = function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "All or part of a the NPC's name.") end,
+  radius = function(args,name,showHelp) return cheat:argsGetOptionalNumber(args, name, 5, showHelp, "The teleport radius around the player. Default 5.") end,
+  max = function(args,name,showHelp) return cheat:argsGetOptionalNumber(args, name, 10, showHelp, "The maximum NPCs to teleport. Default 10.") end
 }
+
 cheat:createCommand("cheat_teleport_npc_to_player", "cheat:cheat_teleport_npc_to_player(%line)", cheat.cheat_teleport_npc_to_player_args,
   "Teleports one or more NPCs to the player's location.",
   "Teleport Father Godwin to ???", "cheat_teleport_npc_to_loc token:Father_Godwin x:1 y:2 z:3")
@@ -220,10 +224,10 @@ function cheat:cheat_teleport_npc_to_player(line)
           npc:SetWorldPos(cheat:get_npc_spawn_point(true, playerPosition.x, playerPosition.y, playerPosition.z, radius));
           spawnCount = spawnCount + 1
           cheat:logInfo("Teleported NPC [%s] to position x=%d y=%d z=%d",
-              npcName,
-              npc:GetWorldPos().x,
-              npc:GetWorldPos().y,
-              npc:GetWorldPos().z)
+          npcName,
+          npc:GetWorldPos().x,
+          npc:GetWorldPos().y,
+          npc:GetWorldPos().z)
         else
           break
         end
@@ -295,25 +299,25 @@ function cheat:find_soul(searchKey, returnAll)
   local soul_ui_name = nil
   local soul_name = nil
   local souls = {}
-
+  
   for i=0,rows do
     local rowInfo = Database.GetTableLine(tableName, i)
     local found = false
     soul_id = nil
     soul_ui_name = nil
     soul_name = nil
-
+    
     if not cheat:isBlank(searchKeyUpper) then
       if cheat:toUpper(rowInfo.soul_id) == searchKeyUpper then
         found = true
       end
-
+      
       if not found then
         if string.find(cheat:toUpper(rowInfo.name_string_id), searchKeyUpper, 1, true) then
           found = true
         end
       end
-    
+      
       if not found then
         soul_name = cheat.soulTextLookup[rowInfo.name_string_id]
         if soul_name then
@@ -325,7 +329,7 @@ function cheat:find_soul(searchKey, returnAll)
     else
       found = true
     end
-
+    
     if found then
       soul_id = rowInfo.soul_id
       soul_ui_name = rowInfo.name_string_id
@@ -343,7 +347,7 @@ function cheat:find_soul(searchKey, returnAll)
       cheat:logInfo("Found soul [%s] ([%s]) with id [%s].", tostring(soul_name), tostring(soul_ui_name), tostring(soul_id))
     end
   end
-
+  
   if returnAll then
     cheat:logDebug("Returning [%s] souls.", tostring(#souls))
     return souls
@@ -352,7 +356,6 @@ function cheat:find_soul(searchKey, returnAll)
     return soul_id, soul_ui_name, soul_name
   end
 end
-
 
 -- ============================================================================
 -- cheat_spawn_entity
@@ -363,12 +366,12 @@ function cheat:cheat_spawn_entity(entityName, entityClass, entitySoul, entityPos
     entityName = entityClass .. tostring(cheat.spawn_counter)
     cheat.spawn_counter = cheat.spawn_counter + 1
   end
-
+  
   if not entityPos then
     local playerPosition = player:GetWorldPos();
     entityPos = cheat:get_npc_spawn_point(true, playerPosition.x, playerPosition.y, playerPosition.z, 5)
   end
-
+  
   if not entityDir then
     entityDir = player:GetWorldPos();
   end
@@ -399,10 +402,11 @@ name	Name of the link. Does not have to be unique among all the links of this en
 (optional) targetId	If specified, the ID of the entity the link shall target. If not specified or 0 then the link will not target anything. Default value: 0
 --]]
 cheat.cheat_spawn_args = {
-  class=function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "bandit|cuman|hare|horse|boar|sheep|pig|cow|buck|doe|reddeer") end,
-  count=function(args,name,showHelp) return cheat:argsGetOptionalNumber(args, name, 1, showHelp, "Number of things to spawn. Default 1.") end,
-  radius=function(args,name,showHelp) return cheat:argsGetOptionalNumber(args, name, 5, showHelp, "The spawn radius around the player. Default 5.") end
+  class = function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "bandit|cuman|hare|horse|boar|sheep|pig|cow|buck|doe|reddeer") end,
+  count = function(args,name,showHelp) return cheat:argsGetOptionalNumber(args, name, 1, showHelp, "Number of things to spawn. Default 1.") end,
+  radius = function(args,name,showHelp) return cheat:argsGetOptionalNumber(args, name, 5, showHelp, "The spawn radius around the player. Default 5.") end
 }
+
 cheat:createCommand("cheat_spawn", "cheat:cheat_spawn(%line)", cheat.cheat_spawn_args,
   "Spawns bandits, cuman, or animals.\n$8"..
   "For some reason most of the animals and some bandits/cuman just stand around. No idea why.\n$8"..
@@ -492,8 +496,9 @@ end
 -- cheat_spawn_npc
 -- ============================================================================
 cheat.cheat_spawn_npc_args = {
-  token=function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "The sould ID, all/part of the soul name, or all/part of localized soul name.") end
+  token = function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "The sould ID, all/part of the soul name, or all/part of localized soul name.") end
 }
+
 cheat:createCommand("cheat_spawn_npc", "cheat:cheat_spawn_npc(%line)", cheat.cheat_spawn_npc_args,
   "Searches through the database of souls and spawns 1 NPC for each match.\n$8"..
   "This is intended to be used to spawn specific NPCs.\n$8"..
@@ -516,34 +521,6 @@ function cheat:cheat_spawn_npc(line)
     end
   end
 end
-
-
-
-
-
---[[
-
-cheat_eval cheat:print_methods(UIAction.GetArray("inventory", -1, "mapMarkers")[0])
-
-mapMarkers
-
-  UIAction.CallFunction("hud", -1, "ShowArcheryHit", data.hitData.offset.x*2.08, data.hitData.offset.z*2.08)
-
-  <function name="AddMapItem" funcname="fc_addMapItem">
-    <param name="Name" desc="Name" type="string"/>
-    <param name="UIName" desc="UIName" type="string"/>
-    <param name="Type" desc="Type" type="int"/>
-    <param name="Order" desc="Order" type="int"/>
-  </function>
-
-  <function name="SetMapItemTracking" funcname="fc_setMapItemTracking">
-    <param name="Type" desc="Type" type="int"/>
-    <param name="Visible" desc="true if mark is tracking" type="bool"/>
-  </function>
---]]
-
-
-
 
 function cheat:getnpcs(range, name)
   local npcs = System.GetEntitiesInSphere(player:GetPos(), range)

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<database name="hammerheart">
+  <table name="buff" version="1">
+    <header>
+      <column name="buff_ai_tag_id" type="integer" />
+      <column name="buff_class_id" type="integer" />
+      <column name="buff_desc" type="character varying" />
+      <column name="buff_exclusivity_id" type="integer" />
+      <column name="buff_id" type="uuid" />
+      <column name="buff_lifetime_id" type="integer" />
+      <column name="buff_name" type="character varying" />
+      <column name="buff_ui_name" type="character varying" />
+      <column name="buff_ui_order" type="integer" />
+      <column name="buff_ui_type_id" type="integer" />
+      <column name="buff_ui_visibility_id" type="integer" />
+      <column name="duration" type="real" />
+      <column name="icon_id" type="integer" />
+      <column name="implementation" type="character varying" />
+      <column name="is_persistent" type="boolean" />
+      <column name="params" type="character varying" />
+      <column name="slot_buff_ui_name" type="character varying" />
+      <column name="slot_icon_id" type="integer" />
+      <column name="visual_effect" type="character varying" />
+    </header>
+    <rows>
+      <!-- Invisibility -->
+      <!-- Vanilla params="vib=-10, con=-10" -->
+      <row buff_ai_tag_id="" buff_class_id="1" buff_desc="" buff_exclusivity_id="1" buff_id="cf787871-d151-43b7-a7c9-39acac116f0f" buff_lifetime_id="0" buff_name="invisibility" buff_ui_name="" buff_ui_order="" buff_ui_type_id="" buff_ui_visibility_id="" duration="-1" icon_id="0" implementation="Cpp:Constant" is_persistent="True" params="evi-300,lpv-300,con-300,noi-300" slot_buff_ui_name="" slot_icon_id="" visual_effect="" />
+    </rows>
+  </table>
+</database>
