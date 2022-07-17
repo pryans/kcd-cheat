@@ -1,6 +1,6 @@
 cheat={}
 cheat.versionMajor = 1
-cheat.versionMinor = 50
+cheat.versionMinor = 51
 cheat.devHome = ""
 cheat.isCommandLineBuild = false
 cheat.commands = {}

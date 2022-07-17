@@ -43,9 +43,15 @@ System.ExecuteCommand("cheat_set_regen enable:true state:stamina amount:10")
 
 [b][size=6]Change Log[/size][/b]
 
+[b]1.51[/b]
+[list]
+[*]See https://github.com/pryans/kcd-cheat/pull/28 for aleksey-orekhov's changes.
+[*]Add treasures, bandit camps, and some gardens to cheat_teleport_to command. Added some additional comments. Made documentation of cheat_teleport_to a bit easier to read (at least in a code editor, but hopefully also in the console)
+[/list]
+
 [b]1.43[/b]
 [list]
-[*]Community changes/fixes. 
+[*]Community changes/fixes.
 [*]See https://github.com/pryans/kcd-cheat/pull/21 for list of changes.
 [/list]
 
@@ -309,10 +315,6 @@ cheat_wash_dirt_and_blood
 
 
 
-[b][size=6]Command Documentation[/size][/b]
-[b]All of this information is available in game by running "command-name ?".[/b]
-
-
 
 
 [size=4][b]cheat_eval[/b][/size]
@@ -503,9 +505,9 @@ Finds all of the items that match the given token.
 Adds an item to the player's inventory.
 
 [b]Arguments:[/b]
- health: (optional number) The condition of the item added. Default 100.
- id: (required) The item ID or all or part of a the item's name. Uses last match from cheat_find_items.
  amount: (optional number) The number of items to add. Default 1.
+ id: (required) The item ID or all or part of a the item's name. Uses last match from cheat_find_items.
+ health: (optional number) The condition of the item added. Default 1.
 
 [b]Examples:[/b]
  Adds the last item with 'bow' in its name:
@@ -515,12 +517,12 @@ Adds an item to the player's inventory.
  cheat_add_item id:802507e9-d620-47b5-ae66-08fcc314e26a
 
  Adds 10 items ui_nm_arrow_hunter by fullname with 50 condition:
- cheat_add_item id:ui_nm_arrow_hunter amount:10 health:50
+ cheat_add_item id:ui_nm_arrow_hunter amount:10 health:0.5
 
 
 
 [size=4][b]cheat_add_all_items[/b][/size]
-Adds all items the player's inventory. This is probably a bad idea...
+Adds all items the player's inventory. This is probably a bad idea because of your limmited carry weight...
 
 [b]Examples:[/b]
  Add all items:
@@ -532,8 +534,8 @@ Adds all items the player's inventory. This is probably a bad idea...
 Removes an item to the player's inventory.
 
 [b]Arguments:[/b]
- amount: (optional number) The number of items to remove. Default 1.
  id: (required) The item ID or all or part of a the item's name. Uses last match from cheat_find_items.
+ amount: (optional number) The number of items to remove. Default 1.
 
 [b]Examples:[/b]
  Removes the last item with 'bow' in its name:
@@ -592,7 +594,7 @@ Damages all weapons and armor in your inventory. This can uneqip items so don't 
  health: (required number) The item health/condition to apply between 0 and 1.
 
 [b]Examples:[/b]
- Damage all weapons and armor to 50%:
+ Damage all ammo, weapons and armor to 50%:
  cheat_damage_all_items health:0.5
 
 
@@ -633,8 +635,8 @@ Finds all of the perks that match the given token.
 Adds the given perk to the player.
 
 [b]Arguments:[/b]
- any: (optional boolean) Whether to not filter out perks you can't select yourself
  id: (required) The perk ID or all or part of a the perk's name. Uses last match from cheat_find_perks.
+ any: (optional boolean) Whether to not filter out perks you can't select yourself
 
 [b]Examples:[/b]
  Adds the last perk with 'hunt' in its name:
@@ -652,8 +654,8 @@ Adds the given perk to the player.
 Adds all perks to the player.
 
 [b]Arguments:[/b]
- any: (optional boolean) Whether to not filter out perks you can't select yourself
  exclude: (optional boolean) If true then negative, test, and obsolete of perks are excluded.
+ any: (optional boolean) Whether to not filter out perks you can't select yourself
 
 [b]Examples:[/b]
  Add all perks:
@@ -668,8 +670,8 @@ Adds all perks to the player.
 Removes the given perk from the player.
 
 [b]Arguments:[/b]
- any: (optional boolean) Whether to not filter out perks you can't select yourself
  id: (required) The perk ID or all or part of a the perk's name. Uses last match from cheat_find_perks.
+ any: (optional boolean) Whether to not filter out perks you can't select yourself
 
 [b]Examples:[/b]
  Removes the last perk with 'hunt' in its name:
@@ -782,9 +784,9 @@ You can end up in the air or under the map.
 I suggest saving your game and turn on immortality first.
 
 [b]Arguments:[/b]
+ z: (required number) Z coordinate
  y: (required number) Y coordinate
  x: (required number) X coordinate
- z: (required number) Z coordinate
 
 [b]Examples:[/b]
  Example:
@@ -812,9 +814,9 @@ This only works if the NPC has been loaded into the world.
 Defaults to last NPC in the list if no num argument received.
 
 [b]Arguments:[/b]
+ id: (required) All or part of the NPC's name.
  num: (optional number) Optional: The NPC's number in the list if there's more than one.
 Keep it greater than 0.
- id: (required) All or part of the NPC's name.
 
 [b]Examples:[/b]
  Teleport to Father Godwin:
@@ -826,8 +828,8 @@ Keep it greater than 0.
 Sets one of the player's states to the given value.
 
 [b]Arguments:[/b]
- value: (required number) The number to assign to the given state.
  state: (required) One of: health, exhaust, hunger, or stamina.
+ value: (required number) The number to assign to the given state.
 
 [b]Examples:[/b]
  Set health to 100 points:
@@ -842,8 +844,8 @@ Sets one of the player's states to the given value.
 Adds XP to one of the player's stats.
 
 [b]Arguments:[/b]
- xp: (required number) The desired XP to add.
  stat: (required) One of: str, agi, vit, or spc.
+ xp: (required number) The desired XP to add.
 
 [b]Examples:[/b]
  Add 100 XP to player's strength stat:
@@ -855,8 +857,8 @@ Adds XP to one of the player's stats.
 Sets one of the player's stats to the given level.
 
 [b]Arguments:[/b]
- level: (required number) The desired level for the given stat (max 20). Level cannot lowered.
  stat: (required) One of: str, agi, vit, or spc.
+ level: (required number) The desired level for the given stat (max 20). Level cannot lowered.
 
 [b]Examples:[/b]
  Set player's strength to level 20:
@@ -1071,8 +1073,8 @@ Finds all of the skills that match the given token.
 Sets one of the player's skills to the given level.
 
 [b]Arguments:[/b]
- skill: (required) The skill name, full or partial, or ID. Use cheat_find_skills to list all skills.
  level: (required number) The desired level for the given skill (max 20).
+ skill: (required) The skill name, full or partial, or ID. Use cheat_find_skills to list all skills.
 
 [b]Examples:[/b]
  Set player's lockpicking skill to level 20:
@@ -1160,11 +1162,11 @@ Teleports one or more NPCs to the given coordinates. Use cheat_loc to get locati
 
 [b]Arguments:[/b]
  max: (optional number) The maximum NPCs to teleport. Default 10.
+ radius: (optional number) The teleport radius around the x,y,z target. Default 5.
  z: (required number) Z coordinate.
  y: (required number) Y coordinate.
- x: (required number) X coordinate.
  token: (required) All or part of a the NPC's name.
- radius: (optional number) The teleport radius around the x,y,z target. Default 5.
+ x: (required number) X coordinate.
 
 [b]Examples:[/b]
  Teleport Father Godwin to somewhere...:
@@ -1176,9 +1178,9 @@ Teleports one or more NPCs to the given coordinates. Use cheat_loc to get locati
 Teleports one or more NPCs to the player's location.
 
 [b]Arguments:[/b]
- max: (optional number) The maximum NPCs to teleport. Default 10.
- token: (required) All or part of a the NPC's name.
  radius: (optional number) The teleport radius around the player. Default 5.
+ token: (required) All or part of a the NPC's name.
+ max: (optional number) The maximum NPCs to teleport. Default 10.
 
 [b]Examples:[/b]
  Teleport Father Godwin to ???:
@@ -1202,9 +1204,9 @@ For some reason most of the animals and some bandits/cuman just stand around. No
 The spawned entities are not managed so you should kill them off or load a clean save.
 
 [b]Arguments:[/b]
+ radius: (optional number) The spawn radius around the player. Default 5.
  count: (optional number) Number of things to spawn. Default 1.
  class: (required) bandit|cuman|hare|horse|boar|sheep|pig|cow|buck|doe|reddeer
- radius: (optional number) The spawn radius around the player. Default 5.
 
 [b]Examples:[/b]
  Spawn 10 bandits:
@@ -1246,8 +1248,8 @@ Sets the weather to the given weather ID.
 7 = dream
 
 [b]Arguments:[/b]
- delay: (optional number) The number of hours to delay the transition. Default 0.
  id: (required number) The weather type ID.
+ delay: (optional number) The number of hours to delay the transition. Default 0.
 
 [b]Examples:[/b]
  Set weather to foggy storm:
