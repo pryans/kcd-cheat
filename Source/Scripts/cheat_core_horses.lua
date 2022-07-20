@@ -18,7 +18,7 @@ function cheat:find_horse(searchKey)
       local str = tostring(entity.soul:GetStatLevel('str'))
       local vit = tostring(entity.soul:GetStatLevel('vit'))
       local total = tostring(tonumber(agi) + tonumber(cou) + tonumber(str) + tonumber(vit))
-
+      
       local found = false
       if not cheat:isBlank(searchKeyUpper) then
         if string.find(cheat:toUpper(horseData.name), searchKeyUpper, 1, true) then
@@ -27,7 +27,7 @@ function cheat:find_horse(searchKey)
       else
         found = true
       end
-
+      
       if found then
         horse_name = horseData.name
         cheat:logInfo("Found horse [%s] agi[%s] cou[%s] str[%s] vit[%s] total[%s].", tostring(horse_name), agi, cou, str, vit, total)
@@ -65,7 +65,7 @@ end
 -- cheat_find_horses
 -- ============================================================================
 cheat.cheat_find_horses_args = {
-  token=function(args,name,showHelp) return cheat:argsGetOptional(args, name, nil, showHelp, "All or part of a horse's name. Leave blank to list all horses.") end
+  token = function(args,name,showHelp) return cheat:argsGetOptional(args, name, nil, showHelp, "All or part of a horse's name. Leave blank to list all horses.") end
 }
 
 cheat:createCommand("cheat_find_horses", "cheat:cheat_find_horses(%line)", cheat.cheat_find_horses_args,
@@ -75,6 +75,7 @@ cheat:createCommand("cheat_find_horses", "cheat:cheat_find_horses(%line)", cheat
 function cheat:cheat_find_horses(line)
   local args = cheat:argsProcess(line, cheat.cheat_find_horses_args)
   local token, tokenErr = cheat:argsGet(args, "token")
+  
   if not tokenErr then
     cheat:find_horse(token)
   end
@@ -84,7 +85,7 @@ end
 -- cheat_set_horse
 -- ============================================================================
 cheat.cheat_set_horse_args = {
-  id=function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "The UUID or all or part of a horse's name (last match is used).") end
+  id = function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "The UUID or all or part of a horse's name (last match is used).") end
 }
 
 cheat:createCommand("cheat_set_horse", "cheat:cheat_set_horse(%line)", cheat.cheat_set_horse_args,
@@ -94,18 +95,21 @@ cheat:createCommand("cheat_set_horse", "cheat:cheat_set_horse(%line)", cheat.che
 function cheat:cheat_set_horse(line)
   local args = cheat:argsProcess(line, cheat.cheat_set_horse_args)
   local id, idErr = cheat:argsGet(args, "id")
-  if not idErr then
+  local gender = player.soul:GetGender()
+  if not idErr and gender ~= 2 then
     if id == 'nil' then
-	  player.player:SetPlayerHorse(__null)
-	  cheat:logInfo("Removed player horse.")
-	  return true
-	end
+      player.player:SetPlayerHorse(__null)
+      cheat:logInfo("Removed player horse.")
+      return true
+    end
     local horseName = cheat:find_horse(id)
     local horse = System.GetEntityByName(horseName)
     player.player:SetPlayerHorse(horse.id)
     cheat:logInfo("Set player horse to [%s].", tostring(horseName))
     cheat:show_horse_stats()
     return true
+  else
+    cheat:logError("Thereza can't own a horse!")
   end
   return false
 end
@@ -119,9 +123,12 @@ cheat:createCommand("cheat_teleport_horse", "cheat:cheat_teleport_horse()", nil,
 function cheat:cheat_teleport_horse()
   local horse = XGenAIModule.GetEntityByWUID(player.player:GetPlayerHorse());
   local playerPosition = player:GetWorldPos();
-  if horse then
+  local gender = player.soul:GetGender()
+  if horse and gender  ~= 2 then
     horse:SetWorldPos({x=playerPosition.x-1, y=playerPosition.y-1, z=playerPosition.z});
     cheat:logInfo("Teleported your horse to you.")
+  elseif gender == 2 then
+    cheat:logError("Theresa doesn't own a horse!")
   else
     cheat:logError("You don't have a horse.")
   end

@@ -40,14 +40,30 @@ function packageRelease() {
 EOF
 
   # clone source dir
+  if [[ -d "${TMP_DIR}" ]]; then
+    rm -rf "${TMP_DIR}"
+  fi
   mkdir -p "${TMP_DIR}"
   cp -r "${SRC_DIR}" "${TMP_DIR}"
 
   # delete default profile?
   if [[ "${NOKEYS}" == "TRUE" ]]; then
-    rm -rf "${TMP_DIR}/Source/Libs/Config/defaultProfile.xml"
+    # assume for now that this Config folder only contains keybinds and can be removed for the NOKEYS package
+    rm -rf "${TMP_DIR}/Source/Libs/Config"
     MOD_CLASS="-NOKEYS"
   fi
+
+  # Localization must be a sibling of the pak file
+  # Localization is currently for the custom keybinds so we don't need it for NOKEYS
+  if [[ -d "${PKG_DIR}/${MOD_NAME}/Localization" ]]; then
+    rm -rf "${PKG_DIR}/${MOD_NAME}/Localization"
+  fi
+  if [[ "${NOKEYS}" != "TRUE" ]]; then
+    for LOCALIZATION_FOLDER in $(ls ${TMP_DIR}/Source/Localization); do
+      7za a -mx=0 -tzip "${PKG_DIR}/${MOD_NAME}/Localization/${LOCALIZATION_FOLDER}.pak" "${TMP_DIR}/Source/Localization/${LOCALIZATION_FOLDER}"/*
+    done
+  fi
+  rm -rf "${TMP_DIR}/Source/Localization"
 
   # Create new data pak file
   cd "${TMP_DIR}/Source"

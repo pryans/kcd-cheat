@@ -1,6 +1,6 @@
 -- cheat_eval return type(XGenAIModule.GetEntityByWUID( player.inventory:GetInventoryTable()[5] ))
 -- ItemManager.GetItemUIName
---  ItemManager.GetItem(player.inventory:GetInventoryTable()[5])
+-- ItemManager.GetItem(player.inventory:GetInventoryTable()[5])
 -- cheat_eval return tostring(player.inventory:GetInventoryTable()[5])
 
 -- cheat_eval cheat:print_methods( ItemManager.GetItem(player.inventory:GetInventoryTable()[5]) )
@@ -22,66 +22,87 @@
 --player.actor:EquipInventoryItem(weapon)
 --player.human:GetItemInHand(0)
 
+-- Item codes to help interpret code below:
+--[[
+<row item_category_id="0" item_category_name="misc" />
+<row item_category_id="1" item_category_name="melee_weapon" />
+<row item_category_id="2" item_category_name="missile_weapon" />
+<row item_category_id="3" item_category_name="ammo" />
+<row item_category_id="4" item_category_name="armor" />
+<row item_category_id="5" item_category_name="food" />
+<row item_category_id="6" item_category_name="money" />
+<row item_category_id="8" item_category_name="document" />
+<row item_category_id="9" item_category_name="alchemy_material" />
+<row item_category_id="10" item_category_name="herb" />
+<row item_category_id="11" item_category_name="alchemy_base" />
+<row item_category_id="12" item_category_name="npc_tool" />
+<row item_category_id="13" item_category_name="ointment_item" />
+<row item_category_id="14" item_category_name="potion" />
+<row item_category_id="15" item_category_name="die" />
+<row item_category_id="16" item_category_name="helmet" />
+<row item_category_id="17" item_category_name="key" />
+<row item_category_id="18" item_category_name="keyring" />
+<row item_category_id="25" item_category_name="player_item" />
+<row item_category_id="26" item_category_name="equippable_item" />
+<row item_category_id="27" item_category_name="weapon" />
+<row item_category_id="28" item_category_name="consumable_item" />
+--]]
 function cheat:recreateitems(mode, miscValue)
   for i,userdata in pairs(player.inventory:GetInventoryTable()) do
     local item = ItemManager.GetItem(userdata)
-    local itemHealth = item.health
     local itemAmount = item.amount
+    local itemHealth = item.health
+    local itemCategoryId = cheat:get_item_category_id(tostring(item.class))
     local itemUIName = ItemManager.GetItemUIName(item.class)
     local itemName = ItemManager.GetItemName(item.class)
-    local itemOwner = tonumber(string.gsub(tostring(ItemManager.GetItemOwner(item.id)), "userdata: ", ""), 10)
+    local itemOwner =  tostring(ItemManager.GetItemOwner(item.id))
+    local playerDataM = "userdata: 0500000000000A53"
+    local playerDataF = "userdata: 05000000000000F5"
     local shouldDelete = false
     local shouldRecreate = false
     local newItemHealth = 1
 
-    if mode == "repairall" and itemHealth ~= 1 then
-      shouldDelete = true
-      shouldRecreate = true
-    end
-    
-    if mode == "damageall" then
-      -- trying to create non-repairable items with less than 100% health will crash the game
-      local item_category_id = cheat:get_item_category_id(tostring(item.class))
-      --[[
-            <row item_category_id="0" item_category_name="misc" />
-      <row item_category_id="1" item_category_name="melee_weapon" />
-      <row item_category_id="2" item_category_name="missile_weapon" />
-      <row item_category_id="3" item_category_name="ammo" />
-      <row item_category_id="4" item_category_name="armor" />
-      <row item_category_id="5" item_category_name="food" />
-      <row item_category_id="6" item_category_name="money" />
-      <row item_category_id="8" item_category_name="document" />
-      <row item_category_id="9" item_category_name="alchemy_material" />
-      <row item_category_id="10" item_category_name="herb" />
-      <row item_category_id="11" item_category_name="alchemy_base" />
-      <row item_category_id="12" item_category_name="npc_tool" />
-      <row item_category_id="13" item_category_name="ointment_item" />
-      <row item_category_id="14" item_category_name="potion" />
-      <row item_category_id="15" item_category_name="die" />
-      <row item_category_id="16" item_category_name="helmet" />
-      <row item_category_id="17" item_category_name="key" />
-      <row item_category_id="18" item_category_name="keyring" />
-      <row item_category_id="25" item_category_name="player_item" />
-      <row item_category_id="26" item_category_name="equippable_item" />
-      <row item_category_id="27" item_category_name="weapon" />
-      <row item_category_id="28" item_category_name="consumable_item" />
-      --]]
-      if item_category_id == 4 or item_category_id == 1 or item_category_id == 2 or item_category_id == 16 or item_category_id == 27 then
-        cheat:logDebug("dmgall [%s] [%s] [%s]", itemUIName, tostring(item.class), tostring(itemHealth))
-        shouldDelete = true
-        shouldRecreate = true
-        newItemHealth = miscValue
+    if mode == "repairall" then
+      local itemHealth = item.health
+      local categoryidArray = {0, 1, 2, 3, 4, 5, 9, 13, 14, 16, 27}
+      for i=1,table.getn(categoryidArray) do
+        if categoryidArray[i] == itemCategoryId and itemHealth ~= 1 then
+          shouldDelete = true
+          shouldRecreate = true
+        end
       end
     end
 
-    if mode == "removestolen" and itemOwner ~= 0 then
-      shouldDelete = true
-      shouldRecreate = false
+    if mode == "damageall" then
+      local categoryidArray = {3, 4, 27}
+      for i=1,table.getn(categoryidArray) do
+        if categoryidArray[i] == itemCategoryId then
+          cheat:logDebug("dmgall [%s] [%s] [%s]", itemUIName, tostring(item.class), tostring(itemHealth))
+          shouldDelete = true
+          shouldRecreate = true
+          newItemHealth = miscValue
+        end
+      end
     end
 
-    if mode == "ownstolen" and itemOwner ~= 0 then
-      shouldDelete = true
-      shouldRecreate = true
+    if mode == "removestolen" then
+      local categoryidArray = {0, 1, 2, 3, 4, 5, 8, 9, 13, 14, 15, 16, 27}
+      for i=1,table.getn(categoryidArray) do
+        if categoryidArray[i] == itemCategoryId and itemOwner ~= playerDataM and itemOwner ~= playerDataF then
+          shouldDelete = true
+          shouldRecreate = false
+        end
+      end
+    end
+
+    if mode == "ownstolen" then
+      local categoryidArray = {0, 1, 2, 3, 4, 5, 8, 13, 14, 15, 16, 27}
+      for i=1,table.getn(categoryidArray) do
+        if categoryidArray[i] == itemCategoryId and itemOwner ~= playerDataM and itemOwner ~= playerDataF then
+          shouldDelete = true
+          shouldRecreate = true
+        end
+      end
     end
 
     if shouldDelete then
@@ -90,7 +111,7 @@ function cheat:recreateitems(mode, miscValue)
         player.inventory:RemoveItem(item.id, 1)
       end
     end
-    
+
     if shouldRecreate then
       cheat:logDebug("recreateitem create [%s] [%s] [%s]", itemUIName, tostring(item.class), tostring(newItemHealth))
       for i=1,itemAmount do
@@ -100,7 +121,6 @@ function cheat:recreateitems(mode, miscValue)
     end
   end
 end
-
 
 -- ============================================================================
 -- find_item
@@ -153,7 +173,6 @@ function cheat:find_item(searchKey, returnAll)
   end
 end
 
-
 -- ============================================================================
 -- find_item
 -- ============================================================================
@@ -172,12 +191,11 @@ function cheat:get_item_category_id(searchKey)
   end
 end
 
-
 -- ============================================================================
 -- cheat_find_items
 -- ============================================================================
 cheat.cheat_find_items_args = {
-  token=function(args,name,showHelp) return cheat:argsGetOptional(args, name, nil, showHelp, "All or part of a the item's name. Leave empty to list all items.") end
+  token = function(args,name,showHelp) return cheat:argsGetOptional(args, name, nil, showHelp, "All or part of a the item's name. Leave empty to list all items.") end
 }
 
 cheat:createCommand("cheat_find_items", "cheat:cheat_find_items(%line)", cheat.cheat_find_items_args,
@@ -198,16 +216,16 @@ end
 -- cheat_add_item
 -- ============================================================================
 cheat.cheat_add_item_args = {
-  id=function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "The item ID or all or part of a the item's name. Uses last match from cheat_find_items.") end,
-  amount=function(args,name,showHelp) return cheat:argsGetOptionalNumber(args, name, 1, showHelp, "The number of items to add. Default 1.") end,
-  health=function(args,name,showHelp) return cheat:argsGetOptionalNumber(args, name, 100, showHelp, "The condition of the item added. Default 100.") end
+  id = function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "The item ID or all or part of a the item's name. Uses last match from cheat_find_items.") end,
+  amount = function(args,name,showHelp) return cheat:argsGetOptionalNumber(args, name, 1, showHelp, "The number of items to add. Default 1.") end,
+  health = function(args,name,showHelp) return cheat:argsGetOptionalNumber(args, name, 100, showHelp, "The condition of the item added. Default 1.") end
 }
 
 cheat:createCommand("cheat_add_item", "cheat:cheat_add_item(%line)", cheat.cheat_add_item_args,
   "Adds an item to the player's inventory.",
   "Adds the last item with 'bow' in its name", "cheat_add_item id:bow",
   "Adds the item ui_nm_arrow_hunter by ID", "cheat_add_item id:802507e9-d620-47b5-ae66-08fcc314e26a",
-  "Adds 10 items ui_nm_arrow_hunter by fullname with 50 condition", "cheat_add_item id:ui_nm_arrow_hunter amount:10 health:50")
+  "Adds 10 items ui_nm_arrow_hunter by fullname with 50 condition", "cheat_add_item id:ui_nm_arrow_hunter amount:10 health:0.5")
 function cheat:cheat_add_item(line)
   local args = cheat:argsProcess(line, cheat.cheat_add_item_args)
   local id, idErr = cheat:argsGet(args, 'id')
@@ -247,7 +265,7 @@ end
 -- cheat_add_all_items
 -- ============================================================================
 cheat:createCommand("cheat_add_all_items", "cheat:cheat_add_all_items()", nil,
-  "Adds all items the player's inventory. This is probably a bad idea...",
+  "Adds all items the player's inventory. This is probably a bad idea because of your limmited carry weight...",
   "Add all items", "cheat_add_all_items")
 function cheat:cheat_add_all_items()
   local items = cheat:find_item(id, true)
@@ -264,9 +282,10 @@ end
 -- cheat_remove_item
 -- ============================================================================
 cheat.cheat_remove_item_args = {
-  id=function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "The item ID or all or part of a the item's name. Uses last match from cheat_find_items.") end,
-  amount=function(args,name,showHelp) return cheat:argsGetOptionalNumber(args, name, 1, showHelp, "The number of items to remove. Default 1.") end,
+  id = function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "The item ID or all or part of a the item's name. Uses last match from cheat_find_items.") end,
+  amount = function(args,name,showHelp) return cheat:argsGetOptionalNumber(args, name, 1, showHelp, "The number of items to remove. Default 1.") end,
 }
+
 cheat:createCommand("cheat_remove_item", "cheat:cheat_remove_item(%line)", cheat.cheat_remove_item_args,
   "Removes an item to the player's inventory.",
   "Removes the last item with 'bow' in its name", "cheat_remove_item id:bow",
@@ -343,11 +362,12 @@ end
 -- cheat_damage_all_items
 -- ============================================================================
 cheat.cheat_damage_all_items_args = {
-  health=function(args,name,showHelp) return cheat:argsGetRequiredNumber(args, name, showHelp, "The item health/condition to apply between 0 and 1.") end
+  health = function(args,name,showHelp) return cheat:argsGetRequiredNumber(args, name, showHelp, "The item health/condition to apply between 0 and 1.") end
 }
+
 cheat:createCommand("cheat_damage_all_items", "cheat:cheat_damage_all_items(%line)", cheat.cheat_damage_all_items_args,
   "Damages all weapons and armor in your inventory. This can uneqip items so don't do this in combat.",
-  "Damage all weapons and armor to 50%", "cheat_damage_all_items health:0.5")
+  "Damage all ammo, weapons and armor to 50%", "cheat_damage_all_items health:0.5")
 function cheat:cheat_damage_all_items(line)
   local args = cheat:argsProcess(line, cheat.cheat_damage_all_items_args)
   local health, healthErr = cheat:argsGet(args, 'health')
