@@ -120,6 +120,45 @@ function cheat:cheat_kill_npc(line)
 end
 
 -- ============================================================================
+-- cheat_resurrect_npc
+-- ============================================================================
+cheat.cheat_resurrect_npc_args = {
+  token = function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "All or part of a the NPC's name.") end,
+  radius = function(args,name,showHelp) return cheat:argsGetOptionalNumber(args, name, 5, showHelp, "The resurrect radius around player. Default 5.") end,
+}
+
+cheat:createCommand("cheat_resurrect_npc", "cheat:cheat_resurrect_npc(%line)", cheat.cheat_resurrect_npc_args,
+  "Finds and resurrects all the dead NPCs within the given radius of the player.",
+  "Resurrect Father Godwin", "cheat_resurrect_npc token:Father Godwin radius:2",
+  "Resurrects all bandits near the player", "cheat_resurrect_npc token:bandit radius:10")
+function cheat:cheat_resurrect_npc(line)
+  local args = cheat:argsProcess(line, cheat.cheat_resurrect_npc_args)
+  local token, tokenErr = cheat:argsGet(args, 'token', nil)
+  local radius, radiusErr = cheat:argsGet(args, 'radius', nil)
+  if not tokenErr and not radiusErr then
+    local npcs = cheat:find_npc(token, radius)
+    if npcs and #npcs > 0 then
+      for i,npc in ipairs(npcs) do
+		if npc:IsDead() then
+          local npcName = cheat:get_npc_name(npc)
+		  local pos = npc:GetWorldPos()
+          npc.actor:ReviveToDefaults()
+		  pos = cheat:get_npc_spawn_point(false, pos.x, pos.y, pos.z, 1)
+		  npc:SetWorldPos(pos)
+          cheat:logInfo("Resurrected NPC [%s] at position x=%d y=%d z=%d",
+          npcName,
+          pos.x,
+          pos.y,
+          pos.z)
+		end
+      end
+    else
+      cheat:logError("NPC [%s] not found.", token)
+    end
+  end
+end
+
+-- ============================================================================
 -- cheat_find_npc
 -- ============================================================================
 cheat.cheat_find_npc_args = {
