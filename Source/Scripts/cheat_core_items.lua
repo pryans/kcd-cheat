@@ -48,7 +48,10 @@
 <row item_category_id="28" item_category_name="consumable_item" />
 --]]
 function cheat:recreateitems(mode, miscValue)
-  for i,userdata in pairs(player.inventory:GetInventoryTable()) do
+  local playerDataM = "userdata: 0500000000000A53"
+  local playerDataF = "userdata: 05000000000000F5"
+
+  for _,userdata in pairs(player.inventory:GetInventoryTable()) do
     local item = ItemManager.GetItem(userdata)
     local itemAmount = item.amount
     local itemHealth = item.health
@@ -56,22 +59,9 @@ function cheat:recreateitems(mode, miscValue)
     local itemUIName = ItemManager.GetItemUIName(item.class)
     local itemName = ItemManager.GetItemName(item.class)
     local itemOwner =  tostring(ItemManager.GetItemOwner(item.id))
-    local playerDataM = "userdata: 0500000000000A53"
-    local playerDataF = "userdata: 05000000000000F5"
     local shouldDelete = false
     local shouldRecreate = false
     local newItemHealth = 1
-
-    if mode == "repairall" then
-      local itemHealth = item.health
-      local categoryidArray = {0, 1, 2, 3, 4, 5, 9, 13, 14, 16, 27}
-      for i=1,table.getn(categoryidArray) do
-        if categoryidArray[i] == itemCategoryId and itemHealth ~= 1 then
-          shouldDelete = true
-          shouldRecreate = true
-        end
-      end
-    end
 
     if mode == "damageall" then
       local categoryidArray = {3, 4, 27}
@@ -353,7 +343,49 @@ cheat:createCommand("cheat_repair_all_items", "cheat:cheat_repair_all_items()", 
   "Repairs all damaged items in your inventory. This can uneqip items so don't do this in combat.",
   "Repair all items", "cheat_repair_all_items")
 function cheat:cheat_repair_all_items()
-  cheat:recreateitems("repairall")
+
+  local newItemHealth = 1
+  local id_is_repairable = {}    -- new array
+  for itemCategoryId=0, 100 do
+    id_is_repairable[itemCategoryId] = false
+  end
+
+  local repairable_ids = {0, 1, 2, 3, 4, 5, 9, 13, 14, 16, 27}
+  for _, itemCategoryId in ipairs(repairable_ids) do
+      id_is_repairable[itemCategoryId] = true
+  end
+
+  for _,userdata in pairs(player.inventory:GetInventoryTable()) do
+	repeat
+		local item = ItemManager.GetItem(userdata)
+		
+		-- Skip items that are at full health
+		-- This is much faster than checking the category so
+		-- we do this first.
+		if item.health == 1 then 
+			do break end
+		end
+
+		-- Skip items that cannot be repaired.
+		local itemClass = item.class
+		local itemCategoryId = cheat:get_item_category_id(tostring(itemClass))
+		if not id_is_repairable[itemCategoryId] then 
+			do break end
+		end
+		
+		local itemAmount = item.amount
+		local itemid = item.id
+
+		for i=1,itemAmount do
+			player.inventory:RemoveItem(itemid, 1)
+		end
+		for i=1,itemAmount do
+			local newitem = ItemManager.CreateItem(itemClass, newItemHealth, 1)
+			player.inventory:AddItem(newitem)
+		end
+	until true
+  end
+
   cheat:logInfo("All items repaired.")
   return true
 end
