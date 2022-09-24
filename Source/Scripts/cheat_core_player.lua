@@ -57,6 +57,11 @@ end
 
 -- ============================================================================
 -- cheat_teleport_to
+-- Thanks to these sources, and others for helping to find many of these places:
+-- https://kingdomcomemap.github.io/
+-- https://forum.kingdomcomerpg.com/t/map-enemy-camps/41266
+-- https://www.reddit.com/r/kingdomcome/comments/tw7u1p/map_of_all_cuman_and_bandit_camp_locations/
+-- https://kingdom-come-deliverance.fandom.com/
 -- ============================================================================
 System.AddCCommand('cheat_teleport_to', 'cheat:teleport_to(%line)',
   [["Teleports the player to the given place. Supported places (case insensitive):
@@ -71,10 +76,10 @@ System.AddCCommand('cheat_teleport_to', 'cheat:teleport_to(%line)',
   Ruin_1,..., Ruin_4,
   Raiders_1,..., Raiders_5, (dog at 2 and 5)
   Interlopers_1,..., Interlopers_3,
-  Bandits_1,...,Bandits_4,
+  Bandits_1,...,Bandits_10,
   /*  MOLDAVITE_BANDIT_CAMP, SKALITZ_SMELTERY_BANDIT_CAMP,
   SASSAU_BANDIT_CAMP, MONASTERY_BANDIT_CAMP */
-  Garden_1,...,Garden_2,
+  Garden_1,...,Garden_39,
   GARDEN_WEST_RATTAY,GARDEN_WHEEL"]])
 function cheat:teleport_to(line)
   if player.soul:GetGender() == 2 then
@@ -169,16 +174,66 @@ function cheat:teleport_to(line)
 
   -- MONASTERY_BANDIT_CAMP
   places["BANDITS_4"] = "x:696 y:2115 z:52"
-
-  -- Gardens are a work in progress...
-  places["GARDEN_WEST_RATTAY"] = "x:2305 y:623 z:39"
-  places["GARDEN_WHEEL"] = "x:2836 y:769 z:92"
-
-  -- For conveniently visiting all gardens.
-  -- Work in progress.
-  places["GARDEN_1"] = places["GARDEN_WEST_RATTAY"]
-  places["GARDEN_2"] = places["GARDEN_WHEEL"]
-
+  
+  -- North of Merhojed
+  places["BANDITS_5"] = "x:1731 y:2977 z:132"
+  
+  -- east of skalitz
+  places["BANDITS_6"] = "x:1274 y:3499 z:87"
+  
+  -- west of Rattai
+  places["BANDITS_7"] = "x:1271 y:532 z:156"
+  
+  -- north of monastery
+  places["BANDITS_8"] = "x:692 y:2110 z:52"
+  
+  -- West of vranik (poachers)
+  places["BANDITS_9"] = "x:229 y:999 z:156"
+  
+  -- cumans southeast of talmberg (not raiders? they drop ears)
+  places["BANDITS_10"] = "x:2697 y:2187 z:126"
+  
+  -- Credit to https://kingdomcomemap.github.io/#1.97/2325.6/1592.8
+  places["GARDEN_1"] = "x:974 y:3896 z:62"
+  places["GARDEN_2"] = "x:427 y:3670 z:40"
+  places["GARDEN_3"] = "x:1205 y:3681 z:32"
+  places["GARDEN_4"] = "x:128 y:3326 z:109"
+  places["GARDEN_5"] = "x:2330 y:3518 z:160"
+  places["GARDEN_6"] = "x:3554 y:3581 z:156"
+  places["GARDEN_7"] = "x:2812 y:3233 z:151"
+  places["GARDEN_8"] = "x:3092 y:2675 z:179"
+  places["GARDEN_9"] = "x:3632 y:2622 z:168"
+  places["GARDEN_10"] = "x:1731 y:2977 z:132"
+  places["GARDEN_11"] = "x:1630 y:2868 z:122"
+  places["GARDEN_12"] = "x:1215 y:2641 z:27"
+  places["GARDEN_13"] = "x:1917 y:2553 z:128"
+  places["GARDEN_14"] = "x:2617 y:2459 z:136"
+  places["GARDEN_15"] = "x:924 y:2356 z:50"
+  places["GARDEN_16"] = "x:991 y:2321 z:55"
+  places["GARDEN_17"] = "x:957 y:2275 z:62"
+  places["GARDEN_18"] = "x:1181 y:2151 z:74"
+  places["GARDEN_19"] = "x:541 y:1850 z:83"
+  places["GARDEN_20"] = "x:1484 y:1764 z:35"
+  places["GARDEN_21"] = "x:1102 y:1252 z:43"
+  places["GARDEN_22"] = "x:784 y:908 z:124"
+  places["GARDEN_23"] = "x:1204 y:744 z:66"
+  places["GARDEN_24"] = "x:1581 y:1272 z:36"
+  places["GARDEN_25"] = "x:1897 y:1064 z:29"
+  places["GARDEN_26"] = "x:2307 y:616 z:40"
+  places["GARDEN_27"] = "x:2836 y:766 z:94"
+  places["GARDEN_28"] = "x:3143 y:504 z:71"
+  places["GARDEN_29"] = "x:3170 y:331 z:137"
+  places["GARDEN_30"] = "x:3604 y:725 z:102"
+  places["GARDEN_31"] = "x:3803 y:1121 z:107"
+  places["GARDEN_32"] = "x:3830 y:1681 z:121"
+  places["GARDEN_33"] = "x:3280 y:1979 z:154"
+  places["GARDEN_34"] = "x:2868 y:1626 z:131"
+  places["GARDEN_35"] = "x:2572 y:1871 z:138"
+  places["GARDEN_36"] = "x:2559 y:2031 z:162"
+  places["GARDEN_37"] = "x:2159 y:1524 z:65"
+  places["GARDEN_38"] = "x:1860 y:1519 z:80"
+  places["GARDEN_39"] = "x:1581 y:1272 z:35"
+  
 
   if places[cheat:toUpper(args)] ~= nil then
     cheat:teleport(places[cheat:toUpper(args)])
