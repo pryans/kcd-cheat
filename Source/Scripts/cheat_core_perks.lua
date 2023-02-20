@@ -27,7 +27,7 @@ function cheat:find_perk(searchKey, returnAll, findAny)
       found = true
     end
     
-    if found and ( findAny or rowInfo.visibility == 2 )then
+    if found and ( findAny or rowInfo.visibility ~= 0 ) then
       perk_id = rowInfo.perk_id
       perk_name = rowInfo.perk_name
       
@@ -124,6 +124,7 @@ function cheat:cheat_add_all_perks(line)
   
   if gender ~= 2 then
     local excludes = {}
+    -- Should be excluded anyway because of negative impacts to gameplay
     excludes["80825cd9-7d7b-440f-aa57-75807e83aed9"] = true -- Always drunk
     excludes["fa299718-b1eb-4664-8769-25f82fb95de9"] = true -- LimitSprint
     excludes["12c75fff-d00d-4cb0-8c27-4a8e4838dc14"] = true -- test_dummy_perk
@@ -138,6 +139,21 @@ function cheat:cheat_add_all_perks(line)
     excludes["574c37d-08af-4576-bcfd-29ccfa79e5ba"] = true -- Combo srt 03 pommelstrike mace OBSOLETE"
     excludes["8d9d23f-e293-4980-abd4-a3046b929771"] = true -- Combo srt 04 cut OBSOLETE"
     excludes["3f6c0eb-1b03-46ad-89f5-7eda9e4ab548"] = true -- Combo srt 04 cut axe OBSOLETE"
+    
+    excludes["80825cd9-7d7b-440f-aa57-75807e83aed9"] = false -- Always drunk
+    excludes["fa299718-b1eb-4664-8769-25f82fb95de9"] = false -- LimitSprint
+    excludes["12c75fff-d00d-4cb0-8c27-4a8e4838dc14"] = false -- test_dummy_perk
+    excludes["519db599-76d4-4703-8c31-486fae00e473"] = false -- test_recipe
+    excludes["a51bfbf1-f60b-40d2-ae3e-830127523862"] = false -- test_subperk
+    excludes["e97c3ca4-04bc-4dfc-bd80-8002280c7c14"] = false -- test_metaperk
+    excludes["775dcec-5dcd-48e7-810d-1fc97e4e203e"] = false -- Combo srt 04 cut mace OBSOLETE
+    excludes["b74821b-9312-4e76-9c22-d2a38ba9dd06"] = false -- Combo srt 05 diagonalstrike mace OBSOLETE"
+    excludes["b89f2c7-e5f3-415f-aec7-32d7655a94ba"] = false -- Combo srt 03 pommelstrike axe OBSOLETE"
+    excludes["9ec2cf8-6e0b-4468-a7d1-7e538b676467"] = false -- Combo srt 05 diagonalstrike axe OBSOLETE"
+    excludes["974b67f-0785-43ce-b51f-9779ecf42fb1"] = false -- Combo srt 03 pommelstrike shs OBSOLETE"
+    excludes["574c37d-08af-4576-bcfd-29ccfa79e5ba"] = false -- Combo srt 03 pommelstrike mace OBSOLETE"
+    excludes["8d9d23f-e293-4980-abd4-a3046b929771"] = false -- Combo srt 04 cut OBSOLETE"
+    excludes["3f6c0eb-1b03-46ad-89f5-7eda9e4ab548"] = false -- Combo srt 04 cut axe OBSOLETE"
     
     -- charlitoti
     -- here is an extension of the excludes perk to exclude aswell the hardcore negative perks:
@@ -154,20 +170,20 @@ function cheat:cheat_add_all_perks(line)
     
     -- WileCoyote68
     -- some more Hardcore related Perks
-    excludes["1e53b07d-8012-44b1-ace6-3504558f04aa"] = true -- Hardcore Mode
-    excludes["1e7c2255-b068-47a0-9447-4e0fe5205e8c"] = true -- Hardcore Mode Buff
-    excludes["01c3b32a-5751-4c98-b6ab-258d02370382"] = true -- Hardcore Mode Constants
-    excludes["305dd4f2-6923-42cb-a14d-2af07dff2863"] = true -- Revenant
-    excludes["9a5842cb-6dc1-4602-a585-aa99bfc9eb16"] = true -- Insomniac
     excludes["d6916a36-f36e-4f7a-947b-d54ba84726f7"] = true -- Ascetic
-    excludes["0f635b58-63e4-4db4-aa1a-5496d62e1a66"] = true -- Ascetic digestion
-    excludes["871a05d0-8d1b-4abf-97ce-d8c496a220b5"] = true -- Ascetic overeat
+    excludes["9a5842cb-6dc1-4602-a585-aa99bfc9eb16"] = true -- Insomniac
+    excludes["305dd4f2-6923-42cb-a14d-2af07dff2863"] = true -- Revenant
     excludes["f1f439cd-7636-4060-8a8b-233153f7f685"] = true -- Thickblooded
-    excludes["034494c7-db3d-47e0-a36f-ddd2aa9dee87"] = true -- Tutorial Injury
-    excludes["16c67f0a-7770-416b-8bee-f9cbd8dd417a"] = true -- Tutorial Combat basic
-    excludes["78d66139-9958-41cc-8148-8153f1a38efd"] = true -- Tutorial Horse
-    excludes["9738139e-0957-4148-8585-8b71ef78ef30"] = true -- Tutorial Hardcore Mode
-    excludes["f29a5eba-5c98-4779-9362-03dc5bfef316"] = true -- Tutorial Combat advanced
+    
+    -- Tied to quests, progress or training
+    excludes["636f75c0-8f7e-4942-8928-4e1a84d79298"] = true -- Bailman
+    excludes["a66149e3-71a7-440a-b287-60c23efbe6a9"] = true -- Cuman Killer
+    excludes["7c804de3-ed00-4cd3-aa99-4220a66c7036"] = true -- Dodger
+    excludes["47709bf7-3bd8-493f-aca3-05b005f166d8"] = true -- Feint
+    excludes["0a3d5815-b962-4198-b003-1eb0a7459903"] = true -- Hunting Permit
+    excludes["d2da2217-d46d-4cdb-accb-4ff860a3d83e"] = true -- Perfect Block
+    excludes["084dd7fd-daee-4041-bae1-c58a0c132292"] = true -- Relieved
+    excludes["0dd2c3df-9f61-4743-b5ca-8c3ac39fb57d"] = true -- Resistance
     
     local perks = cheat:find_perk(nil, true, any)
     for i,perk in pairs(perks) do
