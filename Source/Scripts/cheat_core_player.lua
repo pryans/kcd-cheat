@@ -191,10 +191,10 @@ function cheat:tp_bh(line)
   local nplace, nplaceErr = cheat:argsGet(args, 'place')
   
   local places = {}
-  place["LEDETCHKO"] = "x:2042 y:1282 z:28"
-  place["RATTAY"] = "x:2380 y:595 z:31"
-  place["SASAU"] = "x:959 y:1317 z:19"
-  place["TALMBERG"] = "x:2390 y:2810 z:89"  
+  places["LEDETCHKO"] = "x:2042 y:1282 z:28"
+  places["RATTAY"] = "x:2380 y:595 z:31"
+  places["SASAU"] = "x:959 y:1317 z:19"
+  places["TALMBERG"] = "x:2390 y:2810 z:89"  
   
   if gender ~= 2 then
     if not nplaceErr then
@@ -225,12 +225,12 @@ function cheat:tp_cb(line)
   local nplace, nplaceErr = cheat:argsGet(args, 'place')
   
   local places = {}
-  place["NH_NORTH"] = "x:3256 y:2122 z:127"
-  place["NH_SOUTH"] = "x:3634 y:942 z:86"
-  place["RATTAY"] = "x:1909 y:677 z:28"
-  place["ROVNA"] = "x:1316 y:3316 z:62"
-  place["SASAU"] = "x:343 y:1981 z:18"
-  place["TALMBERG"] = "x:2695 y:2317 z:102"  
+  places["NH_NORTH"] = "x:3256 y:2122 z:127"
+  places["NH_SOUTH"] = "x:3634 y:942 z:86"
+  places["RATTAY"] = "x:1909 y:677 z:28"
+  places["ROVNA"] = "x:1316 y:3316 z:62"
+  places["SASAU"] = "x:343 y:1981 z:18"
+  places["TALMBERG"] = "x:2695 y:2317 z:102"  
   
   if gender ~= 2 then
     if not nplaceErr then
@@ -331,10 +331,10 @@ function cheat:tp_hl(line)
   local nplace, nplaceErr = cheat:argsGet(args, 'place')
   
   local places = {}
-  place["GERTRUDE"] = "x:2318 y:3295 z:150"
-  place["KUNHUTA"] = "x:1980 y:1624 z:100"
-  place["NEUHOF"] = "x:3247 y:1518 z:117"
-  place["SAMOPESH"] = "x:948 y:2338 z:53"  
+  places["GERTRUDE"] = "x:2318 y:3295 z:150"
+  places["KUNHUTA"] = "x:1980 y:1624 z:100"
+  places["NEUHOF"] = "x:3247 y:1518 z:117"
+  places["SAMOPESH"] = "x:948 y:2338 z:53"  
   
   if gender ~= 2 then
     if not nplaceErr then
@@ -499,11 +499,11 @@ function cheat:tp_wc(line)
   local nplace, nplaceErr = cheat:argsGet(args, 'place')
   
   local places = {}
-  place["LEDETCHKO"] = "x:1631 y:1447 z:65"
-  place["RATTAY"] = "x:1950 y:926 z:71"
-  place["RATTAY_WOODS"] = "x:2697 y:1742 z:132"
-  place["TALMBERG"] = "x:2221 y:3153 z:131"
-  place["UZHITZ"] = "x:2296 y:3833 z:155"  
+  places["LEDETCHKO"] = "x:1631 y:1447 z:65"
+  places["RATTAY"] = "x:1950 y:926 z:71"
+  places["RATTAY_WOODS"] = "x:2697 y:1742 z:132"
+  places["TALMBERG"] = "x:2221 y:3153 z:131"
+  places["UZHITZ"] = "x:2296 y:3833 z:155"  
   
   if gender ~= 2 then
     if not nplaceErr then
