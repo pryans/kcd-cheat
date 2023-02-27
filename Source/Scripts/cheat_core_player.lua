@@ -528,7 +528,7 @@ cheat.cheat_tp_to_npc_args = {
 
 cheat:createCommand("cheat_tp_to_npc", "cheat:tp_to_npc(%line)", cheat.cheat_tp_to_npc_args,
   "Finds an NPC or list of NPCs and teleports to any of them.\n$8This only works if the NPC has been loaded into the world.\n$8Defaults to last NPC in the list if no num argument received.",
-  "Teleport to Father Godwin", "cheat_tp_npc id:godwin")
+  "Teleport to Father Godwin", "cheat_tp_to_npc id:godwin")
 function cheat:tp_to_npc(line)
   local args = cheat:argsProcess(line, cheat.cheat_tp_to_npc_args)
   local id, idErr = cheat:argsGet(args, 'id', nil)
