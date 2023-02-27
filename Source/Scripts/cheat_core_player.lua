@@ -63,38 +63,17 @@ end
 -- https://www.reddit.com/r/kingdomcome/comments/tw7u1p/map_of_all_cuman_and_bandit_camp_locations/
 -- https://kingdom-come-deliverance.fandom.com/
 -- ============================================================================
-System.AddCCommand('cheat_teleport_to', 'cheat:teleport_to(%line)',
-  [["Teleports the player to the given place. Supported places (case insensitive):
-  (Inn at the) Glade, Ratai_inn,
-  Ledetchko, Merhojed,
-  Monastery, Neuhof, Pribyslavitz,
-  Rattay, Rovna, Samopesh,
-  Sasau, Skalitz, Talmberg, Uzhitz, Vranik,
-  Wagoners (Inn), (Broken) Wheel,
-  Treasure_1, ..., Treasure_25,
-  Ancient_Treasure_1, ... , Ancient_Treasure_5,
-  Ruin_1,..., Ruin_4,
-  Raiders_1,..., Raiders_5, (dog at 2 and 5)
-  Interlopers_1,..., Interlopers_3,
-  Bandits_1,...,Bandits_10,
-  /*  MOLDAVITE_BANDIT_CAMP, SKALITZ_SMELTERY_BANDIT_CAMP,
-  SASSAU_BANDIT_CAMP, MONASTERY_BANDIT_CAMP */
-  Garden_1,...,Garden_39,
-  GARDEN_WEST_RATTAY,GARDEN_WHEEL"]])
+System.AddCCommand('cheat_teleport_to', 'cheat:teleport_to(%line)', "Teleports the player to the given place. Supported places (case insensitive):\n$8Ledetchko, Merhojed, Monastery,\n$8Neuhof, Pribyslavitz, Rattay,\n$8Rovna, Samopesh, Sasau,\n$8Skalitz, Talmberg, Uzhitz, Vranik")
+
 function cheat:teleport_to(line)
   if player.soul:GetGender() == 2 then
     cheat:logError("You can't use this command while playing Thereza!")
     return
   end
-
+  
   local args = string.gsub(tostring(line), "place:", "")
-
+  
   local places = {}
-  places["BUDIN"] = "x:1405 y:1463 z:19"
-  places["GLADE"] = "x:2849 y:1913 z:156"
-  places["HOME"] = "x:2451 y:693 z:28"
-  places["KATZEK"] = "x:1602 y:1838 z:20"
-  places["KOHELNITZ"] = "x:2823 y:1232 z:25"
   places["LEDETCHKO"] = "x:2052 y:1304 z:30"
   places["MERHOJED"] = "x:1636 y:2618 z:126"
   places["MONASTERY"] = "x:929 y:1617 z:36"
@@ -108,132 +87,6 @@ function cheat:teleport_to(line)
   places["TALMBERG"] = "x:2360 y:2846 z:105"
   places["UZHITZ"] = "x:3041 y:3324 z:156"
   places["VRANIK"] = "x:930 y:913 z:130"
-  places["WAGONERS"] = "x:938 y:1424 z:24"
-  places["WHEEL"] = "x:2915 y:733 z:108"
-
-  -- All treasure locations. I preferred arabic numerals to roman
-  -- numerals because it is much easier to visit all of them in order.
-  -- (You normally only need to change one digit and re-run the command)
-  places["TREASURE_1"] = "x:650 y:1920 z:106"
-  places["TREASURE_2"] = "x:382 y:1813 z:22"
-  places["TREASURE_3"] = "x:223 y:1695 z:71"
-  places["TREASURE_4"] = "x:2772 y:1449 z:106"
-  places["TREASURE_5"] = "x:2086 y:2054 z:126"
-  places["TREASURE_6"] = "x:2268 y:1589 z:114"
-  places["TREASURE_7"] = "x:1860 y:1521 z:80"
-  places["TREASURE_8"] = "x:2332 y:1120 z:54"
-  places["TREASURE_9"] = "x:869 y:3279 z:19"
-  places["TREASURE_10"] = "x:1683 y:938 z:41"
-  places["TREASURE_11"] = "x:1445 y:1140 z:37"
-  places["TREASURE_12"] = "x:3175 y:335 z:136"
-  places["TREASURE_13"] = "x:3610 y:721 z:100"
-  places["TREASURE_14"] = "x:3692 y:1258 z:87"
-  places["TREASURE_15"] = "x:2942 y:1329 z:90"
-  places["TREASURE_16"] = "x:482 y:2578 z:20"
-  places["TREASURE_17"] = "x:769 y:2572 z:20"
-  places["TREASURE_18"] = "x:2494 y:2817 z:99"
-  places["TREASURE_19"] = "x:856 y:1335 z:18"
-  places["TREASURE_20"] = "x:740 y:3699 z:30"
-  places["TREASURE_21"] = "x:657 y:3141 z:41"
-  places["TREASURE_22"] = "x:600 y:608 z:158"
-  places["TREASURE_23"] = "x:1011 y:3972 z:51"
-  places["TREASURE_24"] = "x:903 y:3841 z:66"
-  places["TREASURE_25"] = "x:221 y:3474 z:77"
-  places["ANCIENT_TREASURE_1"] = "x:3872 y:886 z:157"
-  places["ANCIENT_TREASURE_2"] = "x:874 y:270 z:181"
-  places["ANCIENT_TREASURE_3"] = "x:3159 y:3840 z:167"
-  places["ANCIENT_TREASURE_4"] = "x:1723 y:778 z:74"
-  places["ANCIENT_TREASURE_5"] = "x:474 y:3869 z:40"
-
-  -- All bandit camp locations for RUIN Quest.
-  places["RUIN_1"] = "x:3385 y:633 z:60"
-  places["RUIN_2"] = "x:1724 y:708 z:69"
-  places["RUIN_3"] = "x:3212 y:1380 z:101"
-  places["RUIN_4"] = "x:1726 y:951 z:47"
-
-  -- -- All bandit camp locations for RAIDERS Quest.
-  places["RAIDERS_1"] = "x:2464 y:2195 z:150"
-  places["RAIDERS_2"] = "x:2668 y:3163 z:136"
-  places["RAIDERS_3"] = "x:1669 y:3257 z:53"
-  places["RAIDERS_4"] = "x:3615 y:3193 z:172"
-  places["RAIDERS_5"] = "x:2454 y:2362 z:100"
-
-  -- All bandit camp locations for INTERLOPERS Quest.
-  places["INTERLOPERS_1"] = "x:188 y:3266 z:106"
-  places["INTERLOPERS_2"] = "x:536 y:2840 z:87"
-  places["INTERLOPERS_3"] = "x:536 y:2395 z:32"
-
-  -- MOLDAVITE_BANDIT_CAMP
-  places["BANDITS_1"] = "x:365 y:1749 z:19"
-
-  -- SKALITZ_SMELTERY_BANDIT_CAMP
-  places["BANDITS_2"] = "x:873 y:3279 z:23"
-
-  -- SASSAU_BANDIT_CAMP
-  places["BANDITS_3"] = "x:1295 y:1707 z:40"
-
-  -- MONASTERY_BANDIT_CAMP
-  places["BANDITS_4"] = "x:696 y:2115 z:52"
-  
-  -- North of Merhojed
-  places["BANDITS_5"] = "x:1731 y:2977 z:132"
-  
-  -- east of skalitz
-  places["BANDITS_6"] = "x:1274 y:3499 z:87"
-  
-  -- west of Rattai
-  places["BANDITS_7"] = "x:1271 y:532 z:156"
-  
-  -- north of monastery
-  places["BANDITS_8"] = "x:692 y:2110 z:52"
-  
-  -- West of vranik (poachers)
-  places["BANDITS_9"] = "x:229 y:999 z:156"
-  
-  -- cumans southeast of talmberg (not raiders? they drop ears)
-  places["BANDITS_10"] = "x:2697 y:2187 z:126"
-  
-  -- Credit to https://kingdomcomemap.github.io/#1.97/2325.6/1592.8
-  places["GARDEN_1"] = "x:974 y:3896 z:62"
-  places["GARDEN_2"] = "x:427 y:3670 z:40"
-  places["GARDEN_3"] = "x:1205 y:3681 z:32"
-  places["GARDEN_4"] = "x:128 y:3326 z:109"
-  places["GARDEN_5"] = "x:2330 y:3518 z:160"
-  places["GARDEN_6"] = "x:3554 y:3581 z:156"
-  places["GARDEN_7"] = "x:2812 y:3233 z:151"
-  places["GARDEN_8"] = "x:3092 y:2675 z:179"
-  places["GARDEN_9"] = "x:3632 y:2622 z:168"
-  places["GARDEN_10"] = "x:1731 y:2977 z:132"
-  places["GARDEN_11"] = "x:1630 y:2868 z:122"
-  places["GARDEN_12"] = "x:1215 y:2641 z:27"
-  places["GARDEN_13"] = "x:1917 y:2553 z:128"
-  places["GARDEN_14"] = "x:2617 y:2459 z:136"
-  places["GARDEN_15"] = "x:924 y:2356 z:50"
-  places["GARDEN_16"] = "x:991 y:2321 z:55"
-  places["GARDEN_17"] = "x:957 y:2275 z:62"
-  places["GARDEN_18"] = "x:1181 y:2151 z:74"
-  places["GARDEN_19"] = "x:541 y:1850 z:83"
-  places["GARDEN_20"] = "x:1484 y:1764 z:35"
-  places["GARDEN_21"] = "x:1102 y:1252 z:43"
-  places["GARDEN_22"] = "x:784 y:908 z:124"
-  places["GARDEN_23"] = "x:1204 y:744 z:66"
-  places["GARDEN_24"] = "x:1581 y:1272 z:36"
-  places["GARDEN_25"] = "x:1897 y:1064 z:29"
-  places["GARDEN_26"] = "x:2307 y:616 z:40"
-  places["GARDEN_27"] = "x:2836 y:766 z:94"
-  places["GARDEN_28"] = "x:3143 y:504 z:71"
-  places["GARDEN_29"] = "x:3170 y:331 z:137"
-  places["GARDEN_30"] = "x:3604 y:725 z:102"
-  places["GARDEN_31"] = "x:3803 y:1121 z:107"
-  places["GARDEN_32"] = "x:3830 y:1681 z:121"
-  places["GARDEN_33"] = "x:3280 y:1979 z:154"
-  places["GARDEN_34"] = "x:2868 y:1626 z:131"
-  places["GARDEN_35"] = "x:2572 y:1871 z:138"
-  places["GARDEN_36"] = "x:2559 y:2031 z:162"
-  places["GARDEN_37"] = "x:2159 y:1524 z:65"
-  places["GARDEN_38"] = "x:1860 y:1519 z:80"
-  places["GARDEN_39"] = "x:1581 y:1272 z:35"
-  
 
   if places[cheat:toUpper(args)] ~= nil then
     cheat:teleport(places[cheat:toUpper(args)])
@@ -252,6 +105,321 @@ function cheat:teleport_to(line)
   end
 end
 
+
+-- ============================================================================
+-- cheat_tp_bc (BANDIT CAMPS)
+-- ============================================================================
+cheat.cheat_tp_bc_args = {
+  place = function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "Teleport to bandit camp") end,
+}
+
+cheat:createCommand("cheat_tp_bc", "cheat:tp_bc(%line)", cheat.cheat_tp_bc_args,
+"Teleports the player to the given place. Supported places (case insensitive):\n$8RN_1, RN_2, RN_3, RN_4, RS_1, RS_2, RS_3, RS_4, RS_5, IL_1, IL_2, IL_3,\n$8BC_1, BC_2, BC_3, BC_4, BC_5, BC_6, BC_7, BC_8, BC_9, BC_10",
+"Example", "cheat_tp_bc place:RS_1")
+function cheat:tp_bc(line)
+  local gender = player.soul:GetGender()
+  local args = cheat:argsProcess(line, cheat.cheat_tp_bc_args)
+  local nplace, nplaceErr = cheat:argsGet(args, 'place')
+  
+  local places = {}
+  -- As I am not a big fan of much typing I shortened all places names (WileCoyote68)
+  -- All bandit camp locations for RUIN Quest.
+  places["RN_1"] = "x:3385 y:633 z:60"
+  places["RN_2"] = "x:1724 y:708 z:69"
+  places["RN_3"] = "x:3212 y:1380 z:101"
+  places["RN_4"] = "x:1726 y:951 z:47"
+  
+  -- All bandit camp locations for RAIDERS Quest.
+  places["RS_1"] = "x:2464 y:2195 z:150"
+  places["RS_2"] = "x:2668 y:3163 z:136"
+  places["RS_3"] = "x:1669 y:3257 z:53"
+  places["RS_4"] = "x:3615 y:3193 z:172"
+  places["RS_5"] = "x:2454 y:2362 z:100"
+  
+  -- All bandit camp locations for INTERLOPERS Quest.
+  places["IL_1"] = "x:188 y:3266 z:106"
+  places["IL_2"] = "x:536 y:2840 z:87"
+  places["IL_3"] = "x:536 y:2395 z:32"
+  
+  -- MOLDAVITE_BANDIT_CAMP
+  places["BC_1"] = "x:365 y:1749 z:19"
+  -- SKALITZ_SMELTERY_BANDIT_CAMP
+  places["BC_2"] = "x:873 y:3279 z:23"
+  -- SASAU_BANDIT_CAMP
+  places["BC_3"] = "x:1295 y:1707 z:40"
+  -- MONASTERY_BANDIT_CAMP
+  places["BC_4"] = "x:696 y:2115 z:52"
+  -- North of Merhojed
+  places["BC_5"] = "x:1731 y:2977 z:132"
+  -- east of skalitz
+  places["BC_6"] = "x:1274 y:3499 z:87"
+  -- west of Rattai
+  places["BC_7"] = "x:1271 y:532 z:156"
+  -- north of monastery
+  places["BC_8"] = "x:692 y:2110 z:52"
+  -- West of vranik (poachers)
+  places["BC_9"] = "x:229 y:999 z:156"
+  -- cumans southeast of talmberg (not raiders? they drop ears)
+  places["BC_10"] = "x:2697 y:2187 z:126"
+  
+  if gender ~= 2 then
+    if not nplaceErr then
+      if places[cheat:toUpper(nplace)] ~= nil then
+        cheat:teleport(places[cheat:toUpper(nplace)])
+      else
+        cheat:logError("Invalid Place - See list of supported places type: 'cheat_tp_bc ?'")
+      end
+    end
+  else
+    cheat:logError("You can't use this command while playing Thereza!")
+  end
+end
+
+-- ============================================================================
+-- cheat_tp_bh (BATH HOUSE)
+-- ============================================================================
+cheat.cheat_tp_bh_args = {
+  place = function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "Teleport to bath house") end,
+}
+
+cheat:createCommand("cheat_tp_bh", "cheat:tp_bh(%line)", cheat.cheat_tp_bh_args,
+"Teleports the player to the given place. Supported places (case insensitive):\n$8LEDETCHKO, RATTAY, SASAU, TALMBERG",
+"Example", "cheat_tp_bh place:SASAU")
+function cheat:tp_bh(line)
+  local gender = player.soul:GetGender()
+  local args = cheat:argsProcess(line, cheat.cheat_tp_bh_args)
+  local nplace, nplaceErr = cheat:argsGet(args, 'place')
+  
+  local places = {}
+  place["LEDETCHKO"] = "x:2042 y:1282 z:28"
+  place["RATTAY"] = "x:2380 y:595 z:31"
+  place["SASAU"] = "x:959 y:1317 z:19"
+  place["TALMBERG"] = "x:2390 y:2810 z:89"  
+  
+  if gender ~= 2 then
+    if not nplaceErr then
+      if places[cheat:toUpper(nplace)] ~= nil then
+        cheat:teleport(places[cheat:toUpper(nplace)])
+      else
+        cheat:logError("Invalid Place - See list of supported places type: 'cheat_tp_bh ?'")
+      end
+    end
+  else
+    cheat:logError("You can't use this command while playing Thereza!")
+  end
+end
+
+-- ============================================================================
+-- cheat_tp_cb (CHARCOAL-BURNER CAMPS)
+-- ============================================================================
+cheat.cheat_tp_cb_args = {
+  place = function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "Teleport to charcoal-burner camp") end,
+}
+
+cheat:createCommand("cheat_tp_cb", "cheat:tp_cb(%line)", cheat.cheat_tp_cb_args,
+"Teleports the player to the given place. Supported places (case insensitive):\n$8NH_NORTH, NH_SOUTH, RATTAY, ROVNA, SASAU, TALMBERG",
+"Example", "cheat_tp_cb place:RATTAY")
+function cheat:tp_cb(line)
+  local gender = player.soul:GetGender()
+  local args = cheat:argsProcess(line, cheat.cheat_tp_cb_args)
+  local nplace, nplaceErr = cheat:argsGet(args, 'place')
+  
+  local places = {}
+  place["NH_NORTH"] = "x:3256 y:2122 z:127"
+  place["NH_SOUTH"] = "x:3634 y:942 z:86"
+  place["RATTAY"] = "x:1909 y:677 z:28"
+  place["ROVNA"] = "x:1316 y:3316 z:62"
+  place["SASAU"] = "x:343 y:1981 z:18"
+  place["TALMBERG"] = "x:2695 y:2317 z:102"  
+  
+  if gender ~= 2 then
+    if not nplaceErr then
+      if places[cheat:toUpper(nplace)] ~= nil then
+        cheat:teleport(places[cheat:toUpper(nplace)])
+      else
+        cheat:logError("Invalid Place - See list of supported places type: 'cheat_tp_cb ?'")
+      end
+    end
+  else
+    cheat:logError("You can't use this command while playing Thereza!")
+  end
+end
+
+-- ============================================================================
+-- cheat_tp_gn (FOREST GARDEN)
+-- ============================================================================
+cheat.cheat_tp_gn_args = {
+  place = function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "Teleport to garden") end,
+}
+
+cheat:createCommand("cheat_tp_gn", "cheat:tp_gn(%line)", cheat.cheat_tp_gn_args,
+"Teleports the player to the given place. Supported places (case insensitive):\n$8GN_1, GN_2, GN_3, GN_4, GN_5, GN_6, GN_7, GN_8, GN_9, GN_10, GN_11, GN_12, GN_13, GN_14, GN_15,\n$8GN_16, GN_17, GN_18, GN_19, GN_20, GN_21, GN_22, GN_23, GN_24, GN_25, GN_26, GN_27, GN_28, GN_29, GN30, GN_31, GN_32, GN_33, GN_34, GN_35, GN_36, GN_37, GN_38, GN_39",
+"Example", "cheat_tp_gn place:GN_1")
+function cheat:tp_gn(line)
+  local gender = player.soul:GetGender()
+  local args = cheat:argsProcess(line, cheat.cheat_tp_gn_args)
+  local nplace, nplaceErr = cheat:argsGet(args, 'place')
+  
+  local places = {}
+  -- Credit to https://kingdomcomemap.github.io/#1.97/2325.6/1592.8
+  places["GN_1"] = "x:974 y:3896 z:62"
+  places["GN_2"] = "x:427 y:3670 z:40"
+  places["GN_3"] = "x:1205 y:3681 z:32"
+  places["GN_4"] = "x:128 y:3326 z:109"
+  places["GN_5"] = "x:2330 y:3518 z:160"
+  places["GN_6"] = "x:3554 y:3581 z:156"
+  places["GN_7"] = "x:2812 y:3233 z:151"
+  places["GN_8"] = "x:3092 y:2675 z:179"
+  places["GN_9"] = "x:3632 y:2622 z:168"
+  places["GN_10"] = "x:1731 y:2977 z:132"
+  places["GN_11"] = "x:1630 y:2868 z:122"
+  places["GN_12"] = "x:1215 y:2641 z:27"
+  places["GN_13"] = "x:1917 y:2553 z:128"
+  places["GN_14"] = "x:2617 y:2459 z:136"
+  places["GN_15"] = "x:924 y:2356 z:50"
+  places["GN_16"] = "x:991 y:2321 z:55"
+  places["GN_17"] = "x:957 y:2275 z:62"
+  places["GN_18"] = "x:1181 y:2151 z:74"
+  places["GN_19"] = "x:541 y:1850 z:83"
+  places["GN_20"] = "x:1484 y:1764 z:35"
+  places["GN_21"] = "x:1102 y:1252 z:43"
+  places["GN_22"] = "x:784 y:908 z:124"
+  places["GN_23"] = "x:1204 y:744 z:66"
+  places["GN_24"] = "x:1581 y:1272 z:36"
+  places["GN_25"] = "x:1897 y:1064 z:29"
+  places["GN_26"] = "x:2307 y:616 z:40"
+  places["GN_27"] = "x:2836 y:766 z:94"
+  places["GN_28"] = "x:3143 y:504 z:71"
+  places["GN_29"] = "x:3170 y:331 z:137"
+  places["GN_30"] = "x:3604 y:725 z:102"
+  places["GN_31"] = "x:3803 y:1121 z:107"
+  places["GN_32"] = "x:3830 y:1681 z:121"
+  places["GN_33"] = "x:3280 y:1979 z:154"
+  places["GN_34"] = "x:2868 y:1626 z:131"
+  places["GN_35"] = "x:2572 y:1871 z:138"
+  places["GN_36"] = "x:2559 y:2031 z:162"
+  places["GN_37"] = "x:2159 y:1524 z:65"
+  places["GN_38"] = "x:1860 y:1519 z:80"
+  places["GN_39"] = "x:1581 y:1272 z:35"
+  
+  if gender ~= 2 then
+    if not nplaceErr then
+      if places[cheat:toUpper(nplace)] ~= nil then
+        cheat:teleport(places[cheat:toUpper(nplace)])
+      else
+        cheat:logError("Invalid Place - See list of supported places type: 'cheat_tp_gn ?'")
+      end
+    end
+  else
+    cheat:logError("You can't use this command while playing Thereza!")
+  end
+end
+
+-- ============================================================================
+-- cheat_tp_hl (HERBALISTS)
+-- ============================================================================
+cheat.cheat_tp_hl_args = {
+  place = function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "Teleport to herbalist") end,
+}
+
+cheat:createCommand("cheat_tp_hl", "cheat:tp_hl(%line)", cheat.cheat_tp_hl_args,
+"Teleports the player to the given place. Supported places (case insensitive):\n$8GERTRUDE, KUNHUTA, NEUHOF, SAMOPESH",
+"Example", "cheat_tp_hl place:KUNHUTA")
+function cheat:tp_hl(line)
+  local gender = player.soul:GetGender()
+  local args = cheat:argsProcess(line, cheat.cheat_tp_hl_args)
+  local nplace, nplaceErr = cheat:argsGet(args, 'place')
+  
+  local places = {}
+  place["GERTRUDE"] = "x:2318 y:3295 z:150"
+  place["KUNHUTA"] = "x:1980 y:1624 z:100"
+  place["NEUHOF"] = "x:3247 y:1518 z:117"
+  place["SAMOPESH"] = "x:948 y:2338 z:53"  
+  
+  if gender ~= 2 then
+    if not nplaceErr then
+      if places[cheat:toUpper(nplace)] ~= nil then
+        cheat:teleport(places[cheat:toUpper(nplace)])
+      else
+        cheat:logError("Invalid Place - See list of supported places type: 'cheat_tp_hl ?'")
+      end
+    end
+  else
+    cheat:logError("You can't use this command while playing Thereza!")
+  end
+end
+
+-- ============================================================================
+-- cheat_tp_ml (MILLS)
+-- ============================================================================
+cheat.cheat_tp_ml_args = {
+  place = function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "Teleport to herbalist") end,
+}
+
+cheat:createCommand("cheat_tp_ml", "cheat:tp_ml(%line)", cheat.cheat_tp_ml_args,
+"Teleports the player to the given place. Supported places (case insensitive):\n$8BUDIN, KATZEK, KOHELNITZ, LEDETCHKO, RATTAY",
+"Example", "cheat_tp_ml place:BUDIN")
+function cheat:tp_ml(line)
+  local gender = player.soul:GetGender()
+  local args = cheat:argsProcess(line, cheat.cheat_tp_ml_args)
+  local nplace, nplaceErr = cheat:argsGet(args, 'place')
+  
+  local places = {}
+  places["BUDIN"] = "x:1405 y:1463 z:19"
+  places["KATZEK"] = "x:1602 y:1838 z:20"
+  places["KOHELNITZ"] = "x:2823 y:1232 z:25"
+  places["LEDETCHKO"] = "x:2099 y:1317 z:27"
+  places["RATTAY"] = "x:2451 y:693 z:28"
+  
+  if gender ~= 2 then
+    if not nplaceErr then
+      if places[cheat:toUpper(nplace)] ~= nil then
+        cheat:teleport(places[cheat:toUpper(nplace)])
+      else
+        cheat:logError("Invalid Place - See list of supported places type: 'cheat_tp_gn ?'")
+      end
+    end
+  else
+    cheat:logError("You can't use this command while playing Thereza!")
+  end
+end
+
+-- ============================================================================
+-- cheat_tp_tvn (TAVERNS)
+-- ============================================================================
+cheat.cheat_tp_tvn_args = {
+  place = function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "Teleport to tavern") end,
+}
+
+cheat:createCommand("cheat_tp_tvn", "cheat:tp_tvn(%line)", cheat.cheat_tp_tvn_args,
+"Teleports the player to the given place. Supported places (case insensitive):\n$8EAST, GLADE, TALMBERG, WAGONERS, WEST, WHEEL",
+"Example", "cheat_tp_tvn place:GLADE")
+function cheat:tp_tvn(line)
+  local gender = player.soul:GetGender()
+  local args = cheat:argsProcess(line, cheat.cheat_tp_tvn_args)
+  local nplace, nplaceErr = cheat:argsGet(args, 'place')
+  
+  local places = {}
+  places["RATTAY_EAST"] = "x:2718 y:625 z:95"
+  places["GLADE"] = "x:2849 y:1913 z:156"
+  places["TALMBERG"] = "x:2395 y:2727 z:87"
+  places["WAGONERS"] = "x:938 y:1424 z:24"
+  places["RATTAY_WEST"] = "x:2635 y:620 z:89"
+  places["WHEEL"] = "x:2915 y:733 z:108"
+  
+  if gender ~= 2 then
+    if not nplaceErr then
+      if places[cheat:toUpper(nplace)] ~= nil then
+        cheat:teleport(places[cheat:toUpper(nplace)])
+      else
+        cheat:logError("Invalid Place - See list of supported places type: 'cheat_tp_tvn ?'")
+      end
+    end
+  else
+    cheat:logError("You can't use this command while playing Thereza!")
+  end
+end
+
 -- ============================================================================
 -- cheat_tp_tr
 -- ============================================================================
@@ -260,45 +428,48 @@ cheat.cheat_tp_tr_args = {
 }
 
 cheat:createCommand("cheat_tp_tr", "cheat:tp_tr(%line)", cheat.cheat_tp_tr_args,
-"Teleports the player to the given place. Supported places (case insensitive):\n$8I, II, III, IV, V, VI, VII, VIII, IX, X, XI, XII, XIII, XIV, XV, XVI, XVII, XVIII, XIX, XX,\n$8XXI, XXII, XIII, XXIV, XXV, AI, AII, AII, AIII, AIV, AV",
-"Example", "cheat_tp_tr place:XXV")
+"Teleports the player to the given place. Supported places (case insensitive):\n$8TR_1, TR_2, TR_3, TR_4, TR_5, TR_6, TR_7, TR_8, TR_9, TR_10, TR_11, TR_12, TR_13, TR_14, TR_15,\n$8TR_16, TR_17, TR_18, TR_19, TR_20, TR_21, TR_22, TR_23, TR_24, TR_25, ATR_1, ATR_2, ATR_3, ATR_4, ATR_5",
+"Example", "cheat_tp_tr place:TR_1")
 function cheat:tp_tr(line)
   local gender = player.soul:GetGender()
   local args = cheat:argsProcess(line, cheat.cheat_tp_tr_args)
   local nplace, nplaceErr = cheat:argsGet(args, 'place')
-
+  
+  -- All treasure locations. I preferred arabic numerals to roman
+  -- numerals because it is much easier to visit all of them in order.
+  -- (You normally only need to change one digit and re-run the command)
   local places = {}
-  places["I"] = "x:645 y:1916 z:111"
-  places["II"] = "x:384 y:1820 z:22"
-  places["III"] = "x:220 y:1687 z:73"
-  places["IV"] = "x:2777 y:1451 z:107"
-  places["V"] = "x:2084 y:2056 z:126"
-  places["VI"] = "x:2265 y:1592 z:114"
-  places["VII"] = "x:1860 y:1525 z:81"
-  places["VIII"] = "x:2330 y:1125 z:51"
-  places["IX"] = "x:864 y:3280 z:21"
-  places["X"] = "x:1683 y:943 z:41"
-  places["XI"] = "x:1445 y:1137 z:37"
-  places["XII"] = "x:3182 y:338 z:136"
-  places["XIII"] = "x:3604 y:717 z:100"
-  places["XIV"] = "x:3696 y:1258 z:87"
-  places["XV"] = "x:2948 y:1316 z:85"
-  places["XVI"] = "x:486 y:2571 z:21"
-  places["XVII"] = "x:764 y:2572 z:20"
-  places["XVIII"] = "x:2496 y:2805 z:101"
-  places["XIX"] = "x:856 y:1341 z:18"
-  places["XX"] = "x:734 y:3696 z:32"
-  places["XXI"] = "x:658 y:3142 z:41"
-  places["XXII"] = "x:594 y:608 z:159"
-  places["XXIII"] = "x:1020 y:3968 z:52"
-  places["XXIV"] = "x:900 y:3848 z:67"
-  places["XXV"] = "x:212 y:3480 z:77"
-  places["AI"] = "x:3879 y:889 z:159"
-  places["AII"] = "x:877 y:262 z:180"
-  places["AIII"] = "x:3158 y:3835 z:167"
-  places["AIV"] = "x:1727 y:778 z:76"
-  places["AV"] = "x:475 y:3864 z:39"
-
+  places["TR_1"] = "x:650 y:1920 z:106"
+  places["TR_2"] = "x:382 y:1813 z:22"
+  places["TR_3"] = "x:223 y:1695 z:71"
+  places["TR_4"] = "x:2772 y:1449 z:106"
+  places["TR_5"] = "x:2086 y:2054 z:126"
+  places["TR_6"] = "x:2268 y:1589 z:114"
+  places["TR_7"] = "x:1860 y:1521 z:80"
+  places["TR_8"] = "x:2332 y:1120 z:54"
+  places["TR_9"] = "x:869 y:3279 z:19"
+  places["TR_10"] = "x:1683 y:938 z:41"
+  places["TR_11"] = "x:1445 y:1140 z:37"
+  places["TR_12"] = "x:3175 y:335 z:136"
+  places["TR_13"] = "x:3610 y:721 z:100"
+  places["TR_14"] = "x:3692 y:1258 z:87"
+  places["TR_15"] = "x:2942 y:1329 z:90"
+  places["TR_16"] = "x:482 y:2578 z:20"
+  places["TR_17"] = "x:769 y:2572 z:20"
+  places["TR_18"] = "x:2494 y:2817 z:99"
+  places["TR_19"] = "x:856 y:1335 z:18"
+  places["TR_20"] = "x:740 y:3699 z:30"
+  places["TR_21"] = "x:657 y:3141 z:41"
+  places["TR_22"] = "x:600 y:608 z:158"
+  places["TR_23"] = "x:1011 y:3972 z:51"
+  places["TR_24"] = "x:903 y:3841 z:66"
+  places["TR_25"] = "x:221 y:3474 z:77"
+  places["ATR_1"] = "x:3872 y:886 z:157"
+  places["ATR_2"] = "x:874 y:270 z:181"
+  places["ATR_3"] = "x:3159 y:3840 z:167"
+  places["ATR_4"] = "x:1723 y:778 z:74"
+  places["ATR_5"] = "x:474 y:3869 z:40"
+  
   if gender ~= 2 then
     if not nplaceErr then
       if places[cheat:toUpper(nplace)] ~= nil then
@@ -313,15 +484,51 @@ function cheat:tp_tr(line)
 end
 
 -- ============================================================================
+-- cheat_tp_wc (WOODCUTTER CAMP)
+-- ============================================================================
+cheat.cheat_tp_wc_args = {
+  place = function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "Teleport to tavern") end,
+}
+
+cheat:createCommand("cheat_tp_wc", "cheat:tp_wc(%line)", cheat.cheat_tp_wc_args,
+"Teleports the player to the given place. Supported places (case insensitive):\n$8LEDETCHKO, RATTAY, RATTAY_WOODS, TALMBERG, UZHITZ",
+"Example", "cheat_tp_wc place:RATTAY")
+function cheat:tp_wc(line)
+  local gender = player.soul:GetGender()
+  local args = cheat:argsProcess(line, cheat.cheat_tp_wc_args)
+  local nplace, nplaceErr = cheat:argsGet(args, 'place')
+  
+  local places = {}
+  place["LEDETCHKO"] = "x:1631 y:1447 z:65"
+  place["RATTAY"] = "x:1950 y:926 z:71"
+  place["RATTAY_WOODS"] = "x:2697 y:1742 z:132"
+  place["TALMBERG"] = "x:2221 y:3153 z:131"
+  place["UZHITZ"] = "x:2296 y:3833 z:155"  
+  
+  if gender ~= 2 then
+    if not nplaceErr then
+      if places[cheat:toUpper(nplace)] ~= nil then
+        cheat:teleport(places[cheat:toUpper(nplace)])
+      else
+        cheat:logError("Invalid Place - See list of supported places type: 'cheat_tp_wc ?'")
+      end
+    end
+  else
+    cheat:logError("You can't use this command while playing Thereza!")
+  end
+end
+
+-- ============================================================================
 -- cheat_tp_to_npc
 -- ============================================================================
 cheat.cheat_tp_to_npc_args = {
   id = function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "All or part of the NPC's name.") end,
   num = function(args,name,showHelp) return cheat:argsGetOptionalNumber(args, name, 0, showHelp, "Optional: The NPC's number in the list if there's more than one.\n$8Keep it greater than 0.") end
 }
+
 cheat:createCommand("cheat_tp_to_npc", "cheat:tp_to_npc(%line)", cheat.cheat_tp_to_npc_args,
   "Finds an NPC or list of NPCs and teleports to any of them.\n$8This only works if the NPC has been loaded into the world.\n$8Defaults to last NPC in the list if no num argument received.",
-  "Teleport to Father Godwin", "cheat_tp_to_npc id:godwin")
+  "Teleport to Father Godwin", "cheat_tp_npc id:godwin")
 function cheat:tp_to_npc(line)
   local args = cheat:argsProcess(line, cheat.cheat_tp_to_npc_args)
   local id, idErr = cheat:argsGet(args, 'id', nil)
@@ -329,11 +536,11 @@ function cheat:tp_to_npc(line)
   if not idErr and not numErr then
     cheat:cheat_find_npc("token:" .. id)
     local npcs = cheat:find_npc(id)
-
+    
     if num == nil or num <= 0 then
       num = #npcs
     end
-
+    
     if num > #npcs then
       cheat:logError("Sorry, this number is greater than the amount of found NPCS.")
       return

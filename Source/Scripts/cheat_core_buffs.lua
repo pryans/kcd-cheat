@@ -208,14 +208,11 @@ end
 -- cheat_add_buff_immortal
 -- ============================================================================
 cheat:createCommand("cheat_add_buff_immortal", "cheat:cheat_add_buff_immortal()", nil,
-  "Adds buffs to make the player immortal. Use cheat_remove_buff_immortal to remove this.",
+  "Adds buff to make the player immortal. Use cheat_remove_buff_immortal to remove this.",
   "Add immortality", "cheat_add_buff_immortal")
 function cheat:cheat_add_buff_immortal()
   cheat:cheat_add_buff_heal()
-  cheat:cheat_add_buff("id:85aca9c5-ec41-400d-a563-53df7b2399e8")
-  cheat:cheat_add_buff("id:7ead0083-026d-4567-80b3-68ac82693b77")
-  cheat:cheat_add_buff("id:98d2764a-bdbf-473f-903a-1209813d2e15")
-  cheat:cheat_add_buff("id:6cf0aa39-e09c-42fa-bf67-10f2d03991b7")
+  cheat:cheat_add_buff("id:a218af80-b2a5-11ed-afa1-0242ac120002")
   cheat:logInfo("Immortality buffs added.")
   return true
 end
@@ -227,10 +224,7 @@ cheat:createCommand("cheat_remove_buff_immortal", "cheat:cheat_remove_buff_immor
   "Removes the buffs making the player immortal.",
   "Remove immortality", "cheat_remove_buff_immortal")
 function cheat:cheat_remove_buff_immortal()
-  cheat:cheat_remove_buff("id:85aca9c5-ec41-400d-a563-53df7b2399e8")
-  cheat:cheat_remove_buff("id:7ead0083-026d-4567-80b3-68ac82693b77")
-  cheat:cheat_remove_buff("id:98d2764a-bdbf-473f-903a-1209813d2e15")
-  cheat:cheat_remove_buff("id:6cf0aa39-e09c-42fa-bf67-10f2d03991b7")
+  cheat:cheat_remove_buff("id:a218af80-b2a5-11ed-afa1-0242ac120002")
   cheat:logInfo("Immortality buffs removed.")
   return true
 end
@@ -242,7 +236,7 @@ cheat:createCommand("cheat_add_buff_invisible", "cheat:cheat_add_buff_invisible(
   "Adds invisible buff to player. Should set visibility, conspicuousness and noise to zero.\n$8Use cheat_remove_buff_invisible to remove this.",
   "Add invisible buff to player", "cheat_add_buff_invisible")
 function cheat:cheat_add_buff_invisible()
-  cheat:cheat_add_buff("id:cf787871-d151-43b7-a7c9-39acac116f0f") -- tweaked using patched table files
+  cheat:cheat_add_buff("id:a218b534-b2a5-11ed-afa1-0242ac120002") -- tweaked using patched table files
   cheat:logInfo("Invisibility buff added.")
   return true
 end
@@ -254,7 +248,7 @@ cheat:createCommand("cheat_remove_buff_invisible", "cheat:cheat_remove_buff_invi
   "Removes invisible buff from player.",
   "Remove invisible buff from player", "cheat_remove_buff_invisible")
 function cheat:cheat_remove_buff_invisible()
-  cheat:cheat_remove_buff("id:cf787871-d151-43b7-a7c9-39acac116f0f")
+  cheat:cheat_remove_buff("id:a218b534-b2a5-11ed-afa1-0242ac120002")
   cheat:logInfo("Invisibility buff removed.")
   return true
 end
