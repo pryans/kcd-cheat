@@ -135,22 +135,23 @@ function cheat:cheat_resurrect_npc(line)
   local args = cheat:argsProcess(line, cheat.cheat_resurrect_npc_args)
   local token, tokenErr = cheat:argsGet(args, 'token', nil)
   local radius, radiusErr = cheat:argsGet(args, 'radius', nil)
+  
   if not tokenErr and not radiusErr then
     local npcs = cheat:find_npc(token, radius)
     if npcs and #npcs > 0 then
       for i,npc in ipairs(npcs) do
-		if npc:IsDead() then
+        if npc:IsDead() then
           local npcName = cheat:get_npc_name(npc)
-		  local pos = npc:GetWorldPos()
+          local pos = npc:GetWorldPos()
           npc.actor:ReviveToDefaults()
-		  pos = cheat:get_npc_spawn_point(false, pos.x, pos.y, pos.z, 1)
-		  npc:SetWorldPos(pos)
+          pos = cheat:get_npc_spawn_point(false, pos.x, pos.y, pos.z, 1)
+          npc:SetWorldPos(pos)
           cheat:logInfo("Resurrected NPC [%s] at position x=%d y=%d z=%d",
           npcName,
           pos.x,
           pos.y,
           pos.z)
-		end
+        end
       end
     else
       cheat:logError("NPC [%s] not found.", token)
