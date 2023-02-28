@@ -27,11 +27,17 @@
 --[[
 -- repair- and damageable items
 <row item_category_id="0" item_category_name="misc" />
+-- seems to be needed for dagger and some axes (but shouldn't as they are also in the weapon table)
+<row item_category_id="1" item_category_name="melee_weapon" />
+-- seems to be needed for bows (but shouldn't as they are also in the weapon table)
+<row item_category_id="2" item_category_name="missile_weapon" />
 <row item_category_id="4" item_category_name="armor" />
 <row item_category_id="5" item_category_name="food" />
 <row item_category_id="9" item_category_name="alchemy_material" />
 <row item_category_id="13" item_category_name="ointment_item" />
 <row item_category_id="14" item_category_name="potion" />
+-- seems to be needed (but shouldn't as they are also in the armor table)
+<row item_category_id="16" item_category_name="helmet" />
 <row item_category_id="27" item_category_name="weapon" />
 
 -- could be stolen
@@ -58,7 +64,7 @@ function cheat:recreateitems(mode, miscValue)
     local newItemHealth = 1
     
     if mode == "damageall" then
-      local categoryidArray = {4, 27}
+      local categoryidArray = {1, 2, 4, 16, 27}
       for i=1,table.getn(categoryidArray) do
         if categoryidArray[i] == itemCategoryId then
           cheat:logDebug("dmgall [%s] [%s] [%s]", itemUIName, tostring(item.class), tostring(itemHealth))
@@ -70,7 +76,7 @@ function cheat:recreateitems(mode, miscValue)
     end
     
     if mode == "removestolen" then
-      local categoryidArray = {0, 3, 4, 5, 8, 9, 10, 13, 14, 15, 27}
+      local categoryidArray = {0, 1, 2, 3, 4, 5, 8, 9, 10, 13, 14, 15, 16, 27}
       for i=1,table.getn(categoryidArray) do
         if categoryidArray[i] == itemCategoryId and itemOwner ~= playerDataM and itemOwner ~= playerDataF then
           shouldDelete = true
@@ -80,7 +86,7 @@ function cheat:recreateitems(mode, miscValue)
     end
     
     if mode == "ownstolen" then
-      local categoryidArray = {0, 3, 4, 5, 8, 9, 10, 13, 14, 15, 27}
+      local categoryidArray = {0, 1, 2, 3, 4, 5, 8, 9, 10, 13, 14, 15, 16, 27}
       for i=1,table.getn(categoryidArray) do
         if categoryidArray[i] == itemCategoryId and itemOwner ~= playerDataM and itemOwner ~= playerDataF then
           shouldDelete = true
@@ -344,7 +350,7 @@ function cheat:cheat_repair_all_items()
     id_is_repairable[itemCategoryId] = false
   end
   
-  local repairable_ids = {0, 4, 5, 9, 13, 14, 27}
+  local repairable_ids = {0, 1, 2, 4, 5, 9, 13, 14, 16, 27}
   for _, itemCategoryId in ipairs(repairable_ids) do
       id_is_repairable[itemCategoryId] = true
   end
