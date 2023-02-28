@@ -32,10 +32,10 @@
 <row item_category_id="9" item_category_name="alchemy_material" />
 <row item_category_id="13" item_category_name="ointment_item" />
 <row item_category_id="14" item_category_name="potion" />
-<row item_category_id="16" item_category_name="helmet" />
 <row item_category_id="27" item_category_name="weapon" />
 
 -- could be stolen
+<row item_category_id="3" item_category_name="ammo" />
 <row item_category_id="8" item_category_name="document" />
 <row item_category_id="10" item_category_name="herb" />
 <row item_category_id="15" item_category_name="die" />
@@ -58,7 +58,7 @@ function cheat:recreateitems(mode, miscValue)
     local newItemHealth = 1
     
     if mode == "damageall" then
-      local categoryidArray = {0, 4, 5, 9, 14, 16, 27}
+      local categoryidArray = {4, 27}
       for i=1,table.getn(categoryidArray) do
         if categoryidArray[i] == itemCategoryId then
           cheat:logDebug("dmgall [%s] [%s] [%s]", itemUIName, tostring(item.class), tostring(itemHealth))
@@ -70,7 +70,7 @@ function cheat:recreateitems(mode, miscValue)
     end
     
     if mode == "removestolen" then
-      local categoryidArray = {0, 3, 4, 5, 8, 9, 10, 13, 14, 15, 16, 27}
+      local categoryidArray = {0, 3, 4, 5, 8, 9, 10, 13, 14, 15, 27}
       for i=1,table.getn(categoryidArray) do
         if categoryidArray[i] == itemCategoryId and itemOwner ~= playerDataM and itemOwner ~= playerDataF then
           shouldDelete = true
@@ -80,7 +80,7 @@ function cheat:recreateitems(mode, miscValue)
     end
     
     if mode == "ownstolen" then
-      local categoryidArray = {0, 3, 4, 5, 8, 9, 10, 13, 14, 15, 16, 27}
+      local categoryidArray = {0, 3, 4, 5, 8, 9, 10, 13, 14, 15, 27}
       for i=1,table.getn(categoryidArray) do
         if categoryidArray[i] == itemCategoryId and itemOwner ~= playerDataM and itemOwner ~= playerDataF then
           shouldDelete = true
@@ -344,7 +344,7 @@ function cheat:cheat_repair_all_items()
     id_is_repairable[itemCategoryId] = false
   end
   
-  local repairable_ids = {0, 4, 5, 9, 13, 14, 16, 27}
+  local repairable_ids = {0, 4, 5, 9, 13, 14, 27}
   for _, itemCategoryId in ipairs(repairable_ids) do
       id_is_repairable[itemCategoryId] = true
   end
@@ -391,9 +391,12 @@ cheat.cheat_damage_all_items_args = {
   health = function(args,name,showHelp) return cheat:argsGetRequiredNumber(args, name, showHelp, "The item health/condition to apply between 0 and 1.") end
 }
 
+-- Since arrows are the only ammunition we have and they can only have 2 possible states (broken or not broken)
+-- it is not useful to change their health value. Therefore I changed the description.
+
 cheat:createCommand("cheat_damage_all_items", "cheat:cheat_damage_all_items(%line)", cheat.cheat_damage_all_items_args,
   "Damages all weapons and armor in your inventory. This can uneqip items so don't do this in combat.",
-  "Damage all ammo, weapons and armor to 50%", "cheat_damage_all_items health:0.5")
+  "Damage all weapons and armor to 50%", "cheat_damage_all_items health:0.5")
 function cheat:cheat_damage_all_items(line)
   local args = cheat:argsProcess(line, cheat.cheat_damage_all_items_args)
   local health, healthErr = cheat:argsGet(args, 'health')
