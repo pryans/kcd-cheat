@@ -1,3 +1,24 @@
+--[[
+  -- Some buff_class_ids shouldn't be applied to the player after the game is loaded
+  <row buff_class_id="0" buff_class_name="Testing Stat Buff" />
+  <row buff_class_id="1" buff_class_name="System Buff" />
+  <row buff_class_id="2" buff_class_name="Weapon Skill Buff" />
+  <row buff_class_id="3" buff_class_name="Testing Combat Buff" />
+  <row buff_class_id="4" buff_class_name="Perk Buff" />
+  <row buff_class_id="5" buff_class_name="Injury" />
+  <row buff_class_id="6" buff_class_name="Heal" />
+  <row buff_class_id="7" buff_class_name="Poison" />
+  <row buff_class_id="8" buff_class_name="Perception" />
+  <row buff_class_id="9" buff_class_name="Overeat" />
+  <row buff_class_id="10" buff_class_name="Alcohol" />
+  <row buff_class_id="12" buff_class_name="Item Buff" />
+  <row buff_class_id="13" buff_class_name="Potion" />
+  <row buff_class_id="14" buff_class_name="Food Poison" />
+  <row buff_class_id="15" buff_class_name="Script System" />
+  <row buff_class_id="16" buff_class_name="Unconsciousness" />
+  <row buff_class_id="17" buff_class_name="Hangover" />
+  <row buff_class_id="18" buff_class_name="Satisfaction" />
+]]
 -- ============================================================================
 -- find_buff
 -- ============================================================================
@@ -10,33 +31,45 @@ function cheat:find_buff(searchKey, returnAll)
   local buff_id = nil
   local buff_name = nil
   local buffs = {}
+  local excludedIds = {1, 15}
   
-  for i=0,rows do
+  for i = 0, rows do
     local buffInfo = Database.GetTableLine(tableName, i)
     local found = false
+    local skip = false
     
-    if not cheat:isBlank(searchKeyUpper) then
-      if cheat:toUpper(buffInfo.buff_id) == searchKeyUpper then
+    -- Check if the current buff_id is in the excludedIds array
+    for _, excludedId in ipairs(excludedIds) do
+      if buffInfo.buff_id == excludedId then
+        skip = true
+        break
+      end
+    end
+    
+    if not skip then
+      if not cheat:isBlank(searchKeyUpper) then
+        if cheat:toUpper(buffInfo.buff_id) == searchKeyUpper then
+          found = true
+        end
+        
+        if string.find(cheat:toUpper(buffInfo.buff_name), searchKeyUpper, 1, true) then
+          found = true
+        end
+      else
         found = true
       end
       
-      if string.find(cheat:toUpper(buffInfo.buff_name), searchKeyUpper, 1, true) then
-        found = true
+      if found then
+        buff_id = buffInfo.buff_id
+        buff_name = buffInfo.buff_name
+        if returnAll then
+          local buff = {}
+          buff.buff_id = buff_id
+          buff.buff_name = buff_name
+          buffs[buff_id] = buff
+        end
+        cheat:logInfo("Found buff [%s] with id [%s].", tostring(buff_name), tostring(buff_id))
       end
-    else
-      found = true
-    end
-    
-    if found then
-      buff_id = buffInfo.buff_id
-      buff_name = buffInfo.buff_name
-      if returnAll then
-        local buff = {}
-        buff.buff_id = buff_id
-        buff.buff_name = buff_name
-        buffs[buff_id] = buff
-      end
-      cheat:logInfo("Found buff [%s] with id [%s].", tostring(buff_name), tostring(buff_id))
     end
   end
   
