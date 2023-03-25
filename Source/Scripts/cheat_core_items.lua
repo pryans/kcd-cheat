@@ -22,35 +22,35 @@
 --player.actor:EquipInventoryItem(weapon)
 --player.human:GetItemInHand(0)
 
--- Item codes to help interpret code below:
+-- Item categories to help interpret code below:
+-- WileCoyote68: removed categories which shouldn't be used
 --[[
+-- repair- and damageable items
 <row item_category_id="0" item_category_name="misc" />
+-- seems to be needed for dagger and some axes (but shouldn't as they are also in the weapon table)
 <row item_category_id="1" item_category_name="melee_weapon" />
+-- seems to be needed for bows (but shouldn't as they are also in the weapon table)
 <row item_category_id="2" item_category_name="missile_weapon" />
-<row item_category_id="3" item_category_name="ammo" />
 <row item_category_id="4" item_category_name="armor" />
 <row item_category_id="5" item_category_name="food" />
-<row item_category_id="6" item_category_name="money" />
-<row item_category_id="8" item_category_name="document" />
 <row item_category_id="9" item_category_name="alchemy_material" />
-<row item_category_id="10" item_category_name="herb" />
-<row item_category_id="11" item_category_name="alchemy_base" />
-<row item_category_id="12" item_category_name="npc_tool" />
 <row item_category_id="13" item_category_name="ointment_item" />
 <row item_category_id="14" item_category_name="potion" />
-<row item_category_id="15" item_category_name="die" />
+-- seems to be needed (but shouldn't as they are also in the armor table)
 <row item_category_id="16" item_category_name="helmet" />
-<row item_category_id="17" item_category_name="key" />
-<row item_category_id="18" item_category_name="keyring" />
-<row item_category_id="25" item_category_name="player_item" />
-<row item_category_id="26" item_category_name="equippable_item" />
 <row item_category_id="27" item_category_name="weapon" />
-<row item_category_id="28" item_category_name="consumable_item" />
+
+-- could be stolen
+<row item_category_id="3" item_category_name="ammo" />
+<row item_category_id="8" item_category_name="document" />
+<row item_category_id="10" item_category_name="herb" />
+<row item_category_id="15" item_category_name="die" />
+<row item_category_id="17" item_category_name="key" />
 --]]
 function cheat:recreateitems(mode, miscValue)
   local playerDataM = "userdata: 0500000000000A53"
   local playerDataF = "userdata: 05000000000000F5"
-
+  
   for _,userdata in pairs(player.inventory:GetInventoryTable()) do
     local item = ItemManager.GetItem(userdata)
     local itemAmount = item.amount
@@ -62,9 +62,9 @@ function cheat:recreateitems(mode, miscValue)
     local shouldDelete = false
     local shouldRecreate = false
     local newItemHealth = 1
-
+    
     if mode == "damageall" then
-      local categoryidArray = {3, 4, 27}
+      local categoryidArray = {1, 2, 4, 16, 27}
       for i=1,table.getn(categoryidArray) do
         if categoryidArray[i] == itemCategoryId then
           cheat:logDebug("dmgall [%s] [%s] [%s]", itemUIName, tostring(item.class), tostring(itemHealth))
@@ -74,9 +74,9 @@ function cheat:recreateitems(mode, miscValue)
         end
       end
     end
-
+    
     if mode == "removestolen" then
-      local categoryidArray = {0, 1, 2, 3, 4, 5, 8, 9, 13, 14, 15, 16, 27}
+      local categoryidArray = {0, 1, 2, 3, 4, 5, 8, 9, 10, 13, 14, 15, 16, 27}
       for i=1,table.getn(categoryidArray) do
         if categoryidArray[i] == itemCategoryId and itemOwner ~= playerDataM and itemOwner ~= playerDataF then
           shouldDelete = true
@@ -84,9 +84,9 @@ function cheat:recreateitems(mode, miscValue)
         end
       end
     end
-
+    
     if mode == "ownstolen" then
-      local categoryidArray = {0, 1, 2, 3, 4, 5, 8, 13, 14, 15, 16, 27}
+      local categoryidArray = {0, 1, 2, 3, 4, 5, 8, 9, 10, 13, 14, 15, 16, 27}
       for i=1,table.getn(categoryidArray) do
         if categoryidArray[i] == itemCategoryId and itemOwner ~= playerDataM and itemOwner ~= playerDataF then
           shouldDelete = true
@@ -94,14 +94,14 @@ function cheat:recreateitems(mode, miscValue)
         end
       end
     end
-
+    
     if shouldDelete then
       cheat:logDebug("recreateitem delete [%s] [%s]", itemUIName, tostring(item.class))
       for i=1,itemAmount do
         player.inventory:RemoveItem(item.id, 1)
       end
     end
-
+    
     if shouldRecreate then
       cheat:logDebug("recreateitem create [%s] [%s] [%s]", itemUIName, tostring(item.class), tostring(newItemHealth))
       for i=1,itemAmount do
@@ -124,23 +124,23 @@ function cheat:find_item(searchKey, returnAll)
   local item_id = nil
   local item_name = nil
   local items = {}
-
+  
   for i=0,rows do
     local rowInfo = Database.GetTableLine(tableName, i)
     local found = false
-
+    
     if not cheat:isBlank(searchKeyUpper) then
       if cheat:toUpper(rowInfo.item_id) == searchKeyUpper then
         found = true
       end
-
+      
       if string.find(cheat:toUpper(rowInfo.ui_name), searchKeyUpper, 1, true) then
         found = true
       end
     else
       found = true
     end
-
+    
     if found then
       item_id = rowInfo.item_id
       item_name = rowInfo.ui_name
@@ -153,7 +153,7 @@ function cheat:find_item(searchKey, returnAll)
       cheat:logInfo("Found item [%s] with id [%s].", tostring(item_name), tostring(item_id))
     end
   end
-
+  
   if returnAll then
     cheat:logDebug("Returning [%s] items.", tostring(#items))
     return items
@@ -172,7 +172,7 @@ function cheat:get_item_category_id(searchKey)
   local tableInfo = Database.GetTableInfo(tableName)
   local rows = tableInfo.LineCount - 1
   local searchKeyUpper = cheat:toUpper(searchKey)
-
+  
   for i=0,rows do
     local rowInfo = Database.GetTableLine(tableName, i)
     if cheat:toUpper(rowInfo.item_id) == searchKeyUpper then
@@ -221,21 +221,21 @@ function cheat:cheat_add_item(line)
   local id, idErr = cheat:argsGet(args, 'id')
   local amount, amountErr = cheat:argsGet(args, 'amount', 1)
   local health, healthErr = cheat:argsGet(args, 'health', 100)
-
+  
   if idErr or amountErr or healthErr then
     return
   end
-
+  
   if amount < 0 then
     amount = 1
     cheat:logWarn("Setting amount to 1.")
   end
-
+  
   if health < 0 then
     health = 1
     cheat:logWarn("Setting health to 1.")
   end
-
+  
   local item_id, item_name = cheat:find_item(id)
   if not cheat:isBlank(item_id) then
     for i=1,amount do
@@ -343,18 +343,18 @@ cheat:createCommand("cheat_repair_all_items", "cheat:cheat_repair_all_items()", 
   "Repairs all damaged items in your inventory. This can uneqip items so don't do this in combat.",
   "Repair all items", "cheat_repair_all_items")
 function cheat:cheat_repair_all_items()
-
   local newItemHealth = 1
   local id_is_repairable = {}    -- new array
+  
   for itemCategoryId=0, 100 do
     id_is_repairable[itemCategoryId] = false
   end
-
-  local repairable_ids = {0, 1, 2, 3, 4, 5, 9, 13, 14, 16, 27}
+  
+  local repairable_ids = {0, 1, 2, 4, 5, 9, 13, 14, 16, 27}
   for _, itemCategoryId in ipairs(repairable_ids) do
       id_is_repairable[itemCategoryId] = true
   end
-
+  
   for _,userdata in pairs(player.inventory:GetInventoryTable()) do
 	repeat
 		local item = ItemManager.GetItem(userdata)
@@ -365,8 +365,8 @@ function cheat:cheat_repair_all_items()
 		if item.health == 1 then 
 			do break end
 		end
-
-		-- Skip items that cannot be repaired.
+		
+    -- Skip items that cannot be repaired.
 		local itemClass = item.class
 		local itemCategoryId = cheat:get_item_category_id(tostring(itemClass))
 		if not id_is_repairable[itemCategoryId] then 
@@ -375,8 +375,8 @@ function cheat:cheat_repair_all_items()
 		
 		local itemAmount = item.amount
 		local itemid = item.id
-
-		for i=1,itemAmount do
+		
+    for i=1,itemAmount do
 			player.inventory:RemoveItem(itemid, 1)
 		end
 		for i=1,itemAmount do
@@ -385,7 +385,7 @@ function cheat:cheat_repair_all_items()
 		end
 	until true
   end
-
+  
   cheat:logInfo("All items repaired.")
   return true
 end
@@ -397,9 +397,12 @@ cheat.cheat_damage_all_items_args = {
   health = function(args,name,showHelp) return cheat:argsGetRequiredNumber(args, name, showHelp, "The item health/condition to apply between 0 and 1.") end
 }
 
+-- Since arrows are the only ammunition we have and they can only have 2 possible states (broken or not broken)
+-- it is not useful to change their health value. Therefore I changed the description.
+
 cheat:createCommand("cheat_damage_all_items", "cheat:cheat_damage_all_items(%line)", cheat.cheat_damage_all_items_args,
   "Damages all weapons and armor in your inventory. This can uneqip items so don't do this in combat.",
-  "Damage all ammo, weapons and armor to 50%", "cheat_damage_all_items health:0.5")
+  "Damage all weapons and armor to 50%", "cheat_damage_all_items health:0.5")
 function cheat:cheat_damage_all_items(line)
   local args = cheat:argsProcess(line, cheat.cheat_damage_all_items_args)
   local health, healthErr = cheat:argsGet(args, 'health')
