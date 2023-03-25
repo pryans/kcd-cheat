@@ -23,3 +23,5 @@ lua5.3 ./Source/Scripts/Startup/main.lua
 # revert changes
 sed -i 's/cheat.devHome =.*/cheat.devHome = ""/g' ./Source/Scripts/Startup/main.lua
 sed -i 's/cheat.isCommandLineBuild =.*/cheat.isCommandLineBuild = false/g' ./Source/Scripts/Startup/main.lua
+
+echo "Build Complete"

@@ -40,6 +40,7 @@ cheat_remove_item
 cheat_remove_perk
 cheat_repair_all_items
 cheat_reset_perks
+cheat_resurrect_npc
 cheat_reveal_map
 cheat_save
 cheat_set_all_merchants_fence
