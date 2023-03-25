@@ -68,7 +68,16 @@ cheat_teleport
 cheat_teleport_horse
 cheat_teleport_npc_to_loc
 cheat_teleport_npc_to_player
+cheat_tp_bc
+cheat_tp_bh
+cheat_tp_cb
+cheat_tp_ee
+cheat_tp_gn
+cheat_tp_hl
+cheat_tp_ml
 cheat_tp_to_npc
 cheat_tp_tr
+cheat_tp_tvn
+cheat_tp_wc
 cheat_unlock_recipes
 cheat_wash_dirt_and_blood
