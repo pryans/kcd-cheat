@@ -43,35 +43,13 @@ System.ExecuteCommand("cheat_set_regen enable:true state:stamina amount:10")
 
 [b][size=6]Change Log[/size][/b]
 
-[b]1.53[/b]
-[list]
-[*]See https://github.com/pryans/kcd-cheat/pull/38 from wilecoyote
-[*]Changed invisibility and immortal buff to be cheat specific. [b]This is a BREAKING change. See details below[/b].
+[b]1.53[/b][list]
+[*]See [url=https://github.com/pryans/kcd-cheat/pull/38]#38[/url] from wilecoyote
+[/list]
+[b]Teleport Command Changes[/b][list]
 [*]Added a lot of teleport commands (bandit camps, bath houses, charcoal-burner camps, woodland gardens, herbalists, mills, taverns, and woodcutter camps)
 [*]Added additional locations for bath houses, charcoal-burner camps, herbalists, mills, taverns, and woodcutter camps.
 [*]Removed doubled entries for treasure chests.
-[/list]
-
-[b]BREAKING CHANGE: These commands are not backward compatible with your save files.[/b]
-[list]
-[*]cheat_add_buff_immortal
-[*]cheat_add_buff_invisible
-[/list]
-
-[b]If you have used these commands then you need to:[/b]
-[list=1]
-[*]REMOVE the buffs using mod version 1.52
-[*]cheat_remove_buff_immortal
-[*]cheat_remove_buff_invisible
-[*]save your game
-[*]upgrade to 1.53
-[*]then run the commands again if you want to still use them:
-[*]cheat_add_buff_immortal
-[*]cheat_add_buff_invisible
-[/list]
-
-[b]New teleport commands:[/b]
-[list]
 [*]cheat_tp_bc = Teleports the player to the given bandit camp.
 [*]cheat_tp_bh = Teleports the player to the given bath house.
 [*]cheat_tp_cb = Teleports the player to the given charcoal-burner camp.
@@ -82,6 +60,27 @@ System.ExecuteCommand("cheat_set_regen enable:true state:stamina amount:10")
 [*]cheat_tp_tvn = Teleports the player to the given tavern.
 [*]cheat_tp_wc = Teleports the player to the given woodcutter camp.
 [/list]
+
+[b]Invisibility and Immortal Buff Changes[/b][list]
+[*]Changed invisibility and immortal buff to be cheat specific.
+[*]BREAKING CHANGE: These commands are not backward compatible.
+[*]cheat_add_buff_immortal
+[*]cheat_add_buff_invisible
+[/list]
+
+If you have used these commands then you need to:
+[list=1]
+[*]REMOVE the buffs using mod version 1.52
+[*]cheat_remove_buff_immortal
+[*]cheat_remove_buff_invisible
+[*]save your game
+[*]upgrade to 1.53
+[*]then run the commands again if you want to still use them each time your start the game.
+[*]cheat_add_buff_immortal
+[*]cheat_add_buff_invisible
+[/list]
+
+[b]NOTE[/b]: cheat_add_buff_immortal and cheat_add_buff_invisible no longer persist through restarts of the game. The buff IDs are unique to cheat mod starting in 1.53 so they will not conflict with the base game or other mods. If you want these buffs to always be enabled you need to run the commands manually or use the autoexec file.
 
 
 [b]1.51[/b]
