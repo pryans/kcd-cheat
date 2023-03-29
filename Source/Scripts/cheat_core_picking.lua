@@ -5,31 +5,6 @@ cheat:createCommand("cheat_no_stash_lockpicking", "cheat:cheat_no_stash_lockpick
   "This disables the lockpicking minigame on stashes and automatically opens the stash for looting.\n$8Restarting the game reverts this effect.",
   "Turn off lockpicking minigame on stashes", "cheat_no_stash_lockpicking")
 function cheat:cheat_no_stash_lockpicking()
-  for key,value in pairs(AnimDoor) do
-    if key == "Lockpick" then
-      AnimDoor[key] = function(self, user, slot)
-        cheat:logDebug("AnimDoor:Lockpick() Override")
-        if self.lockpickable and (self.bLocked == 1) and self:IsOnKeySide() == 1 and (self.nUserId == 0) then
-          --Minigame.StartLockPicking(self.id);
-          self:Unlock()
-          self:Open()
-          cheat:logDebug("Door Unlocked")
-        end
-      end
-      cheat:logDebug("Replaced AnimDoor:Lockpick() function.")
-    end
-  end
-  cheat:logInfo("Door Lockpicking Disabled")
-  return true
-end
-
--- ============================================================================
--- cheat_no_door_lockpicking
--- ============================================================================
-cheat:createCommand("cheat_no_door_lockpicking", "cheat:cheat_no_door_lockpicking()", nil,
-  "This disables the lockpicking minigame on doors and automatically opens the door.\n$8Restarting the game reverts this effect.",
-  "Turn off lockpicking minigame on doors", "cheat_no_door_lockpicking")
-function cheat:cheat_no_door_lockpicking()
   for key,value in pairs(Stash) do
     if key == "OnUsedHold" then
       Stash[key] = function(self, user, slot)
@@ -52,6 +27,31 @@ function cheat:cheat_no_door_lockpicking()
     end
   end
   cheat:logInfo("Stash Lockpicking Disabled")
+  return true
+end
+
+-- ============================================================================
+-- cheat_no_door_lockpicking
+-- ============================================================================
+cheat:createCommand("cheat_no_door_lockpicking", "cheat:cheat_no_door_lockpicking()", nil,
+  "This disables the lockpicking minigame on doors and automatically opens the door.\n$8Restarting the game reverts this effect.",
+  "Turn off lockpicking minigame on doors", "cheat_no_door_lockpicking")
+function cheat:cheat_no_door_lockpicking()
+  for key,value in pairs(AnimDoor) do
+    if key == "Lockpick" then
+      AnimDoor[key] = function(self, user, slot)
+        cheat:logDebug("AnimDoor:Lockpick() Override")
+        if self.lockpickable and (self.bLocked == 1) and self:IsOnKeySide() == 1 and (self.nUserId == 0) then
+          --Minigame.StartLockPicking(self.id);
+          self:Unlock()
+          self:Open()
+          cheat:logDebug("Door Unlocked")
+        end
+      end
+      cheat:logDebug("Replaced AnimDoor:Lockpick() function.")
+    end
+  end
+  cheat:logInfo("Door Lockpicking Disabled")
   return true
 end
 
