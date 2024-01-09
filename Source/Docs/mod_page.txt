@@ -43,6 +43,13 @@ System.ExecuteCommand("cheat_set_regen enable:true state:stamina amount:10")
 
 [b][size=6]Change Log[/size][/b]
 
+[b]1.54[/b]
+[list]
+[*] See https://github.com/pryans/kcd-cheat/pull/41
+[*] See https://github.com/pryans/kcd-cheat/pull/40
+[/list]
+
+
 [b]1.53[/b][list]
 [*]See [url=https://github.com/pryans/kcd-cheat/pull/38]#38[/url] from wilecoyote
 [/list]
@@ -61,7 +68,8 @@ System.ExecuteCommand("cheat_set_regen enable:true state:stamina amount:10")
 [*]cheat_tp_wc = Teleports the player to the given woodcutter camp.
 [/list]
 
-[b]Invisibility and Immortal Buff Changes[/b][list]
+[b]Invisibility and Immortal Buff Changes[/b]
+[list]
 [*]Changed invisibility and immortal buff to be cheat specific.
 [*]BREAKING CHANGE: These commands are not backward compatible.
 [*]cheat_add_buff_immortal
@@ -363,9 +371,9 @@ cheat_unlock_recipes
 cheat_wash_dirt_and_blood
 
 
+
  
- 
- 
+  
  
 [size=4][b]cheat_eval[/b][/size]
 Executes the given Lua code. This is not a cheat it is used for testing and debugging.
@@ -555,9 +563,9 @@ Finds all of the items that match the given token.
 Adds an item to the player's inventory.
 
 [b]Arguments:[/b]
+	id: (required) The item ID or all or part of a the item's name. Uses last match from cheat_find_items.
 	health: (optional number) The condition of the item added. Default 1.
 	amount: (optional number) The number of items to add. Default 1.
-	id: (required) The item ID or all or part of a the item's name. Uses last match from cheat_find_items.
 
 [b]Examples:[/b]
 	Adds the last item with 'bow' in its name:
@@ -584,8 +592,8 @@ Adds all items the player's inventory. This is probably a bad idea because of yo
 Removes an item to the player's inventory.
 
 [b]Arguments:[/b]
-	amount: (optional number) The number of items to remove. Default 1.
 	id: (required) The item ID or all or part of a the item's name. Uses last match from cheat_find_items.
+	amount: (optional number) The number of items to remove. Default 1.
 
 [b]Examples:[/b]
 	Removes the last item with 'bow' in its name:
@@ -669,8 +677,8 @@ Restarting the game reverts this effect.
 Finds all of the perks that match the given token.
 
 [b]Arguments:[/b]
-	token: (optional) All or part of a the perk's name. Leave empty to list all perks.
 	any: (optional boolean) Whether to not filter out perks you can't select yourself
+	token: (optional) All or part of a the perk's name. Leave empty to list all perks.
 
 [b]Examples:[/b]
 	Show all perks:
@@ -685,8 +693,8 @@ Finds all of the perks that match the given token.
 Adds the given perk to the player.
 
 [b]Arguments:[/b]
-	any: (optional boolean) Whether to not filter out perks you can't select yourself
 	id: (required) The perk ID or all or part of a the perk's name. Uses last match from cheat_find_perks.
+	any: (optional boolean) Whether to not filter out perks you can't select yourself
 
 [b]Examples:[/b]
 	Adds the last perk with 'hunt' in its name:
@@ -720,8 +728,8 @@ Adds all perks to the player.
 Removes the given perk from the player.
 
 [b]Arguments:[/b]
-	any: (optional boolean) Whether to not filter out perks you can't select yourself
 	id: (required) The perk ID or all or part of a the perk's name. Uses last match from cheat_find_perks.
+	any: (optional boolean) Whether to not filter out perks you can't select yourself
 
 [b]Examples:[/b]
 	Removes the last perk with 'hunt' in its name:
@@ -834,9 +842,9 @@ You can end up in the air or under the map.
 I suggest saving your game and turn on immortality first.
 
 [b]Arguments:[/b]
-	x: (required number) X coordinate
-	y: (required number) Y coordinate
 	z: (required number) Z coordinate
+	y: (required number) Y coordinate
+	x: (required number) X coordinate
 
 [b]Examples:[/b]
 	Type to console:
@@ -1021,9 +1029,9 @@ This only works if the NPC has been loaded into the world.
 Defaults to last NPC in the list if no num argument received.
 
 [b]Arguments:[/b]
+	id: (required) All or part of the NPC's name.
 	num: (optional number) Optional: The NPC's number in the list if there's more than one.
 Keep it greater than 0.
-	id: (required) All or part of the NPC's name.
 
 [b]Examples:[/b]
 	Teleport to Father Godwin:
@@ -1245,9 +1253,9 @@ Let me know.
 Regenerates the given player state over time; pulses once per second.
 
 [b]Arguments:[/b]
-	enable: (required boolean) true to enable state regen; false to disable
-	amount: (optional number) The amount to regen every second.
 	state: (required) The state to regen: all, health, stamina, or exhaust.
+	amount: (optional number) The amount to regen every second.
+	enable: (required boolean) true to enable state regen; false to disable
 
 [b]Examples:[/b]
 	Adds 1 to all states every second.:
@@ -1280,8 +1288,8 @@ Finds all of the skills that match the given token.
 Sets one of the player's skills to the given level.
 
 [b]Arguments:[/b]
-	skill: (required) The skill name, full or partial, or ID. Use cheat_find_skills to list all skills.
 	level: (required number) The desired level for the given skill (max 20).
+	skill: (required) The skill name, full or partial, or ID. Use cheat_find_skills to list all skills.
 
 [b]Examples:[/b]
 	Set player's lockpicking skill to level 20:
@@ -1297,7 +1305,7 @@ Reveals the entire map (removes fog of war).
 
 [b]Examples:[/b]
 	Reveal the entire map:
-	cheat_show_map
+	cheat_reveal_map
 
  
  
@@ -1339,8 +1347,8 @@ A high ratio, like 1000, is faster. Default is 15. 0 will pause time.
 Finds and kills all the killable NPCs within the given radius of the player.
 
 [b]Arguments:[/b]
-	token: (required) All or part of a the NPC's name.
 	radius: (optional number) The kill radius around player. Default 5.
+	token: (required) All or part of a the NPC's name.
 
 [b]Examples:[/b]
 	Kill Father Godwin:
@@ -1355,8 +1363,8 @@ Finds and kills all the killable NPCs within the given radius of the player.
 Finds and resurrects all the dead NPCs within the given radius of the player.
 
 [b]Arguments:[/b]
-	token: (required) All or part of a the NPC's name.
 	radius: (optional number) The resurrect radius around player. Default 5.
+	token: (required) All or part of a the NPC's name.
 
 [b]Examples:[/b]
 	Resurrect Father Godwin:
@@ -1384,12 +1392,12 @@ This only works if the NPC has been loaded into the world.
 Teleports one or more NPCs to the given coordinates. Use cheat_loc to get locations.
 
 [b]Arguments:[/b]
-	x: (required number) X coordinate.
-	y: (required number) Y coordinate.
-	token: (required) All or part of a the NPC's name.
 	max: (optional number) The maximum NPCs to teleport. Default 10.
 	z: (required number) Z coordinate.
+	y: (required number) Y coordinate.
+	x: (required number) X coordinate.
 	radius: (optional number) The teleport radius around the x,y,z target. Default 5.
+	token: (required) All or part of a the NPC's name.
 
 [b]Examples:[/b]
 	Teleport Father Godwin to somewhere...:
@@ -1401,9 +1409,9 @@ Teleports one or more NPCs to the given coordinates. Use cheat_loc to get locati
 Teleports one or more NPCs to the player's location.
 
 [b]Arguments:[/b]
-	token: (required) All or part of a the NPC's name.
-	max: (optional number) The maximum NPCs to teleport. Default 10.
 	radius: (optional number) The teleport radius around the player. Default 5.
+	max: (optional number) The maximum NPCs to teleport. Default 10.
+	token: (required) All or part of a the NPC's name.
 
 [b]Examples:[/b]
 	Teleport Father Godwin to ???:
@@ -1427,8 +1435,8 @@ For some reason most of the animals and some bandits/cuman just stand around. No
 The spawned entities are not managed so you should kill them off or load a clean save.
 
 [b]Arguments:[/b]
-	count: (optional number) Number of things to spawn. Default 1.
 	radius: (optional number) The spawn radius around the player. Default 5.
+	count: (optional number) Number of things to spawn. Default 1.
 	class: (required) bandit|cuman|hare|horse|boar|sheep|pig|cow|buck|doe|reddeer
 
 [b]Examples:[/b]
@@ -1471,10 +1479,9 @@ Sets the weather to the given weather ID.
 7 = dream
 
 [b]Arguments:[/b]
-	delay: (optional number) The number of hours to delay the transition. Default 0.
 	id: (required number) The weather type ID.
+	delay: (optional number) The number of hours to delay the transition. Default 0.
 
 [b]Examples:[/b]
 	Set weather to foggy storm:
 	cheat_set_weather id:6
-
