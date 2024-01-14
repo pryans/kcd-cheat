@@ -302,8 +302,8 @@ Restarting the game reverts this effect.
 Finds all of the perks that match the given token.
 
 [b]Arguments:[/b]
-	any: (optional boolean) Whether to not filter out perks you can't select yourself
 	token: (optional) All or part of a the perk's name. Leave empty to list all perks.
+	any: (optional boolean) Whether to not filter out perks you can't select yourself
 
 [b]Examples:[/b]
 	Show all perks:
@@ -467,8 +467,8 @@ You can end up in the air or under the map.
 I suggest saving your game and turn on immortality first.
 
 [b]Arguments:[/b]
-	z: (required number) Z coordinate
 	y: (required number) Y coordinate
+	z: (required number) Z coordinate
 	x: (required number) X coordinate
 
 [b]Examples:[/b]
@@ -684,8 +684,8 @@ Sets one of the player's states to the given value.
 Adds XP to one of the player's stats.
 
 [b]Arguments:[/b]
-	stat: (required) One of: str, agi, vit, or spc.
 	xp: (required number) The desired XP to add.
+	stat: (required) One of: str, agi, vit, or spc.
 
 [b]Examples:[/b]
 	Add 100 XP to player's strength stat:
@@ -697,8 +697,8 @@ Adds XP to one of the player's stats.
 Sets one of the player's stats to the given level.
 
 [b]Arguments:[/b]
-	stat: (required) One of: str, agi, vit, or spc.
 	level: (required number) The desired level for the given stat (max 20). Level cannot lowered.
+	stat: (required) One of: str, agi, vit, or spc.
 
 [b]Examples:[/b]
 	Set player's strength to level 20:
@@ -878,9 +878,9 @@ Let me know.
 Regenerates the given player state over time; pulses once per second.
 
 [b]Arguments:[/b]
-	state: (required) The state to regen: all, health, stamina, or exhaust.
 	amount: (optional number) The amount to regen every second.
 	enable: (required boolean) true to enable state regen; false to disable
+	state: (required) The state to regen: all, health, stamina, or exhaust.
 
 [b]Examples:[/b]
 	Adds 1 to all states every second.:
@@ -913,8 +913,8 @@ Finds all of the skills that match the given token.
 Sets one of the player's skills to the given level.
 
 [b]Arguments:[/b]
-	level: (required number) The desired level for the given skill (max 20).
 	skill: (required) The skill name, full or partial, or ID. Use cheat_find_skills to list all skills.
+	level: (required number) The desired level for the given skill (max 20).
 
 [b]Examples:[/b]
 	Set player's lockpicking skill to level 20:
@@ -972,8 +972,8 @@ A high ratio, like 1000, is faster. Default is 15. 0 will pause time.
 Finds and kills all the killable NPCs within the given radius of the player.
 
 [b]Arguments:[/b]
-	radius: (optional number) The kill radius around player. Default 5.
 	token: (required) All or part of a the NPC's name.
+	radius: (optional number) The kill radius around player. Default 5.
 
 [b]Examples:[/b]
 	Kill Father Godwin:
@@ -988,8 +988,8 @@ Finds and kills all the killable NPCs within the given radius of the player.
 Finds and resurrects all the dead NPCs within the given radius of the player.
 
 [b]Arguments:[/b]
-	radius: (optional number) The resurrect radius around player. Default 5.
 	token: (required) All or part of a the NPC's name.
+	radius: (optional number) The resurrect radius around player. Default 5.
 
 [b]Examples:[/b]
 	Resurrect Father Godwin:
@@ -1017,12 +1017,12 @@ This only works if the NPC has been loaded into the world.
 Teleports one or more NPCs to the given coordinates. Use cheat_loc to get locations.
 
 [b]Arguments:[/b]
-	max: (optional number) The maximum NPCs to teleport. Default 10.
-	z: (required number) Z coordinate.
 	y: (required number) Y coordinate.
+	z: (required number) Z coordinate.
+	token: (required) All or part of a the NPC's name.
 	x: (required number) X coordinate.
 	radius: (optional number) The teleport radius around the x,y,z target. Default 5.
-	token: (required) All or part of a the NPC's name.
+	max: (optional number) The maximum NPCs to teleport. Default 10.
 
 [b]Examples:[/b]
 	Teleport Father Godwin to somewhere...:
@@ -1061,8 +1061,8 @@ The spawned entities are not managed so you should kill them off or load a clean
 
 [b]Arguments:[/b]
 	radius: (optional number) The spawn radius around the player. Default 5.
-	count: (optional number) Number of things to spawn. Default 1.
 	class: (required) bandit|cuman|hare|horse|boar|sheep|pig|cow|buck|doe|reddeer
+	count: (optional number) Number of things to spawn. Default 1.
 
 [b]Examples:[/b]
 	Spawn 10 bandits:
