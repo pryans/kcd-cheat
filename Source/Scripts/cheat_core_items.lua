@@ -414,6 +414,67 @@ function cheat:cheat_damage_all_items(line)
   return false
 end
 
+-- Used by cheat_dump_all_items and cheat_load_all_items
+_global_items_size = 1
+_global_items_classes = {}
+_global_items_amounts = {}
+
+-- ============================================================================
+-- cheat_dump_all_items (To save all items you have at the end of 'a womans lot dlc')
+-- ============================================================================
+cheat:createCommand("cheat_dump_all_items", "cheat:cheat_dump_all_items()", nil,
+  "Dumps all items in inventory global variable that persists for the game session.",
+  "Dump all items", "cheat_dump_all_items")
+function cheat:cheat_dump_all_items()
+
+  cheat:logInfo("Running cheat_dump_all_items X")
+  
+  _global_items_size = 1
+
+  for _,userdata in pairs(player.inventory:GetInventoryTable()) do
+		cheat:logInfo("Dumped Item")
+		local item = ItemManager.GetItem(userdata)
+		_global_items_classes[_global_items_size] = item.class
+		_global_items_amounts[_global_items_size] = item.amount
+		_global_items_size = _global_items_size + 1
+  end
+
+  return true
+end
+
+
+-- ============================================================================
+-- cheat_load_all_items (To load all items you had at the end of 'a womans lot dlc')
+-- ============================================================================
+cheat:createCommand("cheat_load_all_items", "cheat:cheat_load_all_items()", nil,
+  "Loads all items stored by cheat_dump_all_items in this game session.",
+  "Load all items", "cheat_load_all_items")
+function cheat:cheat_load_all_items()
+
+  cheat:logInfo("Running cheat_load_all_items X")
+  
+  if _global_items_size == 1 then
+    cheat:logInfo("Have to run cheat_dump_all_items first!")
+	return true
+  end
+  
+  local new_item_health = 1
+  
+  for item_num = 1, _global_items_size do
+    cheat:logInfo("Loaded Item")
+	local item_class = _global_items_classes[item_num]
+	local item_amount = _global_items_amounts[item_num]
+		
+    local new_item = ItemManager.CreateItem(item_class, new_item_health, item_amount)
+    player.inventory:AddItem(new_item);
+	
+    cheat:logInfo("Added [%s] item [%s] to player's inventory (health [%s]).", tostring(item_amount), tostring(item_class), tostring(new_item_health))
+    Game.ShowItemsTransfer(item_class, amount)
+  end
+
+  return true
+end
+
 -- ============================================================================
 -- end
 -- ============================================================================
