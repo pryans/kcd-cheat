@@ -414,20 +414,20 @@ function cheat:cheat_damage_all_items(line)
   return false
 end
 
--- Used by cheat_dump_all_items and cheat_load_all_items
+-- Used by cheat_save_all_items and cheat_load_all_items
 _global_items_size = 1
 _global_items_classes = {}
 _global_items_amounts = {}
 
 -- ============================================================================
--- cheat_dump_all_items (To save all items you have at the end of 'a womans lot dlc')
+-- cheat_save_all_items (To save all items you have at the end of 'a womans lot dlc')
 -- ============================================================================
-cheat:createCommand("cheat_dump_all_items", "cheat:cheat_dump_all_items()", nil,
+cheat:createCommand("cheat_save_all_items", "cheat:cheat_save_all_items()", nil,
   "Dumps all items in inventory global variable that persists for the game session.",
-  "Dump all items", "cheat_dump_all_items")
-function cheat:cheat_dump_all_items()
+  "Dump all items", "cheat_save_all_items")
+function cheat:cheat_save_all_items()
 
-  cheat:logInfo("Running cheat_dump_all_items X")
+  cheat:logInfo("Running cheat_save_all_items X")
   
   _global_items_size = 1
 
