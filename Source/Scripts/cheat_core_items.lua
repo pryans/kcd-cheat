@@ -432,7 +432,7 @@ function cheat:cheat_save_all_items()
   cheat.g_global_items_size = 1
 
   for _,userdata in pairs(player.inventory:GetInventoryTable()) do
-		cheat:logInfo("Dumped Item")
+		cheat:logInfo("Saved Item")
 		local item = ItemManager.GetItem(userdata)
 		cheat.g_global_items_classes[cheat.g_global_items_size] = item.class
 		cheat.g_global_items_amounts[cheat.g_global_items_size] = item.amount
