@@ -415,28 +415,28 @@ function cheat:cheat_damage_all_items(line)
 end
 
 -- Used by cheat_save_all_items and cheat_load_all_items
-_global_items_size = 1
-_global_items_classes = {}
-_global_items_amounts = {}
+cheat.g_global_items_size = 1
+cheat.g_global_items_classes = {}
+cheat.g_global_items_amounts = {}
 
 -- ============================================================================
 -- cheat_save_all_items (To save all items you have at the end of 'a womans lot dlc')
 -- ============================================================================
 cheat:createCommand("cheat_save_all_items", "cheat:cheat_save_all_items()", nil,
-  "Dumps all items in inventory global variable that persists for the game session.",
-  "Dump all items", "cheat_save_all_items")
+  "Saves inventory to temporary game memory. " ..
+  "Intended for situations where the contents of your inventory will be lost due to game mechanics. " ..
+  "i.e. A Woman's Lot (DLC). See cheat_load_all_items.",
+  "Saves all items", "cheat_save_all_items")
 function cheat:cheat_save_all_items()
-
-  cheat:logInfo("Running cheat_save_all_items X")
   
-  _global_items_size = 1
+  cheat.g_global_items_size = 1
 
   for _,userdata in pairs(player.inventory:GetInventoryTable()) do
 		cheat:logInfo("Dumped Item")
 		local item = ItemManager.GetItem(userdata)
-		_global_items_classes[_global_items_size] = item.class
-		_global_items_amounts[_global_items_size] = item.amount
-		_global_items_size = _global_items_size + 1
+		cheat.g_global_items_classes[cheat.g_global_items_size] = item.class
+		cheat.g_global_items_amounts[cheat.g_global_items_size] = item.amount
+		cheat.g_global_items_size = cheat.g_global_items_size + 1
   end
 
   return true
@@ -447,23 +447,21 @@ end
 -- cheat_load_all_items (To load all items you had at the end of 'a womans lot dlc')
 -- ============================================================================
 cheat:createCommand("cheat_load_all_items", "cheat:cheat_load_all_items()", nil,
-  "Loads all items stored by cheat_dump_all_items in this game session.",
+  "Loads all items stored by cheat_save_all_items in this game session.",
   "Load all items", "cheat_load_all_items")
 function cheat:cheat_load_all_items()
-
-  cheat:logInfo("Running cheat_load_all_items X")
   
-  if _global_items_size == 1 then
-    cheat:logInfo("Have to run cheat_dump_all_items first!")
+  if cheat.g_global_items_size == 1 then
+    cheat:logInfo("Have to run cheat_save_all_items first!")
 	return true
   end
   
   local new_item_health = 1
   
-  for item_num = 1, _global_items_size do
+  for item_num = 1, cheat.g_global_items_size do
     cheat:logInfo("Loaded Item")
-	local item_class = _global_items_classes[item_num]
-	local item_amount = _global_items_amounts[item_num]
+	local item_class = cheat.g_global_items_classes[item_num]
+	local item_amount = cheat.g_global_items_amounts[item_num]
 		
     local new_item = ItemManager.CreateItem(item_class, new_item_health, item_amount)
     player.inventory:AddItem(new_item);
