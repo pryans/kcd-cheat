@@ -20,6 +20,7 @@ cheat_find_skills
 cheat_get_time
 cheat_kill_npc
 cheat_kill_target
+cheat_load_all_items
 cheat_loc
 cheat_no_door_lockpicking
 cheat_no_lockpicking
@@ -43,6 +44,7 @@ cheat_reset_perks
 cheat_resurrect_npc
 cheat_reveal_map
 cheat_save
+cheat_save_all_items
 cheat_set_all_merchants_fence
 cheat_set_bow_reticle
 cheat_set_chat_bubbles

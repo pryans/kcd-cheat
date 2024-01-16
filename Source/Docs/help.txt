@@ -282,6 +282,24 @@ Damages all weapons and armor in your inventory. This can uneqip items so don't 
 
  
  
+[size=4][b]cheat_save_all_items[/b][/size]
+Saves inventory to temporary game memory. Intended for situations where the contents of your inventory will be lost due to game mechanics. i.e. A Woman's Lot (DLC). See cheat_load_all_items.
+
+[b]Examples:[/b]
+	Saves all items:
+	cheat_save_all_items
+
+ 
+ 
+[size=4][b]cheat_load_all_items[/b][/size]
+Loads all items stored by cheat_save_all_items in this game session.
+
+[b]Examples:[/b]
+	Load all items:
+	cheat_load_all_items
+
+ 
+ 
 [size=4][b]cheat_set_all_merchants_fence[/b][/size]
 Flags all merchants so they accept stolen goods.
 Restarting the game reverts this effect.
@@ -302,8 +320,8 @@ Restarting the game reverts this effect.
 Finds all of the perks that match the given token.
 
 [b]Arguments:[/b]
-	token: (optional) All or part of a the perk's name. Leave empty to list all perks.
 	any: (optional boolean) Whether to not filter out perks you can't select yourself
+	token: (optional) All or part of a the perk's name. Leave empty to list all perks.
 
 [b]Examples:[/b]
 	Show all perks:
@@ -467,9 +485,9 @@ You can end up in the air or under the map.
 I suggest saving your game and turn on immortality first.
 
 [b]Arguments:[/b]
-	y: (required number) Y coordinate
 	z: (required number) Z coordinate
 	x: (required number) X coordinate
+	y: (required number) Y coordinate
 
 [b]Examples:[/b]
 	Type to console:
@@ -878,8 +896,8 @@ Let me know.
 Regenerates the given player state over time; pulses once per second.
 
 [b]Arguments:[/b]
-	amount: (optional number) The amount to regen every second.
 	enable: (required boolean) true to enable state regen; false to disable
+	amount: (optional number) The amount to regen every second.
 	state: (required) The state to regen: all, health, stamina, or exhaust.
 
 [b]Examples:[/b]
@@ -913,8 +931,8 @@ Finds all of the skills that match the given token.
 Sets one of the player's skills to the given level.
 
 [b]Arguments:[/b]
-	skill: (required) The skill name, full or partial, or ID. Use cheat_find_skills to list all skills.
 	level: (required number) The desired level for the given skill (max 20).
+	skill: (required) The skill name, full or partial, or ID. Use cheat_find_skills to list all skills.
 
 [b]Examples:[/b]
 	Set player's lockpicking skill to level 20:
@@ -972,8 +990,8 @@ A high ratio, like 1000, is faster. Default is 15. 0 will pause time.
 Finds and kills all the killable NPCs within the given radius of the player.
 
 [b]Arguments:[/b]
-	token: (required) All or part of a the NPC's name.
 	radius: (optional number) The kill radius around player. Default 5.
+	token: (required) All or part of a the NPC's name.
 
 [b]Examples:[/b]
 	Kill Father Godwin:
@@ -988,8 +1006,8 @@ Finds and kills all the killable NPCs within the given radius of the player.
 Finds and resurrects all the dead NPCs within the given radius of the player.
 
 [b]Arguments:[/b]
-	token: (required) All or part of a the NPC's name.
 	radius: (optional number) The resurrect radius around player. Default 5.
+	token: (required) All or part of a the NPC's name.
 
 [b]Examples:[/b]
 	Resurrect Father Godwin:
@@ -1017,12 +1035,12 @@ This only works if the NPC has been loaded into the world.
 Teleports one or more NPCs to the given coordinates. Use cheat_loc to get locations.
 
 [b]Arguments:[/b]
-	y: (required number) Y coordinate.
-	z: (required number) Z coordinate.
-	token: (required) All or part of a the NPC's name.
-	x: (required number) X coordinate.
-	radius: (optional number) The teleport radius around the x,y,z target. Default 5.
 	max: (optional number) The maximum NPCs to teleport. Default 10.
+	radius: (optional number) The teleport radius around the x,y,z target. Default 5.
+	z: (required number) Z coordinate.
+	y: (required number) Y coordinate.
+	x: (required number) X coordinate.
+	token: (required) All or part of a the NPC's name.
 
 [b]Examples:[/b]
 	Teleport Father Godwin to somewhere...:
@@ -1034,8 +1052,8 @@ Teleports one or more NPCs to the given coordinates. Use cheat_loc to get locati
 Teleports one or more NPCs to the player's location.
 
 [b]Arguments:[/b]
-	radius: (optional number) The teleport radius around the player. Default 5.
 	max: (optional number) The maximum NPCs to teleport. Default 10.
+	radius: (optional number) The teleport radius around the player. Default 5.
 	token: (required) All or part of a the NPC's name.
 
 [b]Examples:[/b]
@@ -1060,8 +1078,8 @@ For some reason most of the animals and some bandits/cuman just stand around. No
 The spawned entities are not managed so you should kill them off or load a clean save.
 
 [b]Arguments:[/b]
-	radius: (optional number) The spawn radius around the player. Default 5.
 	class: (required) bandit|cuman|hare|horse|boar|sheep|pig|cow|buck|doe|reddeer
+	radius: (optional number) The spawn radius around the player. Default 5.
 	count: (optional number) Number of things to spawn. Default 1.
 
 [b]Examples:[/b]

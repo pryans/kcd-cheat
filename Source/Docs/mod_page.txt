@@ -43,12 +43,28 @@ System.ExecuteCommand("cheat_set_regen enable:true state:stamina amount:10")
 
 [b][size=6]Change Log[/size][/b]
 
-[b]1.54[/b]
+[b]1.56[/b]
 [list]
-[*] See https://github.com/pryans/kcd-cheat/pull/41
-[*] See https://github.com/pryans/kcd-cheat/pull/40
+[*]Adds 2 new commands cheat_save_all_items and cheat_load_all_items.
+[*]cheat_save_all_items: Saves inventory to temporary game memory. Intended for situations where the contents of your inventory will be lost due to game mechanics. i.e. A Woman's Lot (DLC). See cheat_load_all_items.
+[*]cheat_load_all_items: Loads all items stored by cheat_save_all_items in this game session.
+[*]From aleksey-orekhov: You can now run cheat_save_all_items just before the end of the "A womans lot" dlc to save all your items to a global variable, and then run "cheat_load_all_items" once you are back in control of Henry to keep everything you found as Theresa. Be sure to give Theresa a big THANK YOU afterwards! Both commands must be run in the same game session. If you exit KCD after running cheat_save_all_items , the saved items will not persist for your next invocation of the cheat_load_all_items command. Saving items does NOT remove them from your inventory.
+[*]See pull request https://github.com/pryans/kcd-cheat/pull/43 for aleksey-orekhov's changes.
 [/list]
 
+[b]1.55[/b]
+[list]
+[*]@wilecoyote Added a bunch of dlc related npcs, horses, buffs, perks and codex entries to cheat_localization.lua (see comments about Master Locator Marius at Nexus) so that we can find them with the command cheat_find_npc
+[*]See PR https://github.com/pryans/kcd-cheat/pull/42 for the specific changes
+[/list]
+
+[b]1.54[/b]
+[list]
+[*]Changed the command cheat_reveal_map to be consistent and less confusing.
+[*]Minor fix for cheat_teleport_to (exchanged places 9 and 10. See comments on Nexus)
+[*]The functionality of cheat_no_stash_lockpicking and cheat_no_door_lockpicking were reversed.
+[*]See PR https://github.com/pryans/kcd-cheat/pull/40 and https://github.com/pryans/kcd-cheat/pull/41 for the specific changes
+[/list]
 
 [b]1.53[/b][list]
 [*]See [url=https://github.com/pryans/kcd-cheat/pull/38]#38[/url] from wilecoyote
@@ -308,6 +324,7 @@ cheat_find_skills
 cheat_get_time
 cheat_kill_npc
 cheat_kill_target
+cheat_load_all_items
 cheat_loc
 cheat_no_door_lockpicking
 cheat_no_lockpicking
@@ -331,6 +348,7 @@ cheat_reset_perks
 cheat_resurrect_npc
 cheat_reveal_map
 cheat_save
+cheat_save_all_items
 cheat_set_all_merchants_fence
 cheat_set_bow_reticle
 cheat_set_chat_bubbles
@@ -372,8 +390,10 @@ cheat_wash_dirt_and_blood
 
 
 
+
  
   
+ 
  
 [size=4][b]cheat_eval[/b][/size]
 Executes the given Lua code. This is not a cheat it is used for testing and debugging.
@@ -657,6 +677,24 @@ Damages all weapons and armor in your inventory. This can uneqip items so don't 
 
  
  
+[size=4][b]cheat_save_all_items[/b][/size]
+Saves inventory to temporary game memory. Intended for situations where the contents of your inventory will be lost due to game mechanics. i.e. A Woman's Lot (DLC). See cheat_load_all_items.
+
+[b]Examples:[/b]
+	Saves all items:
+	cheat_save_all_items
+
+ 
+ 
+[size=4][b]cheat_load_all_items[/b][/size]
+Loads all items stored by cheat_save_all_items in this game session.
+
+[b]Examples:[/b]
+	Load all items:
+	cheat_load_all_items
+
+ 
+ 
 [size=4][b]cheat_set_all_merchants_fence[/b][/size]
 Flags all merchants so they accept stolen goods.
 Restarting the game reverts this effect.
@@ -843,8 +881,8 @@ I suggest saving your game and turn on immortality first.
 
 [b]Arguments:[/b]
 	z: (required number) Z coordinate
-	y: (required number) Y coordinate
 	x: (required number) X coordinate
+	y: (required number) Y coordinate
 
 [b]Examples:[/b]
 	Type to console:
@@ -1059,8 +1097,8 @@ Sets one of the player's states to the given value.
 Adds XP to one of the player's stats.
 
 [b]Arguments:[/b]
-	stat: (required) One of: str, agi, vit, or spc.
 	xp: (required number) The desired XP to add.
+	stat: (required) One of: str, agi, vit, or spc.
 
 [b]Examples:[/b]
 	Add 100 XP to player's strength stat:
@@ -1072,8 +1110,8 @@ Adds XP to one of the player's stats.
 Sets one of the player's stats to the given level.
 
 [b]Arguments:[/b]
-	stat: (required) One of: str, agi, vit, or spc.
 	level: (required number) The desired level for the given stat (max 20). Level cannot lowered.
+	stat: (required) One of: str, agi, vit, or spc.
 
 [b]Examples:[/b]
 	Set player's strength to level 20:
@@ -1253,9 +1291,9 @@ Let me know.
 Regenerates the given player state over time; pulses once per second.
 
 [b]Arguments:[/b]
-	state: (required) The state to regen: all, health, stamina, or exhaust.
-	amount: (optional number) The amount to regen every second.
 	enable: (required boolean) true to enable state regen; false to disable
+	amount: (optional number) The amount to regen every second.
+	state: (required) The state to regen: all, health, stamina, or exhaust.
 
 [b]Examples:[/b]
 	Adds 1 to all states every second.:
@@ -1393,10 +1431,10 @@ Teleports one or more NPCs to the given coordinates. Use cheat_loc to get locati
 
 [b]Arguments:[/b]
 	max: (optional number) The maximum NPCs to teleport. Default 10.
+	radius: (optional number) The teleport radius around the x,y,z target. Default 5.
 	z: (required number) Z coordinate.
 	y: (required number) Y coordinate.
 	x: (required number) X coordinate.
-	radius: (optional number) The teleport radius around the x,y,z target. Default 5.
 	token: (required) All or part of a the NPC's name.
 
 [b]Examples:[/b]
@@ -1409,8 +1447,8 @@ Teleports one or more NPCs to the given coordinates. Use cheat_loc to get locati
 Teleports one or more NPCs to the player's location.
 
 [b]Arguments:[/b]
-	radius: (optional number) The teleport radius around the player. Default 5.
 	max: (optional number) The maximum NPCs to teleport. Default 10.
+	radius: (optional number) The teleport radius around the player. Default 5.
 	token: (required) All or part of a the NPC's name.
 
 [b]Examples:[/b]
@@ -1435,9 +1473,9 @@ For some reason most of the animals and some bandits/cuman just stand around. No
 The spawned entities are not managed so you should kill them off or load a clean save.
 
 [b]Arguments:[/b]
+	class: (required) bandit|cuman|hare|horse|boar|sheep|pig|cow|buck|doe|reddeer
 	radius: (optional number) The spawn radius around the player. Default 5.
 	count: (optional number) Number of things to spawn. Default 1.
-	class: (required) bandit|cuman|hare|horse|boar|sheep|pig|cow|buck|doe|reddeer
 
 [b]Examples:[/b]
 	Spawn 10 bandits:
@@ -1485,3 +1523,4 @@ Sets the weather to the given weather ID.
 [b]Examples:[/b]
 	Set weather to foggy storm:
 	cheat_set_weather id:6
+
