@@ -453,7 +453,7 @@ function cheat:cheat_load_all_items()
   
   if cheat.g_global_items_size == 1 then
     cheat:logInfo("Have to run cheat_save_all_items first!")
-	return true
+	return false
   end
   
   local new_item_health = 1
