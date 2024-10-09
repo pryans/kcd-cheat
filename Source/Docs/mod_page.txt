@@ -43,6 +43,12 @@ System.ExecuteCommand("cheat_set_regen enable:true state:stamina amount:10")
 
 [b][size=6]Change Log[/size][/b]
 
+[b]1.57[/b]
+[list]
+[*]@wilecoyote: Set fall dmg to zero for immortal buff
+[*]See PR https://github.com/pryans/kcd-cheat/pull/48 for the specific changes
+[/list]
+
 [b]1.56[/b]
 [list]
 [*]Adds 2 new commands cheat_save_all_items and cheat_load_all_items.
