@@ -4,7 +4,7 @@
     <rows>
       <!-- Invincible -->
       <!-- Default params="hlh=0,slh=0" -->
-      <row buff_ai_tag_id="" buff_class_id="13" buff_desc="" buff_exclusivity_id="1" buff_id="a218af80-b2a5-11ed-afa1-0242ac120002" buff_lifetime_id="0" buff_name="cheat_invincible" buff_ui_name="" buff_ui_order="" buff_ui_type_id="" buff_ui_visibility_id="" duration="-1" icon_id="0" implementation="Cpp:Constant" is_persistent="False" params="imm=1,hlh=0,slh=0,upr=1" slot_buff_ui_name="" slot_icon_id="" visual_effect="" />
+      <row buff_ai_tag_id="" buff_class_id="13" buff_desc="" buff_exclusivity_id="1" buff_id="a218af80-b2a5-11ed-afa1-0242ac120002" buff_lifetime_id="0" buff_name="cheat_invincible" buff_ui_name="" buff_ui_order="" buff_ui_type_id="" buff_ui_visibility_id="" duration="-1" icon_id="0" implementation="Cpp:Constant" is_persistent="False" params="fdm=0,imm=1,hlh=0,slh=0,upr=1" slot_buff_ui_name="" slot_icon_id="" visual_effect="" />
       <!-- Invisibility -->
       <!-- Default params="vib=-10, con=-10" -->
       <row buff_ai_tag_id="" buff_class_id="13" buff_desc="" buff_exclusivity_id="1" buff_id="a218b534-b2a5-11ed-afa1-0242ac120002" buff_lifetime_id="0" buff_name="cheat_invisibility" buff_ui_name="" buff_ui_order="" buff_ui_type_id="" buff_ui_visibility_id="" duration="-1" icon_id="0" implementation="Cpp:Constant" is_persistent="False" params="con=-100,evi=-100,lpv=-100,nbi=-10,noi=-100,ors=-10" slot_buff_ui_name="" slot_icon_id="" visual_effect="" />
