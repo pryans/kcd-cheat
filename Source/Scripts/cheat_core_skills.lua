@@ -73,6 +73,29 @@ function cheat:cheat_find_skills(line)
 end
 
 -- ============================================================================
+-- cheat_add_skill_xp
+-- ============================================================================
+cheat.cheat_add_skill_xp_args = {
+  skill = function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "The skill name, full or partial, or ID. Use cheat_find_skills to list all skills.") end,
+  xp = function(args,name,showHelp) return cheat:argsGetRequiredNumber(args, name, showHelp, "The desired XP to add.") end
+}
+
+cheat:createCommand("cheat_add_skill_xp", "cheat:cheat_add_skill_xp(%line)", cheat.cheat_add_skill_xp_args,
+  "Adds XP to one of the player's skills.",
+  "Add 100 XP to player's lockpicking skill", "cheat_add_skill_xp skill:lockpicking xp:100")
+function cheat:cheat_add_skill_xp(line)
+  local args = cheat:argsProcess(line, cheat.cheat_add_skill_xp_args)
+  local skill, skillErr = cheat:argsGet(args, 'skill')
+  local xp, xpErr = cheat:argsGet(args, 'xp')
+  if not skillErr and not xpErr then
+    player.soul:AddSkillXP(skill, xp)
+    cheat:logInfo("Added [%s] XP to skill [%s].", tostring(xp), tostring(skill))
+    return true
+  end
+  return false
+end
+
+-- ============================================================================
 -- cheat_set_skill_level
 -- ============================================================================
 cheat.cheat_set_skill_level_args = {
