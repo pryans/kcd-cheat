@@ -7,6 +7,7 @@ cheat_add_buff_invisible
 cheat_add_item
 cheat_add_money
 cheat_add_perk
+cheat_add_skill_xp
 cheat_add_stat_xp
 cheat_charm
 cheat_damage_all_items
